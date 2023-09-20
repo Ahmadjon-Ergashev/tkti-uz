@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +13,171 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles/navbar/nav.css' %}">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body>
+    <!-- start header -->
+    <header>
+        <div class="superNav border-bottom py-2 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 centerOnMobile">
+                        <span class="d-none d-lg-inline-block d-md-inline-block d-sm-inline-block d-xs-none me-3"><a class="text-decoration-none text-dark" href="{% url 'home' %}"><strong>info@tkti.uz</strong></a></span>
+                        <span class="me-3"><a class="text-decoration-none text-dark" href="{% url 'home' %}"><i class="fas fa-phone-alt pe-2"></i><strong>+998 71 244-79-17</strong></a></span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 d-none d-lg-block d-md-block-d-sm-block d-xs-none text-end">
+                        <span class="me-2"><i class="fas fa-eye"></i></span> | 
+                        <span class="mx-2"><i class="fas fa-network-wired"></i></span> | 
+                        <span class="mx-1">
+                            <a href=""><i class="fas fa-play text-dark"></i></a>
+                        </span>
+                        <span class="mx-1">
+                            <a href=""><img src="https://jamoat.uz/wp-content/uploads/2021/06/Uzbekistan-Flag.jpg" width="20" alt=""></a>
+                        </span> |
+                        <span class="mx-1">
+                            <a href=""><img src="https://w7.pngwing.com/pngs/537/720/png-transparent-uzbekistan-emblem-logo-national-emblem-icon-symbol.png" width="20" alt=""></a>
+                        </span> | 
+                        <span class="mx-1">
+                            <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">{% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}">
+                                <select name="language" class="language_code me-3 border-0 bg-light fw-bold">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <option class="" value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                            {{ language.code }}
+                                        </option>
+                                    {% endfor %}
+                                </select> 
+                            </form> 
+                        </span>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 d-lg-none text-end">
+                        <span class="me-2"><i class="fas fa-eye"></i></span> | 
+                        <span class="mx-1">
+                            <a href=""><img src="https://jamoat.uz/wp-content/uploads/2021/06/Uzbekistan-Flag.jpg" width="20" alt=""></a>
+                        </span> |
+                        <span class="me-1">
+                            <a href=""><img src="https://w7.pngwing.com/pngs/537/720/png-transparent-uzbekistan-emblem-logo-national-emblem-icon-symbol.png" width="20" alt=""></a>
+                        </span> | 
+                        <span class="mx-1">
+                            <a href=""><i class="fas fa-music text-dark"></i></a>
+                        </span>
+                        <span class="mx-1"> 
+                            <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">{% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}">
+                                <select name="language" class="language_code me-3 border-0 bg-light fw-bold">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <option class="" value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                            {{ language.code }}
+                                        </option>
+                                    {% endfor %}
+                                </select> 
+                            </form> 
+                        </span>
+                    </div>
+                </div>
+            </div>
+          </div>
+        <nav class="navbar navbar-expand-lg bg-white sticky-top navbar-light p-3 shadow-sm">
+            <div class="container">
+                <a class="navbar-brand" href="{% url 'home' %}">
+                    <img src="{% static 'images/brand.png' %}" width="90" alt="logo">
+                </a>
+                <a href="{% url 'home' %}" class="text-decoration-none text-dark">
+                    TOSHKENT <br>
+                    KIMYO-TEXNOLOGIYA <br>
+                    INSTITUTI
+                </a>
+            
+                <div class="mx-auto my-3 ms-3 d-lg-none d-sm-block d-xs-block">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-primary" type="submit" id="button-addon2">
+                                {% blocktrans %}Qidirish{% endblocktrans %}
+                            </button>
+                        </div>
+                    </form>
+                </div>
 
+                <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class=" collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase active" aria-current="page" href="#">Offers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" href="#">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" href="#">Catalog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" href="#">Services</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" href="#">About</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto ">
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" href="#"><i class="fa-solid fa-cart-shopping me-1"></i> Cart</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-2 text-uppercase" href="#"><i class="fa-solid fa-circle-user me-1"></i> Account</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="main_container">
+            <!-- start top bar -->
+            
+            <!-- end top bar -->
+            
+            <!-- start navbar -->
+            
+            <!-- end navbar -->
+        </div>
+    </header>
+    <!-- end header -->
+    {% block content %}
     
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    {% endblock content %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+    <script type='text/javascript'> 
+        function submitForm(){
+            document.getElementById('lang').submit(); 
+        } 
+        AOS.init();
+        // $("#ads_top").slick();
+        // $(document).ready(function(){
+        //     var location = window.location.pathname.toString()
+        //     if (location.includes("category")) {
+        //         $("#category_nav").addClass("active")
+        //     } else if (location.includes("contact")){
+        //         $("#contact_nav").addClass("active")
+        //     } else if (location.includes("news")){
+        //         $("#news_nav").addClass("active")
+        //     } else {
+        //         $("#main_nav").addClass("active")
+        //     }
+        // })
+    </script>
 </body>
 </html>

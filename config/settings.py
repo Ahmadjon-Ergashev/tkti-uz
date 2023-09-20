@@ -85,7 +85,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                "view.my_context_proccessor.global_variables",
             ],
+            'libraries': {
+                'staticfiles': 'django.templatetags.static',
+            }
         },
     },
 ]
