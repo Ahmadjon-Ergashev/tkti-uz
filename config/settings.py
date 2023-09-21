@@ -51,6 +51,7 @@ LOCALE_APPS = [
 GLOBAL_APPS = [
     "mptt",
     "guardian", 
+    "colorfield",
     "compressor", 
     "bootstrap5",
     "django_quill",

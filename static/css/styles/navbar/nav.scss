@@ -25,3 +25,22 @@
         }
     }
 }
+
+.socials{
+    top: 40%;
+    right: 0%;
+    position: fixed;
+    ul {
+        padding: 0;
+        li{
+            padding: 5px;
+            list-style-type: none;
+            a{
+                color: $text_white;
+                i{
+                    font-size: 35px;
+                }
+            }
+        }
+    }
+}

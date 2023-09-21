@@ -11,4 +11,23 @@
 }
 #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover a:hover {
   color: #ffffff;
+}
+
+.socials {
+  top: 40%;
+  right: 0%;
+  position: fixed;
+}
+.socials ul {
+  padding: 0;
+}
+.socials ul li {
+  padding: 5px;
+  list-style-type: none;
+}
+.socials ul li a {
+  color: #ffffff;
+}
+.socials ul li a i {
+  font-size: 35px;
 }/*# sourceMappingURL=nav.css.map */
