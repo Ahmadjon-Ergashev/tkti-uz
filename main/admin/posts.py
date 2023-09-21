@@ -23,10 +23,10 @@ class NavbarAdmin(MPTTModelAdmin):
     search_fields = ("name", )
     date_hierarchy = "added_at"
     list_display_links = ("name", )
-    list_filter = ("parent", "added_at", "visible", "author")
-    list_editable = ("order_num", "inside_order_num", "visible")
+    list_editable = ("order_num", "status", "inside_order_num")
+    list_filter = ("parent", "added_at", "status", "visible", "author")
     readonly_fields = ("author", "added_at", "update_user", "updated_at")
-    list_display = ("id", "name", "parent", "order_num", "inside_order_num", "visible", "added_at")
+    list_display = ("id", "name", "parent", "status", "order_num", "inside_order_num", "visible", "added_at")
 
     fieldsets = (
         (_("Nomi"), {
@@ -38,7 +38,8 @@ class NavbarAdmin(MPTTModelAdmin):
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                "parent", 
+                "parent",
+                "status", 
                 "order_num", 
                 "inside_order_num", 
                 "visible",                

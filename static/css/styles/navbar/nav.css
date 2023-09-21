@@ -1,4 +1,14 @@
 .lang .language_code {
   border: none;
   font-size: 14px;
+}
+
+#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li {
+  transition: 0.5s all;
+}
+#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover {
+  background-color: #26597E;
+}
+#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover a:hover {
+  color: #ffffff;
 }/*# sourceMappingURL=nav.css.map */

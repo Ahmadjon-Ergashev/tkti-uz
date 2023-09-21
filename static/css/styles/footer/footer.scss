@@ -1,0 +1,47 @@
+@import "../variables/colors";
+
+.footer{
+    background: $color2;
+    color:$text_white;
+    .links{
+        ul {
+            list-style-type: none;
+        }
+        li a{
+            color: $text_white;
+            transition: color .2s;
+            &:hover{
+                text-decoration:none;
+                color:$color1;
+            }
+        }
+    }  
+    .about-company{
+        i{
+            font-size: 25px;
+        }
+        a{
+            color:$text_white;
+            transition: color .2s;
+            &:hover{
+                color:$color1;
+            }
+        }
+    } 
+    .location{
+        i{
+            font-size: 18px;
+        }
+        .contact-footer{
+            ul{
+                li{
+                    font-size: 14px;
+                    list-style-type: none;
+                }
+            }
+        }
+    }
+    .copyright p{
+        border-top: 1px solid rgba(255,255,255,.1);
+    } 
+  }

@@ -1,12 +1,27 @@
-$color1: #6E8BEA;
-$color2: #32ACB2;
-$color3: #108C9F;
-$text_white: #fdfdfd;
+@import "../variables/colors";
 
 
 .lang{
     .language_code{
         border: none;
         font-size: 14px;
+    }
+}
+
+#navbarNavDropdown{
+    .navbar-nav{
+        .nav-item{
+            .dropdown-menu{
+                li{
+                    transition: 0.5s all;
+                    &:hover{
+                        background-color: $color1;
+                        a:hover{
+                            color: $text_white;
+                        }
+                    }
+                }
+            }
+        }
     }
 }

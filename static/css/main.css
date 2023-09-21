@@ -6,6 +6,7 @@
     box-sizing: border-box;
 }
 
+
 .main_container{
     width: 80%;
     margin: auto;
@@ -13,7 +14,8 @@
 }
 a {
     font-size:14px;
-    font-weight:700
+    font-weight:700;
+    text-decoration: none;
 }
 .superNav {
     font-size:13px;

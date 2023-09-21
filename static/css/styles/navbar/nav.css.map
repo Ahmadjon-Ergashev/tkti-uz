@@ -1,1 +1,1 @@
-{"version":3,"sources":["nav.scss","nav.css"],"names":[],"mappings":"AAOI;EACI,YAAA;EACA,eAAA;ACNR","file":"nav.css"}
+{"version":3,"sources":["nav.scss","nav.css","../variables/_colors.scss"],"names":[],"mappings":"AAII;EACI,YAAA;EACA,eAAA;ACHR;;ADWgB;EACI,oBAAA;ACRpB;ADSoB;EACI,yBEjBf;ADUT;ADQwB;EACI,cEff;ADSb","file":"nav.css"}
