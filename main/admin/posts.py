@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 # django admin actions
-@admin.action(description="clone post")
+@admin.action(description=_("clone post"))
 def duplicate(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None

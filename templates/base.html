@@ -25,21 +25,13 @@
     <!-- social media -->
     <div class="socials">
         <ul>
-            <li>
-                <a href="">
-                    <i class="fab fa-facebook-square"></i>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <span><i class="fab fa-instagram-square"></i></span>
-                </a>
-            </li>
-            <li>
-                <a href="">
-                    <i class="fab fa-telegram"></i>
-                </a>
-            </li>
+            {% for nets in social_networks %}    
+                <li>
+                    <a href="{{ nets.url }}" target="_blank">
+                        <i class="{{ nets.icon }}n "></i>
+                    </a>
+                </li>
+            {% endfor %}
         </ul>
     </div>
     <!-- social media --> 
@@ -189,18 +181,11 @@
                         {% endblocktrans %}
                     </p>
                     <p>
-                        <a href="">
-                            <i class="fab fa-facebook-square me-2"></i>
-                        </a>
-                        <a href="">
-                            <i class="fab fa-instagram-square me-2"></i>
-                        </a>
-                        <a href="">
-                            <i class="fab fa-telegram me-2"></i>
-                        </a>
-                        <a href="">
-                            <i class="fab fa-youtube"></i>
-                        </a>
+                        {% for nets in social_networks %}                            
+                            <a href="{{ nets.url }}" target="_blank">
+                                <i class="{{ nets.icon }} me-2"></i>
+                            </a>
+                        {% endfor %}     
                     </p>
                 </div>
                 <div class="col-lg-3 col-xs-12 links">
