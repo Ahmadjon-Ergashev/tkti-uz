@@ -57,6 +57,7 @@
   width: 50%;
   font-family: "Raleway";
   float: left;
+  font-weight: 900;
   padding: 15px 25px;
   border: 1px solid #ddd;
   border-bottom: 0;
@@ -85,11 +86,32 @@
   letter-spacing: 0.3px;
   color: #444;
 }
-.pc-tab section div h2 {
-  margin: 0;
-  font-family: "Raleway";
-  letter-spacing: 1px;
-  color: #34495e;
+.pc-tab section div ul li {
+  padding: 8px 0;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+.pc-tab section div ul li a {
+  color: #333;
+  font-size: 13px;
+  font-family: "Droid Serif";
+}
+.pc-tab section div ul li a:hover {
+  color: #26597E;
+  text-decoration: underline;
+}
+.pc-tab section div ul li .header_tabs_section {
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.pc-tab section div ul li .header_tabs_section span {
+  color: #26597E;
+}
+.pc-tab section div ul li .body_tabs_section {
+  padding: 0;
+  border: none;
 }
 
 #tab1:checked ~ nav .tab1 label,

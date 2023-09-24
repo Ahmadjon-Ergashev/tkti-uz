@@ -37,9 +37,13 @@ class PostsListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = navbar_name.name
         context["parent"] = navbar_name.parent
-        context["category_list"] = Navbar.objects.filter(parent_id=navbar_name.parent.id)
+        try:
+            context["category_list"] = Navbar.objects.filter(parent_id=navbar_name.parent.id)
+        except AttributeError:
+            context["category_list"] = navbar_name.get_children()
         context["read_more"] = _("Batafsil")
         context["home"] = _("Asosiy sahifa")
+        context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         return context
 
 

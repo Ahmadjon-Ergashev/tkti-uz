@@ -8,9 +8,14 @@
     <div class="container mt-5">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ home }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page"><a href="">{{ parent }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                {% if parent is not None %}
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ home }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                {% else %}
+                    <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ home }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                {% endif %}
             </ol>
         </nav>
         <div class="row d-flex justify-content-between py-3">
@@ -46,12 +51,122 @@
                     </nav>
                     <section>
                         <div class="tab1">
-                            <h2>First</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus itaque quidem minus nostrum, voluptatem accusamus aspernatur quia harum ratione, officia laudantium inventore autem doloribus atque labore numquam non. Hic, animi.</p>
+                            <ul>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                         <div class="tab2">
-                            <h2>Second</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum nesciunt ipsum dolore error repellendus officiis aliquid a, vitae reprehenderit, accusantium vero, ad. Obcaecati numquam sapiente cupiditate. Praesentium eaque, quae error!</p>
+                            <ul>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="header_tabs_section">
+                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
+                                        <span><i class="fas fa-eye"></i> 15</span>
+                                    </div>
+                                    <div class="body_tabs_section">
+                                        <a href="">
+                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </section>
                 </div>
@@ -71,6 +186,10 @@
                             </a>
                         </div>
                     </div> -->
+                {% empty %}
+                    <p class="text-center">
+                        {{ empty }}
+                    </p>
                 {% endfor %}
             </div>
         </div>

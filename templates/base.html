@@ -201,10 +201,13 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         {% for nav in navbar %}
-                            <li class="nav-item dropdown">
-                                <a href="{% url 'posts_nav' navbar_slug=nav.slug %}" class="nav-link mx-2 text-uppercase dropdown-toggle active" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <li class="nav-item dropdown btn-group mx-2">
+                                <a href="{% url 'posts_nav' navbar_slug=nav.slug %}" class="nav-link text-uppercase active">
                                     {{ nav.name }}
                                 </a>
+                                <button class="p-0 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                                </button>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ nav.id }}">
                                     {% for child in nav.children.all %}
                                         <li class="nav-item dropdown">

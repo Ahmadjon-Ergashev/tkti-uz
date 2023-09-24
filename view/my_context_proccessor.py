@@ -12,6 +12,7 @@ def global_variables(request):
         "navbar": Navbar.objects.filter(status="base", visible=True).order_by("order_num"),
         "social_networks": SocialNetworks.objects.all().order_by("order_num"),
         "news_tab": _("Yangiliklar"),
-        "ads_tab": _("E'lonlar")
+        "ads_tab": _("E'lonlar"),
+        "latest": _("Eng so'ngi")
     }
     return context

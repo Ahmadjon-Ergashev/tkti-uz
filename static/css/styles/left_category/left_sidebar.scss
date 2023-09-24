@@ -80,6 +80,7 @@ $unactiveHoverColor: #dddddd;
                 width: 50%;
                 font-family: "Raleway";
                 float: left;
+                font-weight: 900;
                 padding: 15px 25px;
                 border: 1px solid #ddd;
                 border-bottom: 0;
@@ -113,12 +114,34 @@ $unactiveHoverColor: #dddddd;
             line-height: 1.5em;
             letter-spacing: 0.3px;
             color: #444;
-
-            h2 {
-                margin: 0;
-                font-family: "Raleway";
-                letter-spacing: 1px;
-                color: #34495e;
+            ul{
+                li{
+                    padding: 8px 0;
+                    border-top: 1px solid lightgray;
+                    border-bottom: 1px solid lightgray;
+                    a{
+                        color: $dark;
+                        font-size: 13px;
+                        font-family: "Droid Serif";
+                        &:hover{
+                            color: $color1;
+                            text-decoration: underline;
+                        }
+                    }
+                    .header_tabs_section{
+                        border: none;
+                        padding: 0;
+                        display: flex;
+                        justify-content: space-between;
+                        span{
+                            color: $color1;
+                        }
+                    }
+                    .body_tabs_section{
+                        padding: 0;
+                        border: none;
+                    }
+                }
             }
         }
     }
