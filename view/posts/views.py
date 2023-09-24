@@ -6,7 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from main.models.posts import (
     Posts, Status, Navbar
 )
-from main.models.widgets import HeaderIMG
+from main.models.widgets import HeaderIMG, UsefullLinks
 
 
 
@@ -14,7 +14,8 @@ def Home(request):
     """ for home page view """
     context = {
         "title": _("Bosh sahifa"),
-        "header_img": HeaderIMG.objects.all().order_by("order_num")
+        "header_img": HeaderIMG.objects.all().order_by("order_num"),
+        "usefull_links": UsefullLinks.objects.all().order_by("-add_time")
     }
     return render(request, "home.html", context)
 

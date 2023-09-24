@@ -1,3 +1,36 @@
+#usefull_links {
+  margin: 30px 0;
+}
+#usefull_links .item {
+  padding: 10px;
+  margin: 0px 10px;
+  min-height: 200px;
+  text-align: center;
+  position: relative;
+  background-color: whitesmoke;
+}
+#usefull_links .item .brand img {
+  width: 100px;
+  display: inline;
+}
+#usefull_links .item .body {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  vertical-align: bottom;
+}
+#usefull_links .item .body p {
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+}
+#usefull_links .item .body p a {
+  color: #333;
+}
+
 .footer {
   background: #15446f;
   color: #ffffff;

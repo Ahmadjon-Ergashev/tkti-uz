@@ -8,6 +8,18 @@
     }
 }
 
+.header{
+    margin-bottom: 50px;
+    #headerIMG{
+        .item{
+            height: 78vh!important;
+            background-size: cover;
+            background-position: top;
+            background-repeat: no-repeat;
+        }
+    }
+}
+
 #navbarNavDropdown{
     .navbar-nav{
         .nav-item{

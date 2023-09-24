@@ -5,11 +5,30 @@
 
 {% block content %}
     <div class="header">
-        <div id="owl-demo" class="owl-carousel owl-theme">    
+        <div id="headerIMG">    
             {% for img in header_img %}
                 <div class="item" style="background-image: url('{{ img.image.url }}');">
                 </div>
             {% endfor %}
         </div>
     </div>
+    <!-- useful links -->
+    <div id="usefull_links">  
+        {% for link in usefull_links %}    
+            <div class="item">
+                <div class="brand">
+                    <a href="{{ link.link }}" target="_blank">
+                        <img src="{{ link.logo.url }}" alt="tkti.uz">
+                    </a>
+                </div>
+                <div class="body">
+                    <p>
+                        <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
+                    </p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- useful links -->
 {% endblock content %}

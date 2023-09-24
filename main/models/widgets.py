@@ -42,3 +42,20 @@ class HeaderIMG(models.Model):
     def __str__(self):
         return f"Image {self.id}"
     
+
+class UsefullLinks(models.Model):
+    """ foydali havolar uchun model """
+    name = models.CharField(verbose_name=_("Nomi"), max_length=255, unique=True)
+    logo = models.ImageField(verbose_name=_("rasmi"), default="default/gerb.png", upload_to="usefull_links/%Y-%m-%d/")
+    link = models.URLField(verbose_name=_("Saytga havola"), max_length=150)
+    add_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "usefull_links"
+        managed = True
+        verbose_name = "Foydali havolalar"
+        verbose_name_plural = "Foydali havolalar"
+    
+    def __str__(self):
+        return str(self.name) if self.name else None
+        

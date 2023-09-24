@@ -2,7 +2,9 @@ from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 
-from main.models.widgets import SocialNetworks, HeaderIMG
+from main.models.widgets import (
+    SocialNetworks, HeaderIMG, UsefullLinks
+)
 
 
 @admin.register(SocialNetworks)
@@ -30,3 +32,14 @@ class HeaderIMGAdmin(GuardedModelAdmin):
 
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width=100 />")
+    
+
+@admin.register(UsefullLinks)
+class LinksAdmin(GuardedModelAdmin):
+    search_fields = ("name", )
+    list_display_links = ("name", )
+    readonly_fields = ("get_logo", )
+    list_display = ("id", "name", "get_logo", "add_time")
+
+    def get_logo(self, obj):
+        return mark_safe(f"<img src='{obj.logo.url}' width=100 />")

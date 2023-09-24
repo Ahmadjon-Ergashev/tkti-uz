@@ -13,8 +13,8 @@
                 <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
             </ol>
         </nav>
-        <div class="row d-flex justify-content-between">
-            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3 py-5">
+        <div class="row d-flex justify-content-between py-3">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
                 <ul class="list-group left-category">
                     {% for cl in category_list %}
                         {% if cl.name == title %}
@@ -28,8 +28,38 @@
                         {% endif %}
                     {% endfor %}
                 </ul>
+                <!-- news tabs -->
+                
+                <div class="pc-tab mt-3">
+                    <input checked="checked" id="tab1" type="radio" name="pct" />
+                    <input id="tab2" type="radio" name="pct" />
+                    <input id="tab3" type="radio" name="pct" />
+                    <nav>
+                        <ul>
+                            <li class="tab1">
+                                <label for="tab1">{{ news_tab }}</label>
+                            </li>
+                            <li class="tab2">
+                                <label for="tab2">{{ ads_tab }}</label>
+                            </li>
+                        </ul>
+                    </nav>
+                    <section>
+                        <div class="tab1">
+                            <h2>First</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus itaque quidem minus nostrum, voluptatem accusamus aspernatur quia harum ratione, officia laudantium inventore autem doloribus atque labore numquam non. Hic, animi.</p>
+                        </div>
+                        <div class="tab2">
+                            <h2>Second</h2>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum nesciunt ipsum dolore error repellendus officiis aliquid a, vitae reprehenderit, accusantium vero, ad. Obcaecati numquam sapiente cupiditate. Praesentium eaque, quae error!</p>
+                        </div>
+                    </section>
+                </div>
+                    
+
+                <!-- news tabs -->
             </div>
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border py-5">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border">
                 {% for object in object_list %}
                     <!-- <div class="card pb-3">
                         <h5 class="card-header">{{ object.navbar.name }}</h5>

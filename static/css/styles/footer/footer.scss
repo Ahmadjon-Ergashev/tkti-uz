@@ -1,5 +1,43 @@
 @import "../variables/colors";
 
+#usefull_links{
+    margin: 30px 0;
+    .item{
+        padding: 10px;
+        margin: 0px 10px;
+        min-height: 200px;
+        text-align: center;
+        position: relative;
+        background-color: whitesmoke;
+        // border: 1px solid $color1;
+        .brand{
+            // border: 1px solid red;
+            img{
+                width: 100px;
+                display: inline;
+            }
+        }
+        .body{
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 10px;
+            overflow: hidden;
+            position: absolute;
+            // border: 1px solid red;
+            vertical-align: bottom;
+            p{
+                margin: 0;  
+                padding: 5px;
+                text-align: center;
+                a{
+                    color: $dark;
+                }
+            }
+        }
+    }
+}
+
 .footer{
     background: $color2;
     color:$text_white;
