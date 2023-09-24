@@ -54,8 +54,8 @@ class Posts(models.Model):
         verbose_name=_("object_make_user"), related_name="post_author"
     )
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="posts/images/%Y-%m-%d/", null=True)
-    title = models.CharField(verbose_name=_("Sarlovha"), max_length=400, null=True)
+    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="posts/images/%Y-%m-%d/", default="default/default.png", null=True)
+    title = models.CharField(verbose_name=_("Sarlavha"), max_length=400, null=True)
     subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=500, null=True)
     post = QuillField(null=True)
     pdf_file = models.FileField(
@@ -77,8 +77,8 @@ class Posts(models.Model):
     class Meta:
         db_table = "posts"
         managed = True
-        verbose_name = "Postlar"
-        verbose_name_plural = "Postlar"
+        verbose_name = _("Postlar")
+        verbose_name_plural = _("Postlar")
 
     def __str__(self):
         return str(self.title) if self.title else None
