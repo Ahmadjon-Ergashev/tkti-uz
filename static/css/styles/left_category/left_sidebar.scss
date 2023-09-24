@@ -1,0 +1,25 @@
+@import "../variables/colors";
+
+
+.left-category{
+    .active_list{
+        background-color: $color1;
+        a{
+            color: $text_white;
+        }
+    }
+    li{
+        transition: all 0.5s;
+        a{
+            width: 100%;
+            color: $dark;
+            display: block;
+        }
+        &:hover{
+            background-color: $color1;
+            a{
+                color: $text_white;
+            }
+        }        
+    }
+}

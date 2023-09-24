@@ -32,3 +32,21 @@ a {
         text-align:center
     }
 }
+
+.header .owl-carousel .item{
+    height: 78vh!important;
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+}
+
+#owl-demo .item img{
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.bg-color_1{
+    color: #ffffff;
+    background-color: #26597E;
+}

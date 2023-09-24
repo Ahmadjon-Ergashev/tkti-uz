@@ -4,5 +4,12 @@
 {% endblock title %}
 
 {% block content %}
-  
+    <div class="header">
+        <div id="owl-demo" class="owl-carousel owl-theme">    
+            {% for img in header_img %}
+                <div class="item" style="background-image: url('{{ img.image.url }}');">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock content %}

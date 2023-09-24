@@ -20,10 +20,25 @@ class SocialNetworks(models.Model):
     class Meta:
         db_table = 'social_networks'
         managed = True
-        verbose_name = "Ijtimoiy tarmoqlar"
-        verbose_name_plural = "Ijtimoiy tarmoqlar"
+        verbose_name = _("Ijtimoiy tarmoqlar")
+        verbose_name_plural = _("Ijtimoiy tarmoqlar")
 
     def __str__(self):
         return str(self.name) if self.name else None
 
+
+class HeaderIMG(models.Model):
+    """ header image model """
+    image = models.ImageField(verbose_name=_("Bosh sahifa uchun rasm"), upload_to="HeaderIMG/%Y-%m-%d/")
+    order_num = models.IntegerField(default=0)
+    add_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "header_img"
+        managed = True
+        verbose_name = _("Bosh sahifa uchun rasmlar")
+        verbose_name_plural = _("Bosh sahifa uchun rasmlar")
+
+    def __str__(self):
+        return f"Image {self.id}"
     

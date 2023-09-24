@@ -16,6 +16,9 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles/navbar/nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles/footer/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modules/owl-carousel/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modules/owl-carousel/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles/left_category/left_sidebar.css' %}">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
     <!-- AOS Animation -->
@@ -23,21 +26,95 @@
 </head>
 <body>
     <!-- social media -->
-    <div class="socials">
-        <ul>
+    <div class="socials">    
+        <ul id="social_media_btn">
             {% for nets in social_networks %}    
                 <li>
-                    <a href="{{ nets.url }}" target="_blank">
-                        <i class="{{ nets.icon }}n "></i>
+                    <a href="{{ nets.url }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ nets.name }}">
+                        <i class="{{ nets.icon }}" style="color: {{ nets.color }};"></i>
                     </a>
                 </li>
             {% endfor %}
+            <li>
+                <a href="" class="link" title="sayt haritasi">
+                    <i class="fas fa-link fa-rotate-90"></i>
+                </a>
+            </li>
         </ul>
     </div>
     <!-- social media --> 
 
+    <!-- seaching model window -->
+
+    <div class="modal fade " id="search_window" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        {% blocktrans %}
+                            Sayt bo'ylab qidiruv
+                        {% endblocktrans %}
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="post">
+                        {% csrf_token %}
+                        <!-- <div class="form-group has-search">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input type="text" class="form-control" name="query_search" placeholder="">
+                        </div> -->
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="">
+                            <div class="input-group-append">
+                                <button class="search_btn" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="search_btn" data-bs-dismiss="modal">
+                        {% blocktrans %}
+                            Bekor qilish
+                        {% endblocktrans %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+
+    <!-- seaching model window -->
+
+    <!-- bottom right buttons -->
+    <div class="bottom_right_btns">
+        <ul>
+            <li>
+                <!-- open search window button -->
+                <button type="button" id="open_search_window" class="open_search_window" title="Qidirish" data-bs-toggle="modal" data-bs-target="#search_window">
+                    <i class="fas fa-search"></i>
+                </button>
+            </li>
+            <li>
+                <!-- show social media buttons -->
+                <button type="button" id="show_social_media_btn" class="show_social_media" data-bs-toggle="tooltip" data-bs-placement="left" title="Ijtimoiy tarmoqlar">
+                    <i class="fas fa-plus-circle"></i>
+                </button>
+            </li>
+            <li>
+                <!-- to top navigation button -->
+                <a href="#header" class="to_top_btn">
+                    <i class="fas fa-arrow-circle-up"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- bottom right buttons -->
+
     <!-- start header -->
-    <header>
+    <header id="header">
         <div class="superNav border-bottom py-2 bg-light">
             <div class="container">
                 <div class="row">
@@ -113,19 +190,6 @@
                     KIMYO-TEXNOLOGIYA <br>
                     INSTITUTI
                 </a>
-            
-                <div class="mx-auto my-3 ms-3 d-lg-none d-sm-block d-xs-block">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <div class="input-group">
-                            <input type="text" class="form-control" aria-label="Recipient's username" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-primary" type="submit" id="button-addon2">
-                                {% blocktrans %}Qidirish{% endblocktrans %}
-                            </button>
-                        </div>
-                    </form>
-                </div>
-
                 <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -134,14 +198,14 @@
                     <ul class="navbar-nav ms-auto">
                         {% for nav in navbar %}
                             <li class="nav-item dropdown">
-                                <a href="" class="nav-link mx-2 text-uppercase dropdown-toggle active" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a href="{% url 'posts_nav' navbar_slug=nav.slug %}" class="nav-link mx-2 text-uppercase dropdown-toggle active" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ nav.name }}
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ nav.id }}">
                                     {% for child in nav.children.all %}
                                         <li class="nav-item dropdown">
                                             <li class="nav-item">
-                                                <a href="" class="nav-link mx-2 text-capitalize active">{{ child.name }}</a>
+                                                <a href="{% url 'posts_nav' navbar_slug=child.slug %}" class="nav-link mx-2 text-capitalize active">{{ child.name }}</a>
                                             </li>
                                         </li>
                                     {% endfor %}
@@ -160,7 +224,7 @@
 
     {% endblock content %}
     <!-- start footer -->
-    <div class="mt-5 pt-5 pb-5 footer">
+    <div class="mt-5 pt-5 footer">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-xs-12 about-company">
@@ -237,6 +301,13 @@
                                 {% endblocktrans %}
                             </a>
                         </li>
+                        <li>
+                            - <a href="#">
+                                {% blocktrans %}
+                                    Kontraktni apelsin dasturidan to'lash
+                                {% endblocktrans %}
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-xs-12 location">
@@ -287,11 +358,33 @@
     <!-- end footer -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script> 
+    <script src="{% static 'js/modules/owl-carousel/owl.carousel.min.js' %}"></script>
     <script type='text/javascript'> 
         function submitForm(){
             document.getElementById('lang').submit(); 
         } 
         AOS.init();
+        $("#owl-demo").owlCarousel({
+
+            slideSpeed : 300,
+            paginationSpeed : 400,
+
+            // Responsive
+            responsive: true,
+            items : 1,
+            itemsDesktop : [1199,4],
+            itemsDesktopSmall : [980,3],
+            itemsTablet: [768,2],
+            itemsMobile : [479,1],
+            autoPlay: true,
+
+        });
+        $(document).ready(function(){
+            $("#social_media_btn").hide()
+            $("#show_social_media_btn").click(function(){
+                $("#social_media_btn").fadeToggle()  
+            })
+        })
         // $("#ads_top").slick();
         // $(document).ready(function(){
         //     var location = window.location.pathname.toString()

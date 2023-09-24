@@ -1,0 +1,20 @@
+.left-category .active_list {
+  background-color: #26597E;
+}
+.left-category .active_list a {
+  color: #ffffff;
+}
+.left-category li {
+  transition: all 0.5s;
+}
+.left-category li a {
+  width: 100%;
+  color: #333;
+  display: block;
+}
+.left-category li:hover {
+  background-color: #26597E;
+}
+.left-category li:hover a {
+  color: #ffffff;
+}/*# sourceMappingURL=left_sidebar.css.map */

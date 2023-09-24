@@ -27,20 +27,82 @@
 }
 
 .socials{
-    top: 40%;
+    top: 30%;
     right: 0%;
+    z-index: 9999;
     position: fixed;
     ul {
         padding: 0;
         li{
-            padding: 5px;
             list-style-type: none;
+            background-color: $text_white;
             a{
-                color: $text_white;
+                padding: 5px;
+                display: flex;
+                font-size: 18px;
+                justify-content: space-between;
                 i{
                     font-size: 35px;
                 }
             }
         }
+        .link{
+            color: $color1;
+            i{
+                font-size: 30px;
+            }
+        }
     }
+}
+
+// to top button css
+
+.bottom_right_btns{
+    top: 85%;
+    right: 1%;
+    z-index: 9999;
+    position: fixed; 
+    ul{
+        li{
+            margin-bottom: 10px;
+            list-style-type: none;
+            button{
+                border: none;
+                outline: none;
+                background: none;
+            }
+            i{
+                color: $color1;
+                font-size: 35px;
+            }
+        }
+    }
+}
+
+// seach box 
+.has-search{
+    .form-control {
+        padding-left: 2.375rem;
+    }
+    .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        color: $dark;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        line-height: 2.375rem;
+    }
+
+}
+
+.search_btn{
+    border: none;
+    outline: none;
+    background: none;
+    color: $text_white;
+    padding: 8px 20px;
+    background-color: $color1;
 }

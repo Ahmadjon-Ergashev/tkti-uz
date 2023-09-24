@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+{% block content %}
+    <div class="container mt-5">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ home }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page"><a href="">{{ parent }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+            </ol>
+        </nav>
+        <div class="row d-flex justify-content-between">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3 py-5">
+                <ul class="list-group left-category">
+                    {% for cl in category_list %}
+                        {% if cl.name == title %}
+                            <li class="list-group-item active_list">
+                                <a href="{% url 'posts_nav' navbar_slug=cl.slug %}">{{ cl.name }}</a>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">
+                                <a href="{% url 'posts_nav' navbar_slug=cl.slug %}">{{ cl.name }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border py-5">
+                {% for object in object_list %}
+                    <!-- <div class="card pb-3">
+                        <h5 class="card-header">{{ object.navbar.name }}</h5>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ object.title }}</h5>
+                            <p class="card-text">{{ object.subtitle }}</p>
+                            <a href="{% url 'post_detail' post_slug=object.slug %}" class="btn btn-primary btn-ms">
+                                {{ read_more }}
+                            </a>
+                        </div>
+                    </div> -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+    
