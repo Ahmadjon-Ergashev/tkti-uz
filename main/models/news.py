@@ -7,11 +7,16 @@ from django.utils.translation import gettext_lazy as _
 from .posts import Status
 
 
+class ObjectType(models.TextChoices):
+    news: str = "news", _("Yangilik")
+    ads: str = "ads", _("E'lon")
+
 
 class NewsAndAds(models.Model):
     """ model for news and announcement  """
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="author_news")
     image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="news/images/%Y-%m-%d/", default="default/default.png", null=True)
+    object_type = models.CharField(max_length=100, verbose_name=_("Ma'lumot turi"), choices=ObjectType.choices, default=ObjectType.news)
     title = models.CharField(verbose_name=_("Sarlavha"), max_length=255, null=True)
     subtitle = models.CharField(verbose_name=_("Qisqacha mazmuni"), max_length=300, null=True)
     post = QuillField(verbose_name=_("To'liq mazmuni"), null=True)

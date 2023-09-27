@@ -3,7 +3,7 @@ from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 
 from main.models.widgets import (
-    SocialNetworks, HeaderIMG, UsefullLinks
+    SocialNetworks, HeaderIMG, UsefullLinks, QuickLinks, Statistika
 )
 
 
@@ -43,3 +43,19 @@ class LinksAdmin(GuardedModelAdmin):
 
     def get_logo(self, obj):
         return mark_safe(f"<img src='{obj.logo.url}' width=100 />")
+    
+
+@admin.register(QuickLinks)
+class QuickLinksAdmin(admin.ModelAdmin):
+    ordering = ("-added_at", )
+    list_display_links = ("name", )
+    list_editable = ("order_num", "url")
+    list_display = ("id", "name", "order_num", "url", "added_at")
+    
+
+@admin.register(Statistika)
+class StatistikaAdmin(admin.ModelAdmin):
+    ordering = ("-added_at", )
+    list_display_links = ("name", )
+    list_editable = ("order_num", "quantity")
+    list_display = ("id", "name", "quantity", "order_num", "added_at")

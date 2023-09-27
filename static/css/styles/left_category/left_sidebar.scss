@@ -5,29 +5,60 @@
 @import "../variables/colors";
 
 
-.left-category {
-    .active_list {
-        background-color: $color1;
-
-        a {
+// quick links
+.quick_links{
+    .title{
+        h4{
+            margin: 0;
+            padding: 10px;
             color: $text_white;
+            background: $color1;
         }
     }
-
-    li {
-        transition: all 0.5s;
-
-        a {
-            width: 100%;
-            color: $dark;
-            display: block;
+    .body{
+        ul{
+            li{
+                border: none;
+                a{
+                    color: $dark;
+                }
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 2px; // animation border width
+                    background: $color1; // border color
+                    transition: width 0.5s ease-in-out;
+                }
+                &:hover::after{
+                    width: 100%;
+                }
+            }
+            
         }
+    }
+}
 
-        &:hover {
-            background-color: $color1;
-
-            a {
-                color: $text_white;
+// social networks
+.socials_networks{
+    .title{
+        h4{
+            margin: 0;
+            padding: 10px;
+            color: $text_white;
+            background: $color1;
+        }
+    }
+    .body{
+        ul{
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            li{
+                list-style-type: none;
+                a{
+                    font-size: 35px;
+                }
             }
         }
     }
@@ -78,12 +109,13 @@ $unactiveHoverColor: #dddddd;
         li {
             label {
                 width: 50%;
+                text-align: center;
                 font-family: "Raleway";
                 float: left;
                 font-weight: 900;
                 padding: 15px 25px;
-                border: 1px solid #ddd;
                 border-bottom: 0;
+                border: 1px solid #ddd;
                 background: $unactiveColor;
                 color: #444;
 
@@ -117,16 +149,24 @@ $unactiveHoverColor: #dddddd;
             ul{
                 li{
                     padding: 8px 0;
-                    border-top: 1px solid lightgray;
-                    border-bottom: 1px solid lightgray;
                     a{
                         color: $dark;
                         font-size: 13px;
                         font-family: "Droid Serif";
                         &:hover{
                             color: $color1;
-                            text-decoration: underline;
                         }
+                    }
+                    &::after{
+                        content: "";
+                        display: block;
+                        width: 0;
+                        height: 2px;
+                        background: $color1;
+                        transition: width 0.5s ease-in-out;
+                    }
+                    &:hover::after{
+                        width: 100%;
                     }
                     .header_tabs_section{
                         border: none;
@@ -150,8 +190,8 @@ $unactiveHoverColor: #dddddd;
 #tab1:checked~nav .tab1,
 #tab2:checked~nav .tab2 {
     label {
-        background: white;
         color: #111;
+        background: white;
         position: relative;
 
         &:after {

@@ -1,24 +1,45 @@
 @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700);
 @import url(https://fonts.googleapis.com/css?family=Raleway:100,400,700);
-.left-category .active_list {
-  background-color: #26597E;
-}
-.left-category .active_list a {
+.quick_links .title h4 {
+  margin: 0;
+  padding: 10px;
   color: #ffffff;
+  background: #26597E;
 }
-.left-category li {
-  transition: all 0.5s;
+.quick_links .body ul li {
+  border: none;
 }
-.left-category li a {
-  width: 100%;
+.quick_links .body ul li a {
   color: #333;
+}
+.quick_links .body ul li::after {
+  content: "";
   display: block;
+  width: 0;
+  height: 2px;
+  background: #26597E;
+  transition: width 0.5s ease-in-out;
 }
-.left-category li:hover {
-  background-color: #26597E;
+.quick_links .body ul li:hover::after {
+  width: 100%;
 }
-.left-category li:hover a {
+
+.socials_networks .title h4 {
+  margin: 0;
+  padding: 10px;
   color: #ffffff;
+  background: #26597E;
+}
+.socials_networks .body ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.socials_networks .body ul li {
+  list-style-type: none;
+}
+.socials_networks .body ul li a {
+  font-size: 35px;
 }
 
 .pc-tab > input,
@@ -55,12 +76,13 @@
 }
 .pc-tab ul li label {
   width: 50%;
+  text-align: center;
   font-family: "Raleway";
   float: left;
   font-weight: 900;
   padding: 15px 25px;
-  border: 1px solid #ddd;
   border-bottom: 0;
+  border: 1px solid #ddd;
   background: #eeeeee;
   color: #444;
 }
@@ -88,8 +110,6 @@
 }
 .pc-tab section div ul li {
   padding: 8px 0;
-  border-top: 1px solid lightgray;
-  border-bottom: 1px solid lightgray;
 }
 .pc-tab section div ul li a {
   color: #333;
@@ -98,7 +118,17 @@
 }
 .pc-tab section div ul li a:hover {
   color: #26597E;
-  text-decoration: underline;
+}
+.pc-tab section div ul li::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #26597E;
+  transition: width 0.5s ease-in-out;
+}
+.pc-tab section div ul li:hover::after {
+  width: 100%;
 }
 .pc-tab section div ul li .header_tabs_section {
   border: none;
@@ -116,8 +146,8 @@
 
 #tab1:checked ~ nav .tab1 label,
 #tab2:checked ~ nav .tab2 label {
-  background: white;
   color: #111;
+  background: white;
   position: relative;
 }
 #tab1:checked ~ nav .tab1 label:after,

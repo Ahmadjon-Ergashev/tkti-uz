@@ -1,196 +1,39 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     {{ title }}
 {% endblock title %}
 
 
 {% block content %}
-    <div class="container mt-5">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                {% if parent is not None %}
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ home }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page"><a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-                {% else %}
-                    <li class="breadcrumb-item"><a href="{% url 'home' %}">{{ home }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-                {% endif %}
-            </ol>
-        </nav>
+    <link rel="stylesheet" href="{% static 'css/styles/posts/posts_list.css' %}">
+    <div class="container mt-4">
         <div class="row d-flex justify-content-between py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
-                <ul class="list-group left-category">
-                    {% for cl in category_list %}
-                        {% if cl.name == title %}
-                            <li class="list-group-item active_list">
-                                <a href="{% url 'posts_nav' navbar_slug=cl.slug %}">{{ cl.name }}</a>
-                            </li>
-                        {% else %}
-                            <li class="list-group-item">
-                                <a href="{% url 'posts_nav' navbar_slug=cl.slug %}">{{ cl.name }}</a>
-                            </li>
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-                <!-- news tabs -->
-                
-                <div class="pc-tab mt-3">
-                    <input checked="checked" id="tab1" type="radio" name="pct" />
-                    <input id="tab2" type="radio" name="pct" />
-                    <input id="tab3" type="radio" name="pct" />
-                    <nav>
-                        <ul>
-                            <li class="tab1">
-                                <label for="tab1">{{ news_tab }}</label>
-                            </li>
-                            <li class="tab2">
-                                <label for="tab2">{{ ads_tab }}</label>
-                            </li>
-                        </ul>
-                    </nav>
-                    <section>
-                        <div class="tab1">
-                            <ul>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="tab2">
-                            <ul>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header_tabs_section">
-                                        <span><a href="">{{ today|date:"D, d M, Y" }}</a></span>
-                                        <span><i class="fas fa-eye"></i> 15</span>
-                                    </div>
-                                    <div class="body_tabs_section">
-                                        <a href="">
-                                            Lorem ipsum, dolor sit amet consectetur adipisicing.
-                                        </a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
-                </div>
-                    
-
-                <!-- news tabs -->
+                {% include "../../widgets/left_sidebar.html" %}
             </div>
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border">
-                {% for object in object_list %}
-                    <!-- <div class="card pb-3">
-                        <h5 class="card-header">{{ object.navbar.name }}</h5>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ object.title }}</h5>
-                            <p class="card-text">{{ object.subtitle }}</p>
-                            <a href="{% url 'post_detail' post_slug=object.slug %}" class="btn btn-primary btn-ms">
-                                {{ read_more }}
-                            </a>
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border posts">
+                <!-- Start Blog Layout -->
+                <div class="row " >
+                    {% for object in object_list %}
+                        <div class="col-12 item my-3">
+                            <div class="item-in">
+                                <h4>{{ object.title }}</h4>
+                                <div class="seperator"></div>
+                                <p>
+                                    {{ object.subtitle }}
+                                </p>
+                                <a href="{% url 'post_detail' post_slug=object.slug %}">{{ read_more }}
+                                    <i class="fa fa-long-arrow-right"></i>
+                                </a>
+                            </div>
                         </div>
-                    </div> -->
-                {% empty %}
-                    <p class="text-center">
-                        {{ empty }}
-                    </p>
-                {% endfor %}
+                    {% empty %}
+                        <p class="text-center">
+                            {{ empty }}
+                        </p>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>

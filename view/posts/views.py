@@ -1,3 +1,4 @@
+from typing import Any
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -6,16 +7,26 @@ from django.shortcuts import render, get_object_or_404
 from main.models.posts import (
     Posts, Status, Navbar
 )
-from main.models.widgets import HeaderIMG, UsefullLinks
+from main.models.widgets import (
+    HeaderIMG, UsefullLinks, Statistika
+)
+from main.models.news import NewsAndAds
 
 
 
 def Home(request):
     """ for home page view """
     context = {
+        "all": _("Barchasi"),
         "title": _("Bosh sahifa"),
+        "ads_section_title": _("E'lonlar"),
+        "news_section_title": _("Yangiliklar"),
         "header_img": HeaderIMG.objects.all().order_by("order_num"),
-        "usefull_links": UsefullLinks.objects.all().order_by("-add_time")
+        "statistika": Statistika.objects.all().order_by("-added_at"),
+        "usefull_links": UsefullLinks.objects.all().order_by("-add_time"),
+        "last_news_6": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:6],
+        "top_3_news": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("post_viewed_count")[:3],
+        "top_3_ads": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:3],
     }
     return render(request, "home.html", context)
 
@@ -23,14 +34,14 @@ def Home(request):
 class PostsListView(ListView):
     """ get all posts what connected to navbar """
     model = Posts
-    paginate_by = 15
+    paginate_by = 5
     ordering = ["-added_at"]
     template_name = "pages/posts/posts.html"
 
     def get_queryset(self):
         navbar_slug = self.kwargs["navbar_slug"]
         qs = super().get_queryset().filter(status=Status.published, navbar__slug=navbar_slug).order_by("-added_at")
-        return qs
+        return qs 
     
     def get_context_data(self, **kwargs):
         navbar_name = Navbar.objects.get(slug=self.kwargs["navbar_slug"])
@@ -41,7 +52,6 @@ class PostsListView(ListView):
             context["category_list"] = Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
             context["category_list"] = navbar_name.get_children()
-        context["read_more"] = _("Batafsil")
         context["home"] = _("Asosiy sahifa")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         return context
@@ -53,8 +63,23 @@ class PostDetailView(DetailView):
     template_name = "pages/posts/post_detail.html"
 
     def get_object(self, queryset=None):
-        """Override the get_object method to customize the object retrieval."""
         post_slug = self.kwargs["post_slug"]
         obj = get_object_or_404(Posts, slug=post_slug)
         return obj
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = context["object"]
+        navbar = Navbar.objects.get(slug=post.navbar.slug)
+        context["title"] = navbar.name
+        context["parent"] = navbar.parent.name
+        try:
+            context["category_list"] = Navbar.objects.filter(parent_id=navbar.parent.id)
+            print(self.request.get_host())
+            # context["pdf_file"] = "https://admin.toshvil.uz/media/pdf/files/2023-09-13/%D0%A1%D0%B5%D0%BD%D1%82%D1%8F%D0%B1%D1%80_%D0%B2%D0%B0%D0%BA%D0%B0%D0%BD%D1%86%D0%B8%D1%8F_11.pdf"
+            context["pdf_file"] = "http://127.0.0.1:8000" + post.pdf_file.url
+        except AttributeError:
+            context["category_list"] = navbar.get_children()
+        except ValueError:
+            context["pdf_file"] = ""
+        return context

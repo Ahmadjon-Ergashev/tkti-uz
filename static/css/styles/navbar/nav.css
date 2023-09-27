@@ -3,16 +3,6 @@
   font-size: 14px;
 }
 
-.header {
-  margin-bottom: 50px;
-}
-.header #headerIMG .item {
-  height: 78vh !important;
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-}
-
 #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li {
   transition: 0.5s all;
 }

@@ -1,9 +1,12 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
     {{ title }}
 {% endblock title %}
 
 {% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
+    <!-- headers img -->
     <div class="header">
         <div id="headerIMG">    
             {% for img in header_img %}
@@ -11,24 +14,180 @@
                 </div>
             {% endfor %}
         </div>
-    </div>
-    <!-- useful links -->
-    <div id="usefull_links">  
-        {% for link in usefull_links %}    
-            <div class="item">
-                <div class="brand">
-                    <a href="{{ link.link }}" target="_blank">
-                        <img src="{{ link.logo.url }}" alt="tkti.uz">
-                    </a>
-                </div>
-                <div class="body">
-                    <p>
-                        <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
+        <!-- statistika -->
 
-    <!-- useful links -->
+        <div class="container">
+            <div id="statistika">
+                {% for obj in statistika %}    
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card_icon">
+                                <i class="{{ obj.icon }}"></i>
+                            </div>
+                            <p>
+                                {{ obj.quantity }}
+                            </p>
+                            <h3>{{ obj.name }}</h3>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- statistika -->
+    </div>
+    <!-- headers img -->
+
+
+    <!-- news sections -->
+    <div class="container news" >
+        <div id="news">
+            <div class="news_section_title">
+                <!-- title -->
+                <h1>{{ news_section_title }}</h1>
+                <span>
+                    <a href="" class="mt-2">
+                        {{ all }} <i class="fas fa-arrow-right ms-1"></i>
+                    </a> 
+                </span>
+            </div>
+            <div class="most_read_news mt-4 py-4">
+                <!-- top news -->
+                <section class="wrapper">
+                    <div class="content">
+                        <div class="container">
+                            <div class="row">
+                                {% for t3 in top_3_news %}                                  
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 top_news">
+                                        <div class="card">
+                                            <a class="img-card" href="">
+                                                <img src="{{ t3.image.url }}" />
+                                            </a>
+                                            <div class="time_and_view">
+                                                <span><a href="">{{ t3.added_at|date:"D, d-M Y" }}</a></span>
+                                                <span><a href=""><i class="far fa-eye me-1"></i> {{ t3.post_viewed_count }}</a></span>
+                                            </div>
+                                            <div class="card-content">
+                                                <h4 class="card-title">
+                                                    <a href=""> {{ t3.title | truncatechars:100}}
+                                                    </a>
+                                                </h4>
+                                                <p class="mt-4">
+                                                    {{ t3.subtitle | truncatechars:150 }}
+                                                </p>
+                                            </div>
+                                            <div class="card-read-more text-center">
+                                                <a href="" class="btn btn-link btn-block">
+                                                    {{ read_more }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="row">
+                                {% for t3 in last_news_6 %}                                  
+                                    <div class="col-12 col-sm-6 col-lg-4">
+                                        <div class="card mb-3">
+                                            <div class="row g-0">
+                                                <div class="col-xl-4 d-none d-xl-block">
+                                                    <img src="{{ t3.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
+                                                </div>
+                                                <div class="col-12 col-xl-8">
+                                                    <div class="card-body pb-xl-0 pt-xl-2">
+                                                        <p class="mb-0 border-bottom">
+                                                            <a class="text-dark" href="">{{ t3.added_at }}</a>
+                                                        </p>
+                                                        <p class="card-text">
+                                                            <a class="text-dark" href="">{{ t3.title | truncatechars:50 }}</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- news sections -->    
+
+    <!-- ads section -->
+    <div class="container news" >
+        <div id="news">
+            <div class="news_section_title">
+                <!-- title -->
+                <h1>{{ ads_section_title }}</h1>
+                <span>
+                    <a href="" class="mt-2">
+                        {{ all }} <i class="fas fa-arrow-right ms-1"></i>
+                    </a> 
+                </span>
+            </div>
+            <div class="most_read_news mt-4 py-4">
+                <!-- top ads -->
+                <section class="wrapper">
+                    <div class="content">
+                        <div class="container">
+                            <div class="row">
+                                {% for t3 in top_3_ads %}                                  
+                                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 top_news">
+                                        <div class="card">
+                                            <a class="img-card" href="">
+                                                <img src="{{ t3.image.url }}" />
+                                            </a>
+                                            <div class="time_and_view">
+                                                <span><a href="">{{ t3.added_at|date:"D, d-M Y" }}</a></span>
+                                                <span><a href=""><i class="far fa-eye me-1"></i> {{ t3.post_viewed_count }}</a></span>
+                                            </div>
+                                            <div class="card-content">
+                                                <h4 class="card-title">
+                                                    <a href=""> {{ t3.title | truncatechars:100}}
+                                                    </a>
+                                                </h4>
+                                                <p class="mt-4">
+                                                    {{ t3.subtitle | truncatechars:150 }}
+                                                </p>
+                                            </div>
+                                            <div class="card-read-more text-center">
+                                                <a href="" class="btn btn-link btn-block">
+                                                    {{ read_more }}
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- ads section -->
+          
+
+    <section>
+        <!-- useful links -->
+        <div id="usefull_links">  
+            {% for link in usefull_links %}    
+                <div class="item">
+                    <div class="brand">
+                        <a href="{{ link.link }}" target="_blank">
+                            <img src="{{ link.logo.url }}" alt="tkti.uz">
+                        </a>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <!-- useful links -->
+    </section>
 {% endblock content %}

@@ -58,4 +58,38 @@ class UsefullLinks(models.Model):
     
     def __str__(self):
         return str(self.name) if self.name else None
-        
+    
+
+class QuickLinks(models.Model):
+    """ tezkor havolalar """
+    name = models.CharField(max_length=100, verbose_name=_("Nomi"), unique=True, null=True)
+    url = models.URLField(_("url manzili"), max_length=300, null=True, blank=True)
+    order_num = models.IntegerField(default=0, verbose_name=_("Tartib raqami"))
+    added_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        db_table = "quick_links"
+        managed = True
+        verbose_name = "Tezkor havolalar"
+        verbose_name_plural = "Tezkor havolalar"
+
+    def __str__(self):
+        return str(self.name) if self.name else None
+    
+
+class Statistika(models.Model):
+    """ universitet xaqida statistik malumotlar """
+    name = models.CharField(_("Nomi"), max_length=80, unique=True)
+    icon = models.CharField(_("icon"), max_length=50, null=True)
+    quantity = models.IntegerField(_("soni"), default=0)
+    order_num = models.IntegerField(_("Tartib raqam"), default=0)
+    added_at = models.DateTimeField(auto_now_add=True)   
+
+    class Meta:
+        db_table = "statistika"
+        managed = True
+        verbose_name = _("Statistika")
+        verbose_name_plural = _("Statistika")
+    
+    def __str__(self):
+        return self.name if self.name else None
