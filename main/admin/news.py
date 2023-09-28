@@ -22,9 +22,9 @@ class NewsAdmin(admin.ModelAdmin):
     date_hierarchy = "added_at"
     search_fields = ("title", )
     list_display_links = ("title", )
-    list_editable = ("object_type", "status")
     list_filter = ("object_type", "status", "added_at")
-    list_display = ("id", "title", "object_type", "status", "added_at")
+    list_editable = ("post_viewed_count", "object_type", "status")
+    list_display = ("id", "title", "post_viewed_count", "object_type", "status", "added_at")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
 
     fieldsets = (

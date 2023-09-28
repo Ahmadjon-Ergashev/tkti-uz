@@ -24,9 +24,9 @@ def Home(request):
         "header_img": HeaderIMG.objects.all().order_by("order_num"),
         "statistika": Statistika.objects.all().order_by("-added_at"),
         "usefull_links": UsefullLinks.objects.all().order_by("-add_time"),
+        "top_3_ads": NewsAndAds.objects.filter(object_type="ads", status="pub").order_by("-added_at")[:3],
         "last_news_6": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:6],
-        "top_3_news": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("post_viewed_count")[:3],
-        "top_3_ads": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:3],
+        "top_3_news": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-post_viewed_count")[:3],
     }
     return render(request, "home.html", context)
 

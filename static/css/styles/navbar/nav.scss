@@ -8,9 +8,53 @@
     }
 }
 
+.top_nav{
+    ul{
+        padding: 0;
+        margin: 0;
+        li{
+            display: inline-block;
+            list-style-type: none;
+            a{
+                color: $dark;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            .again{
+                font-weight: 700;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+            .again_dr{
+                z-index: 9998;
+                li{
+                    width: 100%;
+                    padding: 5px 10px;
+                    a{
+                        &:hover{
+                            text-decoration: none;
+                        }
+                    }
+                    &:hover{
+                        background: $color1;
+                        a{
+                            color: $text_white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 #navbarNavDropdown{
     .navbar-nav{
         .nav-item{
+            &:not(:last-child){
+                margin-right: 5px;
+            }
             .dropdown-menu{
                 li{
                     transition: 0.5s all;
