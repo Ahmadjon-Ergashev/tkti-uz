@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'none'">
     <title>
         {% block title %}
           
@@ -13,22 +14,18 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-
     <link rel="shortcut icon" href="{% static 'images/brand.png' %}" type="image/x-icon">
-
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Slick js css -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.min.css" integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <!-- local css files -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <!-- AOS Animation -->
-    <link href="{% static 'css/modules/aos/aos.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/modules/aos/aos.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles/navbar/nav.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles/footer/footer.css' %}">
+    <!-- Slick js css -->
+    <link rel="stylesheet" href="{% static 'css/modules/slickjs/slick.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modules/slickjs/slick-theme.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles/left_category/left_sidebar.css' %}">
 </head>
 <body>
@@ -266,9 +263,9 @@
             </div>
         </nav>
     </header>
+    
     <!-- end header -->
     {% block content %}
-
 
 
     {% endblock content %}
@@ -346,7 +343,7 @@
                                 info@tkti.uz
                             </li>
                             <li class="mt-2">
-                                <!-- <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5992.611411878445!2d69.2526138524833!3d41.323965330062755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b737f1f4161%3A0xab6842dfd7a53fdf!2sToshkent%20kimyo-texnologiya%20instituti%20(TKTI)!5e0!3m2!1suz!2s!4v1695310071406!5m2!1suz!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
+                                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5992.611411878445!2d69.2526138524833!3d41.323965330062755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b737f1f4161%3A0xab6842dfd7a53fdf!2sToshkent%20kimyo-texnologiya%20instituti%20(TKTI)!5e0!3m2!1suz!2s!4v1695310071406!5m2!1suz!2s" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                             </li>
                         </ul>
                     </p>
@@ -363,8 +360,8 @@
     </div>
     <!-- end footer -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     
+    <script src="{% static 'js/modules/slickjs/slick.min.js' %}"></script>
     <script src="{% static 'js/modules/aos/aos.js' %}"></script>
     <script type='text/javascript'> 
         function submitForm(){
@@ -411,12 +408,14 @@
                     }
                 ]
             });
+            
             $("#headerIMG").slick({
                 infinite: true,
                 arrows: false,
                 autoplay: true,
                 autoplaySpeed: 3000,
             });
+
             $("#usefull_links").slick({
                 dots: true,
                 arrows: false,

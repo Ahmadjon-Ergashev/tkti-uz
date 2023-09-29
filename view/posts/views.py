@@ -74,8 +74,11 @@ class PostDetailView(DetailView):
         context["title"] = navbar.name
         context["parent"] = navbar.parent.name
         try:
+            domain = self.request.get_host()
+            print(domain)
             context["category_list"] = Navbar.objects.filter(parent_id=navbar.parent.id)
-            context["pdf_file"] = "http://127.0.0.1:8000" + post.pdf_file.url
+            context["pdf_file"] = f"https://{domain}" + post.pdf_file.url
+            print(context["pdf_file"])
         except AttributeError:
             context["category_list"] = navbar.get_children()
         except ValueError:
