@@ -3,6 +3,11 @@ from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
+import os
+from io import BytesIO
+from PIL import Image, ImageOps
+from django.core.files import File
+
 
 
 class SocialNetworks(models.Model):
@@ -41,6 +46,18 @@ class HeaderIMG(models.Model):
 
     def __str__(self):
         return f"Image {self.id}"
+    
+    def save(self, *args, **kwargs):
+        im = Image.open(self.image)
+        im = im.convert('RGB')
+        im = ImageOps.exif_transpose(im)
+        im_io = BytesIO()
+        im.save(im_io, 'JPEG', quality=50)
+        filename = os.path.splitext(self.image.name)[0]
+        filename = f"{filename}.jpg"
+        new_image = File(im_io, name=filename)
+        self.image = new_image
+        super().save(*args, **kwargs)
     
 
 class UsefullLinks(models.Model):

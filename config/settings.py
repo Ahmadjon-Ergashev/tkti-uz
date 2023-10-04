@@ -53,6 +53,7 @@ GLOBAL_APPS = [
     "guardian", 
     "colorfield",
     "compressor", 
+    'corsheaders',
     "bootstrap5",
     "django_quill",
     "django_filters",
@@ -62,6 +63,7 @@ GLOBAL_APPS = [
 INSTALLED_APPS += LOCALE_APPS + GLOBAL_APPS
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware", # for coresheaders
     "whitenoise.middleware.WhiteNoiseMiddleware", # for static files
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -197,3 +199,41 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # default
     'guardian.backends.ObjectPermissionBackend',
 )
+
+# corsheaders
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT'
+]
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+    "https://*.ngrok-free.app"
+]
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_HEADERS = ['*']
+
+CSRF_ALLOWED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://tkti.uz",
+    "https://*.ngrok-free.app"
+]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "https://tkti.uz",
+    "https://*.ngrok-free.app"
+]
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^http://\\localhost:8000\$",
+    r"^http://\\127.0.0.1:8000\$",
+    r"^https://\\tkti.uz\$",
+]

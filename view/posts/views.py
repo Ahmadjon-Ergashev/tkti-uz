@@ -1,4 +1,3 @@
-from typing import Any
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -75,7 +74,6 @@ class PostDetailView(DetailView):
         context["parent"] = navbar.parent.name
         try:
             domain = self.request.get_host()
-            print(domain)
             context["category_list"] = Navbar.objects.filter(parent_id=navbar.parent.id)
             context["pdf_file"] = f"https://{domain}" + post.pdf_file.url
             print(context["pdf_file"])

@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from mptt.models import TreeForeignKey, MPTTModel
 from django.utils.translation import gettext_lazy as _
 
+import os
+from io import BytesIO
+from PIL import Image, ImageOps
+from django.core.files import File
+
+
 
 class NavbarStatus(models.TextChoices):
     base = "base", _("Asosiy")
@@ -67,7 +73,7 @@ class Posts(models.Model):
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
     status = models.CharField(verbose_name=_("post status"), max_length=50, choices=Status.choices, default=Status.pendding)
-    slug = models.SlugField(max_length=255, verbose_name="slug", help_text=_("Majburyat tug'ulmasa tegmang"))
+    slug = models.SlugField(max_length=255, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Post muallifi"), max_length=300, default="TKTI axborot xizmati")
     added_at = models.DateTimeField(verbose_name=_("Vaqt & sana"))
@@ -83,5 +89,16 @@ class Posts(models.Model):
     def __str__(self):
         return str(self.title) if self.title else None
     
+    def save(self, *args, **kwargs):
+        im = Image.open(self.image)
+        im = im.convert('RGB')
+        im = ImageOps.exif_transpose(im)
+        im_io = BytesIO()
+        im.save(im_io, 'JPEG', quality=50)
+        filename = os.path.splitext(self.image.name)[0]
+        filename = f"{filename}.jpg"
+        new_image = File(im_io, name=filename)
+        self.image = new_image
+        super().save(*args, **kwargs)
     
     

@@ -39,10 +39,7 @@
     </div>
     <!-- headers img -->
 
-    <div class="container" data-aos="fade-right" data-aos-delay="400">
-        <button class="btn btn-primary">submit</button>
-    </div>
-
+    
 
     <!-- news sections -->
     <div class="container news" >
@@ -70,11 +67,11 @@
                                             </a>
                                             <div class="time_and_view">
                                                 <span><a href="">{{ t3.added_at|date:"D, d-M Y" }}</a></span>
-                                                <span><a href=""><i class="far fa-eye me-1"></i> {{ t3.post_viewed_count }}</a></span>
+                                                <span><a href="{% url 'news_detail' obj_slug=t3.slug %}"><i class="far fa-eye me-1"></i> {{ t3.post_viewed_count }}</a></span>
                                             </div>
                                             <div class="card-content">
                                                 <h4 class="card-title">
-                                                    <a href=""> {{ t3.title | truncatechars:100}}
+                                                    <a href="{% url 'news_detail' obj_slug=t3.slug %}"> {{ t3.title | truncatechars:100}}
                                                     </a>
                                                 </h4>
                                                 <p class="mt-4">
@@ -82,7 +79,7 @@
                                                 </p>
                                             </div>
                                             <div class="card-read-more text-center">
-                                                <a href="" class="btn btn-link btn-block">
+                                                <a href="{% url 'news_detail' obj_slug=t3.slug %}" class="btn btn-link btn-block">
                                                     {{ read_more }}
                                                 </a>
                                             </div>
@@ -104,7 +101,7 @@
                                                             <a class="text-dark" href="">{{ t3.added_at }}</a>
                                                         </p>
                                                         <p class="card-text">
-                                                            <a class="text-dark" href="">{{ t3.title | truncatechars:50 }}</a>
+                                                            <a class="text-dark" href="{% url 'news_detail' obj_slug=t3.slug %}">{{ t3.title | truncatechars:50 }}</a>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -147,11 +144,11 @@
                                             </a>
                                             <div class="time_and_view">
                                                 <span><a href="">{{ t3.added_at|date:"D, d-M Y" }}</a></span>
-                                                <span><a href=""><i class="far fa-eye me-1"></i> {{ t3.post_viewed_count }}</a></span>
+                                                <span><a href="{% url 'news_detail' obj_slug=t3.slug %}"><i class="far fa-eye me-1"></i> {{ t3.post_viewed_count }}</a></span>
                                             </div>
                                             <div class="card-content">
                                                 <h4 class="card-title">
-                                                    <a href=""> {{ t3.title | truncatechars:100}}
+                                                    <a href="{% url 'news_detail' obj_slug=t3.slug %}"> {{ t3.title | truncatechars:100}}
                                                     </a>
                                                 </h4>
                                                 <p class="mt-4">
@@ -159,7 +156,7 @@
                                                 </p>
                                             </div>
                                             <div class="card-read-more text-center">
-                                                <a href="" class="btn btn-link btn-block">
+                                                <a href="{% url 'news_detail' obj_slug=t3.slug %}" class="btn btn-link btn-block">
                                                     {{ read_more }}
                                                 </a>
                                             </div>
