@@ -49,20 +49,26 @@
     }
 }
 
-#navbarNavDropdown{
-    .navbar-nav{
-        .nav-item{
-            &:not(:last-child){
-                margin-right: 5px;
-            }
-            .dropdown-menu{
-                z-index: 9999;
-                li{
-                    transition: 0.5s all;
-                    &:hover{
-                        background-color: $color1;
-                        a:hover{
-                            color: $text_white;
+#base_navbar{
+    #navbarNavDropdown{
+        .navbar-nav{
+            .nav-item{
+                &:not(:last-child){
+                    margin-right: 5px;
+                }
+                .nav_name{
+                    // font-size: 18px;
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                }
+                .dropdown-menu{
+                    z-index: 9999;
+                    li{
+                        transition: 0.5s all;
+                        &:hover{
+                            background-color: $color1;
+                            a:hover{
+                                color: $text_white;
+                            }
                         }
                     }
                 }

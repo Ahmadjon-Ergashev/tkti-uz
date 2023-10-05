@@ -10,7 +10,7 @@ from main.models.news import NewsAndAds
 class NewsDetailView(DetailView):
     """ detail view for news and detail """
     model = NewsAndAds
-    template_name = "pages/news_and_ads/detail.html"
+    template_name = "pages/news_and_ada/detail.html"
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]

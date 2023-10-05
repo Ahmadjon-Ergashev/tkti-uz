@@ -84,11 +84,11 @@
                 {% for news in most_read_news %}                  
                     <li>
                         <div class="header_tabs_section">
-                            <span><a href="">{{ news.added_at|date:"D, d M, Y" }}</a></span>
+                            <span><a href="{% url 'news_detail' obj_slug=news.slug %}">{{ news.added_at|date:"D, d M, Y" }}</a></span>
                             <span><i class="fas fa-eye"></i> {{ news.post_viewed_count }}</span>
                         </div>
                         <div class="body_tabs_section">
-                            <a href="">
+                            <a href="{% url 'news_detail' obj_slug=news.slug %}">
                                 {{ news.title | truncatechars:55 }}
                             </a>
                         </div>
@@ -101,11 +101,11 @@
                 {% for ads in most_read_ads %}                  
                     <li>
                         <div class="header_tabs_section">
-                            <span><a href="">{{ ads.added_at|date:"D, d M, Y" }}</a></span>
+                            <span><a href="{% url 'news_detail' obj_slug=ads.slug %}">{{ ads.added_at|date:"D, d M, Y" }}</a></span>
                             <span><i class="fas fa-eye"></i> {{ ads.post_viewed_count }}</span>
                         </div>
                         <div class="body_tabs_section">
-                            <a href="">
+                            <a href="{% url 'news_detail' obj_slug=ads.slug %}">
                                 {{ ads.title | truncatechars:55 }}
                             </a>
                         </div>

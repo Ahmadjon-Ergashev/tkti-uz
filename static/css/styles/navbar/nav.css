@@ -40,19 +40,22 @@
   color: #ffffff;
 }
 
-#navbarNavDropdown .navbar-nav .nav-item:not(:last-child) {
+#base_navbar #navbarNavDropdown .navbar-nav .nav-item:not(:last-child) {
   margin-right: 5px;
 }
-#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu {
+#base_navbar #navbarNavDropdown .navbar-nav .nav-item .nav_name {
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+#base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu {
   z-index: 9999;
 }
-#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li {
+#base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li {
   transition: 0.5s all;
 }
-#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover {
+#base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover {
   background-color: #26597E;
 }
-#navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover a:hover {
+#base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover a:hover {
   color: #ffffff;
 }
 
