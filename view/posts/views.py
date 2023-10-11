@@ -47,6 +47,8 @@ class PostsListView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = navbar_name.name
         context["parent"] = navbar_name.parent
+        context["title_slug"] = navbar_name.slug
+        print(context["object_list"])
         try:
             context["category_list"] = Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
@@ -73,12 +75,11 @@ class PostDetailView(DetailView):
         context["title"] = navbar.name
         context["parent"] = navbar.parent.name
         try:
-            domain = self.request.get_host()
             context["category_list"] = Navbar.objects.filter(parent_id=navbar.parent.id)
-            context["pdf_file"] = f"https://{domain}" + post.pdf_file.url
-            print(context["pdf_file"])
+            context["pdf_file"] = post.pdf_file.url
         except AttributeError:
             context["category_list"] = navbar.get_children()
         except ValueError:
             context["pdf_file"] = ""
         return context
+    

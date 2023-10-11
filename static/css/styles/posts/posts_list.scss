@@ -2,7 +2,7 @@
 @import url(https://fonts.googleapis.com/css?family=Merriweather:400,300,700);
 @import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
 
-.posts{
+.posts {
     background: #fff;
 }
 
@@ -35,6 +35,7 @@
     margin-bottom: 30px;
     position: relative;
     float: left;
+    backface-visibility: hidden;
     -webkit-backface-visibility: hidden;
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
@@ -42,14 +43,17 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+
     .item-in {
         padding: 20px 30px;
         background: #fbf9f9;
         position: relative;
         transition: all 0.5s ease;
-        &:hover{
+
+        &:hover {
             box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
         }
+
         &:hover:before {
             width: 100%;
         }
@@ -150,3 +154,135 @@
         left: 0;
     }
 }
+
+// faculty css theme
+
+.projcard {
+	position: relative;
+	width: 100%;
+	height: 250px;
+	cursor: pointer;
+	font-size: 18px;
+	overflow: hidden;
+	margin-bottom: 40px;
+	border-radius: 10px;
+	background-color: #fff;
+	border: 1px solid $color1;
+	transition: box-shadow 0.2s ease, transform 0.2s ease;
+	&:hover {
+		transform: translate(0px, -3px);
+		.projcard-img {
+			transform: scale(1.05) rotate(1deg);
+		}
+		.projcard-bar {
+			width: 70px;
+		}
+	}
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		opacity: 0.07;
+	}
+	&-innerbox {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+	}
+	&-img {
+		position: absolute;
+		height: 250px;
+		width: 400px;
+		top: 0;
+		left: 0;
+		transition: transform 0.2s ease;
+	}
+	&:nth-child(2n) .projcard-img {
+		left: initial;
+		right: 0;
+	}
+	&-textbox {
+		position: absolute;
+		top: 7%;
+		bottom: 7%;
+		left: 430px;
+		width: calc(100% - 470px);
+		font-size: 17px;
+		&::before, &::after {
+			content: "";
+			position: absolute;
+			display: block;
+			background: #ff0000bb;
+			background: #fff;
+			top: -20%;
+			left: -55px;
+			height: 140%;
+			width: 60px;
+			transform: rotate(8deg);
+		}
+		&::after {
+			display: none;
+			left: initial;
+			right: -55px;
+		}
+		* {
+			position: relative;
+		}
+	}
+	&:nth-child(2n) .projcard-textbox {
+		left: initial;
+		right: 430px;
+		&::before {
+			display: none;
+		}
+		&::after {
+			display: block;
+		}
+	}
+	&-title {
+		font-family: "Voces", "Open Sans", arial, sans-serif;
+		font-size: 24px;
+	}
+	&-subtitle {
+		font-family: "Voces", "Open Sans", arial, sans-serif;
+		color: #888;
+	}
+	&-bar {
+		left: -2px;
+		width: 50px;
+		height: 5px;
+		margin: 10px 0;
+		border-radius: 5px;
+		// background-color: #424242;
+		transition: width 0.2s ease;
+	}
+	&-blue .projcard-bar {
+		background-color: $color1;
+	}
+	&-description {
+		z-index: 10;
+		height: 125px;
+		font-size: 15px;
+		color: #424242;
+		overflow-y: hidden;
+		text-overflow: ellipsis;
+	}
+	&-description:hover{
+		overflow-y: scroll;
+	}
+	&-description::-webkit-scrollbar{
+		width: 3px;
+	}
+	&-description::-webkit-scrollbar-track{
+		background-color: #999;
+	}
+	&-description::-webkit-scrollbar-thumb{
+		background: $color1;
+	}
+}
+

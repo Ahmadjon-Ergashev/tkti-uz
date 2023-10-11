@@ -60,9 +60,9 @@ class Posts(models.Model):
         verbose_name=_("object_make_user"), related_name="post_author"
     )
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="posts/images/%Y-%m-%d/", default="default/default.png", null=True)
+    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="posts/images/%Y-%m-%d/", default="default/default.png", null=True, blank=True)
     title = models.CharField(verbose_name=_("Sarlavha"), max_length=400, null=True)
-    subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=500, null=True)
+    subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=500, null=True, blank=True)
     post = QuillField(null=True)
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="posts/pdf-files/%Y-%m-%d/", 
@@ -100,5 +100,44 @@ class Posts(models.Model):
         new_image = File(im_io, name=filename)
         self.image = new_image
         super().save(*args, **kwargs)
+
+
+class FacultyAdministration(models.Model):
+    """ model for faculty admistrations """
+    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="facultyadministration/", default="default/adminstrations.png")
+    f_name = models.CharField(verbose_name=_("To'liq ismi"), max_length=120, null=True)
+    job_name = models.CharField(verbose_name=_("Mutaxasisligi"), max_length=120, null=True)
+    admission_day = models.CharField(verbose_name=_("Qabul kunlari"), max_length=150, null=True)
+    phone_number = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True)
+    email = models.EmailField(verbose_name=_("E-Pochta manzili"), max_length=120, null=True)
+    order_num = models.IntegerField(default=0, verbose_name=_("Tartib raqam"))
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = "faculty_adminstration"
+        managed = True
+        verbose_name = _("Fakultet ma'muryati")
+        verbose_name_plural = _("Fakultet ma'muryati")
+
+    def __str__(self):
+        return f"{self.f_name} | {self.job_name}"
+
+
+class Departments(models.Model):
+    """ model for departments of faculty """
+    name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
+    faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
+
+    class Meta:
+        db_table = "departments"
+        managed = True
+        verbose_name = "Kafedra"
+        verbose_name_plural = "Kafedralar"
+
+    def __str__(self):
+        return self.name
+
+
     
     

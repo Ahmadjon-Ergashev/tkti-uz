@@ -1,10 +1,14 @@
 import random
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
-from main.models.posts import Navbar, Posts
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+
+
+from main.models.posts import (
+    Navbar, Posts, FacultyAdministration, Departments
+)
 
 
 # django admin actions
@@ -75,6 +79,8 @@ class PostsAdmin(GuardedModelAdmin):
     ordering = ("-added_at", )
     actions = (duplicate, )
     date_hierarchy = "added_at"
+    list_editable = ("status", )
+    list_display_links = ("title", )
     empty_value_display = "Tanlanmagan"
     search_fields = ("title", "navbar__name")
     list_filter = ("navbar", "status", "author", "added_at")
@@ -88,7 +94,7 @@ class PostsAdmin(GuardedModelAdmin):
                 "navbar", "status",
                 "added_at", "author_post",                 
             ),
-        }),
+        }), 
         (_("Media fayllar"), {
             "fields": (
                 ("image", "get_image_file"),
@@ -126,3 +132,44 @@ class PostsAdmin(GuardedModelAdmin):
     
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("title", )}
+
+
+@admin.register(FacultyAdministration)
+class FacultyAdmistrationAdmin(GuardedModelAdmin):
+    ordering = ("order_num", )
+    list_filter = ("added_at", )
+    list_display_links = ("f_name", )
+    search_fields = ("f_name", "job_name")
+    readonly_fields = ("get_image", "added_at", "updated_at")
+    list_display = ("id", "f_name", "job_name", "phone_number", "added_at")
+
+    fieldsets = (
+        (_("Umumiy ozgaruvchilar"), {
+            "fields": (
+               "phone_number", "email", "order_num", ("image", "get_image")
+            ),
+        }),
+        (_("O'zbek tilida ma'lumotlar"), {
+            "fields": (
+                "f_name", "job_name", "admission_day"
+            ),
+        }),        
+        (_("Automatik to'ldiriladigan bo'limlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "added_at", "updated_at"
+            )
+        })
+    )
+    
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+
+
+@admin.register(Departments)
+class DepartmentsAdmin(admin.ModelAdmin):
+    list_display_links = ("name", )
+    list_display = ("id", "name", "faculty")
+
+    
