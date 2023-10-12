@@ -8,3 +8,22 @@
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
 }
+.department-item{
+    a{
+        color: $dark;
+        &:hover{
+            color: $color2;
+        }
+        &::after{
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background: $color1;
+            transition: width .5s ease-in-out;
+        }
+        &:hover::after{
+            width: 90%;
+        }
+    }
+}

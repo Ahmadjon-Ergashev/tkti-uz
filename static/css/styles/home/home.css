@@ -58,7 +58,7 @@
   width: 100%;
   display: flex;
   padding: 2px 15px;
-  background: #333;
+  background: #434343;
   justify-content: space-between;
 }
 .news #news .time_and_view a {
@@ -100,5 +100,5 @@
   text-align: center;
 }
 #usefull_links .item .body p a {
-  color: #333;
+  color: #434343;
 }/*# sourceMappingURL=home.css.map */

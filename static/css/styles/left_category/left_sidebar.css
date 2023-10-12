@@ -10,7 +10,7 @@
   border: none;
 }
 .quick_links .body ul li a {
-  color: #333;
+  color: #434343;
 }
 .quick_links .body ul li::after {
   content: "";
@@ -112,7 +112,7 @@
   padding: 8px 0;
 }
 .pc-tab section div ul li a {
-  color: #333;
+  color: #434343;
   font-size: 13px;
   font-family: "Droid Serif";
 }

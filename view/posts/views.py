@@ -1,10 +1,12 @@
+from typing import Any
+from django.db import models
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
 
 # local models
 from main.models.posts import (
-    Posts, Status, Navbar
+    Posts, Status, Navbar, Departments
 )
 from main.models.widgets import (
     HeaderIMG, UsefullLinks, Statistika
@@ -48,11 +50,15 @@ class PostsListView(ListView):
         context["title"] = navbar_name.name
         context["parent"] = navbar_name.parent
         context["title_slug"] = navbar_name.slug
-        print(context["object_list"])
         try:
             context["category_list"] = Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
             context["category_list"] = navbar_name.get_children()
+        try:
+            context["pdf_file"] = context["object_list"][0].pdf_file
+        except IndexError:
+            context["pdf_file"] = ""
+        print(context["category_list"])
         context["home"] = _("Asosiy sahifa")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         return context
@@ -73,6 +79,8 @@ class PostDetailView(DetailView):
         post = context["object"]
         navbar = Navbar.objects.get(slug=post.navbar.slug)
         context["title"] = navbar.name
+        context["faculty_title"] = _("Fakultet ma'muryati")
+        context["departments_title"] = _("Fakultet kafedralari")
         context["parent"] = navbar.parent.name
         try:
             context["category_list"] = Navbar.objects.filter(parent_id=navbar.parent.id)
@@ -82,4 +90,13 @@ class PostDetailView(DetailView):
         except ValueError:
             context["pdf_file"] = ""
         return context
-    
+
+class DepartmentsDetailView(DetailView):
+    """ departments detail view """
+    model = Departments
+    template_name = "pages/posts/departments_detail.html"
+
+    def get_object(self, queryset):
+        dept_slug = self.kwargs['dept_slug']
+        obj = get_object_or_404(Departments, slug=dept_slug)
+        return obj

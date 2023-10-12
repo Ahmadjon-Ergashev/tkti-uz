@@ -5,4 +5,22 @@
   padding: 10px 0;
   font-weight: 700;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.department-item a {
+  color: #434343;
+}
+.department-item a:hover {
+  color: #15446f;
+}
+.department-item a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #26597E;
+  transition: width 0.5s ease-in-out;
+}
+.department-item a:hover::after {
+  width: 90%;
 }/*# sourceMappingURL=post.css.map */

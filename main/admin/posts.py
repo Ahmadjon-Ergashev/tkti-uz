@@ -1,5 +1,9 @@
 import random
+from typing import Any
 from django.contrib import admin
+from django.db.models.fields.related import ForeignKey
+from django.forms.models import ModelChoiceField
+from django.http.request import HttpRequest
 from mptt.admin import MPTTModelAdmin
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
@@ -12,11 +16,18 @@ from main.models.posts import (
 
 
 # django admin actions
-@admin.action(description=_("clone post"))
+@admin.action(description=_("Nusxa ko'chirish"))
 def duplicate(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None
         i.slug += str(random.randint(9999, 9999))
+        i.save()
+
+@admin.action(description=_("Nusxa ko'chirish"))
+def clone(modeladmin, request, queryset):
+    for i in queryset:
+        i.pk = None
+        i.f_name += " - copy"
         i.save()
 
 
@@ -136,17 +147,19 @@ class PostsAdmin(GuardedModelAdmin):
 
 @admin.register(FacultyAdministration)
 class FacultyAdmistrationAdmin(GuardedModelAdmin):
+    actions = [clone]
     ordering = ("order_num", )
     list_filter = ("added_at", )
+    list_editable = ("order_num", )
     list_display_links = ("f_name", )
     search_fields = ("f_name", "job_name")
     readonly_fields = ("get_image", "added_at", "updated_at")
-    list_display = ("id", "f_name", "job_name", "phone_number", "added_at")
+    list_display = ("id", "f_name", "order_num", "job_name", "phone_number", "added_at")
 
     fieldsets = (
         (_("Umumiy ozgaruvchilar"), {
             "fields": (
-               "phone_number", "email", "order_num", ("image", "get_image")
+              "faculty", "phone_number", "email", "order_num", ("image", "get_image")
             ),
         }),
         (_("O'zbek tilida ma'lumotlar"), {
@@ -166,10 +179,26 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
         return mark_safe(f"<img src='{obj.image.url}' width='250' />")
     get_image.short_description = _("Tanlangan rasm")
 
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            try:
+                kwargs["queryset"] = Posts.objects.filter(navbar__slug="fakultet")
+            except Exception as e:
+                kwargs["queryset"] = Posts.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 @admin.register(Departments)
 class DepartmentsAdmin(admin.ModelAdmin):
     list_display_links = ("name", )
     list_display = ("id", "name", "faculty")
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            try:
+                kwargs["queryset"] = Posts.objects.filter(navbar__slug="fakultet")
+            except Exception as e:
+                kwargs["queryset"] = Posts.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     

@@ -5,6 +5,7 @@ from mptt.models import TreeForeignKey, MPTTModel
 from django.utils.translation import gettext_lazy as _
 
 import os
+import random
 from io import BytesIO
 from PIL import Image, ImageOps
 from django.core.files import File
@@ -60,16 +61,16 @@ class Posts(models.Model):
         verbose_name=_("object_make_user"), related_name="post_author"
     )
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="posts/images/%Y-%m-%d/", default="default/default.png", null=True, blank=True)
+    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="image/posts/%Y-%m-%d/", default="default/default.png", null=True, blank=True)
     title = models.CharField(verbose_name=_("Sarlavha"), max_length=400, null=True)
     subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=500, null=True, blank=True)
     post = QuillField(null=True)
     pdf_file = models.FileField(
-        verbose_name=_("PDF fayl"), upload_to="posts/pdf-files/%Y-%m-%d/", 
+        verbose_name=_("PDF fayl"), upload_to="pdf/posts/%Y-%m-%d/", 
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     video_file = models.FileField(
-        verbose_name=_("Video fayl"), upload_to="posts/videos/%Y-%m-%d/",
+        verbose_name=_("Video fayl"), upload_to="videos/posts/%Y-%m-%d/",
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
     status = models.CharField(verbose_name=_("post status"), max_length=50, choices=Status.choices, default=Status.pendding)
@@ -90,21 +91,26 @@ class Posts(models.Model):
         return str(self.title) if self.title else None
     
     def save(self, *args, **kwargs):
-        im = Image.open(self.image)
-        im = im.convert('RGB')
-        im = ImageOps.exif_transpose(im)
-        im_io = BytesIO()
-        im.save(im_io, 'JPEG', quality=50)
-        filename = os.path.splitext(self.image.name)[0]
-        filename = f"{filename}.jpg"
-        new_image = File(im_io, name=filename)
-        self.image = new_image
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=50)
+            filename = os.path.splitext(self.image.name)[0]
+            date_path = self.added_at.strftime("%Y-%m-%d")
+            filename = f"posts/images/{date_path}/{filename}_{random.randint(111111, 999999)}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+        else:
+            ... 
         super().save(*args, **kwargs)
 
 
-class FacultyAdministration(models.Model):
+class FacultyAdministration(models.Model): 
     """ model for faculty admistrations """
-    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="facultyadministration/", default="default/adminstrations.png")
+    faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
+    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/facultyadministration/", default="default/adminstrations.png")
     f_name = models.CharField(verbose_name=_("To'liq ismi"), max_length=120, null=True)
     job_name = models.CharField(verbose_name=_("Mutaxasisligi"), max_length=120, null=True)
     admission_day = models.CharField(verbose_name=_("Qabul kunlari"), max_length=150, null=True)
@@ -117,6 +123,7 @@ class FacultyAdministration(models.Model):
     class Meta:
         db_table = "faculty_adminstration"
         managed = True
+        ordering = ["order_num"]
         verbose_name = _("Fakultet ma'muryati")
         verbose_name_plural = _("Fakultet ma'muryati")
 
@@ -128,6 +135,10 @@ class Departments(models.Model):
     """ model for departments of faculty """
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
+    pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, upload_to="pdf/departments/%Y-%m-%d/")
+    post = QuillField(null=True, verbose_name=_("To'liq matn"))
+    slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True, help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
+    added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "departments"

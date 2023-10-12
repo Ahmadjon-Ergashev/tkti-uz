@@ -54,10 +54,10 @@
         .navbar-nav{
             .nav-item{
                 &:not(:last-child){
-                    margin-right: 5px;
+                    margin-right: 10px;
                 }
                 .nav_name{
-                    // font-size: 18px;
+                    font-size: 18px;
                     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
                 }
                 .dropdown-menu{

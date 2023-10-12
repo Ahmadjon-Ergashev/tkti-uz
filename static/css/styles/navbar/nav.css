@@ -12,7 +12,7 @@
   list-style-type: none;
 }
 .top_nav ul li a {
-  color: #333;
+  color: #434343;
 }
 .top_nav ul li a:hover {
   text-decoration: underline;
@@ -41,9 +41,10 @@
 }
 
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item:not(:last-child) {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .nav_name {
+  font-size: 18px;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu {
@@ -114,7 +115,7 @@
 .has-search .form-control-feedback {
   position: absolute;
   z-index: 2;
-  color: #333;
+  color: #434343;
   display: block;
   width: 2.375rem;
   height: 2.375rem;

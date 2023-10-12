@@ -161,16 +161,16 @@
 	position: relative;
 	width: 100%;
 	height: 250px;
-	cursor: pointer;
 	font-size: 18px;
 	overflow: hidden;
 	margin-bottom: 40px;
 	border-radius: 10px;
 	background-color: #fff;
-	border: 1px solid $color1;
+	border: 1px solid #888;
 	transition: box-shadow 0.2s ease, transform 0.2s ease;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 	&:hover {
-		transform: translate(0px, -3px);
+		box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
 		.projcard-img {
 			transform: scale(1.05) rotate(1deg);
 		}
@@ -233,6 +233,15 @@
 		* {
 			position: relative;
 		}
+		.read_more{
+			padding: 5px 20px;
+			color: $text_white;
+			background: $color1;
+			transition: all .4s ease-in-out;
+			&:hover{
+				background: $color2;
+			}
+		}
 	}
 	&:nth-child(2n) .projcard-textbox {
 		left: initial;
@@ -245,8 +254,11 @@
 		}
 	}
 	&-title {
-		font-family: "Voces", "Open Sans", arial, sans-serif;
-		font-size: 24px;
+		a{
+			color: $dark;
+			font-size: 20px;
+			font-family: "Voces", "Open Sans", arial, sans-serif;
+		}
 	}
 	&-subtitle {
 		font-family: "Voces", "Open Sans", arial, sans-serif;
@@ -258,7 +270,6 @@
 		height: 5px;
 		margin: 10px 0;
 		border-radius: 5px;
-		// background-color: #424242;
 		transition: width 0.2s ease;
 	}
 	&-blue .projcard-bar {
