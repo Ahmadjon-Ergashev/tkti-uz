@@ -135,8 +135,8 @@ class Departments(models.Model):
     """ model for departments of faculty """
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
-    pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, upload_to="pdf/departments/%Y-%m-%d/")
-    post = QuillField(null=True, verbose_name=_("To'liq matn"))
+    pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
+    post = QuillField(null=True, blank=True, verbose_name=_("To'liq matn"))
     slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True, help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
     added_at = models.DateTimeField(auto_now_add=True)
 

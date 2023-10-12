@@ -63,7 +63,7 @@ class HeaderIMG(models.Model):
 class UsefullLinks(models.Model):
     """ foydali havolar uchun model """
     name = models.CharField(verbose_name=_("Nomi"), max_length=255, unique=True)
-    logo = models.ImageField(verbose_name=_("rasmi"), default="default/gerb.png", upload_to="image/usefull_links/%Y-%m-%d/")
+    logo = models.ImageField(verbose_name=_("rasmi"), default="default/gerb.png", null=True, blank=True, upload_to="image/usefull_links/%Y-%m-%d/")
     link = models.URLField(verbose_name=_("Saytga havola"), max_length=150)
     add_time = models.DateTimeField(auto_now_add=True)
 

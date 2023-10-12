@@ -52,7 +52,7 @@
                             {% for dp in object.departments_set.all %}
                                 <div class="px-0 col-12 col-lg-6 mb-2">
                                     <span class="department-item">
-                                        <a href="">{{ dp.name }}</a>
+                                        <a href="{% url 'dept_detail' dept_slug=dp.slug %}">{{ dp.name }}</a>
                                     </span>
                                 </div>
                             {% endfor %}

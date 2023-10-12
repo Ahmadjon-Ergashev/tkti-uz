@@ -96,7 +96,16 @@ class DepartmentsDetailView(DetailView):
     model = Departments
     template_name = "pages/posts/departments_detail.html"
 
-    def get_object(self, queryset):
+    def get_object(self, queryset=None):
         dept_slug = self.kwargs['dept_slug']
         obj = get_object_or_404(Departments, slug=dept_slug)
         return obj
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        obj = context["object"]
+        context["departments_list"] = Departments.objects.all().order_by("name")
+        context["title"] = obj.name
+        context["title_bar"] = _("Kafedralar")     
+        return context
+    

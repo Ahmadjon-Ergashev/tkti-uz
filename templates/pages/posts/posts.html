@@ -62,7 +62,7 @@
                                                 <ul class="list-group">
                                                     {% for dp in object.departments_set.all %}
                                                         <li class="list-group-item border-0 p-0 py-1" style="background: none;">
-                                                            <a href="">{{ dp }}</a>
+                                                            <a href="{% url 'dept_detail' dept_slug=dp.slug %}">{{ dp }}</a>
                                                         </li>
                                                     {% endfor %}
                                                 </ul>  
