@@ -1,12 +1,11 @@
+import os
+from io import BytesIO
 from django.db import models
+from PIL import Image, ImageOps
+from django.core.files import File
 from colorfield.fields import ColorField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-
-import os
-from io import BytesIO
-from PIL import Image, ImageOps
-from django.core.files import File
 
 
 
@@ -110,3 +109,17 @@ class Statistika(models.Model):
     
     def __str__(self):
         return self.name if self.name else None
+    
+
+class Year(models.Model):
+    """ model for years """
+    year = models.CharField(max_length=4, verbose_name=_("Yilni kiring"))
+
+    class Meta:
+        db_table = 'years'
+        managed = True
+        verbose_name = _("Yil")
+        verbose_name_plural = _("Yillar")
+    
+    def __str__(self):
+        return self.year

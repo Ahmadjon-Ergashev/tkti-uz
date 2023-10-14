@@ -1,16 +1,17 @@
+import os
+import random
+from io import BytesIO
 from django.db import models
+from PIL import Image, ImageOps
+from django.core.files import File
 from django_quill.fields import QuillField
 from django.contrib.auth.models import User
 from mptt.models import TreeForeignKey, MPTTModel
 from django.utils.translation import gettext_lazy as _
 
-import os
-import random
-from io import BytesIO
-from PIL import Image, ImageOps
-from django.core.files import File
 
-YEARS = [(f"{y}", f"{y}") for y in range(2022, 2030)]
+from .widgets import Year
+
 
 class NavbarStatus(models.TextChoices):
     base = "base", _("Asosiy")
@@ -80,6 +81,7 @@ class Posts(models.Model):
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
     status = models.CharField(verbose_name=_("post status"), max_length=50, choices=Status.choices, default=Status.pendding)
+    faculty = models.BooleanField(default=False, verbose_name=_("Fakultet"), help_text=_("Agar shu post fakultet modeliga tegishli bo'lsa belgilang"))
     slug = models.SlugField(max_length=255, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Post muallifi"), max_length=300, default="TKTI axborot xizmati")
@@ -158,10 +160,10 @@ class Departments(models.Model):
 
 class StudyProgram(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Sarlovha"), null=True)
-    year = models.CharField(max_length=4, verbose_name=_("Yilni tanlang"), choices=YEARS, null=True)
+    year = models.ForeignKey(Year, on_delete=models.SET_NULL, verbose_name=_("Yilni tanlang"), null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultetni tanlang"))
     department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))
-    study_way = models.CharField(max_length=123, verbose_name=_("Yonalishni tanlang"), choices=StudyWayType.choices, default=StudyWayType.high)
+    study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"), choices=StudyWayType.choices, default=StudyWayType.high)
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/")
     added_at = models.DateTimeField(auto_now_add=True)
 
