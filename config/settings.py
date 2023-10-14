@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages', 
     "whitenoise.runserver_nostatic", # for static files
     'django.contrib.staticfiles',
+    "drf_yasg", # swagger-ui
 ]
 
 LOCALE_APPS = [
@@ -57,6 +58,7 @@ GLOBAL_APPS = [
     "bootstrap5",
     "django_quill",
     "django_filters",
+    "rest_framework",
     "modeltranslation",
 ]
 
@@ -239,3 +241,9 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^http://\\127.0.0.1:8000\$",
     r"^https://\\tkti.uz\$",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ],
+}

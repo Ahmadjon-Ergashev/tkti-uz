@@ -1,9 +1,5 @@
 import random
-from typing import Any
 from django.contrib import admin
-from django.db.models.fields.related import ForeignKey
-from django.forms.models import ModelChoiceField
-from django.http.request import HttpRequest
 from mptt.admin import MPTTModelAdmin
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
@@ -11,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 from main.models.posts import (
-    Navbar, Posts, FacultyAdministration, Departments
+    Navbar, Posts, FacultyAdministration, Departments, StudyProgram
 )
 
 
@@ -201,4 +197,8 @@ class DepartmentsAdmin(admin.ModelAdmin):
                 kwargs["queryset"] = Posts.objects.none()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
-    
+
+@admin.register(StudyProgram)
+class StudyAdmin(admin.ModelAdmin):
+    list_display = ("id", "title")
+    list_display_links = ("title", )

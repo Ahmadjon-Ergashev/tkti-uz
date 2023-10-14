@@ -39,7 +39,52 @@
     </div>
     <!-- headers img -->
 
+    <!-- study way  -->
+    <div class="container">
+        <section id="studyway">
+            <span class="wrapper_studyway">{{ study_way_title }}</span>
+            <form action="" id="filter_study_way" method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-12 col-lg-4 mb-3">
+                        <div class="form-floating">
+                            {{ filter_study_programs.form.year }}
+                            <label for="id_year">{{ filter_study_programs.form.year.label }}</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 mb-3">
+                        <div class="form-floating">
+                            {{ filter_study_programs.form.faculty }}
+                            <label for="id_faculty">{{ filter_study_programs.form.faculty.label }}</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-4 mb-3">
+                        <div class="form-floating">
+                            {{ filter_study_programs.form.department }}
+                            <label for="id_department">{{ filter_study_programs.form.department.label }}</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-10 mb-3">                        
+                        <div class="form-floating">
+                            {{ filter_study_programs.form.study_way }}
+                            <label for="id_study_way">{{ filter_study_programs.form.study_way.label }}</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-2">
+                        <button type="submit" class="w-100 btn btn-primary py-3">{{ search }}</button>
+                    </div>
+                </div>
+            </form>
+            <!-- queryset -->
+            <div class="my-5" id="result_data">
+                
+            </div>
+
+        </section>
+    </div>
     
+
+    <!-- study way  -->
 
     <!-- news sections -->
     <div class="container news" >
@@ -192,5 +237,5 @@
             {% endfor %}
         </div>
         <!-- useful links -->
-    </section>
+    </section>    
 {% endblock content %}

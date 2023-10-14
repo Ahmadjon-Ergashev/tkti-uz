@@ -11,8 +11,6 @@
           
         {% endblock title %}
     </title>
-    <!-- BootStrap 5 -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
     <link rel="shortcut icon" href="{% static 'images/brand.png' %}" type="image/x-icon">
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
@@ -361,113 +359,19 @@
         </div>
     </div>
     <!-- end footer -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <!-- AOS Animation -->
     
     <script src="{% static 'js/modules/aos/aos.js' %}"></script>
     <script src="{% static 'js/modules/slickjs/slick.min.js' %}"></script>
     <script src="{% static 'js/modules/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    <script type='text/javascript'> 
-        function submitForm(){
-            document.getElementById('lang').submit(); 
-        } 
-        $(document).ready(function(){
-            AOS.init();
-            $(".social_networks_links").each(function() {
-                $color = $(this).data("social-color");
-                $a = $(this).find("a");
-                $a.find("i").css("color", $color)
-            })
-            $("#statistika").slick({
-                dots: true,
-                infinite: true,
-                autoplay: true,
-                slidesToShow: 3,
-                centerMode: true,
-                slidesToScroll: 1,
-                autoplaySpeed: 3000,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                            infinite: true,
-                            dots: true
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
-            
-            $("#headerIMG").slick({
-                infinite: true,
-                arrows: false,
-                autoplay: true,
-                autoplaySpeed: 3000,
-            });
-
-            $("#usefull_links").slick({
-                dots: true,
-                arrows: false,
-                infinite: true,
-                autoplay: true,
-                slidesToShow: 5,
-                slidesToScroll: 1,
-                autoplaySpeed: 3000,
-                responsive: [
-                    {
-                        breakpoint: 1024,
-                        settings: {
-                            slidesToShow: 3,
-                            slidesToScroll: 1,
-                            infinite: true,
-                            dots: true
-                        }
-                    },
-                    {
-                        breakpoint: 600,
-                        settings: {
-                            slidesToShow: 2,
-                            slidesToScroll: 1
-                        }
-                    },
-                    {
-                        breakpoint: 480,
-                        settings: {
-                            slidesToShow: 1,
-                            slidesToScroll: 1
-                        }
-                    }
-                ]
-            });
-
-            $("#social_media_btn").hide()
-            $("#show_social_media_btn").click(function(){
-                $("#social_media_btn").fadeToggle()  
-            })
-            const df = new RegExp("default.jpg")
-            let text = $("#object_base_img")[0]?.children[0]?.attributes[0]?.nodeValue
-            // console.log($("#object_base_img")[0].children[0].attributes[0].nodeValue)
-            $("#object_post").map((item) => {
-                if ($("#object_post")[item].children[0]?.children[0]?.localName === "img" || df.test(text)) {
-                    $("#object_base_img").hide()
-                }
-            })
-        })
-        
-    </script>
+    
+    <!-- local scripts -->
+    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/scripts/api.js' %}"></script>
+    <script src="{% static 'js/scripts/forms.js' %}"></script>
+    <script src="{% static 'js/scripts/carusels.js' %}"></script>
 </body>
 </html>

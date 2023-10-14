@@ -10,11 +10,21 @@ from io import BytesIO
 from PIL import Image, ImageOps
 from django.core.files import File
 
-
+YEARS = [(f"{y}", f"{y}") for y in range(2022, 2030)]
 
 class NavbarStatus(models.TextChoices):
     base = "base", _("Asosiy")
     inside = "inside", _("Ichki")
+
+
+class Status(models.TextChoices):
+    published: str = "pub", _("Published")
+    pendding: str = "pen", _("Pendding")
+
+
+class StudyWayType(models.TextChoices):
+    high: str = "high", _("Bakalavriat")
+    higher: str = "higher", _("Magistraturat")
 
 
 class Navbar(MPTTModel):
@@ -48,10 +58,6 @@ class Navbar(MPTTModel):
     def __str__(self):
         return str(self.name) if self.name else None
 
-
-class Status(models.TextChoices):
-    published: str = "pub", _("Published")
-    pendding: str = "pen", _("Pendding")
 
 
 class Posts(models.Model):
@@ -132,7 +138,7 @@ class FacultyAdministration(models.Model):
 
 
 class Departments(models.Model):
-    """ model for departments of faculty """
+    """ model for departments of faculty (kafedra)"""
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
@@ -150,5 +156,20 @@ class Departments(models.Model):
         return self.name
 
 
+class StudyProgram(models.Model):
+    title = models.CharField(max_length=255, verbose_name=_("Sarlovha"), null=True)
+    year = models.CharField(max_length=4, verbose_name=_("Yilni tanlang"), choices=YEARS, null=True)
+    faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultetni tanlang"))
+    department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))
+    study_way = models.CharField(max_length=123, verbose_name=_("Yonalishni tanlang"), choices=StudyWayType.choices, default=StudyWayType.high)
+    pdf_file = models.FileField(verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/")
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'study_program'
+        managed = True
+        verbose_name = _("Ta'lim dasturi katalogi")
+        verbose_name_plural = _("Ta'lim dasturi katalogi")
     
-    
+    def __str__(self):
+        return f"{self.year}|{self.faculty.title}|{self.department.name}|{self.study_way}"
