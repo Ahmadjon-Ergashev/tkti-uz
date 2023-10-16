@@ -3,12 +3,13 @@ from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 
 from main.models.widgets import (
-    SocialNetworks, HeaderIMG, UsefullLinks, QuickLinks, Statistika
+    SocialNetworks, HeaderIMG, 
+    UsefullLinks, QuickLinks, Statistika, Year
 )
 
 
 @admin.register(SocialNetworks)
-class SocialNetworkingAdmin(GuardedModelAdmin):
+class SocialNetworkingAdmin(GuardedModelAdmin):     
     search_fields = ("name", )
     ordering = ("-added_at", )
     list_display_links = ("name", )
@@ -59,3 +60,5 @@ class StatistikaAdmin(admin.ModelAdmin):
     list_display_links = ("name", )
     list_editable = ("order_num", "quantity")
     list_display = ("id", "name", "quantity", "order_num", "added_at")
+
+admin.site.register(Year)

@@ -98,8 +98,8 @@ class PostsAdmin(GuardedModelAdmin):
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                "navbar", "status",
-                "added_at", "author_post",                 
+                "navbar", "status", "faculty",
+                "added_at", "author_post"                 
             ),
         }), 
         (_("Media fayllar"), {
@@ -192,11 +192,13 @@ class DepartmentsAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
             try:
-                kwargs["queryset"] = Posts.objects.filter(navbar__slug="fakultet")
+                kwargs["queryset"] = Posts.objects.filter(faculty=True)
             except Exception as e:
                 kwargs["queryset"] = Posts.objects.none()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
+    def get_prepopulated_fields(self, request, obj):
+        return {"slug": ("name", )}
 
 @admin.register(StudyProgram)
 class StudyAdmin(admin.ModelAdmin):

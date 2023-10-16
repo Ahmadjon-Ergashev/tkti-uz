@@ -13,7 +13,7 @@
     </title>
     <link rel="shortcut icon" href="{% static 'images/brand.png' %}" type="image/x-icon">
     <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/modules/font-awesome/css/all.min.css' %}">
     <!-- local main css files -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <!-- AOS Animation -->
@@ -199,10 +199,10 @@
                                 <a href=""><i class="fas fa-play text-dark"></i></a>
                             </li>
                             <li class="me-2">
-                                <a href=""><img src="https://w7.pngwing.com/pngs/537/720/png-transparent-uzbekistan-emblem-logo-national-emblem-icon-symbol.png" width="20" alt=""></a>
+                                <a href=""><img src="{% static 'images/gerb.png' %}" width="20" alt=""></a>
                             </li>
                             <li class="me-2">
-                                <a href=""><img src="https://jamoat.uz/wp-content/uploads/2021/06/Uzbekistan-Flag.jpg" width="20" alt=""></a>
+                                <a href=""><img src="{% static 'images/flag.jpg' %}" width="20" alt=""></a>
                             </li>
                             <li>
                                 <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">{% csrf_token %}
@@ -373,5 +373,14 @@
     <script src="{% static 'js/scripts/api.js' %}"></script>
     <script src="{% static 'js/scripts/forms.js' %}"></script>
     <script src="{% static 'js/scripts/carusels.js' %}"></script>
+    <script>
+        $("#id_year").on("change", () => {
+            select_type = `
+                <option value="high">{{ high_degree }}</option>
+                <option value="high">{{ higher_degree }}</option>
+            `
+            $("#id_type").append(select_type)   
+    })
+    </script>
 </body>
 </html>

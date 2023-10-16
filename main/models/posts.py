@@ -151,15 +151,15 @@ class Departments(models.Model):
     class Meta:
         db_table = "departments"
         managed = True
-        verbose_name = "Kafedra"
-        verbose_name_plural = "Kafedralar"
+        verbose_name = _("Kafedra")
+        verbose_name_plural = _("Kafedralar")
 
     def __str__(self):
         return self.name
 
 
 class StudyProgram(models.Model):
-    title = models.CharField(max_length=255, verbose_name=_("Sarlovha"), null=True)
+    title = models.CharField(max_length=255, verbose_name=_("Yonalish nomi"), null=True)
     year = models.ForeignKey(Year, on_delete=models.SET_NULL, verbose_name=_("Yilni tanlang"), null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultetni tanlang"))
     department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))

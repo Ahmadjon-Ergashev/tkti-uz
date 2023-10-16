@@ -48,26 +48,34 @@
                 <div class="row">
                     <div class="col-12 col-lg-4 mb-3">
                         <div class="form-floating">
-                            {{ filter_study_programs.form.year }}
-                            <label for="id_year">{{ filter_study_programs.form.year.label }}</label>
+                            <select class="form-select" id="id_year" aria-label="yers select ">
+                              <option selected>------------</option>
+                            </select>
+                            <label for="id_year">{{ sp_year }}</label>
                         </div>
                     </div>
                     <div class="col-12 col-lg-4 mb-3">
                         <div class="form-floating">
-                            {{ filter_study_programs.form.faculty }}
-                            <label for="id_faculty">{{ filter_study_programs.form.faculty.label }}</label>
+                            <select class="form-select" id="id_type" aria-label="faculty select">
+                                <option selected>------------</option>
+                            </select>
+                            <label for="id_type">{{ sp_type }}</label>
                         </div>
                     </div>
                     <div class="col-12 col-lg-4 mb-3">
                         <div class="form-floating">
-                            {{ filter_study_programs.form.department }}
-                            <label for="id_department">{{ filter_study_programs.form.department.label }}</label>
+                            <select class="form-select" id="id_faculty" aria-label="faculty select">
+                              <option selected>------------</option>
+                            </select>
+                            <label for="id_faculty">{{ sp_faculty }}</label>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-10 mb-3">                        
+                    <div class="col-12 col-lg-10 mb-3">
                         <div class="form-floating">
-                            {{ filter_study_programs.form.study_way }}
-                            <label for="id_study_way">{{ filter_study_programs.form.study_way.label }}</label>
+                            <select class="form-select" id="id_dept" aria-label="department select">
+                              <option selected>------------</option>
+                            </select>
+                            <label for="id_dept">{{ sp_dept }}</label>
                         </div>
                     </div>
                     <div class="col-12 col-lg-2">

@@ -113,7 +113,7 @@ class Statistika(models.Model):
 
 class Year(models.Model):
     """ model for years """
-    year = models.CharField(max_length=4, verbose_name=_("Yilni kiring"))
+    year = models.CharField(max_length=4, verbose_name=_("Yilni kiriting"))
 
     class Meta:
         db_table = 'years'

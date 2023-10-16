@@ -1,5 +1,54 @@
 $(document).ready(function(){
     const base_url = "http://127.0.0.1:8000/uz/"
+    $.ajax({
+        type: "GET",
+        url: "api/widgets/years",
+        data: {},
+        success: function(data) {
+            if (data.length !== 0) {
+                data.map((item)=>{
+                    console.log(item)
+                    select_year = `<option value="${item.year}">${item.year}</option>`
+                    $("#id_year").append(select_year)
+                })
+            }
+        }
+    });
+    $("#id_type").on("change", () => {
+        $.ajax({
+            type: "GET",
+            url: "api/posts/faculty_list",
+            data: {},
+            success: function(data) {
+                if (data.length !== 0) {
+                    data.map((item)=>{
+                        // console.log(item)
+                        select_faculty = `<option value="${item.id}">${item.title}</option>`
+                        $("#id_faculty").append(select_faculty)
+                    })
+                }
+            }
+        });
+    })
+    $("#id_faculty").on("change", ()=> {
+        // console.log($("#id_faculty").val())
+        $.ajax({
+            type: "GET",
+            url: "api/posts/departments_list",
+            data: {
+                faculty: $("#id_faculty").val()
+            },
+            success: function(data) {
+                if (data.length !== 0) {
+                    data.map((item)=>{
+                        // console.log(item)
+                        select_dept = `<option value="${item.id}">${item.name}</option>`
+                        $("#id_dept").append(select_dept)
+                    })
+                }
+            }
+        });
+    })
     $('#filter_study_way').submit(function(event) {
         event.preventDefault();  
         var formData = $(this).serialize();

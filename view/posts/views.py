@@ -1,45 +1,35 @@
-from django.http import JsonResponse
-from django.forms.models import model_to_dict
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
 
 # local models
 from main.models.posts import (
-    Posts, Status, Navbar, Departments, StudyProgram
+    Posts, Status, Navbar, Departments, StudyWayType
 )
 from main.models.widgets import (
     HeaderIMG, UsefullLinks, Statistika
 )
-from .filters import StudyWayFilters
 from main.models.news import NewsAndAds
 
 
 
 def Home(request):
     """ for home page view """
-    study_programs_list = StudyProgram.objects.none()
-    filter_study_programs = StudyWayFilters(request.GET, queryset=study_programs_list)
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest' and request.method == "POST":
-        study_programs_list = StudyProgram.objects.all().order_by("-added_at")
-        filter_study_programs = StudyWayFilters(request.POST, queryset=study_programs_list)
-        if filter_study_programs.is_valid():
-            study_programs_list = filter_study_programs.qs
-            data = {
-                "success": True,
-                "study_program_list": [model_to_dict(i, exclude=['pdf_file']) for i in study_programs_list]
-            }
-            print(data)
-            return JsonResponse(data)   
-    context = {
+    translate_words = {
         "all": _("Barchasi"),
         "search": _("Qidirish"),
         "title": _("Bosh sahifa"),
+        "sp_year": _("Yilni tanlang"),
+        "high_degree": _("Bakalavriat"),
+        "sp_dept": _("Kafedrani tanlang"),
         "ads_section_title": _("E'lonlar"),
+        "higher_degree": _("Magistraturat"),
+        "sp_type": _("Ta'lim turini tanlang"),
+        "sp_faculty": _("Fakultetni tanlang"),
         "news_section_title": _("Yangiliklar"),
-        "study_program_list": study_programs_list,
-        "filter_study_programs": filter_study_programs,
         "study_way_title": _("Ta'lim dasturi katalogi"),
+    }
+    objects_list = {
         "header_img": HeaderIMG.objects.all().order_by("order_num"),
         "statistika": Statistika.objects.all().order_by("-added_at"),
         "usefull_links": UsefullLinks.objects.all().order_by("-add_time"),
@@ -47,6 +37,7 @@ def Home(request):
         "last_news_6": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:6],
         "top_3_news": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-post_viewed_count")[:3],
     }
+    context = translate_words | objects_list        
     return render(request, "home.html", context)
 
 
