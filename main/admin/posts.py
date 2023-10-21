@@ -199,8 +199,9 @@ class DepartmentsAdmin(admin.ModelAdmin):
 
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("name", )}
+    
 
 @admin.register(StudyProgram)
 class StudyAdmin(admin.ModelAdmin):
-    list_display = ("id", "title")
     list_display_links = ("title", )
+    list_display = ("id", "title", "year", "faculty")

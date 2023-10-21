@@ -1,6 +1,7 @@
 # from rest_framework_swagger.views import get_swagger_view
 from drf_yasg import openapi
 from django.contrib import admin
+from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 
 
@@ -16,6 +17,7 @@ yasg_schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
+    permission_classes=(permissions.AllowAny,),
 )
 
 # schema_view = get_swagger_view(title=API_TITLE)

@@ -7,14 +7,16 @@ $(document).ready(function(){
         success: function(data) {
             if (data.length !== 0) {
                 data.map((item)=>{
-                    console.log(item)
-                    select_year = `<option value="${item.year}">${item.year}</option>`
+                    // console.log(item)
+                    select_year = `<option value="${item.id}">${item.year}</option>`
                     $("#id_year").append(select_year)
                 })
             }
         }
     });
     $("#id_type").on("change", () => {
+        $("#id_faculty").empty()
+        $("#id_faculty").append(`<option value="">--------------------</option>`)
         $.ajax({
             type: "GET",
             url: "api/posts/faculty_list",
@@ -31,6 +33,8 @@ $(document).ready(function(){
         });
     })
     $("#id_faculty").on("change", ()=> {
+        $("#id_dept").empty()
+        $("#id_dept").append(`<option value="">--------------------</option>`)
         // console.log($("#id_faculty").val())
         $.ajax({
             type: "GET",
@@ -50,32 +54,37 @@ $(document).ready(function(){
         });
     })
     $('#filter_study_way').submit(function(event) {
-        event.preventDefault();  
-        var formData = $(this).serialize();
+        event.preventDefault();
         $.ajax({
             type: 'GET',
-            url: "api/posts/study_programs", 
-            data: formData,
+            url: "api/posts/study_programs/", 
+            data: {
+                year: $("#id_year").val() !== "--------------------" ? $("#id_year").val(): "",
+                faculty: $("#id_faculty").val() !== "--------------------" ? $("#id_faculty").val(): "",
+                department: $("#id_dept").val() !== "--------------------" ? $("#id_dept").val(): "",
+                study_way: $("#id_type").val() !== "--------------------" ? $("#id_type").val(): ""
+            },
             success: function(data) {
                 $('#result_data').empty();
-                if (data.length !== 0) {                    
-                    for (var i = 0; i < data.length; i++) {
-                        var stf = data[i];
+                if (data.length !== 0) { 
+                    data.map((item) => {
+                        console.log(item)
                         var listItem = `
                             <ul class="list-group list-group-flush border-bottom-1">
-                                <li class="list-group-item"> ${stf.title} <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${stf.id}" aria-controls="offcanvasScrolling">show</button></li>
-                                <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${stf.id}" aria-labelledby="offcanvasScrollingLabel">
+                                <li class="list-group-item"><span>${item.title}</span> <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${item.id}" aria-controls="offcanvasScrolling">Ko'rish</button></li>
+                                <div class="offcanvas offcanvas-start w-50" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${item.id}" aria-labelledby="offcanvasScrollingLabel">
                                     <div class="offcanvas-header">
-                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">${item.title}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <div class="offcanvas-body">
-                                        <p>${stf.title}</p>
+                                        <iframe src="${item.pdf_file}" width="100%" height="80%" frameborder="0"></iframe>
                                     </div>
                                 </div>
-                            </ul>`
+                            </ul>
+                        `
                         $('#result_data').append(listItem);
-                    }
+                    })                  
                 } else {
                     $('#result_data').append(`<p class="text-center">Afsuski ma'lumotlar to'pilmadi</p>`); 
                 }

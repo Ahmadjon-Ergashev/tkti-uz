@@ -27,6 +27,12 @@ class StudyWayType(models.TextChoices):
     high: str = "high", _("Bakalavriat")
     higher: str = "higher", _("Magistraturat")
 
+class StudyTimes(models.TextChoices):
+    daytime: str = "daytime", _("Kundizgi")
+    evning: str = "evning", _("Kechgi")
+    outer: str = "outer", _("Sirtqi")
+    
+
 
 class Navbar(MPTTModel):
     """ Navigation bar model """
@@ -165,6 +171,7 @@ class StudyProgram(models.Model):
     department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))
     study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"), choices=StudyWayType.choices, default=StudyWayType.high)
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/")
+    study_time = models.CharField(max_length=123, verbose_name=_("O'qish vaqtlari"), choices=StudyTimes.choices, default=StudyTimes.daytime)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
