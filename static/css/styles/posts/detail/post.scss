@@ -27,3 +27,17 @@
         }
     }
 }
+
+.post_footer{
+    margin-top: 40px;
+    p{
+        margin-bottom: 0;
+    }
+    .time_and_view{
+        display: flex;
+        justify-content: space-between;
+        span{
+            font-weight: 500;
+        }
+    }
+}

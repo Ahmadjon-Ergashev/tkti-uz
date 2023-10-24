@@ -54,6 +54,78 @@
     }
 }
 
+#faculty_and_departments{
+    margin-bottom: 50px;
+    h1{
+        font-size: 45px;
+        margin-bottom: 25px;
+    }
+    #faculties{
+        .card_box{
+            display: flex;
+            justify-content: space-between;
+            .faculty{
+                flex: 1;
+                text-align: center;
+                // border: 1px solid blue;
+                .card_img{
+                    height: 150px;
+                    position: relative;
+                    // border: 1px solid red;
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    p{
+                        bottom: 0;
+                        padding: 10px 0px;
+                        margin-bottom: 0;
+                        background: $dark;
+                        color: $text_white;
+                        position: absolute;
+                        // border: 1px solid gold;
+                    }
+                }
+                &:not(:last-child){
+                    margin-right: 10px;
+                }
+            }
+        }
+    }
+    #departments{
+        margin-top: 25px;
+        min-height: 150px;
+        .wrapper{
+            margin: 20px 0;
+            border-bottom: 2px solid $color1;
+            span{
+                font-size: 25px;
+            }
+        }
+        .row{
+            .dept-item{
+                border: 1px solid lightgrey;
+                transition: all 0.5s ease-in;
+                p{
+                    margin: 0;
+                    padding: 10px;
+                    a {
+                        color: #777;
+                    }
+                }
+                &:hover{
+                    border: 1px solid  $color1;
+                    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                    p {
+                        a{
+                            color: $color1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 .news{
     padding-bottom: 50px;
     #news{

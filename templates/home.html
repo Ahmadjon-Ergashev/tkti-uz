@@ -5,6 +5,8 @@
 {% endblock title %}
 
 {% block content %}
+    <!-- variables -->
+    <span id="not_found_404" data-not-found="{{ not_found_404 }}"></span>
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
     
@@ -85,24 +87,10 @@
             </form>
             <!-- queryset -->
             <div class="my-5" id="result_data">
-                <!-- <ul class="list-group list-group-flush border-bottom-1">
-                    <li class="list-group-item"><span>${item.title}</span> <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay" aria-controls="offcanvasScrolling">Ko'rish</button></li>
-                    <div class="offcanvas offcanvas-start w-50" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay" aria-labelledby="offcanvasScrollingLabel">
-                        <div class="offcanvas-header">
-                            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Lorem, ipsum dolor sit amet consectetur adipisicing elit. In, repellendus?</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                        </div>
-                        <div class="offcanvas-body">
-                            <iframe src="http://127.0.0.1:8000/media/pdf/study_program/2023-10-15/Talim_dasturi_60112400-Professional_talim_kimyoviy_texnologiyasi.pdf" width="100%" height="80%" frameborder="0"></iframe>
-                        </div>
-                    </div>
-                </ul> -->
+                
             </div>
-
         </section>
     </div>
-    
-
     <!-- study way  -->
 
     <!-- news sections -->
@@ -235,7 +223,47 @@
         </div>
     </div>
     <!-- ads section -->
-          
+    <!-- faculty and departments -->
+    
+    <div class="container">
+        <div id="faculty_and_departments">
+            <h1 class="text-center text-decoration-underline">{{ faculty_title }}</h1>
+            <div id="faculties">
+                <div class="card_box">
+                    <!-- <div class="faculty">
+                        <div class="card_img" style="background-image: url('https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg');">
+                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, iure.</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div id="departments">
+                <div class="box">
+                    <div class="wrapper">
+                        <span id="faculty_title"></span><span> {{ nth_faculty }}</span>
+                    </div>
+                    <div class="row">
+                        <!-- 
+                            <div class="col-12 col-lg-4 col-xxl-3 mb-3">
+                                <div class="dept-item">
+                                    <p>
+                                        <a href="">
+                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem, cum!
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        -->
+                    </div>
+                </div>
+                <div id="not_found_dept">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- faculty and departments -->          
 
     <section>
         <!-- useful links -->

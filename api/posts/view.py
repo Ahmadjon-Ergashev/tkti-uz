@@ -18,14 +18,6 @@ class StudyProgramView(mixins.ListModelMixin, viewsets.GenericViewSet):
         faculty = self.request.query_params.get("faculty")
         study_way = self.request.query_params.get("study_way")
         department = self.request.query_params.get("department")
-        # if year:
-        #     queryset = super().get_queryset().filter(year=year)
-        # if faculty:
-        #     queryset = super().get_queryset().filter(faculty=faculty)
-        # if department:
-        #     queryset = super().get_queryset().filter(department=department)
-        # if study_way:
-        #     queryset = super().get_queryset().filter(study_way=study_way)
         if year and faculty and department and study_way:
             queryset = super().get_queryset().filter(year=year, faculty=faculty, department=department, study_way=study_way)
         return queryset

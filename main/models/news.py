@@ -53,16 +53,19 @@ class NewsAndAds(models.Model):
         return str(self.title) if self.title else None
 
     def save(self, *args, **kwargs):
-        im = Image.open(self.image)
-        im = im.convert('RGB')
-        im = ImageOps.exif_transpose(im)
-        im_io = BytesIO()
-        im.save(im_io, 'JPEG', quality=50)
-        filename = os.path.splitext(self.image.name)[0]
-        filename = f"{filename}.jpg"
-        new_image = File(im_io, name=filename)
-        self.image = new_image
-        super().save(*args, **kwargs)
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=50)
+            filename = os.path.splitext(self.image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
     
     
 

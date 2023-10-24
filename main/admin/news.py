@@ -11,7 +11,7 @@ from main.models.news import NewsAndAds
 def duplicate(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None
-        i.slug += str(random.randint(9999, 9999))
+        i.slug += str(random.randint(999999, 999999))
         i.save()
 
 

@@ -112,14 +112,12 @@ class Posts(models.Model):
             im_io = BytesIO()
             im.save(im_io, 'JPEG', quality=50)
             filename = os.path.splitext(self.image.name)[0]
-            date_path = self.added_at.strftime("%Y-%m-%d")
-            filename = f"posts/images/{date_path}/{filename}_{random.randint(111111, 999999)}.jpg"
+            filename = f"{filename}.jpg"
             new_image = File(im_io, name=filename)
             self.image = new_image
+            super().save(*args, **kwargs)
         else:
-            ... 
-        super().save(*args, **kwargs)
-
+            super().save(*args, **kwargs)
 
 class FacultyAdministration(models.Model): 
     """ model for faculty admistrations """

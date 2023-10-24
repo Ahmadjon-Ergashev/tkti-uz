@@ -21,13 +21,16 @@ def Home(request):
         "title": _("Bosh sahifa"),
         "sp_year": _("Yilni tanlang"),
         "high_degree": _("Bakalavriat"),
+        "faculty_title": _("Fakultetlar"),
         "sp_dept": _("Kafedrani tanlang"),
         "ads_section_title": _("E'lonlar"),
         "higher_degree": _("Magistraturat"),
         "sp_type": _("Ta'lim turini tanlang"),
         "sp_faculty": _("Fakultetni tanlang"),
         "news_section_title": _("Yangiliklar"),
+        "nth_faculty": _("tarkibidagi kafedralar"),
         "study_way_title": _("Ta'lim dasturi katalogi"),
+        "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
     objects_list = {
         "header_img": HeaderIMG.objects.all().order_by("order_num"),
@@ -82,6 +85,8 @@ class PostDetailView(DetailView):
     def get_object(self, queryset=None):
         post_slug = self.kwargs["post_slug"]
         obj = get_object_or_404(Posts, slug=post_slug)
+        obj.post_viewed_count += 1
+        obj.save()
         return obj
     
     def get_context_data(self, **kwargs):

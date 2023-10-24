@@ -23,4 +23,18 @@
 }
 .department-item a:hover::after {
   width: 90%;
+}
+
+.post_footer {
+  margin-top: 40px;
+}
+.post_footer p {
+  margin-bottom: 0;
+}
+.post_footer .time_and_view {
+  display: flex;
+  justify-content: space-between;
+}
+.post_footer .time_and_view span {
+  font-weight: 500;
 }/*# sourceMappingURL=post.css.map */

@@ -15,6 +15,8 @@ class NewsDetailView(DetailView):
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
         object = get_object_or_404(NewsAndAds, slug=slug)
+        object.post_viewed_count += 1
+        object.save()
         return object
     
     def get_context_data(self, **kwargs):

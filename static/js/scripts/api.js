@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    const base_url = "http://127.0.0.1:8000/uz/"
+    $NF404 = $("#not_found_404").data("not-found");
     $.ajax({
         type: "GET",
         url: "api/widgets/years",
@@ -91,4 +91,66 @@ $(document).ready(function(){
             }
         });
     });
+    // faculty and departments
+    $.ajax({
+        type: 'GET',
+        url: "api/posts/faculty_list/",
+        data: {},
+        success: function(data){
+            data.map((item) => {
+                obj = `
+                <div class="faculty" data-faculty-title="${item.title}" data-faculty-id="${item.id}">
+                    <div class="card_img" style="background-image: url('${item.image}');">
+                        <p>${item.title}</p>
+                    </div>
+                </div>
+                `
+                $("#faculties .card_box").append(obj)
+            })
+            $(".card_img p").hide();
+            $(".faculty").on("mouseenter mouseleave", function() {
+                $(this).find(".card_img p").fadeToggle();
+            })
+            $("#departments .wrapper").hide()
+            $(".faculty").on("click", function() {
+                let faculty_id = $(this).data("faculty-id")
+                let title = $(this).data("faculty-title")
+                $("#departments .box").fadeIn()
+                showDepartments(faculty_id)
+                $("#departments .wrapper #faculty_title").html(title)
+                $("#departments .wrapper").fadeIn()
+            })
+        }
+    });
+    function showDepartments(faculty_id){
+        $("#departments .row").empty();
+        $.ajax({
+            type: 'GET',
+            url: "api/posts/departments_list/", 
+            data: {
+                faculty: faculty_id
+            },
+            success: function(data){
+                if (data.length != 0) {
+                    data.map((item) => {
+                        obj = `
+                            <div class="col-12 col-lg-4 col-xxl-3 mb-3">
+                                <div class="dept-item">
+                                    <p>
+                                        <a href="">
+                                            ${item.name}
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        `
+                        $("#departments .row").append(obj);
+                    }); 
+                    $("#departments #not_found_dept").hide()
+                } else {
+                    $("#departments #not_found_dept").html($NF404).show()
+                }
+            } 
+        })
+    }
 })

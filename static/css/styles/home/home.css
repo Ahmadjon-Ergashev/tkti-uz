@@ -40,6 +40,69 @@
   justify-content: space-between;
 }
 
+#faculty_and_departments {
+  margin-bottom: 50px;
+}
+#faculty_and_departments h1 {
+  font-size: 45px;
+  margin-bottom: 25px;
+}
+#faculty_and_departments #faculties .card_box {
+  display: flex;
+  justify-content: space-between;
+}
+#faculty_and_departments #faculties .card_box .faculty {
+  flex: 1;
+  text-align: center;
+}
+#faculty_and_departments #faculties .card_box .faculty .card_img {
+  height: 150px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#faculty_and_departments #faculties .card_box .faculty .card_img p {
+  bottom: 0;
+  padding: 10px 0px;
+  margin-bottom: 0;
+  background: #434343;
+  color: #ffffff;
+  position: absolute;
+}
+#faculty_and_departments #faculties .card_box .faculty:not(:last-child) {
+  margin-right: 10px;
+}
+#faculty_and_departments #departments {
+  margin-top: 25px;
+  min-height: 150px;
+}
+#faculty_and_departments #departments .wrapper {
+  margin: 20px 0;
+  border-bottom: 2px solid #26597E;
+}
+#faculty_and_departments #departments .wrapper span {
+  font-size: 25px;
+}
+#faculty_and_departments #departments .row .dept-item {
+  border: 1px solid lightgrey;
+  transition: all 0.5s ease-in;
+}
+#faculty_and_departments #departments .row .dept-item p {
+  margin: 0;
+  padding: 10px;
+}
+#faculty_and_departments #departments .row .dept-item p a {
+  color: #777;
+}
+#faculty_and_departments #departments .row .dept-item:hover {
+  border: 1px solid #26597E;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#faculty_and_departments #departments .row .dept-item:hover p a {
+  color: #26597E;
+}
+
 .news {
   padding-bottom: 50px;
 }
