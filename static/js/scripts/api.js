@@ -132,12 +132,24 @@ $(document).ready(function(){
             },
             success: function(data){
                 if (data.length != 0) {
+                    $("#departments #not_found_dept").hide()
                     data.map((item) => {
-                        obj = `
+                        this_faculty = `
                             <div class="col-12 col-lg-4 col-xxl-3 mb-3">
                                 <div class="dept-item">
                                     <p>
-                                        <a href="">
+                                        <a href="/posts/navbar/post/${item.faculty.slug}">
+                                            ${item.faculty.title}
+                                        </a>    
+                                    </p>
+                                </div>
+                            </div>
+                        `
+                        let obj = `     
+                            <div class="col-12 col-lg-4 col-xxl-3 mb-3">
+                                <div class="dept-item">
+                                    <p>
+                                        <a href="/posts/departments/${item.slug}">
                                             ${item.name}
                                         </a>
                                     </p>
@@ -146,7 +158,7 @@ $(document).ready(function(){
                         `
                         $("#departments .row").append(obj);
                     }); 
-                    $("#departments #not_found_dept").hide()
+                    $("#departments .row").prepend(this_faculty);
                 } else {
                     $("#departments #not_found_dept").html($NF404).show()
                 }

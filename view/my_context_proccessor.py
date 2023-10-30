@@ -2,19 +2,20 @@ from datetime import datetime
 from django.utils.translation import gettext_lazy as _
 
 # local
-from main.models.posts import Navbar
-from main.models.news import NewsAndAds
-from main.models.widgets import SocialNetworks, QuickLinks
+from main.models import (
+    posts, widgets, news
+)
+
 
 
 def global_variables(request):
     context = {
         "today": datetime.now(),
-        "quick_links": QuickLinks.objects.all().order_by("order_num"),
-        "social_networks": SocialNetworks.objects.all().order_by("order_num"),
-        "navbar": Navbar.objects.filter(status="base", visible=True).order_by("order_num"),
-        "most_read_ads": NewsAndAds.objects.filter(object_type="ads", status="pub").order_by("-added_at")[:6],
-        "most_read_news": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:6],
+        "quick_links": widgets.QuickLinks.objects.all().order_by("order_num"),
+        "social_networks": widgets.SocialNetworks.objects.all().order_by("order_num"),
+        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num"),
+        "most_read_ads": news.Ads.objects.filter(status="pub").order_by("-added_at")[:6],
+        "most_read_news": news.News.objects.filter(status="pub").order_by("-added_at")[:6],
 
         # text variables
         "ads_tab": _("E'lonlar"),

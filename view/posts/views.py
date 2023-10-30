@@ -3,14 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
 
 # local models
-from main.models.posts import (
-    Posts, Status, Navbar, Departments, StudyWayType
+from main.models import (
+    posts, news, widgets
 )
-from main.models.widgets import (
-    HeaderIMG, UsefullLinks, Statistika
-)
-from main.models.news import NewsAndAds
-
 
 
 def Home(request):
@@ -27,18 +22,27 @@ def Home(request):
         "higher_degree": _("Magistraturat"),
         "sp_type": _("Ta'lim turini tanlang"),
         "sp_faculty": _("Fakultetni tanlang"),
-        "news_section_title": _("Yangiliklar"),
+        "videos_section_title": _("Videolar"),
+        "the_most_read": _("Top yangiliklar"),
         "nth_faculty": _("tarkibidagi kafedralar"),
+        "the_last_news": _("Eng so'ngi yangiliklar"),
         "study_way_title": _("Ta'lim dasturi katalogi"),
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
     objects_list = {
-        "header_img": HeaderIMG.objects.all().order_by("order_num"),
-        "statistika": Statistika.objects.all().order_by("-added_at"),
-        "usefull_links": UsefullLinks.objects.all().order_by("-add_time"),
-        "top_3_ads": NewsAndAds.objects.filter(object_type="ads", status="pub").order_by("-added_at")[:3],
-        "last_news_6": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-added_at")[:6],
-        "top_3_news": NewsAndAds.objects.filter(object_type="news", status="pub").order_by("-post_viewed_count")[:3],
+        "header_img": widgets.HeaderIMG.objects.all().order_by("order_num"),
+        "statistika": widgets.Statistika.objects.all().order_by("-added_at"),
+        "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
+        "top_3_ads": news.Ads.objects.filter(status="pub").order_by("-added_at")[:3],
+        "last_news_6": news.News.objects.filter(status="pub").order_by("-added_at")[:8],
+        "top_3_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4],
+        "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].all(),
+        "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].all(),
+        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
+        "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
+        "the_most_read_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
+        "the_most_read_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].all(),
+        "the_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at").all()
     }
     context = translate_words | objects_list        
     return render(request, "home.html", context)
@@ -47,24 +51,24 @@ def Home(request):
 
 class PostsListView(ListView):
     """ get all posts what connected to navbar """
-    model = Posts
+    model = posts.Posts
     paginate_by = 5
     ordering = ["-added_at"]
     template_name = "pages/posts/posts.html"
 
     def get_queryset(self):
         navbar_slug = self.kwargs["navbar_slug"]
-        qs = super().get_queryset().filter(status=Status.published, navbar__slug=navbar_slug).order_by("-added_at")
+        qs = super().get_queryset().filter(status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
         return qs 
     
     def get_context_data(self, **kwargs):
-        navbar_name = Navbar.objects.get(slug=self.kwargs["navbar_slug"])
+        navbar_name = posts.Navbar.objects.get(slug=self.kwargs["navbar_slug"])
         context = super().get_context_data(**kwargs)
         context["title"] = navbar_name.name
         context["parent"] = navbar_name.parent
         context["title_slug"] = navbar_name.slug
         try:
-            context["category_list"] = Navbar.objects.filter(parent_id=navbar_name.parent.id)
+            context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
             context["category_list"] = navbar_name.get_children()
         try:
@@ -79,12 +83,12 @@ class PostsListView(ListView):
 
 class PostDetailView(DetailView):
     """ get detail of posts """
-    model = Posts
+    model = posts.Posts
     template_name = "pages/posts/post_detail.html"
 
     def get_object(self, queryset=None):
         post_slug = self.kwargs["post_slug"]
-        obj = get_object_or_404(Posts, slug=post_slug)
+        obj = get_object_or_404(posts.Posts, slug=post_slug)
         obj.post_viewed_count += 1
         obj.save()
         return obj
@@ -92,13 +96,13 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context["object"]
-        navbar = Navbar.objects.get(slug=post.navbar.slug)
+        navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
         context["title"] = navbar.name
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
         context["parent"] = navbar.parent.name
         try:
-            context["category_list"] = Navbar.objects.filter(parent_id=navbar.parent.id)
+            context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
             context["pdf_file"] = post.pdf_file.url
         except AttributeError:
             context["category_list"] = navbar.get_children()
@@ -108,18 +112,20 @@ class PostDetailView(DetailView):
 
 class DepartmentsDetailView(DetailView):
     """ departments detail view """
-    model = Departments
+    model = posts.Departments
     template_name = "pages/posts/departments_detail.html"
 
     def get_object(self, queryset=None):
         dept_slug = self.kwargs['dept_slug']
-        obj = get_object_or_404(Departments, slug=dept_slug)
+        obj = get_object_or_404(posts.Departments, slug=dept_slug)
+        obj.post_viewed_count += 1
+        obj.save()
         return obj
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         obj = context["object"]
-        context["departments_list"] = Departments.objects.all().order_by("name")
+        context["departments_list"] = posts.Departments.objects.all().order_by("name")
         context["title"] = obj.name
         context["title_bar"] = _("Kafedralar")     
         return context

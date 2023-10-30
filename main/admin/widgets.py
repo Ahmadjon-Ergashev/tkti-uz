@@ -2,13 +2,10 @@ from django.contrib import admin
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 
-from main.models.widgets import (
-    SocialNetworks, HeaderIMG, 
-    UsefullLinks, QuickLinks, Statistika, Year
-)
+from main.models import widgets
 
 
-@admin.register(SocialNetworks)
+@admin.register(widgets.SocialNetworks)
 class SocialNetworkingAdmin(GuardedModelAdmin):     
     search_fields = ("name", )
     ordering = ("-added_at", )
@@ -24,7 +21,7 @@ class SocialNetworkingAdmin(GuardedModelAdmin):
         return super().save_model(request, obj, form, change)
     
 
-@admin.register(HeaderIMG)
+@admin.register(widgets.HeaderIMG)
 class HeaderIMGAdmin(GuardedModelAdmin):
     list_editable = ("order_num", )
     readonly_fields = ["get_image"]
@@ -35,7 +32,7 @@ class HeaderIMGAdmin(GuardedModelAdmin):
         return mark_safe(f"<img src='{obj.image.url}' width=100 />")
     
 
-@admin.register(UsefullLinks)
+@admin.register(widgets.UsefullLinks)
 class LinksAdmin(GuardedModelAdmin):
     search_fields = ("name", )
     list_display_links = ("name", )
@@ -46,7 +43,7 @@ class LinksAdmin(GuardedModelAdmin):
         return mark_safe(f"<img src='{obj.logo.url}' width=100 />")
     
 
-@admin.register(QuickLinks)
+@admin.register(widgets.QuickLinks)
 class QuickLinksAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
     list_display_links = ("name", )
@@ -54,11 +51,13 @@ class QuickLinksAdmin(admin.ModelAdmin):
     list_display = ("id", "name", "order_num", "url", "added_at")
     
 
-@admin.register(Statistika)
+@admin.register(widgets.Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
     list_display_links = ("name", )
     list_editable = ("order_num", "quantity")
     list_display = ("id", "name", "quantity", "order_num", "added_at")
 
-admin.site.register(Year)
+
+admin.site.register(widgets.Year)
+admin.site.register(widgets.Hashtag)

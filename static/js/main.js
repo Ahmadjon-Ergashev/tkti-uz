@@ -18,5 +18,13 @@ $(document).ready(function(){
         if ($("#object_post")[item].children[0]?.children[0]?.localName === "img" || df.test(text)) {
             $("#object_base_img").hide()
         }
-    })
+    });
+    $(".video_tab_item").hover(
+        function() {
+            $(this).prop("controls", true);
+        },
+        function() {
+            $(this).prop("controls", false);
+        }
+    );
 })

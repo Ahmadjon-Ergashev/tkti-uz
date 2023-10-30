@@ -16,8 +16,9 @@ from main.models.posts import (
 def duplicate(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None
-        i.slug += str(random.randint(9999, 9999))
+        i.slug += str(random.randint(1111, 9999))
         i.save()
+
 
 @admin.action(description=_("Nusxa ko'chirish"))
 def clone(modeladmin, request, queryset):
@@ -111,7 +112,7 @@ class PostsAdmin(GuardedModelAdmin):
         (_("O'zbek tilida"), {
             "classes": ("extrapretty"),
             "fields": (
-                "title", "subtitle", "post"                
+                "title", "post"                
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -199,7 +200,7 @@ class DepartmentsAdmin(admin.ModelAdmin):
 
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("name", )}
-    
+
 
 @admin.register(StudyProgram)
 class StudyAdmin(admin.ModelAdmin):

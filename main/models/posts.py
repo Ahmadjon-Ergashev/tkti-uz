@@ -1,5 +1,4 @@
 import os
-import random
 from io import BytesIO
 from django.db import models
 from PIL import Image, ImageOps
@@ -10,28 +9,8 @@ from mptt.models import TreeForeignKey, MPTTModel
 from django.utils.translation import gettext_lazy as _
 
 
-from .widgets import Year
-
-
-class NavbarStatus(models.TextChoices):
-    base = "base", _("Asosiy")
-    inside = "inside", _("Ichki")
-
-
-class Status(models.TextChoices):
-    published: str = "pub", _("Published")
-    pendding: str = "pen", _("Pendding")
-
-
-class StudyWayType(models.TextChoices):
-    high: str = "high", _("Bakalavriat")
-    higher: str = "higher", _("Magistraturat")
-
-class StudyTimes(models.TextChoices):
-    daytime: str = "daytime", _("Kundizgi")
-    evning: str = "evning", _("Kechgi")
-    outer: str = "outer", _("Sirtqi")
-    
+# local
+from main.models import widgets
 
 
 class Navbar(MPTTModel):
@@ -43,7 +22,7 @@ class Navbar(MPTTModel):
     name = models.CharField(verbose_name=_("Nomi"), max_length=100)
     parent = TreeForeignKey("self", related_name="children", on_delete=models.SET_NULL, null=True, blank=True)
     visible = models.BooleanField(default=True, verbose_name=_("Ko'rinish"))
-    status = models.CharField(verbose_name=_("status"), max_length=30, choices=NavbarStatus.choices, default=NavbarStatus.inside)
+    status = models.CharField(verbose_name=_("status"), max_length=30, choices=widgets.NavbarStatus.choices, default=widgets.NavbarStatus.inside)
     order_num = models.IntegerField(verbose_name=_("Tartib raqami"), default=0)
     inside_order_num = models.IntegerField(default=0, verbose_name=_("Ichki tartib raqam"))
     slug = models.SlugField(max_length=120, unique=True)
@@ -67,17 +46,13 @@ class Navbar(MPTTModel):
 
 
 
-class Posts(models.Model):
+class Posts(widgets.AbstractTemplate):
     """ Posts """
     author = models.ForeignKey(
         User, on_delete=models.SET_NULL, null=True, 
         verbose_name=_("object_make_user"), related_name="post_author"
     )
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    image = models.ImageField(verbose_name=_("Post uchun asosiy rasm"), upload_to="image/posts/%Y-%m-%d/", default="default/default.png", null=True, blank=True)
-    title = models.CharField(verbose_name=_("Sarlavha"), max_length=400, null=True)
-    subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=500, null=True, blank=True)
-    post = QuillField(null=True)
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/posts/%Y-%m-%d/", 
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
@@ -86,15 +61,9 @@ class Posts(models.Model):
         verbose_name=_("Video fayl"), upload_to="videos/posts/%Y-%m-%d/",
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
-    status = models.CharField(verbose_name=_("post status"), max_length=50, choices=Status.choices, default=Status.pendding)
     faculty = models.BooleanField(default=False, verbose_name=_("Fakultet"), help_text=_("Agar shu post fakultet modeliga tegishli bo'lsa belgilang"))
-    slug = models.SlugField(max_length=255, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
-    post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
-    author_post = models.CharField(verbose_name=_("Post muallifi"), max_length=300, default="TKTI axborot xizmati")
-    added_at = models.DateTimeField(verbose_name=_("Vaqt & sana"))
     update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_post_user")
-    updated_at = models.DateTimeField(auto_now=True)
-
+    
     class Meta:
         db_table = "posts"
         managed = True
@@ -118,6 +87,8 @@ class Posts(models.Model):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
+
+
 
 class FacultyAdministration(models.Model): 
     """ model for faculty admistrations """
@@ -150,6 +121,7 @@ class Departments(models.Model):
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
     post = QuillField(null=True, blank=True, verbose_name=_("To'liq matn"))
     slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True, help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
+    post_viewed_count = models.IntegerField(_("Ko'rilganlik soni"), default=0)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -164,12 +136,12 @@ class Departments(models.Model):
 
 class StudyProgram(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Yonalish nomi"), null=True)
-    year = models.ForeignKey(Year, on_delete=models.SET_NULL, verbose_name=_("Yilni tanlang"), null=True)
+    year = models.ForeignKey(widgets.Year, on_delete=models.SET_NULL, verbose_name=_("Yilni tanlang"), null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultetni tanlang"))
     department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))
-    study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"), choices=StudyWayType.choices, default=StudyWayType.high)
+    study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"), choices=widgets.StudyWayType.choices, default=widgets.StudyWayType.high)
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/")
-    study_time = models.CharField(max_length=123, verbose_name=_("O'qish vaqtlari"), choices=StudyTimes.choices, default=StudyTimes.daytime)
+    study_time = models.CharField(max_length=123, verbose_name=_("O'qish vaqtlari"), choices=widgets.StudyTimes.choices, default=widgets.StudyTimes.daytime)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

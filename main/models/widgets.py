@@ -4,9 +4,61 @@ from django.db import models
 from PIL import Image, ImageOps
 from django.core.files import File
 from colorfield.fields import ColorField
+from django_quill.fields import QuillField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
+
+class NavbarStatus(models.TextChoices):
+    base = "base", _("Asosiy")
+    inside = "inside", _("Ichki")
+
+
+class StudyWayType(models.TextChoices):
+    high: str = "high", _("Bakalavriat")
+    higher: str = "higher", _("Magistraturat")
+
+
+class StudyTimes(models.TextChoices):
+    daytime: str = "daytime", _("Kundizgi")
+    evning: str = "evning", _("Kechgi")
+    outer: str = "outer", _("Sirtqi")
+
+
+class Status(models.TextChoices):
+    published: str = "pub", _("Published")
+    pendding: str = "pen", _("Pendding")
+
+
+class AbstractTemplate(models.Model):
+    """ abstract tamplate for news posts and ads """
+    image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
+    title = models.CharField(verbose_name=_("Sarlavha"), max_length=255, null=True)
+    post = QuillField(verbose_name=_("To'liq mazmuni"), null=True, blank=True)
+    status = models.CharField(verbose_name=_("status"), max_length=50, choices=Status.choices, default=Status.pendding)
+    slug = models.SlugField(max_length=255, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
+    post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
+    author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
+    added_at = models.DateTimeField(verbose_name=_("Vaqt & sana"))
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
+        managed = True
+
+    
+class Hashtag(models.Model):
+    """ hashtags for news and ads """
+    name = models.CharField(max_length=123, verbose_name=_("Nomi"), null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "hashtags"
+        managed = True
+        verbose_name = _("Hashtaglar")
+        verbose_name_plural = _("Hashtaglar")
 
 
 class SocialNetworks(models.Model):
@@ -44,19 +96,22 @@ class HeaderIMG(models.Model):
         verbose_name_plural = _("Bosh sahifa uchun rasmlar")
 
     def __str__(self):
-        return f"Image {self.id}"
+        return f"Image {self.pk}"
     
     def save(self, *args, **kwargs):
-        im = Image.open(self.image)
-        im = im.convert('RGB')
-        im = ImageOps.exif_transpose(im)
-        im_io = BytesIO()
-        im.save(im_io, 'JPEG', quality=50)
-        filename = os.path.splitext(self.image.name)[0]
-        filename = f"{filename}.jpg"
-        new_image = File(im_io, name=filename)
-        self.image = new_image
-        super().save(*args, **kwargs)
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=50)
+            filename = os.path.splitext(self.image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
     
 
 class UsefullLinks(models.Model):

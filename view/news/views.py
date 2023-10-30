@@ -4,17 +4,17 @@ from django.utils.translation import gettext_lazy as _
 
 
 # local vars
-from main.models.news import NewsAndAds
+from main.models import news
 
 
 class NewsDetailView(DetailView):
     """ detail view for news and detail """
-    model = NewsAndAds
+    model = news.News
     template_name = "pages/news_and_ada/detail.html"
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
-        object = get_object_or_404(NewsAndAds, slug=slug)
+        object = get_object_or_404(news.News, slug=slug)
         object.post_viewed_count += 1
         object.save()
         return object
@@ -22,7 +22,31 @@ class NewsDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object = context["object"]
-        context["title"] = _("Yangilik") if object.object_type == "news" else _("E'lon")
+        context["title"] = _("Yangilik")
+        try:
+            domain = self.request.get_host()
+            context["pdf_file"] = f"https://{domain}" + object.pdf_file.url
+        except ValueError:
+            context["pdf_file"] = ""
+        return context
+
+
+class AdsDetailView(DetailView):
+    """ detail view for ads and detail """
+    model = news.News
+    template_name = "pages/news_and_ada/detail.html"
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs["obj_slug"]
+        object = get_object_or_404(news.Ads, slug=slug)
+        object.post_viewed_count += 1
+        object.save()
+        return object
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object = context["object"]
+        context["title"] = _("E'lon")
         try:
             domain = self.request.get_host()
             context["pdf_file"] = f"https://{domain}" + object.pdf_file.url

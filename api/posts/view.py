@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 from drf_yasg.utils import swagger_auto_schema
 
-from main.models import posts
+from main.models import posts, widgets
 from api.posts import query_params
 from .serializers import (
     StudyProgramSerializer, PostsSerializers, DepartmentsSerializers
@@ -33,7 +33,7 @@ class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = PostsSerializers
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(status=posts.Status.published, faculty=True)
+        queryset = super().get_queryset().filter(status=widgets.Status.published, faculty=True)
         return queryset
     
 
