@@ -24,6 +24,7 @@ def Home(request):
         "sp_faculty": _("Fakultetni tanlang"),
         "videos_section_title": _("Videolar"),
         "the_most_read": _("Top yangiliklar"),
+        "photo_grid_title": _("Foto lavhalar"),
         "nth_faculty": _("tarkibidagi kafedralar"),
         "the_last_news": _("Eng so'ngi yangiliklar"),
         "study_way_title": _("Ta'lim dasturi katalogi"),
@@ -35,14 +36,15 @@ def Home(request):
         "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
         "top_3_ads": news.Ads.objects.filter(status="pub").order_by("-added_at")[:3],
         "last_news_6": news.News.objects.filter(status="pub").order_by("-added_at")[:8],
+        "the_photos_home": widgets.PhotoGallary.objects.order_by("-added_at")[:6].all(),
         "top_3_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4],
         "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].all(),
         "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].all(),
         "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
         "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
+        "the_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].all(),
         "the_most_read_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
         "the_most_read_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].all(),
-        "the_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at").all()
     }
     context = translate_words | objects_list        
     return render(request, "home.html", context)

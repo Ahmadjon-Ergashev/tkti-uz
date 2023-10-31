@@ -1,286 +1,290 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-    {{ title }}
+{{ title }}
 {% endblock title %}
 
 {% block content %}
-    <!-- variables -->
-    <span id="not_found_404" data-not-found="{{ not_found_404 }}"></span>
-    <!-- custom css -->
-    <link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
-    <link rel="stylesheet" href="{% static 'css/modules/extextions/tabs.css' %}">
-    
-    <!-- headers img -->
-    <div class="header">
-        <div id="headerIMG">    
-            {% for img in header_img %}
-                <div class="item" style="background-image: url('{{ img.image.url }}');">
+<!-- variables -->
+<span id="not_found_404" data-not-found="{{ not_found_404 }}"></span>
+<!-- custom css -->
+<link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/modules/extextions/tabs.css' %}">
+<link rel="stylesheet" href="{% static 'css/styles/image_grid/home/home_grid.css' %}">
+
+<!-- headers img -->
+<div class="header">
+    <div id="headerIMG">
+        {% for img in header_img %}
+        <div class="item" style="background-image: url('{{ img.image.url }}');">
+        </div>
+        {% endfor %}
+    </div>
+    <!-- statistika -->
+
+    <div class="container">
+        <div id="statistika">
+            {% for obj in statistika %}
+            <div class="card">
+                <div class="card-body">
+                    <div class="card_icon">
+                        <i class="{{ obj.icon }}"></i>
+                    </div>
+                    <p>
+                        {{ obj.quantity }}
+                    </p>
+                    <h3>{{ obj.name }}</h3>
                 </div>
+            </div>
             {% endfor %}
         </div>
-        <!-- statistika -->
-
-        <div class="container">
-            <div id="statistika">
-                {% for obj in statistika %}    
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="card_icon">
-                                <i class="{{ obj.icon }}"></i>
-                            </div>
-                            <p>
-                                {{ obj.quantity }}
-                            </p>
-                            <h3>{{ obj.name }}</h3>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
-        </div>
-        <!-- statistika -->
     </div>
-    <!-- headers img -->
+    <!-- statistika -->
+</div>
+<!-- headers img -->
 
-    <!-- study way  -->
-    <div class="container">
-        <section id="studyway">
-            <span class="wrapper_studyway">{{ study_way_title }}</span>
-            <form action="" id="filter_study_way" method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="col-12 col-lg-4 mb-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="id_year" aria-label="yers select ">
-                              <option selected>--------------------</option>
-                            </select>
-                            <label for="id_year">{{ sp_year }}</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4 mb-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="id_type" aria-label="faculty select">
-                                <option selected>--------------------</option>
-                            </select>
-                            <label for="id_type">{{ sp_type }}</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-4 mb-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="id_faculty" aria-label="faculty select">
-                              <option selected>--------------------</option>
-                            </select>
-                            <label for="id_faculty">{{ sp_faculty }}</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-10 mb-3">
-                        <div class="form-floating">
-                            <select class="form-select" id="id_dept" aria-label="department select">
-                              <option selected>--------------------</option>
-                            </select>
-                            <label for="id_dept">{{ sp_dept }}</label>
-                        </div>
-                    </div>
-                    <div class="col-12 col-lg-2">
-                        <button type="submit" class="w-100 btn btn-primary py-3">{{ search }}</button>
+<!-- study way  -->
+<div class="container">
+    <section id="studyway">
+        <span class="wrapper_studyway">{{ study_way_title }}</span>
+        <form action="" id="filter_study_way" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-12 col-lg-4 mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="id_year" aria-label="yers select ">
+                            <option selected>--------------------</option>
+                        </select>
+                        <label for="id_year">{{ sp_year }}</label>
                     </div>
                 </div>
-            </form>
-            <!-- queryset -->
-            <div class="my-5" id="result_data">
-                
+                <div class="col-12 col-lg-4 mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="id_type" aria-label="faculty select">
+                            <option selected>--------------------</option>
+                        </select>
+                        <label for="id_type">{{ sp_type }}</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-4 mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="id_faculty" aria-label="faculty select">
+                            <option selected>--------------------</option>
+                        </select>
+                        <label for="id_faculty">{{ sp_faculty }}</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-10 mb-3">
+                    <div class="form-floating">
+                        <select class="form-select" id="id_dept" aria-label="department select">
+                            <option selected>--------------------</option>
+                        </select>
+                        <label for="id_dept">{{ sp_dept }}</label>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-2">
+                    <button type="submit" class="w-100 btn btn-primary py-3">{{ search }}</button>
+                </div>
+            </div>
+        </form>
+        <!-- queryset -->
+        <div class="my-5" id="result_data">
+
+        </div>
+    </section>
+</div>
+<!-- study way  -->
+
+<!-- news ads videos -->
+
+<div id="news_ads_section">
+    <div class="container">
+        <section id="home_tabs">
+            <div class="page">
+                <!-- <h1>{{ news_section_title }}</h1>	-->
+                <!-- tabs -->
+                <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
+                    <input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
+                    <label for="tab1">{{ the_last_news }}</label>
+
+                    <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
+                    <label for="tab2">{{ the_most_read }}</label>
+
+                    <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
+                    <label for="tab3">{{ ads_section_title }}</label>
+
+                    <input type="radio" name="pcss3t" id="tab4" class="tab-content-4">
+                    <label for="tab4">{{ videos_section_title }}</label>
+                    <ul>
+                        <li class="tab-content tab-content-first typography">
+                            <div class="row big_box">
+                                {% for i in the_last_news_4 %}
+                                <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                    <div class="item">
+                                        <div class="item_img">
+                                            <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
+                                        </div>
+                                        <div class="item_body">
+                                            <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title |
+                                                    truncatechars:120 }}</a></h4>
+                                        </div>
+                                        <div class="item_footer">
+                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="border mx-4"></div>
+                            <div class="row small_news mt-2">
+                                {% for i in the_last_news_8 %}
+                                <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                    <div class="news_box">
+                                        <div class="news_box_body">
+                                            <p>
+                                                <a href="">
+                                                    {{ i.title | truncatechars:80 }}
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="news_box_footer">
+                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </li>
+
+                        <li class="tab-content tab-content-2 typography">
+                            <div class="row big_box">
+                                {% for i in the_most_read_4 %}
+                                <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                    <div class="item">
+                                        <div class="item_img">
+                                            <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
+                                        </div>
+                                        <div class="item_body">
+                                            <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title |
+                                                    truncatechars:120 }}</a></h4>
+                                        </div>
+                                        <div class="item_footer">
+                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="border mx-4"></div>
+                            <div class="row small_news">
+                                {% for i in the_most_read_8 %}
+                                <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                    <div class="news_box">
+                                        <div class="news_box_body">
+                                            <p>
+                                                <a href="">
+                                                    {{ i.title | truncatechars:80 }}
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="news_box_footer">
+                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li class="tab-content tab-content-3 typography">
+                            <div class="row big_box">
+                                {% for i in the_last_ads_4 %}
+                                <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                    <div class="item">
+                                        <div class="item_img">
+                                            <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
+                                        </div>
+                                        <div class="item_body">
+                                            <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title |
+                                                    truncatechars:120 }}</a></h4>
+                                        </div>
+                                        <div class="item_footer">
+                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="border mx-4"></div>
+                            <div class="row small_news">
+                                {% for i in the_last_ads_8 %}
+                                <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                    <div class="news_box">
+                                        <div class="news_box_body">
+                                            <p>
+                                                <a href="">
+                                                    {{ i.title | truncatechars:80 }}
+                                                </a>
+                                            </p>
+                                        </div>
+                                        <div class="news_box_footer">
+                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </li>
+                        <li class="tab-content tab-content-4 typography">
+                            <div class="row videos_tab">
+                                {% for v in the_videos %}
+                                <div class="col-12 col-lg-4 col-xxl-4 mb-3">
+                                    <div class="video">
+                                        <video class="video_tab_item" width="100%" poster="{{ v.poster.url }}">
+                                            <source src="{{ v.video_file.url }}" , type="video/mp4">
+                                        </video>
+                                    </div>
+                                    <p>{{ v.title | truncatechars:150 }}</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!--/ tabs -->
             </div>
         </section>
     </div>
-    <!-- study way  -->
+</div>
 
-    <!-- news ads videos -->
+<!-- news ads videos -->
 
-    <div id="news_ads_section">
-        <div class="container">
-            <section id="home_tabs">
-                <div class="page">
-                    <!-- <h1>{{ news_section_title }}</h1>	-->
-                    <!-- tabs -->
-                    <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
-                        <input type="radio" name="pcss3t" checked  id="tab1"class="tab-content-first">
-                        <label for="tab1">{{ the_last_news }}</label>
-                        
-                        <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-                        <label for="tab2">{{ the_most_read }}</label>
-                        
-                        <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
-                        <label for="tab3">{{ ads_section_title }}</label>
+<!-- faculty and departments -->
 
-                        <input type="radio" name="pcss3t" id="tab4" class="tab-content-4">
-                        <label for="tab4">{{ videos_section_title }}</label>
-                        <ul>
-                            <li class="tab-content tab-content-first typography">
-                                <div class="row big_box">
-                                    {% for i in the_last_news_4 %}  
-                                        <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                            <div class="item">
-                                                <div class="item_img">
-                                                    <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                                </div>
-                                                <div class="item_body">
-                                                    <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title | truncatechars:120 }}</a></h4>
-                                                </div>
-                                                <div class="item_footer">
-                                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="border mx-4"></div>
-                                <div class="row small_news mt-2">
-                                    {% for i in the_last_news_8 %}                                  
-                                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                            <div class="news_box">
-                                                <div class="news_box_body">
-                                                    <p>
-                                                        <a href="">
-                                                            {{ i.title | truncatechars:80 }}
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                                <div class="news_box_footer">
-                                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                            
-                            <li class="tab-content tab-content-2 typography">
-                                <div class="row big_box">
-                                    {% for i in the_most_read_4 %}  
-                                        <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                            <div class="item">
-                                                <div class="item_img">
-                                                    <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                                </div>
-                                                <div class="item_body">
-                                                    <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title | truncatechars:120 }}</a></h4>
-                                                </div>
-                                                <div class="item_footer">
-                                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="border mx-4"></div>
-                                <div class="row small_news">
-                                    {% for i in the_most_read_8 %}                                  
-                                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                            <div class="news_box">
-                                                <div class="news_box_body">
-                                                    <p>
-                                                        <a href="">
-                                                            {{ i.title | truncatechars:80 }}
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                                <div class="news_box_footer">
-                                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                            <li class="tab-content tab-content-3 typography">
-                                <div class="row big_box">
-                                    {% for i in the_last_ads_4 %}  
-                                        <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                            <div class="item">
-                                                <div class="item_img">
-                                                    <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                                </div>
-                                                <div class="item_body">
-                                                    <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title | truncatechars:120 }}</a></h4>
-                                                </div>
-                                                <div class="item_footer">
-                                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="border mx-4"></div>
-                                <div class="row small_news">
-                                    {% for i in the_last_ads_8 %}                                  
-                                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                            <div class="news_box">
-                                                <div class="news_box_body">
-                                                    <p>
-                                                        <a href="">
-                                                            {{ i.title | truncatechars:80 }}
-                                                        </a>
-                                                    </p>
-                                                </div>
-                                                <div class="news_box_footer">
-                                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </li>
-                            <li class="tab-content tab-content-4 typography">
-                                <div class="row videos_tab">
-                                    {% for v in the_videos %}
-                                        <div class="col-12 col-lg-4 col-xxl-4 mb-3">
-                                            <div class="video">
-                                                <video class="video_tab_item" width="100%" poster="{{ v.poster.url }}">
-                                                    <source src="{{ v.video_file.url }}", type="video/mp4">
-                                                </video>
-                                            </div>
-                                            <p>{{ v.title | truncatechars:150 }}</p>
-                                        </div>
-                                    {% endfor %}
-                                </div>  
-                            </li>
-                        </ul>
-                    </div>
-                    <!--/ tabs -->
-                </div>
-            </section>
-        </div>
-    </div>
-
-    <!-- news ads videos -->
-
-    <!-- faculty and departments -->
-    
-    <div class="container">
-        <div id="faculty_and_departments">
-            <h1 class="text-center text-decoration-underline">{{ faculty_title }}</h1>
-            <div id="faculties">
-                <div class="card_box">
-                    <!-- <div class="faculty">
+<div class="container">
+    <div id="faculty_and_departments">
+        <h1 class="text-center text-decoration-underline">{{ faculty_title }}</h1>
+        <div id="faculties">
+            <div class="card_box">
+                <!-- <div class="faculty">
                         <div class="card_img" style="background-image: url('https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg');">
                             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, iure.</p>
                         </div>
                     </div> -->
-                </div>
             </div>
-            <div id="departments">
-                <div class="box">
-                    <div class="wrapper">
-                        <span id="faculty_title"></span><span> {{ nth_faculty }}</span>
-                    </div>
-                    <div class="row">
-                        <!-- 
+        </div>
+        <div id="departments">
+            <div class="box">
+                <div class="wrapper">
+                    <span id="faculty_title"></span><span> {{ nth_faculty }}</span>
+                </div>
+                <div class="row">
+                    <!-- 
                             <div class="col-12 col-lg-4 col-xxl-3 mb-3">
                                 <div class="dept-item">
                                     <p>
@@ -291,38 +295,56 @@
                                 </div>
                             </div>
                         -->
-                    </div>
                 </div>
-                <div id="not_found_dept">
-                    
-                </div>
+            </div>
+            <div id="not_found_dept">
+
             </div>
         </div>
     </div>
+</div>
 
-    <!-- faculty and departments -->          
+<!-- faculty and departments -->
 
-    <section>
-        <!-- useful links -->
-        <div id="usefull_links">  
-            {% for link in usefull_links %}    
-                <div class="item">
-                    <div class="brand">
-                        <a href="{{ link.link }}" target="_blank">
-                            <img src="{{ link.logo.url }}" alt="tkti.uz">
-                        </a>
-                    </div>
-                    <div class="body">
-                        <p>
-                            <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
-                        </p>
-                    </div>
-                </div>
-            {% endfor %}
+<!-- photo gallary -->
+
+<div class="photo_grid_header">
+    <h4>{{ photo_grid_title }}</h4>
+    <span><a href="">{{ read_more }}</a></span>
+</div>
+<section class="photo_grid">
+    {% for p in the_photos_home %}  
+        <div class="card">
+            <div class="card__img">
+                <img src="{{ p.image.url }}" alt="tkti.uz">
+            </div>
         </div>
-        <!-- useful links -->
-    </section>    
-    <!-- jQuery -->
-    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'js/scripts/api.js' %}"></script>
+    {% endfor %}
+</section>
+
+<!-- photo gallary -->
+
+<section>
+    <!-- useful links -->
+    <div id="usefull_links">
+        {% for link in usefull_links %}
+        <div class="item">
+            <div class="brand">
+                <a href="{{ link.link }}" target="_blank">
+                    <img src="{{ link.logo.url }}" alt="tkti.uz">
+                </a>
+            </div>
+            <div class="body">
+                <p>
+                    <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- useful links -->
+</section>
+<!-- jQuery -->
+<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/scripts/api.js' %}"></script>
 {% endblock content %}

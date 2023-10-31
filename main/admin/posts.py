@@ -73,7 +73,7 @@ class NavbarAdmin(MPTTModelAdmin):
         if obj.author:
             obj.update_user = request.user
         else:
-            obj.auhtor = request.user
+            obj.author = request.user
         return super().save_model(request, obj, form, change)
     
     def get_prepopulated_fields(self, request, obj):
@@ -132,10 +132,12 @@ class PostsAdmin(GuardedModelAdmin):
     get_image_file.short_description = _("Post uchun tanlangan rasmli fayl")
 
     def save_model(self, request, obj, form, change):
+        if obj.navbar.slug == "fakultet":
+            obj.faculty = True
         if obj.author:
             obj.update_user = request.user
         else:
-            obj.auhtor = request.user
+            obj.author = request.user   
         return super().save_model(request, obj, form, change)
     
     def get_prepopulated_fields(self, request, obj):

@@ -41,6 +41,33 @@ $(document).ready(function(){
         autoplaySpeed: 3000,
     });
 
+    $('#photo_carusel').slick({
+        // arrows: false,
+        infinite: true,
+        slidesToShow: 4,
+        // centerMode: true,
+        slidesToScroll: 1,
+        autoplaySpeed: 3000,
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              slidesToShow: 3
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              arrows: false,
+              centerMode: true,
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+
     $("#usefull_links").slick({
         dots: true,
         arrows: false,

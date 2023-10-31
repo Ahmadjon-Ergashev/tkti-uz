@@ -178,3 +178,33 @@ class Year(models.Model):
     
     def __str__(self):
         return self.year
+
+
+class PhotoGallary(models.Model):
+    """ photos model """
+    image = models.ImageField(_("Rasm"), upload_to="image/photo_gallary/%Y-%m-%d/", null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = "photo_gallary"
+        managed = True
+        verbose_name = _("Rasmlar")
+        verbose_name_plural = _("Rasmlar")
+
+    def __str__(self):
+        return f"{self.image}"
+    
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=50)
+            filename = os.path.splitext(self.image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)

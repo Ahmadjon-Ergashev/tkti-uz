@@ -1,10 +1,10 @@
-from django.shortcuts import get_object_or_404
 from django.views.generic.detail import DetailView
+from django.shortcuts import get_object_or_404, render
 from django.utils.translation import gettext_lazy as _
 
 
 # local vars
-from main.models import news
+from main.models import news, widgets
 
 
 class NewsDetailView(DetailView):
@@ -53,3 +53,13 @@ class AdsDetailView(DetailView):
         except ValueError:
             context["pdf_file"] = ""
         return context
+    
+
+def Upload_Images(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            data = request.FILES.getlist('images') 
+            for d in data:
+                img = widgets.PhotoGallary.objects.create(image=d)
+                img.save()
+    return render(request, "widgets/upload_images.html") 
