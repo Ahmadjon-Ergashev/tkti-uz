@@ -246,7 +246,7 @@
                                 <div class="col-12 col-lg-4 col-xxl-4 mb-3">
                                     <div class="video">
                                         <video class="video_tab_item" width="100%" poster="{{ v.poster.url }}">
-                                            <source src="{{ v.video_file.url }}" , type="video/mp4">
+                                            <source src="{{ v.video_file.url }}" type="video/mp4">
                                         </video>
                                     </div>
                                     <p>{{ v.title | truncatechars:150 }}</p>
@@ -310,7 +310,7 @@
 
 <div class="photo_grid_header">
     <h4>{{ photo_grid_title }}</h4>
-    <span><a href="">{{ read_more }}</a></span>
+    <span><a href="{% url 'photo_gallary' %}">{{ read_more }}</a></span>
 </div>
 <section class="photo_grid">
     {% for p in the_photos_home %}  

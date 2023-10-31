@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <style>
+        .photo_title{
+            padding:1%;
+            color:black;
+            font-size:50px;
+            text-align:center;
+            font-family: Satisfy sans-serif;
+        }
+        #gallery{
+            -webkit-column-count:4;
+            -moz-column-count:4;
+            column-count:4;
+            
+            -webkit-column-gap:20px;
+            -moz-column-gap:20px;
+            column-gap:20px;
+        }
+        @media (max-width:1200px){
+            #gallery{
+                -webkit-column-count:3;
+                -moz-column-count:3;
+                column-count:3;
+                    
+                -webkit-column-gap:20px;
+                -moz-column-gap:20px;
+                column-gap:20px;
+            }
+        }
+        @media (max-width:800px){
+            #gallery{
+                -webkit-column-count:2;
+                -moz-column-count:2;
+                column-count:2;
+                    
+                -webkit-column-gap:20px;
+                -moz-column-gap:20px;
+                column-gap:20px;
+            }
+        }
+        @media (max-width:600px){
+            #gallery{
+                -webkit-column-count:1;
+                -moz-column-count:1;
+                column-count:1;
+            }  
+        }
+        #gallery .obj_img, #gallery video {
+            width:100%;
+            height:auto;
+            margin: 4% auto;
+            cursor: pointer;
+            transition: all 0.2s;
+            -webkit-transition: all 0.2s;
+            box-shadow:-3px 5px 15px #000;
+        }
+        .modal-img{
+            width: 100%;
+        }
+        /* .modal_window{
+            min-height: 80vh !important;
+        } */
+</style>
+
+<h1 class="photo_title">{{ photo_grid_title }}</h1><hr>
+<div id="gallery" class="container">  
+    {% for obj in object_list %}
+        <a data-bs-toggle="modal" data-bs-target="#IMG{{obj.id}}">
+            <img src="{{ obj.image.url }}" class="obj_img img-responsive">
+        </a>
+        <div class="modal fade" id="IMG{{obj.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-x  l">
+                <div class="modal-content">
+                    <div class="modal-body p-0 modal_window ">
+                        <img src="{{ obj.image.url }}" class="modal-img img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<!-- pagination -->
+{% include "../../widgets/pagination.html" %}
+<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+{% endblock content %}

@@ -18,10 +18,13 @@ def global_variables(request):
         "most_read_news": news.News.objects.filter(status="pub").order_by("-added_at")[:6],
 
         # text variables
+        "next": _("oldinga"),
+        "previous": _("ortga"),
         "ads_tab": _("E'lonlar"),
         "latest" : _("Eng so'ngi"),
         "read_more": _("Batafsil"),
         "news_tab": _("Yangiliklar"),
+        "photo_grid_title": _("Foto lavhalar"),
         "quick_link_title": _("Tezkor havolalar"),
         "social_networks_title": _("Ijtimoiy tarmoqlar"),
     }

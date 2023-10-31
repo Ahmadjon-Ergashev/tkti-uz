@@ -188,6 +188,7 @@ class PhotoGallary(models.Model):
     class Meta:
         db_table = "photo_gallary"
         managed = True
+        ordering = ["-added_at"]
         verbose_name = _("Rasmlar")
         verbose_name_plural = _("Rasmlar")
 

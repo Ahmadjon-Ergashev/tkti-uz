@@ -1,3 +1,5 @@
+from typing import Any
+from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404, render
 from django.utils.translation import gettext_lazy as _
@@ -63,3 +65,16 @@ def Upload_Images(request):
                 img = widgets.PhotoGallary.objects.create(image=d)
                 img.save()
     return render(request, "widgets/upload_images.html") 
+
+
+class PhotoGallaryView(ListView):
+    """ photo gallary view """
+    model = widgets.PhotoGallary
+    template_name = "pages/photos/gallary.html"
+    paginate_by = 20
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = _("Rasmlar")
+        print(data)
+        return data

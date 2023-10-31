@@ -231,13 +231,11 @@ CSRF_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://tkti.uz",
-    "https://*.ngrok-free.app"
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://tkti.uz",
-    "https://*.ngrok-free.app"
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^http://\\localhost:8000\$",

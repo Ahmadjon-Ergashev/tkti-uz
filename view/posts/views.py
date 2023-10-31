@@ -24,7 +24,6 @@ def Home(request):
         "sp_faculty": _("Fakultetni tanlang"),
         "videos_section_title": _("Videolar"),
         "the_most_read": _("Top yangiliklar"),
-        "photo_grid_title": _("Foto lavhalar"),
         "nth_faculty": _("tarkibidagi kafedralar"),
         "the_last_news": _("Eng so'ngi yangiliklar"),
         "study_way_title": _("Ta'lim dasturi katalogi"),

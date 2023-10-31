@@ -23,6 +23,6 @@ yasg_schema_view = get_schema_view(
 # schema_view = get_swagger_view(title=API_TITLE)
 
 
-# admin.site.site_header = "Migrant Admin"
-# admin.site.site_title = "Migrant Admin"
-# admin.site.index_title = "Migrant Admin"
+admin.site.site_header = "Toshkent Kimyo Texnologiyalar Instituti"
+admin.site.site_title = "Toshkent Kimyo Texnologiyalar Instituti"
+admin.site.index_title = "Toshkent Kimyo Texnologiyalar Instituti"
