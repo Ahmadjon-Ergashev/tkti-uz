@@ -45,7 +45,7 @@
                 </li>
             {% endfor %}
             <li>
-                <a href="" class="link" title="sayt haritasi">
+                <a href="{% url 'site_map' %}" class="link" title="sayt haritasi">
                     <i class="fas fa-link fa-rotate-90"></i>
                 </a>
             </li>
@@ -198,16 +198,16 @@
                                 <span><i class="fas fa-eye"></i></span>
                             </li>
                             <li class="me-2">
-                                <a href="" class="text-dark"><i class="fas fa-network-wired"></i></a>
+                                <a href="{% url 'site_map' %}" class="text-dark"><i class="fas fa-network-wired"></i></a>
                             </li>
                             <li class="me-2">
-                                <a href=""><i class="fas fa-play text-dark"></i></a>
+                                <a href="{% url 'anthem' %}"><i class="fas fa-play text-dark"></i></a>
                             </li>
                             <li class="me-2">
-                                <a href=""><img src="{% static 'images/gerb.png' %}" width="20" alt=""></a>
+                                <a href="{% url 'coat_of_arms' %}"><img src="{% static 'images/gerb.png' %}" width="20" alt=""></a>
                             </li>
                             <li class="me-2">
-                                <a href=""><img src="{% static 'images/flag.jpg' %}" width="20" alt=""></a>
+                                <a href="{% url 'flag' %}"><img src="{% static 'images/flag.jpg' %}" width="20" alt=""></a>
                             </li>
                             <li>
                                 <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">{% csrf_token %}

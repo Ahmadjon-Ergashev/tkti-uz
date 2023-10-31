@@ -27,4 +27,5 @@ $(document).ready(function(){
             $(this).prop("controls", false);
         }
     );
+    $(".ql-align-center").addClass("text-center")
 })

@@ -209,3 +209,51 @@ class PhotoGallary(models.Model):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
+
+
+class Flag(models.Model):
+    """ flag model """
+    title = models.CharField(_("Sarlavha"), max_length=255)
+    description = QuillField(_("To'liq Matn"), null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        db_table = 'flag'
+        managed = True
+        verbose_name = _("Bayroq")
+        verbose_name_plural = _("Bayroq")
+
+
+class CoatofArms(models.Model):
+    """ coat of arms (gerb) model """
+    title = models.CharField(_("Sarlavha"), max_length=255)
+    description = QuillField(_("To'liq Matn"), null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        db_table = 'coat_of_arms'
+        managed = True
+        verbose_name = _("Gerb")
+        verbose_name_plural = _("Gerb")
+
+
+class Anthem(models.Model):
+    """ anthem model """
+    title = models.CharField(_("Sarlavha"), max_length=255)
+    description = QuillField(_("To'liq Matn"), null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        db_table = 'anthem'
+        managed = True
+        verbose_name = _("Madhiya")
+        verbose_name_plural = _("Madhiya")

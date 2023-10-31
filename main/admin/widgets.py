@@ -71,3 +71,23 @@ class PhotoGallary(admin.ModelAdmin):
 
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width=250 />")
+
+
+@admin.register(widgets.Flag)
+class FlagAdmin(admin.ModelAdmin):
+    list_display = ("id", "title")
+    list_display_links = ("title", )
+
+
+@admin.register(widgets.CoatofArms)
+class CoatofArmsAdmin(admin.ModelAdmin):
+    list_display = ("id", "title")
+    list_display_links = ("title", )
+
+
+
+@admin.register(widgets.Anthem)
+class AnthemAdmin(admin.ModelAdmin):
+    list_display = ("id", "title")
+    list_display_links = ("title", )
+

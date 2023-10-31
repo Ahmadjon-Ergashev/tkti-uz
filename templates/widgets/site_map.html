@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+    <!-- css modal -->
+    <link rel="stylesheet" href="{% static 'css/styles/small_sections/sitemap/sitemap.css' %}">
+    
+    <div class="container mt-4">
+        <h2 class="my-4 sitemap_title">{{ title }}</h2>
+        <ul class="sitemap_ul">
+            {% for obj in object_list %}
+                <li>
+                    <a href="{% url 'posts_nav' navbar_slug=obj.slug %}">{{ obj.name }}</a>
+                    <ul>
+                        {% for obj_child in obj.children.all %}
+                            <li>
+                                <a href="{% url 'posts_nav' navbar_slug=obj_child.slug %}">{{ obj_child.name }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+{% endblock content %}
