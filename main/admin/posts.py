@@ -112,7 +112,7 @@ class PostsAdmin(GuardedModelAdmin):
         (_("O'zbek tilida"), {
             "classes": ("extrapretty"),
             "fields": (
-                "title", "post"                
+                "title", "subtitle", "post"                
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {

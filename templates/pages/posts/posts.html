@@ -79,10 +79,10 @@
                                     <div class="projcard-innerbox">
                                         <img class="projcard-img" src="{{ object.image.url }}"/>
                                         <div class="projcard-textbox">
-                                            <div class="projcard-title">{{ object.title }}</div>
+                                            <div class="projcard-title">{{ object.title | truncatechars:120 }}</div>
                                             <div class="projcard-bar"></div>
                                             <div class="projcard-description">
-                                                {{ object.subtitle }}
+                                                {{ object.subtitle | truncatechars:100 }}
                                             </div>
                                             <a class="read_more" href="{% url 'post_detail' post_slug=object.slug %}">{{ read_more }}</a>
                                         </div>

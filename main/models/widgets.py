@@ -33,7 +33,8 @@ class Status(models.TextChoices):
 class AbstractTemplate(models.Model):
     """ abstract tamplate for news posts and ads """
     image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
-    title = models.CharField(verbose_name=_("Sarlavha"), max_length=255, null=True)
+    title = models.CharField(verbose_name=_("Sarlavha"), max_length=230, null=True)
+    subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=255, null=True)
     post = QuillField(verbose_name=_("To'liq mazmuni"), null=True, blank=True)
     status = models.CharField(verbose_name=_("status"), max_length=50, choices=Status.choices, default=Status.pendding)
     slug = models.SlugField(max_length=255, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
