@@ -117,141 +117,80 @@
                     <label for="tab4">{{ videos_section_title }}</label>
                     <ul>
                         <li class="tab-content tab-content-first typography">
-                            <div class="row big_box">
-                                {% for i in the_last_news_4 %}
-                                <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                    <div class="item">
-                                        <div class="item_img">
-                                            <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                        </div>
-                                        <div class="item_body">
-                                            <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title |
-                                                    truncatechars:120 }}</a></h4>
-                                        </div>
-                                        <div class="item_footer">
-                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
+                            <div class="row big_box" id="the_last_news_4">
+                                
                             </div>
                             <div class="border mx-4"></div>
-                            <div class="row small_news mt-2">
-                                {% for i in the_last_news_8 %}
-                                <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                    <div class="news_box">
-                                        <div class="news_box_body">
-                                            <p>
-                                                <a href="">
-                                                    {{ i.title | truncatechars:80 }}
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <div class="news_box_footer">
-                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
+                            <div class="row small_news mt-2" id="the_last_news_8">
+
                             </div>
                         </li>
 
                         <li class="tab-content tab-content-2 typography">
-                            <div class="row big_box">
-                                {% for i in the_most_read_4 %}
-                                <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                    <div class="item">
-                                        <div class="item_img">
-                                            <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                        </div>
-                                        <div class="item_body">
-                                            <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title |
-                                                    truncatechars:120 }}</a></h4>
-                                        </div>
-                                        <div class="item_footer">
-                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
+                            <div class="row big_box" id="the_most_read_4">
+
                             </div>
                             <div class="border mx-4"></div>
-                            <div class="row small_news">
-                                {% for i in the_most_read_8 %}
-                                <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                    <div class="news_box">
-                                        <div class="news_box_body">
-                                            <p>
-                                                <a href="">
-                                                    {{ i.title | truncatechars:80 }}
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <div class="news_box_footer">
-                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
+                            <div class="row small_news" id="the_most_read_8">
+
                             </div>
                         </li>
                         <li class="tab-content tab-content-3 typography">
-                            <div class="row big_box">
+                            <div class="row big_box" id="the_last_ads_4">
                                 {% for i in the_last_ads_4 %}
-                                <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                    <div class="item">
-                                        <div class="item_img">
-                                            <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                        </div>
-                                        <div class="item_body">
-                                            <h4><a href="{% url 'news_detail' obj_slug=i.slug %}">{{ i.title |
-                                                    truncatechars:120 }}</a></h4>
-                                        </div>
-                                        <div class="item_footer">
-                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                    <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                        <div class="item">
+                                            <div class="item_img">
+                                                <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
+                                            </div>
+                                            <div class="item_body">
+                                                <h4>
+                                                    <a href="{% url 'ads_detail' obj_slug=i.slug %}">
+                                                        {{ i.title | truncatechars:120 }}
+                                                    </a>
+                                                </h4>
+                                            </div>
+                                            <div class="item_footer">
+                                                <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                                <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endfor %}
                             </div>
                             <div class="border mx-4"></div>
-                            <div class="row small_news">
+                            <div class="row small_news" id="the_last_ads_8">
                                 {% for i in the_last_ads_8 %}
-                                <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                    <div class="news_box">
-                                        <div class="news_box_body">
-                                            <p>
-                                                <a href="">
-                                                    {{ i.title | truncatechars:80 }}
-                                                </a>
-                                            </p>
-                                        </div>
-                                        <div class="news_box_footer">
-                                            <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                            <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                    <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                        <div class="news_box">
+                                            <div class="news_box_body">
+                                                <p>
+                                                    <a href="{% url 'ads_detail' obj_slug=i.slug %}">
+                                                        {{ i.title | truncatechars:80 }}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                            <div class="news_box_footer">
+                                                <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                                <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 {% endfor %}
                             </div>
                         </li>
                         <li class="tab-content tab-content-4 typography">
-                            <div class="row videos_tab">
-                                {% for v in the_videos %}
-                                <div class="col-12 col-lg-4 col-xxl-4 mb-3">
-                                    <div class="video">
-                                        <video class="video_tab_item" width="100%" poster="{{ v.poster.url }}">
-                                            <source src="{{ v.video_file.url }}" type="video/mp4">
-                                        </video>
+                            <div class="row videos_tab" id="the_videos">
+                                <!-- {% for v in the_videos %}
+                                    <div class="col-12 col-lg-4 col-xxl-4 mb-3">
+                                        <div class="video">
+                                            <video class="video_tab_item" width="100%" poster="{{ v.poster.url }}">
+                                                <source src="{{ v.video_file.url }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        <p>{{ v.title | truncatechars:150 }}</p>
                                     </div>
-                                    <p>{{ v.title | truncatechars:150 }}</p>
-                                </div>
-                                {% endfor %}
+                                {% endfor %} -->
                             </div>
                         </li>
                     </ul>
@@ -347,4 +286,7 @@
 <!-- jQuery -->
 <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'js/scripts/api.js' %}"></script>
+<script src="{% static 'js/scripts/tabs/news.js' %}"></script>
+<script src="{% static 'js/scripts/tabs/ads.js' %}"></script>
+<script src="{% static 'js/scripts/tabs/videos.js' %}"></script>
 {% endblock content %}

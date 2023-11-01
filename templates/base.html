@@ -195,7 +195,7 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav text-xxl-end">
                         <ul>
                             <li class="me-2">
-                                <span><i class="fas fa-eye"></i></span>
+                                <span id="specialButton" style="cursor: pointer;"><i class="fas fa-eye"></i></span>
                             </li>
                             <li class="me-2">
                                 <a href="{% url 'site_map' %}" class="text-dark"><i class="fas fa-network-wired"></i></a>
@@ -367,6 +367,8 @@
 
     <!-- jQuery -->
     <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <!-- <script src="{% static 'js/modules/visually_impaired/uhpv_full.min.js' %}"></script> -->
+
     <!-- AOS Animation -->
     
     <script src="{% static 'js/modules/aos/aos.js' %}"></script>

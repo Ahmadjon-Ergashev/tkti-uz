@@ -19,7 +19,7 @@ $(document).ready(function(){
             $("#object_base_img").hide()
         }
     });
-    $(".video_tab_item").hover(
+    $("#the_videos .video_tab_item").hover(
         function() {
             $(this).prop("controls", true);
         },

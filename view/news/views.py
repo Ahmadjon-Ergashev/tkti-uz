@@ -1,4 +1,3 @@
-from typing import Any
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404, render
@@ -27,7 +26,7 @@ class NewsDetailView(DetailView):
         context["title"] = _("Yangilik")
         try:
             domain = self.request.get_host()
-            context["pdf_file"] = f"https://{domain}" + object.pdf_file.url
+            context["pdf_file"] = f"http://{domain}" + object.pdf_file.url
         except ValueError:
             context["pdf_file"] = ""
         return context
@@ -51,7 +50,7 @@ class AdsDetailView(DetailView):
         context["title"] = _("E'lon")
         try:
             domain = self.request.get_host()
-            context["pdf_file"] = f"https://{domain}" + object.pdf_file.url
+            context["pdf_file"] = f"http://{domain}" + object.pdf_file.url
         except ValueError:
             context["pdf_file"] = ""
         return context

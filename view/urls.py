@@ -13,6 +13,7 @@ posts = [
 ]
 news = [
     path("news/detail/<slug:obj_slug>/", news.NewsDetailView.as_view(), name="news_detail"),
+    path("ads/detail/<slug:obj_slug>/", news.AdsDetailView.as_view(), name="ads_detail"),
     path("upload/images/", news.Upload_Images),
     path("photo/gallary/", news.PhotoGallaryView.as_view(), name="photo_gallary"),
 ]
