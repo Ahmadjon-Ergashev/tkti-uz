@@ -1,0 +1,13 @@
+.card_box .col-12 .card {
+  height: 300px;
+  min-height: 350px;
+  position: relative;
+}
+.card_box .col-12 .card img {
+  height: 200px;
+}
+.card_box .col-12 .card .read_more {
+  bottom: 10px;
+  width: 100%;
+  position: absolute;
+}/*# sourceMappingURL=news.css.map */

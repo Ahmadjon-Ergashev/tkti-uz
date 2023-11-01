@@ -129,8 +129,22 @@
 
 #news_ads_section{
     padding: 80px 0;
+    position: relative;
     background: $color1;
-    .tab-content{
+    .view_all_btn{
+        right: 5px;
+        bottom: 5px;
+        color: $color1;
+        position: absolute;
+        padding: 10px 25px;
+        border: 1px solid $color1;
+        transition: all 0.5s ease-in;
+        &:hover{
+            color: $text_white;
+            background-color: $color1;
+        }
+    }
+    .tab-content{   
         .big_box{
             .col-12{
                 transition: all 0.3s ease-in;

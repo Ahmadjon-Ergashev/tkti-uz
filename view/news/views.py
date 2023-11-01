@@ -8,10 +8,27 @@ from django.utils.translation import gettext_lazy as _
 from main.models import news, widgets
 
 
+class NewsView(ListView):
+    """ all news view with pagination """
+    model = news.News
+    template_name = "pages/news_and_ads/all_items.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status="pub").order_by("-added_at")
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Yangiliklar")
+        context["data_number"] = 0
+        return context
+
+
 class NewsDetailView(DetailView):
     """ detail view for news and detail """
     model = news.News
-    template_name = "pages/news_and_ada/detail.html"
+    template_name = "pages/news_and_ads/detail.html"
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
@@ -32,10 +49,27 @@ class NewsDetailView(DetailView):
         return context
 
 
+class AdsView(ListView):
+    """ all ads items with pagination """
+    model = news.Ads
+    template_name = "pages/news_and_ads/all_items.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status="pub").order_by("-added_at")
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("E'lonlar")
+        context["data_number"] = 1
+        return context
+
+
 class AdsDetailView(DetailView):
     """ detail view for ads and detail """
     model = news.News
-    template_name = "pages/news_and_ada/detail.html"
+    template_name = "pages/news_and_ads/detail.html"
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
@@ -77,3 +111,39 @@ class PhotoGallaryView(ListView):
         data["title"] = _("Rasmlar")
         print(data)
         return data
+    
+
+class VideoView(ListView):
+    """ all videos """
+    model = news.VideoGallery
+    template_name = "pages/news_and_ads/all_items.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status="pub").order_by("-added_at")
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Video lavhalar")
+        context["data_number"] = 2
+        return context
+    
+
+
+class VideosDetailView(DetailView):
+    """ videos detail """
+    model = news.VideoGallery
+    template_name = "pages/news_and_ads/detail.html"
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs["obj_slug"]
+        object = get_object_or_404(news.VideoGallery, slug=slug)
+        object.post_viewed_count += 1
+        object.save()
+        return object
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Video Lavhalar")
+        return context

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles/news/news.css' %}">
+    <div class="container">
+        <div class="title my-5">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="row card_box">
+            {% for obj in object_list %}              
+                <div class="col-12 col-md-4 col-lg-3">
+                    <div class="card">
+                        {% if obj.poster %}
+                            <img src="{{ obj.poster.url }}" class="card-img-top" alt="{{ obj.title }} | tkti.uz">
+                        {% else %}  
+                            <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.title }} | tkti.uz">
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{ obj.title | truncatechars:100 }}
+                            </p>
+                            <div class="read_more">
+                                <a href="detail/{{ obj.slug }}">{{ read_more }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% include "../../widgets/pagination.html" %}
+    </div>
+  
+{% endblock content %}

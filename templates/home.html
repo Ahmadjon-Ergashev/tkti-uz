@@ -124,6 +124,7 @@
                             <div class="row small_news mt-2" id="the_last_news_8">
 
                             </div>
+                            <a href="news/" class="view_all_btn">{{ all }}</a>
                         </li>
 
                         <li class="tab-content tab-content-2 typography">
@@ -134,6 +135,7 @@
                             <div class="row small_news" id="the_most_read_8">
 
                             </div>
+                            <a href="news/" class="view_all_btn">{{ all }}</a>
                         </li>
                         <li class="tab-content tab-content-3 typography">
                             <div class="row big_box" id="the_last_ads_4">
@@ -178,20 +180,13 @@
                                     </div>
                                 {% endfor %}
                             </div>
+                            <a href="ads/" class="view_all_btn">{{ all }}</a>
                         </li>
                         <li class="tab-content tab-content-4 typography">
                             <div class="row videos_tab" id="the_videos">
-                                <!-- {% for v in the_videos %}
-                                    <div class="col-12 col-lg-4 col-xxl-4 mb-3">
-                                        <div class="video">
-                                            <video class="video_tab_item" width="100%" poster="{{ v.poster.url }}">
-                                                <source src="{{ v.video_file.url }}" type="video/mp4">
-                                            </video>
-                                        </div>
-                                        <p>{{ v.title | truncatechars:150 }}</p>
-                                    </div>
-                                {% endfor %} -->
+
                             </div>
+                            <a href="videos/" class="view_all_btn">{{ all }}</a>
                         </li>
                     </ul>
                 </div>

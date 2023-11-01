@@ -1,0 +1,19 @@
+
+
+.card_box{
+    .col-12{
+        .card{
+            height: 300px;
+            min-height: 350px;
+            position: relative;
+            img{
+                height: 200px;
+            }
+            .read_more{
+                bottom: 10px;
+                width: 100%;
+                position: absolute;
+            }
+        }
+    }
+}
