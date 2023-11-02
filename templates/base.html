@@ -245,7 +245,7 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav ms-auto">
                         {% for nav in navbar %}
-                            <li class="nav-item dropdown btn-group">
+                            <li class="nav-item dropdown btn-group main_nav_item">
                                 <a href="{% url 'posts_nav' navbar_slug=nav.slug %}" class="nav-link nav_name active">
                                     {{ nav.name }}
                                 </a>

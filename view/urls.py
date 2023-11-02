@@ -9,6 +9,7 @@ from view.widgets import views as widgets
 posts = [
     path("", posts.Home, name="home"),
     path("posts/navbar/<slug:navbar_slug>/", posts.PostsListView.as_view(), name="posts_nav"),
+    path("posts/sections/<slug:post_slug>/", posts.SectionsDetailView.as_view(), name="sect_nav"),
     path("posts/navbar/post/<slug:post_slug>/", posts.PostDetailView.as_view(), name="post_detail"),
     path("posts/departments/<slug:dept_slug>/", posts.DepartmentsDetailView.as_view(), name="dept_detail")
 ]

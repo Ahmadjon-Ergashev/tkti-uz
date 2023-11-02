@@ -52,10 +52,12 @@
 #base_navbar{
     #navbarNavDropdown{
         .navbar-nav{
-            .nav-item{
+            .main_nav_item{
                 &:not(:last-child){
                     margin-right: 10px;
                 }
+            }
+            .nav-item{
                 .nav_name{
                     font-size: 18px;
                     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;

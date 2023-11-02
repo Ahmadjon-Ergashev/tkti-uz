@@ -9,6 +9,7 @@ from django.utils.translation import gettext_lazy as _
 from main.models.posts import (
     Navbar, Posts, FacultyAdministration, Departments, StudyProgram
 )
+from main.models import posts
 
 
 # django admin actions
@@ -28,7 +29,7 @@ def clone(modeladmin, request, queryset):
         i.save()
 
 
-@admin.register(Navbar)
+@admin.register(posts.Navbar)
 class NavbarAdmin(MPTTModelAdmin):
     """ Admin view for Navigation bar model """
     ordering = ("name", )
@@ -81,7 +82,7 @@ class NavbarAdmin(MPTTModelAdmin):
 
 
 
-@admin.register(Posts)
+@admin.register(posts.Posts)
 class PostsAdmin(GuardedModelAdmin):
     """ Admin view for Posts """
     ordering = ("-added_at", )
@@ -144,7 +145,7 @@ class PostsAdmin(GuardedModelAdmin):
         return {"slug": ("title", )}
 
 
-@admin.register(FacultyAdministration)
+@admin.register(posts.FacultyAdministration)
 class FacultyAdmistrationAdmin(GuardedModelAdmin):
     actions = [clone]
     ordering = ("order_num", )
@@ -187,7 +188,7 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
-@admin.register(Departments)
+@admin.register(posts.Departments)
 class DepartmentsAdmin(admin.ModelAdmin):
     list_display_links = ("name", )
     list_display = ("id", "name", "faculty")
@@ -204,7 +205,100 @@ class DepartmentsAdmin(admin.ModelAdmin):
         return {"slug": ("name", )}
 
 
-@admin.register(StudyProgram)
+@admin.register(posts.StudyProgram)
 class StudyAdmin(admin.ModelAdmin):
     list_display_links = ("title", )
     list_display = ("id", "title", "year", "faculty")
+
+
+@admin.register(posts.ContactSection)
+class ContactSectionAdmin(admin.ModelAdmin):
+    readonly_fields = ["get_image"]
+    list_display_links = ("id", "title")
+    list_display = ("id", "title", "order_num")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "navbar", "title", ("image", "get_image"), "order_num", 
+                "email", "phone", "address", "address_url"
+            ),
+        }),
+    )
+    
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+
+
+@admin.register(posts.Workers)
+class WorkersAdmin(admin.ModelAdmin):
+    search_fields = ("f_name", )
+    readonly_fields = ["get_image"]
+    list_display_links = ("f_name", )
+    list_display = ("id", "f_name", "section", "position", "phone", "email", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "position", "section", "f_name", "phone", "extra_phone", "email",
+                ("image", "get_image")
+            ),
+        }),
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+
+
+@admin.register(posts.SectionsAndCenters)
+class SectionsAdmin(admin.ModelAdmin):
+    list_display_links = ("title", )
+    list_display = ("id", "title", "added_at")
+    prepopulated_fields = ({"slug": ("title", )})
+
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "navbar", "title", "about", 
+                "target", "activity", "slug"
+            ),
+        }),
+    )
+
+
+@admin.register(posts.UniversityAdmistrations)
+class UniversityAdminsAdmin(admin.ModelAdmin):
+    list_editable = ("order_num", )
+    readonly_fields = ("get_image", "added_at")
+    prepopulated_fields = ({"slug": ("f_name", )})   
+    list_display_links = ("id", "get_image", "f_name")
+    list_display = ("id", "get_image", "f_name", "position", "order_num", "added_at")
+
+    fieldsets = (
+        ("Umumiy qiymatlar", {
+            'fields': (
+                "navbar", ("image", "get_image"), "facebook", 
+                "instagram", "linkedin", "order_num", "email", "phone"
+            ),
+        }),
+        ("O'zbek tilida", {
+            'fields': (
+                "f_name", "admission_days", "position", "short_info", 
+                "scientific_activity", "scientific_direction", "main_tasks_in_position", 
+            ),
+        }),
+        ("Automatik to'ldiriladigan fieldlar", {
+            'fields': (
+                "slug", "added_at"
+            ),
+        }),
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+

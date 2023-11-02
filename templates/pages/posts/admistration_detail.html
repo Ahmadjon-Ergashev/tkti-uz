@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+
+    <div class="container">
+        <div class="row d-flex justify-content-between py-3">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
+                {% include "../../widgets/left_sidebar.html" %}
+            </div>  
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 posts">
+                <div class="card mb-3">
+                    <div class="row g-0">
+                        <div class="col-md-5">
+                            <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="{{ object.f_name }} | tkti.uz">
+                        </div>
+                        <div class="col-md-7">
+                            <div class="card-header">
+                                <b>{{ object.position }}</b>
+                            </div>
+                            <div class="card-body" style="padding-bottom: 7px;">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><b>{{ object.f_name }}</b></li>
+                                    <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ object.email }}</li>
+                                    <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ object.phone }}</li>
+                                    <li class="list-group-item"><i class="fas fa-calendar me-1"></i> {{ object.admission_days }}</li>
+                                    <li class="list-group-item">
+                                        <a href="{{ object.facebook }}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>
+                                        <a href="{{ object.instagram }}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>
+                                        <a href="{{ object.linkedin }}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

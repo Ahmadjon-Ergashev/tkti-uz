@@ -152,3 +152,124 @@ class StudyProgram(models.Model):
     
     def __str__(self):
         return f"{self.year}|{self.faculty.title}|{self.department.name}|{self.study_way}"
+    
+
+class ContactSection(models.Model):
+    """ contact model """
+    navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
+    title = models.CharField(_("Sarlavha"), max_length=250, null=True)
+    image = models.ImageField(verbose_name=_("Rasm"), default="default/default.png", upload_to="image/contact/%Y-%m-%d/", null=True)
+    email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, default="info@tkti.uz")
+    phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=17, null=True, help_text="+998332300701")
+    address = models.CharField(verbose_name=_("Manzil"), max_length=250, null=True)
+    address_url = models.URLField(_("E-Manzil"), max_length=200)
+    order_num = models.IntegerField(default=0)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'contact_section'
+        managed = True
+        verbose_name = _("Bog'lanish")
+        verbose_name_plural = _("Bog'lanish")
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=50)
+            filename = os.path.splitext(self.image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
+
+class Workers(models.Model):
+    """ xodimlar """
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/workers/%Y-%m-%d/", default="default/adminstrations.png")
+    position = models.CharField(_("Lavozimi"), choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head, max_length=150, null=True)
+    f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
+    email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, null=True, help_text="example@domain.com")
+    phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True, help_text="+998332300701")
+    extra_phone = models.CharField(verbose_name=_("Qo'shimcha Telefon raqami"), max_length=20, null=True, blank=True, help_text="+998332300703")
+    section = models.ForeignKey("SectionsAndCenters", verbose_name=_("Bo'lim va markaz nomi"), on_delete=models.SET_NULL, null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.f_name} | {self.position} | {self.phone}"
+
+    class Meta:
+        db_table = 'workers_for_sections'
+        managed = True
+        verbose_name = _("Bo'lim va Markazlar xodimlari")
+        verbose_name_plural = _("Bo'lim va Markazlar xodimlari") 
+
+
+class SectionsAndCenters(models.Model):
+    """ bo'lim va markazlar """
+    navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
+    title = models.CharField(max_length=255, verbose_name=_("Sarlavha"), null=True)
+    about = QuillField(verbose_name=_("Xaqida"), null=True)
+    target = QuillField(verbose_name=_("Maqsad"), null=True)
+    activity = QuillField(verbose_name=_("Faoliyati"), null=True, blank=True)
+    slug = models.SlugField(_("Slug"), null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'sections_and_centers'
+        managed = True
+        verbose_name = _("Bo'lim va Markazlar")
+        verbose_name_plural = _("Bo'lim va Markazlar")
+
+    
+class UniversityAdmistrations(models.Model):
+    """ university admistrations model """
+    navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/adminstrations/%Y-%m-%d/", default="default/adminstrations.png")
+    f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
+    position = models.CharField(_("Lavozimi"), max_length=255, null=True)
+    email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, null=True, help_text="example@domain.com")
+    phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True, help_text="+998332300701")
+    admission_days = models.CharField(verbose_name=_("Qabul vaqti"), max_length=255, null=True)
+    short_info = QuillField(verbose_name=_("Qisqacha ma'lumot"), null=True)
+    scientific_direction = QuillField(verbose_name=_("Ilmiy yo'nalishlari"), null=True)
+    main_tasks_in_position = QuillField(verbose_name=_("Lavozimidagi asosiy vazifalar"), null=True)
+    scientific_activity = QuillField(verbose_name=_("Ilmiy va pedagogik mehnat faoliyati"), null=True)
+    facebook = models.URLField(_("Facebook manzili"), max_length=200, null=True, blank=True)
+    instagram = models.URLField(_("Instagram manzili"), max_length=200, null=True, blank=True)
+    linkedin = models.URLField(_("Linkedin manzili"), max_length=200, null=True, blank=True)
+    order_num = models.IntegerField(default=0, verbose_name=_("Tartib raqami"))
+    slug = models.SlugField(_("Slug"), null=True, blank=True)
+    added_at = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.f_name
+    
+    class Meta:
+        db_table = 'university_admistration'
+        managed = True
+        ordering = ["order_num"]
+        verbose_name = _("Insitut raxbariyati")
+        verbose_name_plural = _("Insitut raxbariyati")
+
+
+
+
+
+
+
+
+    
+
+    
+

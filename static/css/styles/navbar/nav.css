@@ -40,7 +40,7 @@
   color: #ffffff;
 }
 
-#base_navbar #navbarNavDropdown .navbar-nav .nav-item:not(:last-child) {
+#base_navbar #navbarNavDropdown .navbar-nav .main_nav_item:not(:last-child) {
   margin-right: 10px;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .nav_name {

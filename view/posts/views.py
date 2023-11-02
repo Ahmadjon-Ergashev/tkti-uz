@@ -1,3 +1,5 @@
+from typing import Any
+from django.db import models
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -59,7 +61,14 @@ class PostsListView(ListView):
 
     def get_queryset(self):
         navbar_slug = self.kwargs["navbar_slug"]
-        qs = super().get_queryset().filter(status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
+        if navbar_slug == "boglanish":
+            qs = posts.ContactSection.objects.all().order_by("order_num")
+        elif navbar_slug == "bolim-va-markazlar":
+            qs = posts.SectionsAndCenters.objects.all().order_by("-added_at")
+        elif navbar_slug == "institut-rahbariyati":
+            qs = posts.UniversityAdmistrations.objects.all().order_by("order_num")
+        else:
+            qs = super().get_queryset().filter(status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
         return qs 
     
     def get_context_data(self, **kwargs):
@@ -74,11 +83,14 @@ class PostsListView(ListView):
             context["category_list"] = navbar_name.get_children()
         try:
             context["pdf_file"] = context["object_list"][0].pdf_file
-        except IndexError:
+        except Exception:
             context["pdf_file"] = ""
-        print(context["category_list"])
         context["home"] = _("Asosiy sahifa")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
+        context["short_info"] = _("Qisqacha ma'lumot")
+        context["scientific_direction"] = _("Ilmiy yo'nalishlari")
+        context["main_tasks_in_position"] = _("Lavozimidagi asosiy vazifalar")
+        context["scientific_activity"] = _("Ilmiy va pedagogik mehnat faoliyati")
         return context
 
 
@@ -130,4 +142,35 @@ class DepartmentsDetailView(DetailView):
         context["title"] = obj.name
         context["title_bar"] = _("Kafedralar")     
         return context
+    
+
+class SectionsDetailView(DetailView):
+    """ bo'lim va markazlar """
+    model = posts.SectionsAndCenters
+    template_name = "pages/posts/sections_detail.html"
+
+    def get_object(self, queryset=None):
+        post_slug = self.kwargs["post_slug"]
+        obj = get_object_or_404(posts.SectionsAndCenters, slug=post_slug)
+        return obj
+    
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        obj = data["object"]
+        navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
+        data["title"] = obj.title
+        data["title"] = navbar.name
+        data["parent"] = navbar.parent.name
+        try:
+            data["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
+        except AttributeError:
+            data["category_list"] = navbar.get_children()
+        data["about"] = _("Xaqida")
+        data["target"] = _("Masadi")
+        data["workers"] = _("Xodimlar")   
+        data["activity"] = _("Faoliyati")        
+        return data
+    
+    
     

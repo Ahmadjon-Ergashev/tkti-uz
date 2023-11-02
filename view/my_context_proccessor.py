@@ -14,8 +14,8 @@ def global_variables(request):
         "quick_links": widgets.QuickLinks.objects.all().order_by("order_num"),
         "social_networks": widgets.SocialNetworks.objects.all().order_by("order_num"),
         "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num"),
-        "most_read_ads": news.Ads.objects.filter(status="pub").order_by("-added_at")[:6],
-        "most_read_news": news.News.objects.filter(status="pub").order_by("-added_at")[:6],
+        "most_read_ads": news.Ads.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
+        "most_read_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
 
         # text variables
         "next": _("oldinga"),

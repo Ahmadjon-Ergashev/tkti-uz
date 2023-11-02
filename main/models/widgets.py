@@ -30,6 +30,12 @@ class Status(models.TextChoices):
     pendding: str = "pen", _("Pendding")
 
 
+class WorkerPositions(models.TextChoices):
+    department_head: str = _("Bo'lim boshlig'i"), _("Bo'lim boshlig'i")
+    chief_specialist: str = _("Bosh mutaxasis"), _("Bosh mutaxasis")
+    leading_specialist: str = _("Yetakchi mutaxasis"), _("Yetakchi mutaxasis")
+
+
 class AbstractTemplate(models.Model):
     """ abstract tamplate for news posts and ads """
     image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
