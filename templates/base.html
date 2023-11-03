@@ -66,16 +66,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
-                        {% csrf_token %}
-                        <!-- <div class="form-group has-search">
-                            <span class="fa fa-search form-control-feedback"></span>
-                            <input type="text" class="form-control" name="query_search" placeholder="">
-                        </div> -->
+                    <form action="{% url 'search' %}" method="post"> {% csrf_token %}
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="">
+                            <input type="search" name="search_query" class="form-control" placeholder="......">
                             <div class="input-group-append">
-                                <button class="search_btn" type="button">
+                                <button class="search_btn" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
                             </div>

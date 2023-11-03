@@ -28,6 +28,7 @@ widgets = [
     path("flag", widgets.FlagView.as_view(), name="flag"),
     path("anthem", widgets.AnthemView.as_view(), name="anthem"),
     path("sitemap", widgets.SiteMapView.as_view(), name="site_map"),
+    path("searching/results", widgets.SearchAroundProgram.as_view(), name="search"),
     path("coat_of_arms", widgets.CoatofArmsView.as_view(), name="coat_of_arms"),
 ]
 

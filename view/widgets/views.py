@@ -1,9 +1,9 @@
-from typing import Any
 from django.views.generic.list import ListView
+from django.contrib.postgres import search as s
 from django.utils.translation import gettext_lazy as _
 
 # local
-from main.models import posts, widgets
+from main.models import posts, widgets, news
 
 
 class SiteMapView(ListView):
@@ -59,3 +59,27 @@ class FaqView(ListView):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Ko'p beriladigan savollar")
         return data
+    
+
+# searching multiple model
+from itertools import chain
+from django.shortcuts import redirect, render
+
+
+class SearchAroundProgram(ListView):
+    template_name = "widgets/search.html"
+    
+    def post(self, request, *args, **kwargs):
+        search_query = request.POST.get("search_query", "")
+        vector = s.SearchVector("title", "subtitle")
+        query = s.SearchQuery(search_query)
+        posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query)
+        news_results = news.News.objects.annotate(search=vector).filter(search=query)
+        ads_results = news.Ads.objects.annotate(search=vector).filter(search=query)
+        combined_results = list(chain(posts_results, news_results, ads_results))
+        context = {
+            "search_results": combined_results,
+            "title": _("Qidituv natijalari"),
+            "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :(")
+        }
+        return render(request, self.template_name, context)

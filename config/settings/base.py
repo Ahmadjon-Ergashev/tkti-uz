@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages', 
+    "django.contrib.postgres", # for multi model search
     "whitenoise.runserver_nostatic", # for static files
     'django.contrib.staticfiles',
     "drf_yasg", # swagger-ui
