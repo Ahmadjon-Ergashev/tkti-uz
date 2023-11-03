@@ -1,3 +1,4 @@
+from typing import Any
 from django.views.generic.list import ListView
 from django.utils.translation import gettext_lazy as _
 
@@ -49,3 +50,12 @@ class AnthemView(ListView):
         context["title"] = _("O`zbekiston Respublikasining davlat madhiyasi")
         return context
     
+
+class FaqView(ListView):
+    model = widgets.FaqCategory
+    template_name = "widgets/faq.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = _("Ko'p beriladigan savollar")
+        return data

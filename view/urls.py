@@ -24,6 +24,7 @@ news = [
     path("videos/detail/<slug:obj_slug>/", news.VideosDetailView.as_view(), name="video_detail"),
 ]
 widgets = [
+    path("faq", widgets.FaqView.as_view(), name="faq"),
     path("flag", widgets.FlagView.as_view(), name="flag"),
     path("anthem", widgets.AnthemView.as_view(), name="anthem"),
     path("sitemap", widgets.SiteMapView.as_view(), name="site_map"),

@@ -27,6 +27,43 @@
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
+#about {
+  margin: 70px 0;
+  padding: 70px 0;
+  background: #15446f;
+}
+#about h1 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+#about .img {
+  overflow: hidden;
+  padding-top: 10px;
+  height: 100%;
+}
+#about .img img {
+  height: 100%;
+  transition: all 0.2s ease-out;
+}
+#about .img img:hover {
+  transform: scale(1.1);
+}
+#about p {
+  color: #ffffff;
+  text-align: justify;
+}
+#about .read_more {
+  padding: 10px 50px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  transition: all 0.5 ease;
+}
+#about .read_more:hover {
+  color: #26597E;
+  background-color: #ffffff;
+}
+
 #studyway .wrapper_studyway {
   display: block;
   font-size: 45px;

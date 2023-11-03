@@ -264,3 +264,30 @@ class Anthem(models.Model):
         managed = True
         verbose_name = _("Madhiya")
         verbose_name_plural = _("Madhiya")
+
+
+class FaqCategory(models.Model):
+    """ faq category model """
+    name = models.CharField(max_length=255, verbose_name=_("Nomi"), blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+
+
+class Faq(models.Model):
+    """ faq model (ko'p berilgan savollar) """
+    category = models.ForeignKey(FaqCategory, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
+    title = models.CharField(_("Savol"), max_length=255, unique=True, null=True)
+    answer = QuillField(_("Javob"), null=True, blank=True)
+    is_active = models.BooleanField(_('Aktiv'), default=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+    class Meta:
+        db_table = 'faq'
+        managed = True
+        verbose_name = _("Ko'p beriladigan savollar")
+        verbose_name_plural = _("Ko'p beriladigan savollar")

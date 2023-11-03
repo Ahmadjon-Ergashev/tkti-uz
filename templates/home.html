@@ -43,6 +43,33 @@
 </div>
 <!-- headers img -->
 
+<section id="about">
+    <div class="container about_container">
+        <div class="row">
+            <h1 class="text-center">{{ about_us }}</h1>
+            <div class="col-12 col-md-4 col-lg-5">
+                <div class="img">
+                    <img src="{% static 'images/tkti.jpg' %}" class="img-fluid" alt="">
+                </div>
+            </div>
+            <div class="col-12 col-md-8 col-lg-7">
+                <p class="card-text">
+                    {{ section_1 }}
+                    <br>
+                    <br>
+                    {{ section_2 }}
+                    <br>
+                    <br>
+                    {{ section_3 }}
+                </p>
+            </div>
+            <div class="col-12 text-end mt-4">
+                <a href="" class="read_more">{{ read_more }}</a>
+            </div>
+        </div>    
+    </div>
+</section>
+
 <!-- study way  -->
 <div class="container">
     <section id="studyway">

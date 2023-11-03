@@ -36,6 +36,43 @@
     }
 }
 
+#about{
+    margin: 70px 0;
+    padding: 70px 0;
+    background: $color2;
+    h1{
+        font-weight: 700;
+        color: $text_white;
+        margin-bottom: 20px;
+    }
+    .img{
+        overflow: hidden;
+        padding-top: 10px;
+        height: 100%;
+        img{
+            height: 100%;
+            transition: all 0.2s ease-out;
+            &:hover{
+                transform: scale(1.1);
+            }
+        }
+    }
+    p{
+        color: $text_white;
+        text-align: justify;
+    }
+    .read_more{
+        padding: 10px 50px;
+        color: $text_white;
+        border: 1px solid $text_white;
+        transition: all 0.5 ease;
+        &:hover{
+            color: $color1;
+            background-color: $text_white;
+        }
+    }
+}
+
 #studyway{
     .wrapper_studyway{
         display: block;

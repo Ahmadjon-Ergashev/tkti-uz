@@ -85,9 +85,30 @@ class CoatofArmsAdmin(admin.ModelAdmin):
     list_display_links = ("title", )
 
 
-
 @admin.register(widgets.Anthem)
 class AnthemAdmin(admin.ModelAdmin):
     list_display = ("id", "title")
     list_display_links = ("title", )
 
+
+@admin.register(widgets.FaqCategory)
+class FaqCategoryAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    list_display_links = ("id", "name")
+
+
+@admin.register(widgets.Faq)
+class FaqAdmin(admin.ModelAdmin):
+    list_filter = ("category", )
+    list_editable = ("is_active", )
+    list_display_links = ("id", "title")
+    list_display = ("id", "title", "category", "is_active", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                ("category", "is_active"), "title", "answer" 
+            ),
+        }),
+    )
+    

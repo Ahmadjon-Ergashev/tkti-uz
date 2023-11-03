@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+
+<div class="container">
+    <div class="row d-flex justify-content-between py-3">
+        <div class="col-12 col-sm-12 mx-md-auto col-md-10 col-lg-4 col-xl-4 col-xxl-3">
+            {% include "./left_sidebar.html" %}
+        </div>
+        <div class="col-12 col-sm-12 mx-md-auto col-md-10 col-lg-8 col-xl-8 col-xxl-9">
+            <div id="faq">
+                <form action="" class="mb-4" id="faq_category_form" method="post">
+                    {% csrf_token %}
+                    <h5>Bo'limni tanlang:</h5>
+                    <select name="" class="form-control" id="faq_category">
+                        <option value="" selected>--------------------</option>
+                    </select>
+                </form>
+                <div class="accordion accordion-flush" id="faq_answers">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/scripts/posts/faq.js' %}"></script>
+{% endblock content %}

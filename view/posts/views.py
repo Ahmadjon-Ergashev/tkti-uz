@@ -12,6 +12,26 @@ from main.models import (
 
 def Home(request):
     """ for home page view """
+    about_us = {
+        "about_us": _("Biz xaqimizda"),
+        "section_1": _("""
+            Toshkent kimyo-texnologiya instituti (TKTI, http://tkti.uz) - kimyoviy texnologiya (organik va noorganik moddalar, 
+            polimerlar, silikat va qiyin eruvchan materiallar, nodir va kamyob metallar kimyoviy texnologiyasi), oziq-ovqat texnologiyasi, 
+            neft va gazni qayta ishlash, ekologiya, biotexnologiya, enologiya, sellyuloza va yogʻochga ishlov berish texnologiyasi va b. yo‘nalishlar 
+            boyicha yuqori malakali mutaxassislar tayyorlashga ixtisoslashgan Markaziy Osiyodagi yetakchi universitetlardan biri hisoblanadi.
+        """),
+        "section_2": _("""
+            Toshkent kimyo-texnologiya instituti 1991-yil 6-maydagi O‘zbekiston Respublikasi Prezidentining Farmoni bilan tashkil etilgan. 
+            TKTI respublikada oliy texnik ta’lim darajasini oshirish, 
+            muhandislik va ilmiy kadrlar tayyorlashni takomillashtirish maqsadida 1929 yildan beri faoliyat yuritayotgan sobiq Toshkent politexnika institutining bir necha fakultetlari negizida tashkil etilgan. 
+            Institut o‘z faoliyati davomida mamlakatimiz kimyo, neft-gaz, oziq-ovqat, qurilish sanoati va iqtisodiyotining boshqa tarmoqlari uchun 10 mingdan ortiq yuqori malakali muhandis-texnologlar tayyorladi.
+        """),
+        "section_3": _("""
+            Toshkent kimyo-texnologiya instituti Oʻzbekistondagi yetakchi kimyo-texnologiya oliy oʻquv yurtiboʻlib, oʻquv, ilmiy-tadqiqot, 
+            pedagogik va tarbiyaviy faoliyatni amalga oshiradi. Institut tuzilmasiga Toshkent shahridagi Bosh kampus, Shahrisabz va Yangiyerdagi filiallar kiradi.
+            Toshkent shahridagi Bosh kampusda 5 ta fakultet, 24 ta kafedra, 6 ta ishlab chiqarish oʻquv markazlari va 12 ta ilmiylaboratoriyalar mavjud.
+        """)
+    }
     translate_words = {
         "all": _("Barchasi"),
         "search": _("Qidirish"),
@@ -35,19 +55,11 @@ def Home(request):
         "header_img": widgets.HeaderIMG.objects.all().order_by("order_num"),
         "statistika": widgets.Statistika.objects.all().order_by("-added_at"),
         "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
-        "top_3_ads": news.Ads.objects.filter(status="pub").order_by("-added_at")[:3],
-        "last_news_6": news.News.objects.filter(status="pub").order_by("-added_at")[:8],
         "the_photos_home": widgets.PhotoGallary.objects.order_by("-added_at")[:6].all(),
-        "top_3_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4],
         "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].all(),
-        "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].all(),
-        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
-        "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
-        "the_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].all(),
-        "the_most_read_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
-        "the_most_read_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].all(),
+        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all()
     }
-    context = translate_words | objects_list        
+    context = translate_words | objects_list | about_us 
     return render(request, "home.html", context)
 
 
