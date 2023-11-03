@@ -302,3 +302,29 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
         return mark_safe(f"<img src='{obj.image.url}' width='250' />")
     get_image.short_description = _("Tanlangan rasm")
 
+
+
+@admin.register(posts.TalentedStudents)
+class TalentedStudentsAdmin(admin.ModelAdmin):
+    search_fields = ("f_name", )
+    readonly_fields = ("get_image", )
+    list_display_links = ("id", "get_image", "f_name")
+    list_display = ("id", "get_image", "f_name", "desc", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "f_name", "desc", ("image", "get_image")
+            ),
+        }),
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+
+
+@admin.register(posts.BossSection)
+class BossSection(admin.ModelAdmin):
+    list_display = ("id", "f_name")
+    list_display_links = ("id", "f_name")

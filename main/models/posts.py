@@ -71,7 +71,7 @@ class Posts(widgets.AbstractTemplate):
         verbose_name_plural = _("Postlar")
 
     def __str__(self):
-        return str(self.title) if self.title else None
+        return f"{self.navbar} | {self.title[:30]}"
     
     def save(self, *args, **kwargs):
         if self._state.adding:
@@ -261,6 +261,55 @@ class UniversityAdmistrations(models.Model):
         ordering = ["order_num"]
         verbose_name = _("Insitut raxbariyati")
         verbose_name_plural = _("Insitut raxbariyati")
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=25)
+            filename = os.path.splitext(self.image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
+
+
+
+class TalentedStudents(models.Model):
+    """ talented students in university """
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/students/%Y-%m-%d/", null=True)
+    f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
+    desc = models.TextField(_("Ta'laba xaqida"), null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.f_name
+
+    class Meta:
+        db_table = 'talanted_students'
+        managed = True
+        verbose_name = _("Iqtidorli talabalar")
+        verbose_name_plural = _("Iqtidorli talabalar")    
+    
+
+class BossSection(models.Model):
+    post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(_("Rasmi"), upload_to="image/boss_section/%Y-%m-%d/", null=True)
+    position = models.CharField(
+        max_length=255, verbose_name=_("Lavozimi"), 
+        choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head)
+    f_name = models.CharField(_("To'liq ismi"), max_length=150)
+    email = models.CharField(_("Email"), max_length=250)
+    phone = models.CharField(_("Telefon raqami"), max_length=250)
+    
+
+    def __str__(self):
+        return self.f_name
 
 
 

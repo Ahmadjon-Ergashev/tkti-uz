@@ -2,15 +2,13 @@ from rest_framework import viewsets, mixins
 from drf_yasg.utils import swagger_auto_schema
 
 from main.models import posts, widgets
-from api.posts import query_params
-from .serializers import (
-    StudyProgramSerializer, PostsSerializers, DepartmentsSerializers
- )
+from api.posts import query_params, serializers
+
 
 
 class StudyProgramView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.StudyProgram.objects.all().order_by("-added_at")
-    serializer_class = StudyProgramSerializer
+    serializer_class = serializers.StudyProgramSerializer
 
     def get_queryset(self):
         queryset = super().get_queryset().none()
@@ -30,7 +28,7 @@ class StudyProgramView(mixins.ListModelMixin, viewsets.GenericViewSet):
 class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
     """ get all faculties list """
     queryset = posts.Posts.objects.all()
-    serializer_class = PostsSerializers
+    serializer_class = serializers.PostsSerializers
 
     def get_queryset(self):
         queryset = super().get_queryset().filter(status=widgets.Status.published, faculty=True)
@@ -40,7 +38,7 @@ class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.Departments.objects.all()
-    serializer_class = DepartmentsSerializers
+    serializer_class = serializers.DepartmentsSerializers
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -54,3 +52,16 @@ class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     @swagger_auto_schema(manual_parameters=query_params.department_query())
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
+    
+
+class AdmistrationsView(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = posts.UniversityAdmistrations.objects.all().order_by("order_num")
+    serializer_class = serializers.AdmistationSerializer
+
+
+class TalentedStudentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = posts.TalentedStudents.objects.all().order_by("-added_at")
+    serializer_class = serializers.TalentedStudentsSerializers
+
+    
+    

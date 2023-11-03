@@ -67,6 +67,8 @@ class PostsListView(ListView):
             qs = posts.SectionsAndCenters.objects.all().order_by("-added_at")
         elif navbar_slug == "institut-rahbariyati":
             qs = posts.UniversityAdmistrations.objects.all().order_by("order_num")
+        elif navbar_slug == "iqtidorli-talabalar":
+            qs = posts.TalentedStudents.objects.all().order_by("-added_at")
         else:
             qs = super().get_queryset().filter(status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
         return qs 
@@ -87,10 +89,6 @@ class PostsListView(ListView):
             context["pdf_file"] = ""
         context["home"] = _("Asosiy sahifa")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
-        context["short_info"] = _("Qisqacha ma'lumot")
-        context["scientific_direction"] = _("Ilmiy yo'nalishlari")
-        context["main_tasks_in_position"] = _("Lavozimidagi asosiy vazifalar")
-        context["scientific_activity"] = _("Ilmiy va pedagogik mehnat faoliyati")
         return context
 
 

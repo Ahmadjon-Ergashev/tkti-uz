@@ -46,6 +46,25 @@
                                     {{ object.post.html | safe }}
                                 </div>
                             {% endif %}
+                            <div class="row">
+                                {% for obj in object.bosssection_set.all %}
+                                    <div class="col-12 col-md-4 col-xl-4">
+                                        <div class="card">
+                                            <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
+                                            <div class="card-header">
+                                                <b>{{ obj.position }}</b>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
+                                                    <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
+                                                    <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>    
+                                {% endfor %}
+                            </div>
                         </div>  
                     {% endfor %}
                 {% else %}
@@ -95,9 +114,9 @@
                             {% endfor %}
                         </div>
                     {% elif title_slug == 'institut-rahbariyati' %}
-                        <div class="row">
-                            {% for obj in object_list %}
-                                <div class="col-12 col-md-6 col-lg-6">
+                        <div class="row" id="adminstations">
+                            <!-- {% for obj in object_list %}
+                                <div class="col-12 col-md-4 col-lg-4">
                                     <div class="card">
                                         <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
                                         <div class="card-header">
@@ -117,9 +136,9 @@
                                             </ul>
                                         </div>
                                         <div class="card-footer text-center">
-                                            <a href="{% url 'admins_nav' post_slug=obj.slug %}" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ obj.id }}">{{ read_more }}</a>
+                                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ obj.id }}">{{ read_more }}</a>
                                             
-                                            <!-- Modal -->
+                                            
                                             <div class="modal fade" id="staticBackdrop{{ obj.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl">
                                                     <div class="modal-content">
@@ -185,7 +204,25 @@
                                         </div>
                                     </div>
                                 </div>
-                            {% endfor %}
+                            {% endfor %} -->
+                        </div>
+                    {% elif title_slug == 'iqtidorli-talabalar' %}
+                        <div class="row" id="talented_students">
+                            <!-- {% for obj in object_list %}
+                                <div class="col-12 col-md-4 col-lg-4">
+                                    <div class="card" style="height: 390px; min-height: 390px;">
+                                        <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
+                                        <div class="card-header">
+                                            <b>{{ obj.f_name }}</b>
+                                        </div>
+                                        <div class="card-body">
+                                            <p class="card-text">
+                                                {{ obj.desc }}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %} -->
                         </div>
                     {% elif title_slug == 'fakultet' %}
                         <!-- faculty section -->
@@ -239,5 +276,8 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/scripts/posts/posts_inside.js' %}"></script>
+    <script src="{% static 'js/scripts/posts/talented_students.js' %}"></script>
 {% endblock content %}
     
