@@ -26,6 +26,7 @@ def clone(modeladmin, request, queryset):
         i.save()
 
 
+
 @admin.register(posts.Navbar)
 class NavbarAdmin(MPTTModelAdmin):
     """ Admin view for Navigation bar model """
@@ -46,15 +47,15 @@ class NavbarAdmin(MPTTModelAdmin):
                 "status", 
                 "order_num", 
                 "inside_order_num", 
-                "visible",                
+                "visible"        
             ),
         }),
-        (_("O'zbek tilida"), {
+        (_("Nomi"), {
             "classes": ("extrapretty"),
             "fields": (
                 "name_uz",             
                 "name_ru",             
-                "name_en",             
+                "name_en"             
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -77,7 +78,7 @@ class NavbarAdmin(MPTTModelAdmin):
         return super().save_model(request, obj, form, change)
     
     def get_prepopulated_fields(self, request, obj):
-        return {"slug": ("name", )}
+        return {"slug": ("name_uz", )}
 
 
 
@@ -110,9 +111,21 @@ class PostsAdmin(GuardedModelAdmin):
             ),
         }),
         (_("O'zbek tilida"), {
-            "classes": ("extrapretty"),
+            "classes": ("collapse"),
             "fields": (
-                "title", "subtitle", "post"                
+                "title_uz", "subtitle_uz", "post_uz"                
+            ),
+        }),
+        (_("Rus tilida"), {
+            "classes": ("collapse"),
+            "fields": (
+                "title_ru", "subtitle_ru", "post_ru"                
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            "classes": ("collapse"),
+            "fields": (
+                "title_en", "subtitle_en", "post_en"                
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -141,7 +154,7 @@ class PostsAdmin(GuardedModelAdmin):
         return super().save_model(request, obj, form, change)
     
     def get_prepopulated_fields(self, request, obj):
-        return {"slug": ("title", )}
+        return {"slug": ("title_uz", )}
 
 
 @admin.register(posts.FacultyAdministration)
@@ -150,20 +163,33 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
     ordering = ("order_num", )
     list_filter = ("added_at", )
     list_editable = ("order_num", )
-    list_display_links = ("f_name", )
-    search_fields = ("f_name", "job_name")
+    list_display_links = ("f_name_uz", )
     readonly_fields = ("get_image", "added_at", "updated_at")
-    list_display = ("id", "f_name", "order_num", "job_name", "phone_number", "added_at")
+    list_display = ("id", "f_name_uz", "order_num", "job_name_uz", "phone_number", "added_at")
+    search_fields = ("f_name_uz", "f_name_en", "f_name_ru", "job_name_uz", "job_name_ru", "job_name_en")
 
     fieldsets = (
-        (_("Umumiy ozgaruvchilar"), {
+        (_("Umumiy o'zgaruvchilar"), {
             "fields": (
               "faculty", "phone_number", "email", "order_num", ("image", "get_image")
             ),
         }),
         (_("O'zbek tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
             "fields": (
-                "f_name", "job_name", "admission_day"
+                "f_name_uz", "job_name_uz", "admission_day_uz"
+            ),
+        }),        
+        (_("Rus tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_ru", "job_name_ru", "admission_day_ru"
+            ),
+        }),        
+        (_("Ingiliz tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_en", "job_name_en", "admission_day_en"
             ),
         }),        
         (_("Automatik to'ldiriladigan bo'limlar"), {
@@ -189,8 +215,8 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
 
 @admin.register(posts.Departments)
 class DepartmentsAdmin(admin.ModelAdmin):
-    list_display_links = ("name", )
-    list_display = ("id", "name", "faculty")
+    list_display_links = ("name_uz", )
+    list_display = ("id", "name_uz", "faculty")
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
@@ -201,13 +227,40 @@ class DepartmentsAdmin(admin.ModelAdmin):
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_prepopulated_fields(self, request, obj):
-        return {"slug": ("name", )}
+        return {"slug": ("name_uz", )}
 
 
 @admin.register(posts.StudyProgram)
 class StudyAdmin(admin.ModelAdmin):
-    list_display_links = ("title", )
-    list_display = ("id", "title", "year", "faculty")
+    list_display_links = ("title_uz", )
+    list_display = ("id", "title_uz", "year", "faculty")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "year", "faculty", "department", "study_way", "pdf_file", "study_time"
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_en", 
+            ),
+        }),
+    )
+    
 
 
 @admin.register(posts.ContactSection)
@@ -219,8 +272,26 @@ class ContactSectionAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "navbar", "title", ("image", "get_image"), "order_num", 
-                "email", "phone", "address", "address_url"
+                "navbar", ("image", "get_image"), "order_num", 
+                "email", "phone", "address_url"
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_uz", "address_uz"
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_ru", "address_ru"
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_en", "address_en"
             ),
         }),
     )
@@ -233,16 +304,34 @@ class ContactSectionAdmin(admin.ModelAdmin):
 
 @admin.register(posts.Workers)
 class WorkersAdmin(admin.ModelAdmin):
-    search_fields = ("f_name", )
     readonly_fields = ["get_image"]
-    list_display_links = ("f_name", )
-    list_display = ("id", "f_name", "section", "position", "phone", "email", "added_at")
+    list_display_links = ("f_name_uz", )
+    search_fields = ("f_name_uz", "f_name_ru", "f_name_en")
+    list_display = ("id", "f_name_uz", "section", "position", "phone", "email", "added_at")
 
     fieldsets = (
         (None, {
             "fields": (
-                "position", "section", "f_name", "phone", "extra_phone", "email",
+                "position", "section", "phone", "extra_phone", "email",
                 ("image", "get_image")
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_en", 
             ),
         }),
     )
@@ -254,16 +343,39 @@ class WorkersAdmin(admin.ModelAdmin):
 
 @admin.register(posts.SectionsAndCenters)
 class SectionsAdmin(admin.ModelAdmin):
-    list_display_links = ("title", )
-    list_display = ("id", "title", "added_at")
-    prepopulated_fields = ({"slug": ("title", )})
+    list_display_links = ("title_uz", )
+    list_display = ("id", "title_uz", "added_at")
+    prepopulated_fields = ({"slug": ("title_uz", )})
 
 
     fieldsets = (
         (None, {
             "fields": (
-                "navbar", "title", "about", 
-                "target", "activity", "slug"
+                "navbar", 
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_uz", "about_uz", "target_uz", "activity_uz" 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_ru", "about_ru", "target_ru", "activity_ru" 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "title_en", "about_en", "target_en", "activity_en" 
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "slug",
             ),
         }),
     )
@@ -273,9 +385,9 @@ class SectionsAdmin(admin.ModelAdmin):
 class UniversityAdminsAdmin(admin.ModelAdmin):
     list_editable = ("order_num", )
     readonly_fields = ("get_image", "added_at")
-    prepopulated_fields = ({"slug": ("f_name", )})   
-    list_display_links = ("id", "get_image", "f_name")
-    list_display = ("id", "get_image", "f_name", "position", "order_num", "added_at")
+    prepopulated_fields = ({"slug": ("f_name_uz", )})   
+    list_display_links = ("id", "get_image", "f_name_uz")
+    list_display = ("id", "get_image", "f_name_uz", "position", "order_num", "added_at")
 
     fieldsets = (
         ("Umumiy qiymatlar", {
@@ -286,8 +398,20 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
         }),
         ("O'zbek tilida", {
             'fields': (
-                "f_name", "admission_days", "position", "short_info", 
-                "scientific_activity", "scientific_direction", "main_tasks_in_position", 
+                "f_name_uz", "admission_days_uz", "position_uz", "short_info_uz", 
+                "scientific_activity_uz", "scientific_direction_uz", "main_tasks_in_position_uz", 
+            ),
+        }),
+        ("Rus tilida", {
+            'fields': (
+                "f_name_ru", "admission_days_ru", "position_ru", "short_info_ru", 
+                "scientific_activity_ru", "scientific_direction_ru", "main_tasks_in_position_ru", 
+            ),
+        }),
+        ("Ingiliz tilida", {
+            'fields': (
+                "f_name_en", "admission_days_en", "position_en", "short_info_en", 
+                "scientific_activity_en", "scientific_direction_en", "main_tasks_in_position_en", 
             ),
         }),
         ("Automatik to'ldiriladigan fieldlar", {
@@ -305,15 +429,33 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
 
 @admin.register(posts.TalentedStudents)
 class TalentedStudentsAdmin(admin.ModelAdmin):
-    search_fields = ("f_name", )
+    search_fields = ("f_name_uz", )
     readonly_fields = ("get_image", )
-    list_display_links = ("id", "get_image", "f_name")
-    list_display = ("id", "get_image", "f_name", "desc", "added_at")
+    list_display_links = ("id", "get_image", "f_name_uz")
+    list_display = ("id", "get_image", "f_name_uz", "desc_uz", "added_at")
 
     fieldsets = (
         (None, {
             "fields": (
-                "f_name", "desc", ("image", "get_image")
+                ("image", "get_image")
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_uz", "desc_uz",
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_ru", "desc_ru",
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_en", "desc_en",
             ),
         }),
     )
@@ -326,4 +468,21 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
 @admin.register(posts.BossSection)
 class BossSection(admin.ModelAdmin):
     list_display = ("id", "f_name")
+    readonly_fields = ("get_image", )
     list_display_links = ("id", "f_name")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "post",
+                "position", "email", "phone",
+                ("f_name_uz", "f_name_ru", "f_name_en"),
+                ("image", "get_image")
+            ),
+        }),
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+    

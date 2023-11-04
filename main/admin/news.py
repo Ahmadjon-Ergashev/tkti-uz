@@ -7,11 +7,11 @@ from main.models import news
 
 
 # django admin actions
-@admin.action(description=_("clone post"))
+@admin.action(description=_("Nusxa ko'chirish"))
 def duplicate(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None
-        i.slug += str(random.randint(111111, 999999))
+        i.slug += str(random.randint(111111, 999999)) 
         i.save()
 
 
@@ -20,13 +20,13 @@ class NewsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
-    search_fields = ("title", )
     filter_horizontal = ["hashtag"]
-    list_display_links = ("title", )
+    list_display_links = ("title_uz", )
     list_filter = ("category", "status", "added_at")
+    search_fields = ("title_uz", "title_en", "title_ru")
     list_editable = ("post_viewed_count", "category", "status")
-    list_display = ("id", "title", "post_viewed_count", "category", "status", "added_at")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
+    list_display = ("id", "title_uz", "post_viewed_count", "category", "status", "added_at")
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
@@ -43,9 +43,21 @@ class NewsAdmin(admin.ModelAdmin):
             ),
         }),
         (_("O'zbek tilida"), {
-            "classes": ("extrapretty"),
+            "classes": ("collapse"),
             "fields": (
-                "title", "post"                
+                "title_uz", "post_uz"                
+            ),
+        }),
+        (_("Rus tilida"), {
+            "classes": ("collapse"),
+            "fields": (
+                "title_ru", "post_ru"                
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            "classes": ("collapse"),
+            "fields": (
+                "title_en", "post_en"                
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -68,11 +80,11 @@ class NewsAdmin(admin.ModelAdmin):
         if obj.author:
             obj.update_user = request.user
         else:
-            obj.auhtor = request.user
+            obj.author = request.user
         return super().save_model(request, obj, form, change)
     
     def get_prepopulated_fields(self, request, obj):
-        return {"slug": ("title", )}
+        return {"slug": ("title_uz", )}
 
 
 @admin.register(news.Ads)
@@ -80,13 +92,13 @@ class AdsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
-    search_fields = ("title", )
     filter_horizontal = ["hashtag"]
-    list_display_links = ("title", )
+    list_display_links = ("title_uz", )
     list_filter = ("status", "added_at")
     list_editable = ("post_viewed_count", "status")
-    list_display = ("id", "title", "post_viewed_count", "status", "added_at")
+    search_fields = ("title_uz", "title_en", "title_ru")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
+    list_display = ("id", "title_uz", "post_viewed_count", "status", "added_at")
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
@@ -103,9 +115,21 @@ class AdsAdmin(admin.ModelAdmin):
             ),
         }),
         (_("O'zbek tilida"), {
-            "classes": ("extrapretty"),
+            "classes": ("collapse"),
             "fields": (
-                "title", "post"                
+                "title_uz", "post_uz"                
+            ),
+        }),
+        (_("Rus tilida"), {
+            "classes": ("collapse"),
+            "fields": (
+                "title_ru", "post_ru"                
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            "classes": ("collapse"),
+            "fields": (
+                "title_en", "post_en"                
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -128,22 +152,22 @@ class AdsAdmin(admin.ModelAdmin):
         if obj.author:
             obj.update_user = request.user
         else:
-            obj.auhtor = request.user
+            obj.author = request.user
         return super().save_model(request, obj, form, change)
     
     def get_prepopulated_fields(self, request, obj):
-        return {"slug": ("title", )}
+        return {"slug": ("title_uz", )}
     
 
 @admin.register(news.Category)
 class CategoryAdmin(admin.ModelAdmin):
     list_editable = ("order_num", )
-    list_display = ("name", "order_num", "added_at")
+    list_display = ("name_uz", "order_num", "added_at")
 
     fieldsets = (
         (None, {
             'fields': (
-                "name", "order_num"
+                ("name_uz", "name_ru", "name_en"), "order_num"
             ),
         }),
     )
@@ -153,15 +177,16 @@ class CategoryAdmin(admin.ModelAdmin):
 class VideoGallyadmin(admin.ModelAdmin):
     actions = [duplicate]
     list_editable = ("status", )
-    list_display_links = ("id", "title")
-    prepopulated_fields = ({"slug": ("title", )})
-    list_display = ("id", "title", "status", "added_at")
+    list_display_links = ("id", "title_uz")
+    prepopulated_fields = ({"slug": ("title_uz", )})
+    list_display = ("id", "title_uz", "status", "added_at")
     readonly_fields = ["author", "post_viewed_count", "update_at"]
 
     fieldsets = (
         (None, {
             "fields": (
-                "title", "added_at", "poster", "video_file", "status"
+                ("title_uz", "title_en", "title_ru"), 
+                "added_at", "poster", "video_file", "status"
             ),
         }),
         

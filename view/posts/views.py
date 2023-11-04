@@ -179,7 +179,7 @@ class SectionsDetailView(DetailView):
         except AttributeError:
             data["category_list"] = navbar.get_children()
         data["about"] = _("Xaqida")
-        data["target"] = _("Masadi")
+        data["target"] = _("Maqsadi")
         data["workers"] = _("Xodimlar")   
         data["activity"] = _("Faoliyati")        
         return data
