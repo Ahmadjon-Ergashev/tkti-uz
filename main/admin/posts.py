@@ -6,9 +6,6 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 
-from main.models.posts import (
-    Navbar, Posts, FacultyAdministration, Departments, StudyProgram
-)
 from main.models import posts
 
 
@@ -32,22 +29,16 @@ def clone(modeladmin, request, queryset):
 @admin.register(posts.Navbar)
 class NavbarAdmin(MPTTModelAdmin):
     """ Admin view for Navigation bar model """
-    ordering = ("name", )
-    search_fields = ("name", )
+    ordering = ("name_uz", )
     date_hierarchy = "added_at"
-    list_display_links = ("name", )
+    list_display_links = ("name_uz", )
+    search_fields = ("name_uz", "name_ru", "name_en")
     list_editable = ("order_num", "status", "inside_order_num")
     list_filter = ("parent", "added_at", "status", "visible", "author")
     readonly_fields = ("author", "added_at", "update_user", "updated_at")
-    list_display = ("id", "name", "parent", "status", "order_num", "inside_order_num", "visible", "added_at")
+    list_display = ("id", "name_uz", "parent", "status", "order_num", "inside_order_num", "visible", "added_at")
 
     fieldsets = (
-        (_("Nomi"), {
-            "classes": ("extrapretty"),
-            "fields": (
-                "name",             
-            ),
-        }),
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
@@ -56,6 +47,14 @@ class NavbarAdmin(MPTTModelAdmin):
                 "order_num", 
                 "inside_order_num", 
                 "visible",                
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            "classes": ("extrapretty"),
+            "fields": (
+                "name_uz",             
+                "name_ru",             
+                "name_en",             
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -182,9 +181,9 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
             try:
-                kwargs["queryset"] = Posts.objects.filter(navbar__slug="fakultet")
+                kwargs["queryset"] = posts.Posts.objects.filter(navbar__slug="fakultet")
             except Exception as e:
-                kwargs["queryset"] = Posts.objects.none()
+                kwargs["queryset"] = posts.Posts.objects.none()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
@@ -196,9 +195,9 @@ class DepartmentsAdmin(admin.ModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
             try:
-                kwargs["queryset"] = Posts.objects.filter(faculty=True)
+                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
             except Exception as e:
-                kwargs["queryset"] = Posts.objects.none()
+                kwargs["queryset"] = posts.Posts.objects.none()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_prepopulated_fields(self, request, obj):
