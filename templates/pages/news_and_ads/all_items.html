@@ -23,7 +23,13 @@
                                 {{ obj.title | truncatechars:100 }}
                             </p>
                             <div class="read_more">
-                                <a href="detail/{{ obj.slug }}">{{ read_more }}</a>
+                                {% if data_number == 0 %}
+                                    <a href="{% url 'news_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
+                                {% elif data_number == 1 %}
+                                    <a href="{% url 'ads_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
+                                {% elif data_number == 2 %}
+                                    <a href="{% url 'video_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

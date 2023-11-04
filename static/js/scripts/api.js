@@ -165,4 +165,42 @@ $(document).ready(function(){
             } 
         })
     }
+    // $.ajax({
+    //     type: 'GET',
+    //     url: "/api/posts/talented_students",
+    //     data: {},
+    //     success: function(data){
+    //         data.map((item) => {
+    //             let items = `
+    //                 <div class="card">
+    //                     <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
+    //                     <div class="card-header">
+    //                         <b>
+    //                            ${item.f_name}
+    //                         </b>
+    //                     </div>
+    //                     <div class="card-body">
+    //                         <p class="card-text">
+    //                             ${item.desc}
+    //                         </p>
+    //                     </div>
+    //                 </div>
+    //                 <div class="card">
+    //                     <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
+    //                     <div class="card-header">
+    //                         <b>
+    //                            ${item.f_name}
+    //                         </b>
+    //                     </div>
+    //                     <div class="card-body">
+    //                         <p class="card-text">
+    //                             ${item.desc}
+    //                         </p>
+    //                     </div>
+    //                 </div>
+    //             `   
+    //             // $("#students_list").append(items)         
+    //         })
+    //     }
+    // })
 })

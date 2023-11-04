@@ -16,8 +16,8 @@
 <div class="header">
     <div id="headerIMG">
         {% for img in header_img %}
-        <div class="item" style="background-image: url('{{ img.image.url }}');">
-        </div>
+            <div class="item" style="background-image: url('{{ img.image.url }}');">
+            </div>
         {% endfor %}
     </div>
     <!-- statistika -->
@@ -25,17 +25,17 @@
     <div class="container">
         <div id="statistika">
             {% for obj in statistika %}
-            <div class="card">
-                <div class="card-body">
-                    <div class="card_icon">
-                        <i class="{{ obj.icon }}"></i>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card_icon">
+                            <i class="{{ obj.icon }}"></i>
+                        </div>
+                        <p>
+                            {{ obj.quantity }}
+                        </p>
+                        <h3>{{ obj.name }}</h3>
                     </div>
-                    <p>
-                        {{ obj.quantity }}
-                    </p>
-                    <h3>{{ obj.name }}</h3>
                 </div>
-            </div>
             {% endfor %}
         </div>
     </div>
@@ -266,6 +266,59 @@
 </div>
 
 <!-- faculty and departments -->
+
+<!-- Talented students -->
+
+<section class="talented_students">
+    <div class="container">
+        <h1 class="text-center text-decoration-underline">{{ talented_student_title }}</h1>
+        <div id="students_list">
+            {% for item in talented_students %}
+                <div class="card">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.f_name }} | tkti.uz">
+                    <div class="card-header">
+                        <b>
+                            {{ item.f_name }}
+                        </b>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ item.desc }}
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.f_name }} | tkti.uz">
+                    <div class="card-header">
+                        <b>
+                            {{ item.f_name }}
+                        </b>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ item.desc }}
+                        </p>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.f_name }} | tkti.uz">
+                    <div class="card-header">
+                        <b>
+                            {{ item.f_name }}
+                        </b>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{ item.desc }}
+                        </p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Talented students -->
 
 <!-- photo gallary -->
 

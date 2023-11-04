@@ -49,12 +49,14 @@ def Home(request):
         "nth_faculty": _("tarkibidagi kafedralar"),
         "the_last_news": _("Eng so'ngi yangiliklar"),
         "study_way_title": _("Ta'lim dasturi katalogi"),
+        "talented_student_title": _("Iqtidorli talabalar"),
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
     objects_list = {
         "header_img": widgets.HeaderIMG.objects.all().order_by("order_num"),
         "statistika": widgets.Statistika.objects.all().order_by("-added_at"),
         "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
+        "talented_students": posts.TalentedStudents.objects.order_by("-added_at").all(),
         "the_photos_home": widgets.PhotoGallary.objects.order_by("-added_at")[:6].all(),
         "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].all(),
         "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all()

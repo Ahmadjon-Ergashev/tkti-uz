@@ -21,6 +21,7 @@ news = [
     path("photo/gallary/", news.PhotoGallaryView.as_view(), name="photo_gallary"),
     path("ads/detail/<slug:obj_slug>/", news.AdsDetailView.as_view(), name="ads_detail"),
     path("news/detail/<slug:obj_slug>/", news.NewsDetailView.as_view(), name="news_detail"),
+    path("news/hashtags/<str:hashtag>/", news.HashtagSearchView.as_view(), name="hashtag_news"),
     path("videos/detail/<slug:obj_slug>/", news.VideosDetailView.as_view(), name="video_detail"),
 ]
 widgets = [
@@ -28,8 +29,8 @@ widgets = [
     path("flag", widgets.FlagView.as_view(), name="flag"),
     path("anthem", widgets.AnthemView.as_view(), name="anthem"),
     path("sitemap", widgets.SiteMapView.as_view(), name="site_map"),
-    path("searching/results", widgets.SearchAroundProgram.as_view(), name="search"),
     path("coat_of_arms", widgets.CoatofArmsView.as_view(), name="coat_of_arms"),
+    path("searching/results", widgets.SearchAroundProgram.as_view(), name="search"),
 ]
 
 urlpatterns = [] + posts + news + widgets

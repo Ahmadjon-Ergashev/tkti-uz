@@ -259,6 +259,14 @@
   font-family: "Noto Serif", serif;
 }
 
+.talented_students #students_list {
+  padding: 40px 0;
+}
+.talented_students #students_list .card {
+  width: 350px;
+  margin: 0px 10px;
+}
+
 #photo_carusel {
   margin: 50px 0;
   background-color: #26597E;

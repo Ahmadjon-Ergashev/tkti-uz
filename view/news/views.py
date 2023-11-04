@@ -49,6 +49,27 @@ class NewsDetailView(DetailView):
         return context
 
 
+class HashtagSearchView(ListView):
+    """ search by hashtags in news """
+    model = news.News
+    template_name = "pages/news_and_ads/all_items.html"
+
+    def get_queryset(self):
+        hashtag = self.kwargs["hashtag"]
+        hashtag_ = widgets.Hashtag.objects.get(name=hashtag)
+        data =  super().get_queryset().filter(hashtag=hashtag_)
+        print(data)
+        return data    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Yangiliklar")
+        context["data_number"] = 0
+        return context
+
+
+
+
 class AdsView(ListView):
     """ all ads items with pagination """
     model = news.Ads

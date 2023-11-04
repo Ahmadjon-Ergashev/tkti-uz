@@ -44,6 +44,11 @@
                             {{ object.post.html | safe }}
                         </div>
                     {% endif %}
+                    <div class="hashtags">
+                        {% for h in object.hashtag.all %}
+                            <a href="{% url 'hashtag_news' hashtag=h.name %}" class="hashtag">#{{ h.name }}</a>  
+                        {% endfor %}
+                    </div>
                     <div class="post_footer">
                         <p class="text-end fw-bold">{{ object.author_post }}</p>
                         <div class="time_and_view">
