@@ -23,7 +23,7 @@ def Main():
         subprocess.call(["sudo", "docker", "volume", "rm", volume_name])
         # subprocess.call(["sudo", "docker", "compose", "up", "-d", "--build"])
     elif args.reload:
-        subprocess.call(["sudo", "systemctl", "daemond-reload"])
+        subprocess.call(["sudo", "systemctl", "daemon-reload"])
         subprocess.call(["sudo", "systemctl", "restart", "tkti"])
         subprocess.call(["sudo", "nginx", "-t"])
         subprocess.call(["sudo", "systemctl", "restart", "nginx"])
