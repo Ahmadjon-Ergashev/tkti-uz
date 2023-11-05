@@ -189,7 +189,8 @@
                                 <a href="{% url 'flag' %}"><img src="{% static 'images/flag.jpg' %}" width="20" alt=""></a>
                             </li>
                             <li>
-                                <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">{% csrf_token %}
+                                <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">
+                                    {% csrf_token %}
                                     <input name="next" type="hidden" value="{{ redirect_to }}">
                                     <select name="language" class="language_code border-0 bg-light fw-bold">
                                         {% get_current_language as LANGUAGE_CODE %}

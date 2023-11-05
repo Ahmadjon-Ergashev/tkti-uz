@@ -2,6 +2,8 @@ from config.settings.base import *
 
 
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+CSP_FRAME_ANCESTORS = "https://tkti.toshvil.uz"
 DATABASES = {
     'default': {
         'ENGINE': env("POSTGRES_ENGINE"),

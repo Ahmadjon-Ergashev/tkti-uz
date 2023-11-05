@@ -26,7 +26,7 @@ class NewsAdmin(admin.ModelAdmin):
     list_filter = ("status", "added_at")
     search_fields = ("title_uz", "title_en", "title_ru")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
-    list_display = ("id", "title_uz", "post_viewed_count", "status", "added_at", "post_viewed_count")
+    list_display = ("id", "title_uz", "post_viewed_count", "status", "added_at")
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
