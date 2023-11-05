@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.11.1'
 
 services:
   web:
@@ -9,7 +9,7 @@ services:
     command: bash ./entrypoint.sh
     volumes:
       - .:/usr/src/app
-        - ./static:/usr/src/app/static
+      - ./static:/usr/src/app/static
       - ./media:/usr/src/app/media
     ports:
       - 8000:8000

@@ -20,7 +20,6 @@ inflection==0.5.1
 Markdown==3.5
 packaging==23.2
 Pillow==10.0.1
-psycopg2==2.9.7
 pytz==2023.3.post1
 PyYAML==6.0.1
 rcssmin==1.1.1
@@ -30,3 +29,4 @@ sqlparse==0.4.4
 typing_extensions==4.7.1
 uritemplate==4.1.1
 whitenoise==6.5.0
+psycopg2-binary==2.9.9

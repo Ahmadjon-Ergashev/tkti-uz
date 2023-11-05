@@ -1,5 +1,7 @@
 from config.settings.base import *
 
+
+ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 DATABASES = {
     'default': {
         'ENGINE': env("POSTGRES_ENGINE"),
@@ -7,6 +9,6 @@ DATABASES = {
         'USER': env("POSTGRES_USER"),
         'PASSWORD': env("POSTGRES_PASSWORD"),
         'HOST': env("POSTGRES_HOST"),
-        'PORT': env("POSTGRES_PORT"),
+        'PORT': 5432,
     }
 }
