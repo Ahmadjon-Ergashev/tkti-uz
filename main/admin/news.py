@@ -20,19 +20,20 @@ class NewsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
+    list_editable = ("status", )
     filter_horizontal = ["hashtag"]
     list_display_links = ("title_uz", )
-    list_filter = ("category", "status", "added_at")
+    list_filter = ("status", "added_at")
     search_fields = ("title_uz", "title_en", "title_ru")
-    list_editable = ("post_viewed_count", "category", "status")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
-    list_display = ("id", "title_uz", "post_viewed_count", "category", "status", "added_at")
+    list_display = ("id", "title_uz", "post_viewed_count", "status", "added_at", "post_viewed_count")
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                "category", "status",
+                # "category", 
+                "status",
                 "added_at", "author_post", "hashtag"          
             ),
         }),

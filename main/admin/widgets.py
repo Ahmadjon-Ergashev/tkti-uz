@@ -152,10 +152,10 @@ class QuickLinksAdmin(admin.ModelAdmin):
 @admin.register(widgets.Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
-    list_display_links = ("name", )
+    list_display_links = ("name_uz", )
     readonly_fields = ("added_at", )
     list_editable = ("order_num", "quantity")
-    list_display = ("id", "name", "quantity", "order_num", "added_at")
+    list_display = ("id", "name_uz", "quantity", "order_num", "added_at")
 
     fieldsets = (
         (None, {
@@ -205,8 +205,8 @@ class PhotoGallary(admin.ModelAdmin):
 
 @admin.register(widgets.Flag)
 class FlagAdmin(admin.ModelAdmin):
-    list_display = ("id", "title")
-    list_display_links = ("title", )
+    list_display = ("id", "title_uz")
+    list_display_links = ("title_uz", )
 
     fieldsets = (
         (_("O'zbek tilida"), {
@@ -233,8 +233,8 @@ class FlagAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.CoatofArms)
 class CoatofArmsAdmin(admin.ModelAdmin):
-    list_display = ("id", "title")
-    list_display_links = ("title", )
+    list_display = ("id", "title_uz")
+    list_display_links = ("title_uz", )
 
     fieldsets = (
         (_("O'zbek tilida"), {
@@ -260,8 +260,8 @@ class CoatofArmsAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Anthem)
 class AnthemAdmin(admin.ModelAdmin):
-    list_display = ("id", "title")
-    list_display_links = ("title", )
+    list_display = ("id", "title_uz")
+    list_display_links = ("title_uz", )
 
     fieldsets = (
         (_("O'zbek tilida"), {
@@ -317,8 +317,8 @@ class FaqAdmin(admin.ModelAdmin):
     list_filter = ("category", )
     list_editable = ("is_active", )
     readonly_fields = ("added_at", )
-    list_display_links = ("id", "title")
-    list_display = ("id", "title", "category", "is_active", "added_at")
+    list_display_links = ("id", "title_uz")
+    list_display = ("id", "title_uz", "category", "is_active", "added_at")
 
     fieldsets = (
         (None, {

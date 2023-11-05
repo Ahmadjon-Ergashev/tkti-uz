@@ -87,7 +87,7 @@ class SocialNetworks(models.Model):
         verbose_name_plural = _("Ijtimoiy tarmoqlar")
 
     def __str__(self):
-        return str(self.name) if self.name else None
+        return str(self.name)
 
 
 class HeaderIMG(models.Model):
@@ -135,7 +135,7 @@ class UsefullLinks(models.Model):
         verbose_name_plural = "Foydali havolalar"
     
     def __str__(self):
-        return str(self.name) if self.name else None
+        return str(self.name)
     
 
 class QuickLinks(models.Model):
@@ -152,7 +152,7 @@ class QuickLinks(models.Model):
         verbose_name_plural = "Tezkor havolalar"
 
     def __str__(self):
-        return str(self.name) if self.name else None
+        return str(self.name)
     
 
 class Statistika(models.Model):
@@ -170,7 +170,7 @@ class Statistika(models.Model):
         verbose_name_plural = _("Statistika")
     
     def __str__(self):
-        return self.name if self.name else None
+        return self.name
     
 
 class Year(models.Model):
