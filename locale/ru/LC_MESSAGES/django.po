@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-04 17:04+0500\n"
+"POT-Creation-Date: 2023-11-05 14:23+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,111 +16,129 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
-"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+
 #: api/posts/serializers.py:52 view/my_context_proccessor.py:25
 msgid "Batafsil"
-msgstr ""
+msgstr "Более"
 
 #: api/posts/serializers.py:53 main/models/posts.py:244
 msgid "Qisqacha ma'lumot"
-msgstr ""
+msgstr "Краткая информация"
 
 #: api/posts/serializers.py:54 main/models/posts.py:245
 msgid "Ilmiy yo'nalishlari"
-msgstr ""
+msgstr "Научные направления"
 
 #: api/posts/serializers.py:55 main/models/posts.py:246
 msgid "Lavozimidagi asosiy vazifalar"
-msgstr ""
+msgstr "Основные обязанности должности"
 
 #: api/posts/serializers.py:56 main/models/posts.py:247
 msgid "Ilmiy va pedagogik mehnat faoliyati"
-msgstr ""
+msgstr "Научно-педагогическая работа"
 
 #: config/settings/base.py:164
 msgid "Uzbek"
-msgstr ""
+msgstr "Узбекский"
 
 #: config/settings/base.py:165
 msgid "Russion"
-msgstr ""
+msgstr "Русский"
 
 #: config/settings/base.py:166
 msgid "English"
-msgstr ""
+msgstr "Английский"
 
-#: main/admin/news.py:10
-msgid "clone post"
-msgstr ""
-
-#: main/admin/news.py:32 main/admin/news.py:92 main/admin/posts.py:43
-#: main/admin/posts.py:100
-msgid "Umumiy o'zgaruvchilar"
-msgstr ""
-
-#: main/admin/news.py:39 main/admin/news.py:99 main/admin/posts.py:107
-msgid "Media fayllar"
-msgstr ""
-
-#: main/admin/news.py:45 main/admin/news.py:105 main/admin/posts.py:113
-#: main/admin/widgets.py:83
-msgid "O'zbek tilida"
-msgstr ""
-
-#: main/admin/news.py:51 main/admin/news.py:111 main/admin/news.py:168
-#: main/admin/posts.py:61 main/admin/posts.py:119
-msgid "Automatik to'ldiriladigan fieldlar"
-msgstr ""
-
-#: main/admin/news.py:65
-msgid "Yangilik uchun tanlangan rasmli fayl"
-msgstr ""
-
-#: main/admin/news.py:125
-msgid "E'lonlar uchun tanlangan rasmli fayl"
-msgstr ""
-
-#: main/admin/posts.py:13 main/admin/posts.py:21
+#: main/admin/news.py:10 main/admin/posts.py:13 main/admin/posts.py:21
 msgid "Nusxa ko'chirish"
-msgstr ""
+msgstr "Копирование"
+
+#: main/admin/news.py:32 main/admin/news.py:104 main/admin/posts.py:43
+#: main/admin/posts.py:100 main/admin/posts.py:172
+msgid "Umumiy o'zgaruvchilar"
+msgstr "Общие переменные"
+
+#: main/admin/news.py:39 main/admin/news.py:111 main/admin/posts.py:107
+msgid "Media fayllar"
+msgstr "Медиа-файлы"
+
+#: main/admin/news.py:45 main/admin/news.py:117 main/admin/posts.py:113
+#: main/admin/posts.py:244 main/admin/posts.py:279 main/admin/posts.py:319
+#: main/admin/posts.py:357 main/admin/posts.py:443 main/admin/widgets.py:24
+#: main/admin/widgets.py:82 main/admin/widgets.py:126 main/admin/widgets.py:166
+#: main/admin/widgets.py:212 main/admin/widgets.py:240
+#: main/admin/widgets.py:267 main/admin/widgets.py:294
+#: main/admin/widgets.py:329
+msgid "O'zbek tilida"
+msgstr "На узбекском языке"
+
+#: main/admin/news.py:51 main/admin/news.py:123 main/admin/posts.py:119
+#: main/admin/posts.py:250 main/admin/posts.py:285 main/admin/posts.py:325
+#: main/admin/posts.py:363 main/admin/posts.py:449 main/admin/widgets.py:30
+#: main/admin/widgets.py:88 main/admin/widgets.py:132 main/admin/widgets.py:172
+#: main/admin/widgets.py:218 main/admin/widgets.py:246
+#: main/admin/widgets.py:273 main/admin/widgets.py:300
+#: main/admin/widgets.py:335
+msgid "Rus tilida"
+msgstr "На русском"
+
+#: main/admin/news.py:57 main/admin/news.py:129 main/admin/posts.py:125
+#: main/admin/posts.py:256 main/admin/posts.py:291 main/admin/posts.py:331
+#: main/admin/posts.py:369 main/admin/posts.py:455 main/admin/widgets.py:36
+#: main/admin/widgets.py:94 main/admin/widgets.py:138 main/admin/widgets.py:178
+#: main/admin/widgets.py:224 main/admin/widgets.py:252
+#: main/admin/widgets.py:279 main/admin/widgets.py:306
+#: main/admin/widgets.py:341
+msgid "Ingiliz tilida"
+msgstr "По-английски"
+
+#: main/admin/news.py:63 main/admin/news.py:135 main/admin/news.py:193
+#: main/admin/posts.py:61 main/admin/posts.py:131 main/admin/posts.py:375
+msgid "Automatik to'ldiriladigan fieldlar"
+msgstr "Автозаполняемые поля"
+
+#: main/admin/news.py:77
+msgid "Yangilik uchun tanlangan rasmli fayl"
+msgstr "Выбранный файл изображения для новостей"
+
+#: main/admin/news.py:149
+msgid "E'lonlar uchun tanlangan rasmli fayl"
+msgstr "Выбранный файл изображения для объявлений"
 
 #: main/admin/posts.py:53 main/models/news.py:16 main/models/posts.py:22
 #: main/models/widgets.py:59 main/models/widgets.py:74
 #: main/models/widgets.py:126 main/models/widgets.py:143
 #: main/models/widgets.py:160 main/models/widgets.py:271
 msgid "Nomi"
-msgstr ""
+msgstr "Имя"
 
-#: main/admin/posts.py:133
+#: main/admin/posts.py:145
 msgid "Post uchun tanlangan rasmli fayl"
-msgstr ""
+msgstr "Выбранный файл изображения для пост"
 
-#: main/admin/posts.py:160
-msgid "Umumiy ozgaruvchilar"
-msgstr ""
-
-#: main/admin/posts.py:165
+#: main/admin/posts.py:177
 msgid "O'zbek tilida ma'lumotlar"
-msgstr ""
+msgstr "Информация на узбекском языке"
 
-#: main/admin/posts.py:170
+#: main/admin/posts.py:183
+msgid "Rus tilida ma'lumotlar"
+msgstr "Информация на русском языке"
+
+#: main/admin/posts.py:189
+msgid "Ingiliz tilida ma'lumotlar"
+msgstr "Информация на английском языке"
+
+#: main/admin/posts.py:195
 msgid "Automatik to'ldiriladigan bo'limlar"
-msgstr ""
+msgstr "Автозаполнение разделов"
 
-#: main/admin/posts.py:180 main/admin/posts.py:232 main/admin/posts.py:253
-#: main/admin/posts.py:303 main/admin/posts.py:324
+#: main/admin/posts.py:205 main/admin/posts.py:302 main/admin/posts.py:341
+#: main/admin/posts.py:426 main/admin/posts.py:465 main/admin/posts.py:487
 msgid "Tanlangan rasm"
-msgstr ""
-
-#: main/admin/widgets.py:89
-msgid "Rus tilida"
-msgstr ""
-
-#: main/admin/widgets.py:95
-msgid "Ingiliz tilida"
-msgstr ""
+msgstr "выбранные изображения"
 
 #: main/models/news.py:17
 msgid "slug"
@@ -128,71 +146,71 @@ msgstr ""
 
 #: main/models/news.py:17
 msgid "Majburyat tug'ulmasa tegmang !"
-msgstr ""
+msgstr "Не трогай, если в этом нет необходимости"
 
 #: main/models/news.py:18 main/models/posts.py:26 main/models/posts.py:251
 #: main/models/widgets.py:145
 msgid "Tartib raqami"
-msgstr ""
+msgstr "номер последовательности"
 
 #: main/models/news.py:24 main/models/news.py:25
 msgid "Yangiliklar uchun bo'limlar"
-msgstr ""
+msgstr "Разделы для новостей"
 
 #: main/models/news.py:33 main/models/posts.py:55 main/models/posts.py:159
 #: main/models/posts.py:217 main/models/posts.py:237 main/models/widgets.py:280
 msgid "Bo'lim nomi"
-msgstr ""
+msgstr "Название раздела"
 
 #: main/models/news.py:36 main/models/news.py:76 main/models/posts.py:57
 #: main/models/posts.py:121 main/models/posts.py:143
 msgid "PDF fayl"
-msgstr ""
+msgstr "PDF-файл"
 
 #: main/models/news.py:37 main/models/news.py:77 main/models/posts.py:58
 msgid "Faqat *.pdf formatdagi faylarni yuklang"
-msgstr ""
+msgstr "Загружайте файлы только в формате *.pdf"
 
 #: main/models/news.py:40 main/models/news.py:80 main/models/posts.py:61
 msgid "Video fayl"
-msgstr ""
+msgstr "Видео файл"
 
 #: main/models/news.py:41 main/models/news.py:81 main/models/posts.py:62
 msgid "agar video fayl mavjud bo'lsa yuklang."
-msgstr ""
+msgstr "загрузите видеофайл, если есть"
 
 #: main/models/news.py:49 main/models/news.py:50
 #: view/my_context_proccessor.py:26 view/news/views.py:23 view/news/views.py:66
 msgid "Yangiliklar"
-msgstr ""
+msgstr "Новости"
 
 #: main/models/news.py:89 main/models/news.py:90
 #: view/my_context_proccessor.py:23 view/news/views.py:85
 #: view/posts/views.py:43
 msgid "E'lonlar"
-msgstr ""
+msgstr "Объявления"
 
 #: main/models/news.py:113
 msgid "Author"
-msgstr ""
+msgstr "Автор"
 
 #: main/models/news.py:114 main/models/posts.py:160 main/models/posts.py:218
 #: main/models/widgets.py:42 main/models/widgets.py:223
 #: main/models/widgets.py:239 main/models/widgets.py:255
 msgid "Sarlavha"
-msgstr ""
+msgstr "Заголовок"
 
 #: main/models/news.py:115
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 #: main/models/news.py:116
 msgid "video uchun foster"
-msgstr ""
+msgstr "постер к видео"
 
 #: main/models/news.py:117
 msgid "Video file"
-msgstr ""
+msgstr "Видео файл"
 
 #: main/models/news.py:118 main/models/posts.py:123 main/models/posts.py:222
 #: main/models/posts.py:252
@@ -201,477 +219,454 @@ msgstr ""
 
 #: main/models/news.py:118 main/models/widgets.py:46
 msgid "Majburyat tug'ulmasa tegmang"
-msgstr ""
+msgstr "Не трогай, если в этом нет необходимости"
 
 #: main/models/news.py:119 main/models/posts.py:124 main/models/widgets.py:47
 msgid "Ko'rilganlik soni"
-msgstr ""
+msgstr "Количество просмотров"
 
 #: main/models/news.py:119 main/models/widgets.py:47
 msgid "Tegilmasin !"
-msgstr ""
+msgstr "Не трогай"
 
 #: main/models/news.py:120 main/models/widgets.py:49
 msgid "Vaqt & sana"
-msgstr ""
+msgstr "Время и дата"
 
 #: main/models/news.py:126 main/models/news.py:127
 msgid "Video Galareya"
-msgstr ""
+msgstr "Видео Галерея"
 
 #: main/models/posts.py:20 main/models/posts.py:53
 msgid "object_make_user"
-msgstr ""
+msgstr "автор"
 
 #: main/models/posts.py:24
 msgid "Ko'rinish"
-msgstr ""
+msgstr "видимый"
 
 #: main/models/posts.py:25 main/models/widgets.py:45
 msgid "status"
-msgstr ""
+msgstr "статус"
 
 #: main/models/posts.py:27
 msgid "Ichki tartib raqam"
-msgstr ""
+msgstr "Внутренний порядковый номер"
 
 #: main/models/posts.py:40 main/models/posts.py:41
 msgid "Bo'limlar"
-msgstr ""
+msgstr "Департаменты"
 
 #: main/models/posts.py:64
 msgid "Fakultet"
-msgstr ""
+msgstr "Факультет"
 
 #: main/models/posts.py:64
 msgid "Agar shu post fakultet modeliga tegishli bo'lsa belgilang"
-msgstr ""
+msgstr "Отметьте, если этот пост посвящен модели факультета."
 
 #: main/models/posts.py:70 main/models/posts.py:71
 msgid "Postlar"
-msgstr ""
+msgstr "Публикации"
 
 #: main/models/posts.py:95 main/models/posts.py:120
 msgid "Fakultet nomi"
-msgstr ""
+msgstr "Название факультета"
 
 #: main/models/posts.py:96
 msgid "Hodim rasmi"
-msgstr ""
+msgstr "Фото сотрудника"
 
 #: main/models/posts.py:97 main/models/posts.py:198 main/models/posts.py:239
 #: main/models/posts.py:286 main/models/posts.py:306
 msgid "To'liq ismi"
-msgstr ""
+msgstr "Полное имя"
 
 #: main/models/posts.py:98
 msgid "Mutaxasisligi"
-msgstr ""
+msgstr "Специальность"
 
 #: main/models/posts.py:99
 msgid "Qabul kunlari"
-msgstr ""
+msgstr "Приемные дни"
 
 #: main/models/posts.py:100 main/models/posts.py:163 main/models/posts.py:200
 #: main/models/posts.py:242 main/models/posts.py:308
 msgid "Telefon raqami"
-msgstr ""
+msgstr "Номер телефона"
 
 #: main/models/posts.py:101
 msgid "E-Pochta manzili"
-msgstr ""
+msgstr "Адрес электронной почты"
 
 #: main/models/posts.py:102 main/models/widgets.py:163
 msgid "Tartib raqam"
-msgstr ""
+msgstr "Порядковый номер"
 
 #: main/models/posts.py:110 main/models/posts.py:111 view/posts/views.py:126
 msgid "Fakultet ma'muryati"
-msgstr ""
+msgstr "Администрация факультета"
 
 #: main/models/posts.py:119
 msgid "Kafedra nomi"
-msgstr ""
+msgstr "название отдела"
 
 #: main/models/posts.py:121
 msgid "Faqat PDF formatidagi faylni joylang"
-msgstr ""
+msgstr "Часто задаваемые вопросы по форматированию файлов PDF"
 
 #: main/models/posts.py:122
 msgid "To'liq matn"
-msgstr ""
+msgstr "Полный текст"
 
 #: main/models/posts.py:123
 msgid "Zarurat tug'ulmasa tegilmasin"
-msgstr ""
+msgstr "Не трогайте без необходимости"
 
 #: main/models/posts.py:130
 msgid "Kafedra"
-msgstr ""
+msgstr "Департамент"
 
 #: main/models/posts.py:131 view/posts/views.py:155
 msgid "Kafedralar"
-msgstr ""
+msgstr "Департаменты"
 
 #: main/models/posts.py:138
 msgid "Yonalish nomi"
-msgstr ""
+msgstr "название специальности"
 
 #: main/models/posts.py:139 view/posts/views.py:39
 msgid "Yilni tanlang"
-msgstr ""
+msgstr "Выберите год"
 
 #: main/models/posts.py:140 view/posts/views.py:46
 msgid "Fakultetni tanlang"
-msgstr ""
+msgstr "Выберите факультет"
 
 #: main/models/posts.py:141 view/posts/views.py:42
 msgid "Kafedrani tanlang"
-msgstr ""
+msgstr "Выберите департамент"
 
 #: main/models/posts.py:142
 msgid "Ta'lim darajasini tanlang"
-msgstr ""
+msgstr "Выберите уровень образования"
 
 #: main/models/posts.py:144
 msgid "O'qish vaqtlari"
-msgstr ""
+msgstr "Время обучения"
 
 #: main/models/posts.py:150 main/models/posts.py:151 view/posts/views.py:51
 msgid "Ta'lim dasturi katalogi"
-msgstr ""
+msgstr "Каталог образовательных программ"
 
 #: main/models/posts.py:161 main/models/widgets.py:192
 msgid "Rasm"
-msgstr ""
+msgstr "Картина"
 
 #: main/models/posts.py:162 main/models/posts.py:199 main/models/posts.py:241
 msgid "E-Pochta"
-msgstr ""
+msgstr "Электронная почта"
 
 #: main/models/posts.py:164
 msgid "Manzil"
-msgstr ""
+msgstr "Адрес"
 
 #: main/models/posts.py:165
 msgid "E-Manzil"
-msgstr ""
+msgstr "Электронный адрес"
 
-#: main/models/posts.py:175 main/models/posts.py:176
+#: main/models/posts.py:175 main/models/posts.py:176 templates/base.html:298
 msgid "Bog'lanish"
-msgstr ""
+msgstr "Связь"
 
 #: main/models/posts.py:196 main/models/posts.py:238 main/models/posts.py:285
 #: main/models/posts.py:302
 msgid "Rasmi"
-msgstr ""
+msgstr "Картина"
 
 #: main/models/posts.py:197 main/models/posts.py:240 main/models/posts.py:304
 msgid "Lavozimi"
-msgstr ""
+msgstr "Позиция"
 
 #: main/models/posts.py:201
 msgid "Qo'shimcha Telefon raqami"
-msgstr ""
+msgstr "Дополнительный номер телефона"
 
 #: main/models/posts.py:202
 msgid "Bo'lim va markaz nomi"
-msgstr ""
+msgstr "Название отделения и центра"
 
 #: main/models/posts.py:211 main/models/posts.py:212
 msgid "Bo'lim va Markazlar xodimlari"
-msgstr ""
+msgstr "Сотрудники кафедры и центров"
 
 #: main/models/posts.py:219 view/posts/views.py:181
 msgid "Xaqida"
-msgstr ""
+msgstr "О"
 
 #: main/models/posts.py:220
 msgid "Maqsad"
-msgstr ""
+msgstr "Цель"
 
 #: main/models/posts.py:221 view/posts/views.py:184
 msgid "Faoliyati"
-msgstr ""
+msgstr "Активность"
 
 #: main/models/posts.py:231 main/models/posts.py:232
 msgid "Bo'lim va Markazlar"
-msgstr ""
+msgstr "Департамент и центры"
 
 #: main/models/posts.py:243
 msgid "Qabul vaqti"
-msgstr ""
+msgstr "Время приема"
 
 #: main/models/posts.py:248
 msgid "Facebook manzili"
-msgstr ""
+msgstr "адрес Facebook"
 
 #: main/models/posts.py:249
 msgid "Instagram manzili"
-msgstr ""
+msgstr "Адрес Инстаграм"
 
 #: main/models/posts.py:250
 msgid "Linkedin manzili"
-msgstr ""
+msgstr "адрес в Linkedin"
 
 #: main/models/posts.py:262 main/models/posts.py:263
 msgid "Insitut raxbariyati"
-msgstr ""
+msgstr "Руководство института"
 
 #: main/models/posts.py:287
 msgid "Ta'laba xaqida"
-msgstr ""
+msgstr "О студенте"
 
 #: main/models/posts.py:296 main/models/posts.py:297 view/posts/views.py:52
 msgid "Iqtidorli talabalar"
-msgstr ""
+msgstr "Талантливые студенты"
 
 #: main/models/posts.py:301
 msgid "post"
-msgstr ""
+msgstr "пост"
 
 #: main/models/posts.py:307
 msgid "Email"
-msgstr ""
+msgstr "Электронная почта"
 
 #: main/models/widgets.py:13
 msgid "Asosiy"
-msgstr ""
+msgstr "Основной"
 
 #: main/models/widgets.py:14
 msgid "Ichki"
-msgstr ""
+msgstr "Внутренний"
 
 #: main/models/widgets.py:18 view/posts/views.py:40
 msgid "Bakalavriat"
-msgstr ""
+msgstr "Бакалавриат"
 
 #: main/models/widgets.py:19 view/posts/views.py:44
 msgid "Magistraturat"
-msgstr ""
+msgstr "Магистратура"
 
 #: main/models/widgets.py:23
 msgid "Kundizgi"
-msgstr ""
+msgstr "Дневное время"
 
 #: main/models/widgets.py:24
 msgid "Kechgi"
-msgstr ""
+msgstr "Вечер"
 
 #: main/models/widgets.py:25
 msgid "Sirtqi"
-msgstr ""
+msgstr "Внешне"
 
 #: main/models/widgets.py:29
 msgid "Published"
-msgstr ""
+msgstr "Опубликовано"
 
 #: main/models/widgets.py:30
 msgid "Pendding"
-msgstr ""
+msgstr "В ожидании"
 
 #: main/models/widgets.py:34
 msgid "Bo'lim boshlig'i"
-msgstr ""
+msgstr "глава отделения"
 
 #: main/models/widgets.py:35
 msgid "Bosh mutaxasis"
-msgstr ""
+msgstr "Главный специалист"
 
 #: main/models/widgets.py:36
 msgid "Yetakchi mutaxasis"
-msgstr ""
+msgstr "Ведущий специалист"
 
 #: main/models/widgets.py:41
 msgid "Asosiy rasm"
-msgstr ""
+msgstr "Главное фото"
 
 #: main/models/widgets.py:43
 msgid "Qisqacha mazmun"
-msgstr ""
+msgstr "Краткое содержание"
 
 #: main/models/widgets.py:44
 msgid "To'liq mazmuni"
-msgstr ""
+msgstr "Полный контент"
 
 #: main/models/widgets.py:48
 msgid "Muallifi"
-msgstr ""
+msgstr "Автор"
 
 #: main/models/widgets.py:67 main/models/widgets.py:68
 msgid "Hashtaglar"
-msgstr ""
+msgstr "Хэштеги"
 
 #: main/models/widgets.py:74
 msgid "ishtimoiy tarmoq nomlarini kiriting, m: facebook, instagram"
-msgstr ""
+msgstr "введите названия социальных сетей, м: facebook, instagram"
 
 #: main/models/widgets.py:75
 msgid "Icon"
-msgstr ""
+msgstr "Икона"
 
 #: main/models/widgets.py:75
 msgid ""
 "messangerning icon class nomi, class nomlarini olish uchun https://"
 "fontawesome.com/v5/search shu saytga kiring, m: fab fa-facebook"
 msgstr ""
+"имя класса значка мессенджера, чтобы получить имена классовзайдите на этот "
+"сайт https://fontawesome.com/v5/search, m: fab fa-facebook"
 
 #: main/models/widgets.py:76
 msgid "rangi"
-msgstr ""
+msgstr "цвет"
 
 #: main/models/widgets.py:77
 msgid "url manzil"
-msgstr ""
+msgstr "URL-адрес"
 
 #: main/models/widgets.py:86 main/models/widgets.py:87
 #: view/my_context_proccessor.py:29
 msgid "Ijtimoiy tarmoqlar"
-msgstr ""
+msgstr "Социальные сети"
 
 #: main/models/widgets.py:95
 msgid "Bosh sahifa uchun rasm"
-msgstr ""
+msgstr "Изображение для главной страницы"
 
 #: main/models/widgets.py:102 main/models/widgets.py:103
 msgid "Bosh sahifa uchun rasmlar"
-msgstr ""
+msgstr "Картинки для главной страницы"
 
 #: main/models/widgets.py:127
 msgid "rasmi"
-msgstr ""
+msgstr "картина"
 
 #: main/models/widgets.py:128
 msgid "Saytga havola"
-msgstr ""
+msgstr "Ссылка на сайт"
 
 #: main/models/widgets.py:144
 msgid "url manzili"
-msgstr ""
+msgstr "URL-адрес"
 
 #: main/models/widgets.py:161
 msgid "icon"
-msgstr ""
+msgstr "икона"
 
 #: main/models/widgets.py:162
 msgid "soni"
-msgstr ""
+msgstr "номер"
 
 #: main/models/widgets.py:169 main/models/widgets.py:170
 msgid "Statistika"
-msgstr ""
+msgstr "Статистика"
 
 #: main/models/widgets.py:178
 msgid "Yilni kiriting"
-msgstr ""
+msgstr "Введите год"
 
 #: main/models/widgets.py:183
 msgid "Yil"
-msgstr ""
+msgstr "Год"
 
 #: main/models/widgets.py:184
 msgid "Yillar"
-msgstr ""
+msgstr "Годы"
 
 #: main/models/widgets.py:199 main/models/widgets.py:200 view/news/views.py:132
 msgid "Rasmlar"
-msgstr ""
+msgstr "Картинки"
 
 #: main/models/widgets.py:224 main/models/widgets.py:240
 #: main/models/widgets.py:256
 msgid "To'liq Matn"
-msgstr ""
+msgstr "Полный текст"
 
 #: main/models/widgets.py:233 main/models/widgets.py:234
 msgid "Bayroq"
-msgstr ""
+msgstr "Флаг"
 
 #: main/models/widgets.py:249 main/models/widgets.py:250
 msgid "Gerb"
-msgstr ""
+msgstr "герб"
 
 #: main/models/widgets.py:265 main/models/widgets.py:266
 msgid "Madhiya"
-msgstr ""
+msgstr "Гимн"
 
 #: main/models/widgets.py:281
 msgid "Savol"
-msgstr ""
+msgstr "Вопрос"
 
 #: main/models/widgets.py:282
 msgid "Javob"
-msgstr ""
+msgstr "Отвечать"
 
 #: main/models/widgets.py:283
 msgid "Aktiv"
-msgstr ""
+msgstr "Активный"
 
 #: main/models/widgets.py:292 main/models/widgets.py:293
 #: view/widgets/views.py:60
 msgid "Ko'p beriladigan savollar"
-msgstr ""
+msgstr "Часто задаваемые вопросы"
 
 #: templates/base.html:62
-msgid ""
-"\n"
-"                            Sayt bo'ylab qidiruv\n"
-"                        "
-msgstr ""
+msgid "Sayt bo'ylab qidiruv"
+msgstr "Поиск по всему сайту"
 
-#: templates/base.html:82
-msgid ""
-"\n"
-"                            Bekor qilish\n"
-"                        "
-msgstr ""
+#: templates/base.html:80
+msgid "Bekor qilish"
+msgstr "Отмена"
 
-#: templates/base.html:136
-msgid ""
-"\n"
-"                                        Hemis talaba\n"
-"                                    "
-msgstr ""
+#: templates/base.html:132
+msgid "Hemis talaba"
+msgstr "Хемис - студент"
 
-#: templates/base.html:143
-msgid ""
-"\n"
-"                                        Hemis o‘qituvchi  \n"
-"                                    "
-msgstr ""
+#: templates/base.html:137
+msgid "Hemis o‘qituvchi"
+msgstr "Хемис — учитель"
 
-#: templates/base.html:150
-msgid ""
-"\n"
-"                                        Dars jadvali\n"
-"                                    "
-msgstr ""
+#: templates/base.html:142
+msgid "Dars jadvali"
+msgstr "Расписание занятий"
 
-#: templates/base.html:157
-msgid ""
-"\n"
-"                                        TKTI Kutubxona\n"
-"                                    "
-msgstr ""
+#: templates/base.html:147
+msgid "TKTI Kutubxona"
+msgstr "Библиотека ТКТИ"
 
-#: templates/base.html:174
-msgid ""
-"\n"
-"                                        Yana\n"
-"                                    "
-msgstr ""
+#: templates/base.html:162
+msgid "Yana"
+msgstr "Снова"
 
-#: templates/base.html:181
-msgid ""
-"\n"
-"                                                Kutubxona\n"
-"                                            "
-msgstr ""
+#: templates/base.html:167
+msgid "Kutubxona"
+msgstr "Библиотека"
 
-#: templates/base.html:284
+#: templates/base.html:268
 msgid ""
-"\n"
-"                            Toshkent kimyo-texnologiya instituti kimyoviy "
-"texnologiya, oziq-ovqat texnologiya,\n"
+"Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat "
+"texnologiya,\n"
 "                            neft va gazni qayta ishkash texnologiyasi, "
 "ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy "
 "kadrlarni tayyorlash, \n"
@@ -686,84 +681,68 @@ msgid ""
 "neft va gaz asosida olinadigan mahsulotlar turlarini ko‘paytirish, "
 "ikkilamchi xomashyo va sanoat chiqindilaridan samarali \n"
 "                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari olib "
-"borilmoqda.\n"
-"                        "
+"borilmoqda."
 msgstr ""
+"Ташкентский химико-технологический институт является базовым высшим учебным "
+"заведением по подготовке, переподготовке и повышению квалификации "
+"высококвалифицированных специалистов и научных кадров для химической "
+"технологии, пищевой технологии, технологии переработки нефти и газа, "
+"экологии и других областей. Разработка экологически чистых, "
+"импортозамещающих и экспортных, энергосберегающих технологий производства "
+"зеленой химии, энергетики и пищевых продуктов, направленных на решение "
+"текущих проблем производственных отраслей и предприятий Узбекистана, "
+"расширение местной минерально-сырьевой базы, нефти. проводятся научно-"
+"исследовательские и опытно-конструкторские работы по увеличению видов "
+"газовой продукции, эффективному использованию вторичного сырья и "
+"промышленных отходов."
 
-#: templates/base.html:304
-msgid ""
-"\n"
-"                            Havolalar     \n"
-"                        "
-msgstr ""
+#: templates/base.html:286
+msgid "Havolalar"
+msgstr "Быстрые ссылки"
 
-#: templates/base.html:318
-msgid ""
-"\n"
-"                            Bog'lanish\n"
-"                        "
-msgstr ""
+#: templates/base.html:303
+msgid "Navoiy ko’chasi, 32-uy, Toshkent, O'zbekiston, 100011"
+msgstr "улица Навои, 32, Ташкент, Узбекистан, 100011"
 
-#: templates/base.html:325
-msgid ""
-"\n"
-"                                    Navoiy ko’chasi, 32-uy, Toshkent, "
-"O'zbekiston, 100011\n"
-"                                "
-msgstr ""
-
-#: templates/base.html:330
-msgid ""
-" \n"
-"                                    Jamoat transporti:\n"
-"                                    <ul class=\"\">\n"
-"                                        <li style=\"list-style-type: "
-"symbols('-');\">\n"
-"                                            65, 25, 148, 55, 14, 147\n"
-"                                        </li>\n"
-"                                    </ul>\n"
-"                                "
-msgstr ""
+#: templates/base.html:306
+msgid "Jamoat transporti:"
+msgstr "Общественный транспорт:"
 
 #: view/my_context_proccessor.py:21
 msgid "oldinga"
-msgstr ""
+msgstr "вперед"
 
 #: view/my_context_proccessor.py:22
 msgid "ortga"
-msgstr ""
+msgstr "назад"
 
 #: view/my_context_proccessor.py:24
 msgid "Eng so'ngi"
-msgstr ""
+msgstr "Последний"
 
 #: view/my_context_proccessor.py:27
 msgid "Foto lavhalar"
-msgstr ""
+msgstr "Фотографии"
 
 #: view/my_context_proccessor.py:28
 msgid "Tezkor havolalar"
-msgstr ""
+msgstr "Быстрые ссылки"
 
 #: view/news/views.py:43
 msgid "Yangilik"
-msgstr ""
+msgstr "Новости"
 
 #: view/news/views.py:105
 msgid "E'lon"
-msgstr ""
+msgstr "Анонс"
 
-#: view/news/views.py:149
+#: view/news/views.py:149 view/news/views.py:169
 msgid "Video lavhalar"
-msgstr ""
-
-#: view/news/views.py:169
-msgid "Video Lavhalar"
-msgstr ""
+msgstr "Видео"
 
 #: view/posts/views.py:16
 msgid "Biz xaqimizda"
-msgstr ""
+msgstr "О нас"
 
 #: view/posts/views.py:17
 msgid ""
@@ -780,7 +759,15 @@ msgid ""
 "hisoblanadi.\n"
 "        "
 msgstr ""
-
+"\n"
+"Ташкентский химико-технологический институт (ТХТИ, http://tkti.uz) - "
+"химическая технология (органические и неорганические вещества, полимеры, "
+"силикатные и труднорастворимые материалы, химическая технология редких и "
+"редких металлов), пищевая технология, нефть и газоперерабатывающие работы, "
+"экология, биотехнология, энология, технология переработки целлюлозы и "
+"древесины и др. – один из ведущих университетов Центральной Азии, "
+"специализирующийся на подготовке высококвалифицированных специалистов.\n"
+"       "
 #: view/posts/views.py:23
 msgid ""
 "\n"
@@ -795,7 +782,16 @@ msgid ""
 "mingdan ortiq yuqori malakali muhandis-texnologlar tayyorladi.\n"
 "        "
 msgstr ""
-
+"\n"
+"Ташкентский химико-технологический институт был создан Указом Президента "
+"Республики Узбекистан от 6 мая 1991 года. ТКТИ создан на базе нескольких "
+"факультетов бывшего Ташкентского политехнического института, действующего с "
+"1929 года, в целях повышения уровня высшего технического образования и "
+"подготовки инженерных и научных кадров в республике. За время своей "
+"деятельности институт подготовил более 10 тысяч высококвалифицированных "
+"инженеров и технологов для химической, нефтегазовой, пищевой, строительной "
+"промышленности и других отраслей экономики нашей страны.\n"
+"       "
 #: view/posts/views.py:29
 msgid ""
 "\n"
@@ -809,83 +805,91 @@ msgid ""
 "mavjud.\n"
 "        "
 msgstr ""
-
+"\n"
+"Ташкентский химико-технологический институт является ведущим химико-"
+"технологическим высшим учебным заведением Узбекистана и осуществляет "
+"образовательную, научно-исследовательскую, педагогическую и образовательную "
+"деятельность. В структуру института входят главный корпус в Ташкенте, "
+"филиалы в Шахрисабзе и Янгиере. Главный кампус в Ташкенте имеет 5 "
+"факультетов, 24 кафедры, 6 производственно-учебных центров и 12 научных "
+"лабораторий.\n"
+"       "
 #: view/posts/views.py:36
 msgid "Barchasi"
-msgstr ""
+msgstr "Все"
 
 #: view/posts/views.py:37
 msgid "Qidirish"
-msgstr ""
+msgstr "поиск"
 
 #: view/posts/views.py:38
 msgid "Bosh sahifa"
-msgstr ""
+msgstr "Главная страница"
 
 #: view/posts/views.py:41
 msgid "Fakultetlar"
-msgstr ""
+msgstr "Факультеты"
 
 #: view/posts/views.py:45
 msgid "Ta'lim turini tanlang"
-msgstr ""
+msgstr "Выберите тип образования"
 
 #: view/posts/views.py:47
 msgid "Videolar"
-msgstr ""
+msgstr "Видео"
 
 #: view/posts/views.py:48
 msgid "Top yangiliklar"
-msgstr ""
+msgstr "Главные новости"
 
 #: view/posts/views.py:49
 msgid "tarkibidagi kafedralar"
-msgstr ""
+msgstr "отделы внутри"
 
 #: view/posts/views.py:50
 msgid "Eng so'ngi yangiliklar"
-msgstr ""
+msgstr "Последние новости"
 
 #: view/posts/views.py:53 view/widgets/views.py:83
 msgid "Afsuski hechqanday ma'lumot topilmadi :("
-msgstr ""
+msgstr "К сожалению, никакой информации не найдено :("
 
 #: view/posts/views.py:104
 msgid "Asosiy sahifa"
-msgstr ""
+msgstr "Главная страница"
 
 #: view/posts/views.py:105
 msgid "Afsuski hozircha ma'lumotlar topilmadi :("
-msgstr ""
+msgstr "К сожалению, никакой информации не найдено :("
 
 #: view/posts/views.py:127
 msgid "Fakultet kafedralari"
-msgstr ""
+msgstr "Кафедры факультета"
 
 #: view/posts/views.py:182
-msgid "Masadi"
-msgstr ""
+msgid "Maqsadi"
+msgstr "Цель"
 
 #: view/posts/views.py:183
 msgid "Xodimlar"
-msgstr ""
+msgstr "Сотрудники"
 
 #: view/widgets/views.py:20
 msgid "Sayt haritasi"
-msgstr ""
+msgstr "Карта сайта"
 
 #: view/widgets/views.py:30
 msgid "O`zbekiston Respublikasining davlat bayrog`i"
-msgstr ""
+msgstr "Государственный флаг Республики Узбекистан."
 
 #: view/widgets/views.py:40
 msgid "O`zbekiston Respublikasining davlat gerbi"
-msgstr ""
+msgstr "Государственный герб Республики Узбекистан."
 
 #: view/widgets/views.py:50
 msgid "O`zbekiston Respublikasining davlat madhiyasi"
-msgstr ""
+msgstr "Государственный гимн Республики Узбекистан."
 
 #: view/widgets/views.py:82
 msgid "Qidituv natijalari"
-msgstr ""
+msgstr "Результаты поиска"

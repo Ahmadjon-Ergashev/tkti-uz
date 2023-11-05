@@ -59,16 +59,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        {% blocktrans %}
-                            Sayt bo'ylab qidiruv
-                        {% endblocktrans %}
+                        {% blocktrans %}Sayt bo'ylab qidiruv{% endblocktrans %}
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{% url 'search' %}" method="post"> {% csrf_token %}
                         <div class="input-group">
-                            <input type="search" name="search_query" class="form-control" placeholder="......">
+                            <input type="search" name="search_query" class="form-control" placeholder="">
                             <div class="input-group-append">
                                 <button class="search_btn" type="submit">
                                     <i class="fa fa-search"></i>
@@ -79,9 +77,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="search_btn" data-bs-dismiss="modal">
-                        {% blocktrans %}
-                            Bekor qilish
-                        {% endblocktrans %}
+                        {% blocktrans %}Bekor qilish{% endblocktrans %}
                     </button>
                 </div>
             </div>
@@ -133,30 +129,22 @@
                         <ul>
                             <li class="me-2">
                                 <a href="https://student.tcti.uz/dashboard/login" target="_blank">
-                                    {% blocktrans %}
-                                        Hemis talaba
-                                    {% endblocktrans %}
+                                    {% blocktrans %}Hemis talaba{% endblocktrans %}
                                 </a>
                             </li>
                             <li class="me-2">
                                 <a href="https://hemis.tcti.uz/dashboard/login" target="_blank">
-                                    {% blocktrans %}
-                                        Hemis o‘qituvchi  
-                                    {% endblocktrans %}
+                                    {% blocktrans %}Hemis o‘qituvchi{% endblocktrans %}
                                 </a>
                             </li>
                             <li class="me-2">
                                 <a href="https://tkti-2023.edupage.org/timetable/view.php" target="_blank">
-                                    {% blocktrans %}
-                                        Dars jadvali
-                                    {% endblocktrans %}
+                                    {% blocktrans %}Dars jadvali{% endblocktrans %}
                                 </a>
                             </li>
                             <li class="me-2">
                                 <a href="https://new.akbt.uz/uz" target="_blank">
-                                    {% blocktrans %}
-                                        TKTI Kutubxona
-                                    {% endblocktrans %}
+                                    {% blocktrans %}TKTI Kutubxona{% endblocktrans %}
                                 </a>
                             </li>
                             <li class="me-2">
@@ -171,16 +159,12 @@
                             </li>
                             <!-- <li>
                                 <a href="" class="p-0 again btn btn-sm dropdown-toggle dropdown-toggle-split" id="again_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {% blocktrans %}
-                                        Yana
-                                    {% endblocktrans %}
+                                    {% blocktrans %}Yana{% endblocktrans %}
                                 </a>
                                 <ul class="dropdown-menu again_dr" aria-labelledby="again_dropdown">
                                     <li>
                                         <a href="">
-                                            {% blocktrans %}
-                                                Kutubxona
-                                            {% endblocktrans %}
+                                            {% blocktrans %}Kutubxona{% endblocktrans %}
                                         </a>
                                     </li>
                                 </ul>
@@ -281,15 +265,13 @@
                         INSTITUTI
                     </h4>
                     <p class="pr-5 text-white-50">
-                        {% blocktrans %}
-                            Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat texnologiya,
+                        {% blocktrans %}Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat texnologiya,
                             neft va gazni qayta ishkash texnologiyasi, ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy kadrlarni tayyorlash, 
                             qayta tayyorlash va ularning malakasini oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.
                             Institutda O‘zbekiston ishlab chiqarish soha va korxonalarining dolzarb muammolarini hal etishga qaratilgan yashil kimyo, 
                             energetika va oziq-ovqat mahsulotlari ishlab chiqarish uchun ekologik toza, import o‘rnini bosuvchi va eksportbop, energiya tejovchi texnologiyalarni ishlab chiqish, 
                             mahalliy mineral xomashyo bazasini kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali 
-                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari olib borilmoqda.
-                        {% endblocktrans %}
+                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari olib borilmoqda.{% endblocktrans %}
                     </p>
                     <p>
                         {% for nets in social_networks %}                            
@@ -301,9 +283,7 @@
                 </div>
                 <div class="col-lg-3 col-xs-12 links">
                     <h4 class="mt-lg-0 mt-sm-3">
-                        {% blocktrans %}
-                            Havolalar     
-                        {% endblocktrans %}
+                        {% blocktrans %}Havolalar{% endblocktrans %}
                     </h4>
                     <ul class="m-0 p-0">
                         {% for ql in quick_links %}
@@ -315,26 +295,20 @@
                 </div>
                 <div class="col-lg-4 col-xs-12 location">
                     <h4 class="mt-lg-0 mt-sm-5">
-                        {% blocktrans %}
-                            Bog'lanish
-                        {% endblocktrans %}
+                        {% blocktrans %}Bog'lanish{% endblocktrans %}
                     </h4>
                     <p class="contact-footer">
                         <ul class="list-group list-unstyled">
                             <li class=""><i class="fas fa-map-marker-alt me-2"></i>
-                                {% blocktrans %}
-                                    Navoiy ko’chasi, 32-uy, Toshkent, O'zbekiston, 100011
-                                {% endblocktrans %}
+                                {% blocktrans %}Navoiy ko’chasi, 32-uy, Toshkent, O'zbekiston, 100011{% endblocktrans %}
                             </li>
                             <li><i class="fas fa-bus me-2"></i>
-                                {% blocktrans %} 
-                                    Jamoat transporti:
+                                {% blocktrans %}Jamoat transporti:{% endblocktrans %} 
                                     <ul class="">
                                         <li style="list-style-type: symbols('-');">
                                             65, 25, 148, 55, 14, 147
                                         </li>
                                     </ul>
-                                {% endblocktrans %} 
                             </li>
                             <li><i class="fas fa-phone-alt me-2"></i>
                                 +998 71 244-79-17

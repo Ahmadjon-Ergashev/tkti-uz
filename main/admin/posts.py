@@ -111,19 +111,19 @@ class PostsAdmin(GuardedModelAdmin):
             ),
         }),
         (_("O'zbek tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_uz", "subtitle_uz", "post_uz"                
             ),
         }),
         (_("Rus tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_ru", "subtitle_ru", "post_ru"                
             ),
         }),
         (_("Ingiliz tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_en", "subtitle_en", "post_en"                
             ),

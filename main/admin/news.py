@@ -43,19 +43,18 @@ class NewsAdmin(admin.ModelAdmin):
             ),
         }),
         (_("O'zbek tilida"), {
-            "classes": ("collapse"),
             "fields": (
                 "title_uz", "post_uz"                
             ),
         }),
         (_("Rus tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_ru", "post_ru"                
             ),
         }),
         (_("Ingiliz tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_en", "post_en"                
             ),
@@ -115,19 +114,19 @@ class AdsAdmin(admin.ModelAdmin):
             ),
         }),
         (_("O'zbek tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_uz", "post_uz"                
             ),
         }),
         (_("Rus tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_ru", "post_ru"                
             ),
         }),
         (_("Ingiliz tilida"), {
-            "classes": ("collapse"),
+            "classes": ("collapse", ),
             "fields": (
                 "title_en", "post_en"                
             ),
