@@ -218,6 +218,15 @@ class DepartmentsAdmin(admin.ModelAdmin):
     list_display_links = ("name_uz", )
     list_display = ("id", "name_uz", "faculty")
 
+    # fieldsets = (
+    #     (None, {
+    #         "fields": (
+                
+    #         ),
+    #     }),
+    # )
+    
+
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
             try:
