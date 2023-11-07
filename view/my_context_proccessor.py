@@ -19,8 +19,12 @@ def global_variables(request):
 
         # text variables
         "next": _("oldinga"),
+        "about": _("Xaqida"),
         "previous": _("ortga"),
+        "target": _("Maqsadi"),
         "ads_tab": _("E'lonlar"),
+        "workers": _("Xodimlar"),
+        "activity": _("Faoliyati"),
         "latest" : _("Eng so'ngi"),
         "read_more": _("Batafsil"),
         "news_tab": _("Yangiliklar"),

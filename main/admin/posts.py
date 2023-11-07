@@ -100,7 +100,7 @@ class PostsAdmin(GuardedModelAdmin):
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                "navbar", "status", "faculty",
+                "navbar", "status",
                 "added_at", "author_post"                 
             ),
         }), 
@@ -133,6 +133,7 @@ class PostsAdmin(GuardedModelAdmin):
             "fields": (
                 "author",
                 "slug",
+                "faculty",
                 "post_viewed_count",
                 "update_user",
                 "updated_at"
@@ -207,7 +208,7 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
             try:
-                kwargs["queryset"] = posts.Posts.objects.filter(navbar__slug="fakultet")
+                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
             except Exception as e:
                 kwargs["queryset"] = posts.Posts.objects.none()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
@@ -215,16 +216,42 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
 
 @admin.register(posts.Departments)
 class DepartmentsAdmin(admin.ModelAdmin):
+    search_fields = ("name_uz", )
     list_display_links = ("name_uz", )
     list_display = ("id", "name_uz", "faculty")
+    readonly_fields = ("added_at", "post_viewed_count")
 
-    # fieldsets = (
-    #     (None, {
-    #         "fields": (
-                
-    #         ),
-    #     }),
-    # )
+    fieldsets = (
+        (None, {
+            "fields": (
+                "faculty", "pdf_file"
+            ),
+        }),
+        (_("O'zbek tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", "about_uz", "target_uz", "activity_uz" 
+            ),
+        }),        
+        (_("Rus tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", "about_ru", "target_ru", "activity_ru" 
+            ),
+        }),        
+        (_("Ingiliz tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", "about_en", "target_en", "activity_en" 
+            ),
+        }), 
+        (_("Automatik to'ldiriladigan bo'limlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "slug", "added_at", "post_viewed_count"
+            )
+        })
+    )
     
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
@@ -239,10 +266,62 @@ class DepartmentsAdmin(admin.ModelAdmin):
         return {"slug": ("name_uz", )}
 
 
+@admin.register(posts.DepartmentsAdmistrations)
+class DeptAdminstraAdmin(admin.ModelAdmin):
+    actions = [clone]
+    search_fields = ("f_name_uz", )
+    list_editable = ("order_num", ) 
+    list_display_links = ("f_name_uz", )
+    autocomplete_fields = ("department", )
+    readonly_fields = ("get_image", "added_at", "updated_at", )
+    list_display = ("id", "f_name_uz", "department", "order_num", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "department", ("image", "get_image"),
+                "phone_number", "email"   
+            ),
+        }),
+        (_("O'zbek tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_uz", "job_name_uz", "admission_day_uz"
+            ),
+        }),        
+        (_("Rus tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_ru", "job_name_ru", "admission_day_ru"
+            ),
+        }),        
+        (_("Ingiliz tilida ma'lumotlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "f_name_en", "job_name_en", "admission_day_en"
+            ),
+        }),        
+        (_("Automatik to'ldiriladigan bo'limlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "added_at", "updated_at"
+            )
+        })
+    )
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
+    get_image.short_description = _("Tanlangan rasm")
+
+
+
 @admin.register(posts.StudyProgram)
 class StudyAdmin(admin.ModelAdmin):
+    readonly_fields = ("added_at", )
     list_display_links = ("title_uz", )
-    list_display = ("id", "title_uz", "year", "faculty")
+    autocomplete_fields = ("department", )
+    search_fields = ("title_uz", "title_ru", "title_en")
+    list_display = ("id", "title_uz", "year", "faculty", "department", "added_at")
 
     fieldsets = (
         (None, {
@@ -268,7 +347,21 @@ class StudyAdmin(admin.ModelAdmin):
                 "title_en", 
             ),
         }),
+        (_("Automatik to'ldiriladigan bo'limlar"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "added_at",
+            )
+        })
     )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            try:
+                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True).all()
+            except Exception as e:
+                kwargs["queryset"] = posts.Posts.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
 
 
@@ -352,9 +445,11 @@ class WorkersAdmin(admin.ModelAdmin):
 
 @admin.register(posts.SectionsAndCenters)
 class SectionsAdmin(admin.ModelAdmin):
+    actions = [duplicate]
     list_display_links = ("title_uz", )
     list_display = ("id", "title_uz", "added_at")
     prepopulated_fields = ({"slug": ("title_uz", )})
+    search_fields = ("title_uz", "title_ru", "title_en")
 
 
     fieldsets = (

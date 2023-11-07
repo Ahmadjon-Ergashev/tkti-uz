@@ -22,7 +22,12 @@ class FacultyAdministrationTranslation(TranslationOptions):
 
 @register(posts.Departments)
 class DepartmentsTranslation(TranslationOptions):
-    fields = ("name", "post")
+    fields = ("name", "about", "target", "activity")
+
+
+@register(posts.DepartmentsAdmistrations)
+class DepartmentsAdmistrationsTranslation(TranslationOptions):
+    fields = ("f_name", "job_name", "admission_day")
 
 
 @register(posts.StudyProgram)

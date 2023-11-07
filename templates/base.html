@@ -351,6 +351,8 @@
     <script src="{% static 'js/scripts/carusels.js' %}"></script>
     <script>
         $("#id_year").on("change", () => {
+            $("#id_type").empty()
+            $("#id_type").append(`<option value="">--------------------</option>`)
             select_type = `
                 <option value="high">{{ high_degree }}</option>
                 <option value="high">{{ higher_degree }}</option>

@@ -119,7 +119,9 @@ class Departments(models.Model):
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
-    post = QuillField(null=True, blank=True, verbose_name=_("To'liq matn"))
+    about = QuillField(verbose_name=_("Xaqida"), null=True, blank=True)
+    target = QuillField(verbose_name=_("Maqsad"), null=True, blank=True)
+    activity = QuillField(verbose_name=_("Faoliyati"), null=True, blank=True)
     slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True, help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
     post_viewed_count = models.IntegerField(_("Ko'rilganlik soni"), default=0)
     added_at = models.DateTimeField(auto_now_add=True)
@@ -127,11 +129,37 @@ class Departments(models.Model):
     class Meta:
         db_table = "departments"
         managed = True
+        ordering = ["-added_at"]
         verbose_name = _("Kafedra")
         verbose_name_plural = _("Kafedralar")
 
     def __str__(self):
         return self.name
+
+
+class DepartmentsAdmistrations(models.Model):
+    """ adminstrations of departments """
+    department = models.ForeignKey(Departments, verbose_name=_("Kafedrani tanglang"), on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/departmentsadminstations/", default="default/adminstrations.png")
+    f_name = models.CharField(verbose_name=_("To'liq ismi"), max_length=120, null=True)
+    job_name = models.CharField(verbose_name=_("Mutaxasisligi"), max_length=120, null=True)
+    admission_day = models.CharField(verbose_name=_("Qabul kunlari"), max_length=150, null=True)
+    phone_number = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True)
+    email = models.EmailField(verbose_name=_("E-Pochta manzili"), max_length=120, null=True)
+    order_num = models.IntegerField(default=0, verbose_name=_("Tartib raqam"))
+    added_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.f_name
+    
+    class Meta:
+        db_table = 'dept_adminstrations'
+        managed = True
+        ordering = ["order_num"]
+        verbose_name = _("Kafedra ma'muryati")
+        verbose_name_plural = _("Kafedra ma'muryati")
+
 
 
 class StudyProgram(models.Model):
@@ -219,7 +247,7 @@ class SectionsAndCenters(models.Model):
     about = QuillField(verbose_name=_("Xaqida"), null=True)
     target = QuillField(verbose_name=_("Maqsad"), null=True)
     activity = QuillField(verbose_name=_("Faoliyati"), null=True, blank=True)
-    slug = models.SlugField(_("Slug"), null=True)
+    slug = models.SlugField(_("Slug"), max_length=255, null=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

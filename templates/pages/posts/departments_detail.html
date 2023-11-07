@@ -72,7 +72,7 @@
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
-                    <h1 class="text-center">{{ object.name }}</h1>
+                    <h1 class="text-center fw-bold">{{ object.name }}</h1>
                     {% if object.pdf_file %}
                         <div class="post_pdf mt-3">
                             <iframe 
@@ -80,17 +80,85 @@
                                 width="100%" 
                                 height="700" 
                                 style="border:0;" 
-                                allowfullscreen="" 
+                                allowfullscreen="true" 
                                 loading="lazy" 
                                 referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
                     {% endif %}
-                    {% if object.post %}
-                        <div class="post_text mt-3" id="object_post">
-                            {{ object.post.html | safe }}
+                    <br><hr>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <h5 class=" fw-bold">{{ about }}</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse show" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ object.about.html | safe }}
+                                </div>
+                            </div>
                         </div>
-                    {% endif %}
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                    <h5 class=" fw-bold">{{ target }}</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ object.target.html | safe }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                    <h5 class=" fw-bold">{{ activity }}</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ object.activity.html | safe }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                    <h5 class=" fw-bold">{{ workers }}</h5>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        {% for worker in object.departmentsadmistrations_set.all %}
+                                            <div class="col-12 col-md-12 mb-2 p-1">
+                                                <div class="card mb-3">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-3">
+                                                            <img src="{{ worker.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group-item"><i class="fas fa-user-tie me-2"></i> {{ worker.job_name }}</li>
+                                                                <li class="list-group-item"><i class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}</li>
+                                                                <li class="list-group-item"><i class="fas fa-envelope me-2"></i> {{ worker.email }}</li>
+                                                                <li class="list-group-item"><i class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}</li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="post_footer">
                         <div class="time_and_view">
                             <span><i class="fas fa-eye me-2"></i> {{ object.post_viewed_count }}</span>

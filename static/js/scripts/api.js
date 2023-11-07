@@ -72,13 +72,13 @@ $(document).ready(function(){
                         var listItem = `
                             <ul class="list-group list-group-flush border-bottom-1">
                                 <li class="list-group-item"><span>${item.title}</span> <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${item.id}" aria-controls="offcanvasScrolling">Ko'rish</button></li>
-                                <div class="offcanvas offcanvas-start w-50" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${item.id}" aria-labelledby="offcanvasScrollingLabel">
+                                <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${item.id}" aria-labelledby="offcanvasScrollingLabel">
                                     <div class="offcanvas-header">
                                         <h5 class="offcanvas-title" id="offcanvasScrollingLabel">${item.title}</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                                     </div>
                                     <div class="offcanvas-body">
-                                        <iframe src="${item.pdf_file}" width="100%" height="80%" frameborder="0"></iframe>
+                                        <iframe src="${item.pdf_file}" width="100%" height="100%" frameborder="0"></iframe>
                                     </div>
                                 </div>
                             </ul>
@@ -165,42 +165,4 @@ $(document).ready(function(){
             } 
         })
     }
-    // $.ajax({
-    //     type: 'GET',
-    //     url: "/api/posts/talented_students",
-    //     data: {},
-    //     success: function(data){
-    //         data.map((item) => {
-    //             let items = `
-    //                 <div class="card">
-    //                     <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
-    //                     <div class="card-header">
-    //                         <b>
-    //                            ${item.f_name}
-    //                         </b>
-    //                     </div>
-    //                     <div class="card-body">
-    //                         <p class="card-text">
-    //                             ${item.desc}
-    //                         </p>
-    //                     </div>
-    //                 </div>
-    //                 <div class="card">
-    //                     <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
-    //                     <div class="card-header">
-    //                         <b>
-    //                            ${item.f_name}
-    //                         </b>
-    //                     </div>
-    //                     <div class="card-body">
-    //                         <p class="card-text">
-    //                             ${item.desc}
-    //                         </p>
-    //                     </div>
-    //                 </div>
-    //             `   
-    //             // $("#students_list").append(items)         
-    //         })
-    //     }
-    // })
 })

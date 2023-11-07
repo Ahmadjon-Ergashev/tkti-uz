@@ -17,7 +17,7 @@
                     <div class="post_img mb-3" id="object_base_img">
                         <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="tkti.uz">
                     </div>
-                    <h3>{{ object.title }}</h3>
+                    <h2>{{ object.title }}</h2>
                     {% if object.video_file %}
                         <div class="post_video">
                             <video width="100%" controls>
@@ -61,24 +61,40 @@
                     {% if object.facultyadministration_set.all %}
                         <br>
                         <hr>
-                        <h3 class="mb-3 fw-bold">{{ faculty_title }}</h3>
-                        <div class="row px-3">
-                            {% for worker in object.facultyadministration_set.all %}
-                                <div class="col-12 col-lg-4 mb-1 p-1">
-                                    <div class="card">
-                                        <img src="{{ worker.image.url }}" class="card-img-top" alt="tkti.uz">
-                                        <div class="card-body">
-                                          <h5 class="card-title text-center lh-1 pb-2">{{ worker.f_name }}</h5>
-                                          <p class="card-text fw-bold">{{ worker.job_name }}</p>
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <span class="fw-bold">{{ faculty_title }}</span>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body">
+                                        <div class="row">
+                                            {% for worker in object.facultyadministration_set.all %}
+                                                <div class="col-12 col-md-12 mb-2 p-1">
+                                                    <div class="card mb-3">
+                                                        <div class="row g-0">
+                                                            <div class="col-md-3">
+                                                                <img src="{{ worker.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
+                                                            </div>
+                                                            <div class="col-md-9">
+                                                                <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>
+                                                                <ul class="list-group list-group-flush">
+                                                                    <li class="list-group-item"><i class="fas fa-user-tie me-2"></i> {{ worker.job_name }}</li>
+                                                                    <li class="list-group-item"><i class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}</li>
+                                                                    <li class="list-group-item"><i class="fas fa-envelope me-2"></i> {{ worker.email }}</li>
+                                                                    <li class="list-group-item"><i class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endfor %}
                                         </div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item"><i class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}</li>
-                                          <li class="list-group-item"><i class="fas fa-envelope me-2"></i> {{ worker.email }}</li>
-                                          <li class="list-group-item"><i class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}</li>
-                                        </ul>
-                                      </div>
+                                    </div>
                                 </div>
-                            {% endfor %}
+                            </div>
                         </div>
                     {% endif %}
                     <div class="post_footer">

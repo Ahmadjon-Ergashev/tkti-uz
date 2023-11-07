@@ -1,5 +1,3 @@
-from typing import Any
-from django.db import models
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -177,11 +175,7 @@ class SectionsDetailView(DetailView):
         try:
             data["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
         except AttributeError:
-            data["category_list"] = navbar.get_children()
-        data["about"] = _("Xaqida")
-        data["target"] = _("Maqsadi")
-        data["workers"] = _("Xodimlar")   
-        data["activity"] = _("Faoliyati")        
+            data["category_list"] = navbar.get_children()    
         return data
     
     
