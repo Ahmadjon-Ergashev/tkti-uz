@@ -71,7 +71,11 @@ $(document).ready(function(){
                         console.log(item)
                         var listItem = `
                             <ul class="list-group list-group-flush border-bottom-1">
-                                <li class="list-group-item"><span>${item.title}</span> <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${item.id}" aria-controls="offcanvasScrolling">Ko'rish</button></li>
+                                <li class="list-group-item"><span>${item.title}</span> 
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                    <a class="btn btn-primary" href="${item.pdf_file}" download="${item.pdf_file}">yuklab olish</a>
+                                    <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${item.id}" aria-controls="offcanvasScrolling">Ko'rish</a></li>
+                                </div>
                                 <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${item.id}" aria-labelledby="offcanvasScrollingLabel">
                                     <div class="offcanvas-header">
                                         <h5 class="offcanvas-title" id="offcanvasScrollingLabel">${item.title}</h5>

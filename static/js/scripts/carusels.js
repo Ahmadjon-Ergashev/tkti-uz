@@ -107,7 +107,7 @@ $(document).ready(function(){
         arrows: true,
         infinite: true,
         autoplay: true,
-        slidesToShow: 5,
+        slidesToShow: 4,
         slidesToScroll: 2,
         autoplaySpeed: 3000,
         responsive: [
