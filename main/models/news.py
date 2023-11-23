@@ -128,3 +128,54 @@ class VideoGallery(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+    
+
+class Events(widgets.AbstractTemplate):
+    """ university events plans """
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Author"), related_name="event_author")
+    event_type = models.ForeignKey(widgets.EventTypes, on_delete=models.SET_NULL, null=True, verbose_name=_("Tadbir turini tanlang."))
+    location = models.CharField(verbose_name=_("Tadbir manzili"), max_length=255)
+    location_url = models.URLField(verbose_name=_("Tadbirning url manzili"), max_length=255)
+    pdf_file = models.FileField(
+        verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    video_file = models.FileField(
+        verbose_name=_("Video fayl"), upload_to="videos/news/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
+    )
+    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_events_user")
+    add_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'events'
+        managed = True
+        verbose_name =_("Tadbirlar")
+        verbose_name_plural = _("Tadbirlar")    
+        
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            im = Image.open(self.image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=50)
+            filename = os.path.splitext(self.image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
+
+""" Find Your Studies Model """
+
+# class StudentsLevel(models.Model):
+#     """ students level types ['Bacheler's degree', 'Magister degree'] """
+#     name = models.CharField(max_length=123, blank=True, null=True, verbose_name=_("Nomi"))
+#     added_at = models.DateTimeField(auto_now_add=True)
+
+

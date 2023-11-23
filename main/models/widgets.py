@@ -291,3 +291,18 @@ class Faq(models.Model):
         managed = True
         verbose_name = _("Ko'p beriladigan savollar")
         verbose_name_plural = _("Ko'p beriladigan savollar")
+
+
+class EventTypes(models.Model):
+    """ event types model """
+    name = models.CharField(_("Nomi"), max_length=255, null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table = 'event_type'
+        managed = True
+        verbose_name = _("Tadbir turlari")
+        verbose_name_plural = _("Tadbir turlari")

@@ -83,12 +83,21 @@ class AdsTranslation(TranslationOptions):
     fields = ("title", "subtitle", "post")
     
 
+@register(news.Events)
+class EventsTranslation(TranslationOptions):
+    fields = ("title", "subtitle", "post", "location")
+    
+
 @register(news.VideoGallery)
 class VideoGalleryTranslation(TranslationOptions):
     fields = ("title", )
 
 
 """ widgets models translations file """
+    
+@register(widgets.EventTypes)
+class EventTypesTranslation(TranslationOptions):
+    fields = ("name", )
     
 @register(widgets.Hashtag)
 class HashtagTranslation(TranslationOptions):

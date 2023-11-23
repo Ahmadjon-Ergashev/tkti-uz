@@ -104,7 +104,6 @@ class LinksAdmin(GuardedModelAdmin):
         }),
     )
     
-
     def get_logo(self, obj):
         return mark_safe(f"<img src='{obj.logo.url}' width=100 />")
     
@@ -123,6 +122,40 @@ class QuickLinksAdmin(admin.ModelAdmin):
                 "order_num", "url"
             ),
         }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", 
+            ),
+        }),
+        ("Automatik to'ldiriladigan fieldlar", {
+            'fields': (
+                "added_at", 
+            ),
+        }),
+    )
+    
+
+@admin.register(widgets.EventTypes)
+class EventTypesAdmin(admin.ModelAdmin):
+    ordering = ("-added_at", )
+    readonly_fields = ("added_at", )
+    list_display_links = ("name_uz", )
+    list_display = ("id", "name_uz", "added_at")
+
+    fieldsets = (
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (

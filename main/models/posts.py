@@ -334,10 +334,10 @@ class BossSection(models.Model):
     f_name = models.CharField(_("To'liq ismi"), max_length=150)
     email = models.CharField(_("Email"), max_length=250)
     phone = models.CharField(_("Telefon raqami"), max_length=250)
-    
 
     def __str__(self):
         return self.f_name
+
 
 
 
