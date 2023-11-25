@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 
 from main.models import news
+from api.widgets.serializers import EventTypeSerializers
 
 class NewsSerizliers(serializers.ModelSerializer):
     class Meta:
@@ -41,7 +42,7 @@ class VideoSerializers(serializers.ModelSerializer):
 class EventsSerializers(serializers.ModelSerializer):
     class Meta:
         model = news.Events
-        fields = ["id", "title", "location", "image", "slug", "added_at"]
+        fields = ["id", "title", "location", "image", "event_type", "slug", "added_at"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -50,4 +51,5 @@ class EventsSerializers(serializers.ModelSerializer):
         datetime_val = datetime.combine(date, time)
         new_date_time = datetime_val + timedelta(hours=5)
         data["added_at"] = new_date_time.strftime("%Y-%m-%d %H:%M")
+        data["event_type"] = EventTypeSerializers(instance=instance.event_type).data
         return data

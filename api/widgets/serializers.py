@@ -26,3 +26,10 @@ class FaqSeralizers(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data["answer"] = instance.answer.html
         return data
+    
+
+class EventTypeSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = widgets.EventTypes
+        fields = "__all__"
+        

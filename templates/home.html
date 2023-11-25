@@ -9,6 +9,7 @@
 <span id="not_found_404" data-not-found="{{ not_found_404 }}"></span>
 <!-- custom css -->
 <link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/modules/tabs/tabs.css' %}">
 <link rel="stylesheet" href="{% static 'css/modules/extextions/tabs.css' %}">
 <link rel="stylesheet" href="{% static 'css/styles/image_grid/home/home_grid.css' %}">
 
@@ -112,16 +113,147 @@
 <!-- study way  -->
 
 <!-- Events section -->
+<div id="events">
+    <div class="_container">
+        <div class="tap_title">
+            <div class="tab_box container">
+                <div class="tab_box_title"><span>{{ events }}</span></div>
+                <div class="tab_btns">
+                    <button class="tab_btn active_tap">Upcoming</button>
+                    <button class="tab_btn">{{ all }}</button>
+                    <button class="tab_btn">Arxiv</button>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="content_box container">
+            <div class="content d-block">
+                <div class="row" id="upcoming_events">
+                    <!-- <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="card_header">
+                                    <h5 class="card-title">Open lecture “Technological fixes for the global environmental crisis?</h5>
+                                </div>
+                                <div class="box_footer">
+                                    <span class="time">05 12 2023 10:00</span> <br>
+                                    <span>Thesis defense</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+            <div class="content">
+                <div class="row" id="all_events">
+                    
+                </div>
+            </div>
+            <div class="content">
+                <div class="row" id="arxiv_events">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Events section -->
 
 <!-- news ads videos -->
-<div id="news_ads_section">
+
+<div id="news_ads_videos">
+    <div class="_container">
+        <div class="tap_title">
+            <div class="tab_box container px-0">
+                <div class="tab_box_title"><span>{{ news_tab }}</span></div>
+                <div class="tab_btns">
+                    <button class="tab_btn active_tap">{{ the_last_news }}</button>
+                    <button class="tab_btn">{{ the_most_read }}</button>
+                    <button class="tab_btn">{{ ads_section_title }}</button>
+                    <button class="tab_btn">{{ videos_section_title }}</button>
+                    <div class="line"></div>
+                </div>
+            </div>
+        </div>
+        <div class="content_box container">
+            <div class="content d-block">
+                <div class="row big_box" id="the_last_news_4">
+                                
+                </div>
+                <div class="row small_news mt-2" id="the_last_news_8">
+                
+                </div>
+                <a href="news/" class="view_all_btn">{{ all }}</a>
+            </div>
+            <div class="content">
+                <div class="row big_box" id="the_most_read_4">
+
+                </div>
+                <div class="row small_news" id="the_most_read_8">
+
+                </div>
+                <a href="news/" class="view_all_btn">{{ all }}</a>
+            </div>
+            <div class="content">
+                <div class="row big_box" id="the_last_ads_4">
+                    {% for i in the_last_ads_4 %}
+                        <div class="col-12 col-md-4 col-xl-3 mb-2">
+                            <div class="item">
+                                <div class="item_img">
+                                    <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
+                                </div>
+                                <div class="item_body">
+                                    <h4>
+                                        <a href="{% url 'ads_detail' obj_slug=i.slug %}">
+                                            {{ i.title | truncatechars:120 }}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="item_footer">
+                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="border mx-4"></div>
+                <div class="row small_news" id="the_last_ads_8">
+                    {% for i in the_last_ads_8 %}
+                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                            <div class="news_box">
+                                <div class="news_box_body">
+                                    <p>
+                                        <a href="{% url 'ads_detail' obj_slug=i.slug %}">
+                                            {{ i.title | truncatechars:80 }}
+                                        </a>
+                                    </p>
+                                </div>
+                                <div class="news_box_footer">
+                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <a href="ads/" class="view_all_btn">{{ all }}</a>
+            </div>
+            <div class="content">
+                <div class="row videos_tab" id="the_videos">
+
+                </div>
+                <a href="videos/" class="view_all_btn">{{ all }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div id="news_ads_section">
     <div class="container">
         <section id="home_tabs">
             <div class="page">
-                <!-- <h1>{{ news_section_title }}</h1>	-->
-                <!-- tabs -->
                 <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
                     <input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
                     <label for="tab1">{{ the_last_news }}</label>
@@ -209,26 +341,25 @@
                         </li>
                     </ul>
                 </div>
-                <!--/ tabs -->
             </div>
         </section>
     </div>
-</div>
+</div> -->
 
 <!-- news ads videos -->
 
 <!-- faculty and departments -->
 
-<div class="container">
+<!-- <div class="container">
     <div id="faculty_and_departments">
         <h1 class="text-center text-decoration-underline">{{ faculty_title }}</h1>
         <div id="faculties">
             <div class="card_box">
-                <!-- <div class="faculty">
+                <div class="faculty">
                         <div class="card_img" style="background-image: url('https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg');">
                             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, iure.</p>
                         </div>
-                    </div> -->
+                    </div>
             </div>
         </div>
         <div id="departments">
@@ -237,17 +368,17 @@
                     <span id="faculty_title"></span><span> {{ nth_faculty }}</span>
                 </div>
                 <div class="row">
-                    <!-- 
-                            <div class="col-12 col-lg-4 col-xxl-3 mb-3">
-                                <div class="dept-item">
-                                    <p>
-                                        <a href="">
-                                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem, cum!
-                                        </a>
-                                    </p>
-                                </div>
-                            </div>
-                        -->
+            
+                    <div class="col-12 col-lg-4 col-xxl-3 mb-3">
+                        <div class="dept-item">
+                            <p>
+                                <a href="">
+                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem, cum!
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                
                 </div>
             </div>
             <div id="not_found_dept">
@@ -255,7 +386,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- faculty and departments -->
 
@@ -325,9 +456,13 @@
     <!-- useful links -->
 </section>
 <!-- jQuery -->
+<script src="{% static 'js/scripts/custom_tabs.js' %}"></script>
 <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+
+
 <script src="{% static 'js/scripts/api.js' %}"></script>
-<script src="{% static 'js/scripts/tabs/news.js' %}"></script>
 <script src="{% static 'js/scripts/tabs/ads.js' %}"></script>
+<script src="{% static 'js/scripts/tabs/news.js' %}"></script>
 <script src="{% static 'js/scripts/tabs/videos.js' %}"></script>
+<script src="{% static 'js/scripts/tabs/events.js' %}"></script>
 {% endblock content %}

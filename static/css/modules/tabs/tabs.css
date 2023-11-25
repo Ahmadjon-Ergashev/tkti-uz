@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#events {
+  padding: 50px 0px;
+}
+#events .content {
+  min-height: 370px;
+  max-height: 370px;
+}
+#events .content .card {
+  border: none;
+  min-height: 150px;
+  max-height: 150px;
+}
+
+#news_ads_videos {
+  padding: 50px 0px;
+  margin-bottom: 50px;
+}
+#news_ads_videos .content_box .content {
+  position: relative;
+  min-height: 760px;
+  max-height: 760px;
+}
+#news_ads_videos .content_box .content .view_all_btn {
+  right: 5px;
+  bottom: 5px;
+  color: #111;
+  position: absolute;
+  padding: 10px 25px;
+  border: 1px solid #111;
+  transition: all 0.1s ease;
+}
+#news_ads_videos .content_box .content .view_all_btn:hover {
+  color: white;
+  background-color: #111;
+}
+
+._container {
+  background-color: white;
+}
+._container .tap_title {
+  background-color: #ddd;
+}
+._container .tap_title .tab_box {
+  width: 100%;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  border-bottom: 2px solid rgb(229, 229, 229);
+}
+._container .tap_title .tab_box .tab_box_title {
+  display: flex;
+  align-items: center;
+}
+._container .tap_title .tab_box .tab_box_title span {
+  font-size: 30px;
+  font-weight: 600;
+}
+._container .tap_title .tab_box .tab_btns .tab_btn {
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #919191;
+  background: none;
+  padding: 15px 18px;
+  transition: all 0.5s ease-in-out;
+}
+._container .tap_title .tab_box .tab_btns .active_tap {
+  color: white;
+  background-color: #111;
+}
+._container .content_box {
+  padding: 20px 0;
+}
+._container .content_box .content {
+  display: none;
+  animation: moving 0.8s ease;
+}
+@keyframes moving {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+._container .content_box .content .row .card .card-body .card-title_h5 {
+  font-size: 16px;
+  line-height: 1.5;
+}
+._container .content_box .content .row .card .card-body .box_footer span {
+  color: #919191;
+  font-size: 14px;
+  font-family: monospace;
+}
+
+@media only screen and (max-width: 768px) {
+  #events {
+    padding: 20px;
+  }
+  ._container {
+    padding: 15px;
+  }
+  .tab_box {
+    padding: 10px 0;
+  }
+  .tab_box .tab_btns {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .tab_box .tab_btns .tab_btn {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 496px) {
+  .tab_box .tab_btns .active_tap {
+    color: #111;
+    background: none;
+  }
+  .tab_box .tab_btns .tab_btn {
+    text-align: center;
+    display: block;
+  }
+}/*# sourceMappingURL=tabs.css.map */

@@ -88,11 +88,11 @@ class EventView(mixins.ListModelMixin, GenericViewSet):
         get_type = self.request.query_params.get("get_type")
         if get_type and start and end:
             if get_type == query_params.EventGetType.all.value:
-                qs = super().get_queryset().filter(status='pub').order_by('added_at')[int(start):int(end)]
+                qs = super().get_queryset().filter(status='pub').order_by('-added_at')[int(start):int(end)]
             elif get_type == query_params.EventGetType.upcoming.value:
                 qs = super().get_queryset().filter(status='pub', added_at__gte=timezone.now()).order_by('added_at')[int(start):int(end)]
             elif get_type == query_params.EventGetType.past.value:
-                qs = super().get_queryset().filter(status='pub', added_at__lte=timezone.now()).order_by('added_at')[int(start):int(end)]
+                qs = super().get_queryset().filter(status='pub', added_at__lte=timezone.now()).order_by('-added_at')[int(start):int(end)]
         return qs
     
     @swagger_auto_schema(manual_parameters=query_params.events_queries())

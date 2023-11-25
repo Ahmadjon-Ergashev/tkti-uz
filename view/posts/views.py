@@ -33,6 +33,7 @@ def Home(request):
     translate_words = {
         "all": _("Barchasi"),
         "search": _("Qidirish"),
+        "events": _("Voqealar"),
         "title": _("Bosh sahifa"),
         "sp_year": _("Yilni tanlang"),
         "high_degree": _("Bakalavriat"),
