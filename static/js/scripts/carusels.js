@@ -104,11 +104,12 @@ $(document).ready(function(){
     });
     $("#students_list").slick({
         dots: true,
-        arrows: true,
+        arrows: false,
         infinite: true,
         autoplay: true,
         slidesToShow: 4,
-        slidesToScroll: 2,
+        centerMode: true,
+        slidesToScroll: 1,
         autoplaySpeed: 3000,
         responsive: [
             {

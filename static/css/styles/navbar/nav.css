@@ -41,7 +41,7 @@
 }
 
 #base_navbar #navbarNavDropdown .navbar-nav .main_nav_item:not(:last-child) {
-  margin-right: 10px;
+  margin-right: 5px;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .nav_name {
   font-size: 18px;
@@ -54,7 +54,7 @@
   transition: 0.5s all;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover {
-  background-color: #26597E;
+  background-color: #111;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover a:hover {
   color: #ffffff;

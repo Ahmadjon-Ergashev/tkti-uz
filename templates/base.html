@@ -229,14 +229,14 @@
                                 <a href="{% url 'posts_nav' navbar_slug=nav.slug %}" class="nav-link nav_name active">
                                     {{ nav.name }}
                                 </a>
-                                <button class="p-0 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="p-1 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ nav.id }}">
                                     {% for child in nav.children.all %}
-                                        <li class="nav-item dropdown">
+                                        <li class="nav-item dropdown" style="width: 300px;">
                                             <li class="nav-item">
-                                                <a href="{% url 'posts_nav' navbar_slug=child.slug %}" class="nav-link mx-2 text-capitalize active">{{ child.name }}</a>
+                                                <a href="{% url 'posts_nav' navbar_slug=child.slug %}" class="nav-link mx-2 active">{{ child.name }}</a>
                                             </li>
                                         </li>
                                     {% endfor %}

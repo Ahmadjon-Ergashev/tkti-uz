@@ -69,34 +69,42 @@
 </section> -->
 
 <!-- study way  -->
+<div class="section_title py-2">
+    <div class="container">
+        <h1>{{ study_way_title }}</h1>
+    </div>
+</div>
 <div class="container">
     <section id="studyway">
-        <span class="wrapper_studyway">{{ study_way_title }}</span>
         <form action="" id="filter_study_way" method="post">
             {% csrf_token %}
-            <div class="row">
-                <div class="col-12 col-lg-4 mb-3">
-                    <div class="form-floating">
-                        <select class="form-select" id="id_type" aria-label="faculty select">
-                            <option selected>--------------------</option>
-                        </select>
-                        <label for="id_type">{{ sp_type }}</label>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-4 mb-3">
-                    <div class="form-floating">
-                        <select class="form-select" id="id_faculty" aria-label="faculty select">
-                            <option selected>--------------------</option>
-                        </select>
-                        <label for="id_faculty">{{ sp_faculty }}</label>
-                    </div>
-                </div>
-                <div class="col-12 col-lg-10 mb-3">
-                    <div class="form-floating">
-                        <select class="form-select" id="id_dept" aria-label="department select">
-                            <option selected>--------------------</option>
-                        </select>
-                        <label for="id_dept">{{ sp_dept }}</label>
+            <div class="row pt-4">
+                <div class="col-12 col-lg-10">
+                    <div class="row">
+                        <div class="col-12 col-lg-4 mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="id_type" aria-label="faculty select">
+                                    <option selected>--------------------</option>
+                                </select>
+                                <label for="id_type">{{ sp_type }}</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="id_faculty" aria-label="faculty select">
+                                    <option selected>--------------------</option>
+                                </select>
+                                <label for="id_faculty">{{ sp_faculty }}</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-4 mb-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="id_dept" aria-label="department select">
+                                    <option selected>--------------------</option>
+                                </select>
+                                <label for="id_dept">{{ sp_dept }}</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-12 col-lg-2">
@@ -105,7 +113,7 @@
             </div>
         </form>
         <!-- queryset -->
-        <div class="my-5" id="result_data">
+        <div class="my-3" id="result_data">
 
         </div>
     </section>
@@ -116,17 +124,17 @@
 <div id="events">
     <div class="_container">
         <div class="tap_title">
-            <div class="tab_box container">
+            <div class="tab_box container" style="padding: 0;">
                 <div class="tab_box_title"><span>{{ events }}</span></div>
                 <div class="tab_btns">
-                    <button class="tab_btn active_tap">Upcoming</button>
+                    <button class="tab_btn active_tap">{{ upcoming }}</button>
                     <button class="tab_btn">{{ all }}</button>
-                    <button class="tab_btn">Arxiv</button>
+                    <button class="tab_btn">{{ arxiv }}</button>
                     <div class="line"></div>
                 </div>
             </div>
         </div>
-        <div class="content_box container">
+        <div class="content_box my-5 container">
             <div class="content d-block">
                 <div class="row" id="upcoming_events">
                     <!-- <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
@@ -143,16 +151,22 @@
                         </div>
                     </div> -->
                 </div>
+                <a href="events/" class="view_all_btn">{{ all }}</a>
+
             </div>
             <div class="content">
                 <div class="row" id="all_events">
                     
                 </div>
+                <a href="events/" class="view_all_btn">{{ all }}</a>
+
             </div>
             <div class="content">
                 <div class="row" id="arxiv_events">
                     
                 </div>
+                <a href="events/" class="view_all_btn">{{ all }}</a>
+
             </div>
         </div>
     </div>
@@ -250,101 +264,6 @@
     </div>
 </div>
 
-<!-- <div id="news_ads_section">
-    <div class="container">
-        <section id="home_tabs">
-            <div class="page">
-                <div class="pcss3t pcss3t-effect-scale pcss3t-theme-1">
-                    <input type="radio" name="pcss3t" checked id="tab1" class="tab-content-first">
-                    <label for="tab1">{{ the_last_news }}</label>
-
-                    <input type="radio" name="pcss3t" id="tab2" class="tab-content-2">
-                    <label for="tab2">{{ the_most_read }}</label>
-
-                    <input type="radio" name="pcss3t" id="tab3" class="tab-content-3">
-                    <label for="tab3">{{ ads_section_title }}</label>
-
-                    <input type="radio" name="pcss3t" id="tab4" class="tab-content-4">
-                    <label for="tab4">{{ videos_section_title }}</label>
-                    <ul>
-                        <li class="tab-content tab-content-first typography">
-                            <div class="row big_box" id="the_last_news_4">
-                                
-                            </div>
-                            <div class="border mx-4"></div>
-                            <div class="row small_news mt-2" id="the_last_news_8">
-
-                            </div>
-                            <a href="news/" class="view_all_btn">{{ all }}</a>
-                        </li>
-
-                        <li class="tab-content tab-content-2 typography">
-                            <div class="row big_box" id="the_most_read_4">
-
-                            </div>
-                            <div class="border mx-4"></div>
-                            <div class="row small_news" id="the_most_read_8">
-
-                            </div>
-                            <a href="news/" class="view_all_btn">{{ all }}</a>
-                        </li>
-                        <li class="tab-content tab-content-3 typography">
-                            <div class="row big_box" id="the_last_ads_4">
-                                {% for i in the_last_ads_4 %}
-                                    <div class="col-12 col-md-4 col-xl-3 mb-2">
-                                        <div class="item">
-                                            <div class="item_img">
-                                                <img src="{{ i.image.url }}" alt="{{ t.title }} | tkti.uz">
-                                            </div>
-                                            <div class="item_body">
-                                                <h4>
-                                                    <a href="{% url 'ads_detail' obj_slug=i.slug %}">
-                                                        {{ i.title | truncatechars:120 }}
-                                                    </a>
-                                                </h4>
-                                            </div>
-                                            <div class="item_footer">
-                                                <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <div class="border mx-4"></div>
-                            <div class="row small_news" id="the_last_ads_8">
-                                {% for i in the_last_ads_8 %}
-                                    <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                                        <div class="news_box">
-                                            <div class="news_box_body">
-                                                <p>
-                                                    <a href="{% url 'ads_detail' obj_slug=i.slug %}">
-                                                        {{ i.title | truncatechars:80 }}
-                                                    </a>
-                                                </p>
-                                            </div>
-                                            <div class="news_box_footer">
-                                                <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                                <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
-                            <a href="ads/" class="view_all_btn">{{ all }}</a>
-                        </li>
-                        <li class="tab-content tab-content-4 typography">
-                            <div class="row videos_tab" id="the_videos">
-
-                            </div>
-                            <a href="videos/" class="view_all_btn">{{ all }}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </div>
-</div> -->
 
 <!-- news ads videos -->
 
@@ -393,8 +312,12 @@
 <!-- Talented students -->
 
 <section class="talented_students">
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ talented_student_title }}</h1>
+        </div>
+    </div>
     <div class="container">
-        <h1 class="text-center text-decoration-underline">{{ talented_student_title }}</h1>
         <div id="students_list">
             {% for item in talented_students %}
                 <div class="card" style="height: 390px; min-height: 390px;">
@@ -419,14 +342,17 @@
 
 <!-- photo gallary -->
 
-<div class="photo_grid_header">
-    <h4>{{ photo_grid_title }}</h4>
-    <span><a href="{% url 'photo_gallary' %}">{{ read_more }}</a></span>
+
+<div class="section_title">
+    <div class="photo ">
+        <h1>{{ photo_grid_title }}</h1>
+        <button type="button" class="p-3"><a href="{% url 'photo_gallary' %}">{{ read_more }}</a></button>
+    </div>
 </div>
 <section class="photo_grid">
-    {% for p in the_photos_home %}  
-        <div class="card">
-            <div class="card__img">
+    {% for p in the_photos_home %}   
+        <div class="card">          
+            <div class="card__img"> 
                 <img src="{{ p.image.url }}" alt="tkti.uz">
             </div>
         </div>
@@ -436,6 +362,11 @@
 <!-- photo gallary -->
 
 <section>
+    <div class="section_title py-2">
+        <div class="photo">
+            <h1>{{ usuful_links_title }}</h1>
+        </div>
+    </div>
     <!-- useful links -->
     <div id="usefull_links">
         {% for link in usefull_links %}

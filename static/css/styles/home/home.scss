@@ -541,4 +541,22 @@
 
 // news ads videos tabs section
 
+.section_title{
+    .photo{
+        button{
+            border: none;
+            background: none;
+            transition: all .3s ease;
+            a{
+                color: #777;
+            }
+            &:hover{
+                background: #111;
+                a{
+                    color: white;
+                }
+            }
+        }
 
+    }  
+}

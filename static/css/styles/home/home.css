@@ -414,4 +414,19 @@
 }
 #usefull_links .item .body p a {
   color: #111;
+}
+
+.section_title .photo button {
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+}
+.section_title .photo button a {
+  color: #777;
+}
+.section_title .photo button:hover {
+  background: #111;
+}
+.section_title .photo button:hover a {
+  color: white;
 }/*# sourceMappingURL=home.css.map */

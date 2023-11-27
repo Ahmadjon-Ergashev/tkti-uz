@@ -8,13 +8,27 @@
   padding: 50px 0px;
 }
 #events .content {
-  min-height: 370px;
-  max-height: 370px;
+  position: relative;
+  min-height: 420px;
+  max-height: 420px;
 }
 #events .content .card {
   border: none;
   min-height: 150px;
   max-height: 150px;
+}
+#events .view_all_btn {
+  right: 5px;
+  bottom: 5px;
+  color: #111;
+  position: absolute;
+  padding: 10px 25px;
+  border: 1px solid #111;
+  transition: all 0.1s ease;
+}
+#events .view_all_btn:hover {
+  color: white;
+  background-color: #111;
 }
 
 #news_ads_videos {

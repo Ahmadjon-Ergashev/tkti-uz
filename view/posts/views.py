@@ -31,6 +31,7 @@ def Home(request):
         """)
     }
     translate_words = {
+        "arxiv": _("Arxiv"),
         "all": _("Barchasi"),
         "search": _("Qidirish"),
         "events": _("Voqealar"),
@@ -45,7 +46,9 @@ def Home(request):
         "sp_faculty": _("Fakultetni tanlang"),
         "videos_section_title": _("Videolar"),
         "the_most_read": _("Top yangiliklar"),
+        "upcoming": _("Yaqinlashib kelayotganlar"),
         "nth_faculty": _("tarkibidagi kafedralar"),
+        "usuful_links_title": _("Foydali havolalar"),
         "the_last_news": _("Eng so'ngi yangiliklar"),
         "study_way_title": _("Ta'lim dasturi katalogi"),
         "talented_student_title": _("Iqtidorli talabalar"),

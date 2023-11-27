@@ -8,6 +8,27 @@
     box-sizing: border-box;
 }
 
+.container{
+    padding: 0 !important;
+}
+
+.section_title{
+    margin: 20px 0;
+    background: #ddd;
+}
+.section_title h1{
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+}
+.section_title .photo{
+    width: 95%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
 
 .main_container {
     width: 80%;

@@ -54,7 +54,7 @@
         .navbar-nav{
             .main_nav_item{
                 &:not(:last-child){
-                    margin-right: 10px;
+                    margin-right: 5px;
                 }
             }
             .nav-item{
@@ -67,7 +67,7 @@
                     li{
                         transition: 0.5s all;
                         &:hover{
-                            background-color: $color1;
+                            background-color: #111;
                             a:hover{
                                 color: $text_white;
                             }

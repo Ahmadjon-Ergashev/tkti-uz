@@ -7,24 +7,16 @@
     }
 }
 
-.photo_grid_header{
-    width: 94%;
+._title{
+    width: 96%;
     margin: auto;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid $color1;
-    h4{
-        font-weight: 900;
-    }
-    margin-bottom: 30px;
 }
 
 .photo_grid {
-
     img {
         width: 100%;
-        display: block;
         height: 100%;
+        display: block;
         object-fit: cover;
     }
     margin-bottom: 35px;

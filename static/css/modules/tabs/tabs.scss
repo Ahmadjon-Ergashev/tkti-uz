@@ -3,15 +3,30 @@
     padding: 0;
     box-sizing: border-box;    
 }
+
 #events{
     padding: 50px 0px;
     .content{
-        min-height: 370px;
-        max-height: 370px;
+        position: relative;
+        min-height: 420px;
+        max-height: 420px;
         .card{
             border: none;
             min-height: 150px;
             max-height: 150px;
+        }
+    }
+    .view_all_btn{
+        right: 5px;
+        bottom: 5px;
+        color: #111;
+        position: absolute;
+        padding: 10px 25px;
+        border: 1px solid #111;
+        transition: all 0.1s ease;
+        &:hover{
+            color: white;
+            background-color: #111;
         }
     }
 }

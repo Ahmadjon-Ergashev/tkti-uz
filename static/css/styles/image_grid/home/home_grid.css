@@ -1,14 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
-.photo_grid_header {
-  width: 94%;
+._title {
+  width: 96%;
   margin: auto;
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid #26597E;
-  margin-bottom: 30px;
-}
-.photo_grid_header h4 {
-  font-weight: 900;
 }
 
 .photo_grid {
@@ -24,8 +17,8 @@
 }
 .photo_grid img {
   width: 100%;
-  display: block;
   height: 100%;
+  display: block;
   -o-object-fit: cover;
      object-fit: cover;
 }
