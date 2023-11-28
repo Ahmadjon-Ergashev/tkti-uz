@@ -1,5 +1,9 @@
 import random
+from typing import Any
 from django.contrib import admin
+from django.db.models.fields.related import ForeignKey, ManyToManyField
+from django.forms.models import ModelChoiceField, ModelMultipleChoiceField
+from django.http.request import HttpRequest
 from mptt.admin import MPTTModelAdmin
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
@@ -23,6 +27,13 @@ def clone(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None
         i.f_name += " - copy"
+        i.save()
+
+
+@admin.action(description=_("Nusxa ko'chirish"))
+def simple_clone(modeladmin, request, queryset):
+    for i in queryset:
+        i.pk = None
         i.save()
 
 
@@ -216,6 +227,7 @@ class FacultyAdmistrationAdmin(GuardedModelAdmin):
 
 @admin.register(posts.Departments)
 class DepartmentsAdmin(admin.ModelAdmin):
+    actions = [duplicate]
     search_fields = ("name_uz", )
     list_display_links = ("name_uz", )
     list_display = ("id", "name_uz", "faculty")
@@ -317,6 +329,7 @@ class DeptAdminstraAdmin(admin.ModelAdmin):
 
 @admin.register(posts.StudyProgram)
 class StudyAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     readonly_fields = ("added_at", )
     list_display_links = ("title_uz", )
     autocomplete_fields = ("department", )
@@ -367,6 +380,7 @@ class StudyAdmin(admin.ModelAdmin):
 
 @admin.register(posts.ContactSection)
 class ContactSectionAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     readonly_fields = ["get_image"]
     list_display_links = ("id", "title")
     list_display = ("id", "title", "order_num")
@@ -406,6 +420,7 @@ class ContactSectionAdmin(admin.ModelAdmin):
 
 @admin.register(posts.Workers)
 class WorkersAdmin(admin.ModelAdmin):
+    actions = [clone]
     readonly_fields = ["get_image"]
     list_display_links = ("f_name_uz", )
     search_fields = ("f_name_uz", "f_name_ru", "f_name_en")
@@ -487,6 +502,7 @@ class SectionsAdmin(admin.ModelAdmin):
 
 @admin.register(posts.UniversityAdmistrations)
 class UniversityAdminsAdmin(admin.ModelAdmin):
+    actions = [duplicate]
     list_editable = ("order_num", )
     readonly_fields = ("get_image", "added_at")
     prepopulated_fields = ({"slug": ("f_name_uz", )})   
@@ -518,7 +534,7 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
                 "scientific_activity_en", "scientific_direction_en", "main_tasks_in_position_en", 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "slug", "added_at"
             ),
@@ -533,8 +549,9 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
 
 @admin.register(posts.TalentedStudents)
 class TalentedStudentsAdmin(admin.ModelAdmin):
+    actions = [clone]
     search_fields = ("f_name_uz", )
-    readonly_fields = ("get_image", )
+    readonly_fields = ("get_image", "added_at")
     list_display_links = ("id", "get_image", "f_name_uz")
     list_display = ("id", "get_image", "f_name_uz", "desc_uz", "added_at")
 
@@ -562,6 +579,11 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
                 "f_name_en", "desc_en",
             ),
         }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
     )
 
     def get_image(self, obj):
@@ -571,6 +593,7 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
 
 @admin.register(posts.BossSection)
 class BossSection(admin.ModelAdmin):
+    actions = [clone]
     list_display = ("id", "f_name")
     readonly_fields = ("get_image", )
     list_display_links = ("id", "f_name")
@@ -589,4 +612,145 @@ class BossSection(admin.ModelAdmin):
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width='250' />")
     get_image.short_description = _("Tanlangan rasm")
+
+
+@admin.register(posts.StudyDegrees)
+class StudyDegreesAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    search_fields = ("name_uz", )
+    readonly_fields = ("added_at", )  
+    filter_horizontal = ("faculty", )
+    list_display_links = ("id", "name_uz")
+    list_display = ("id", "name_uz", "added_at")
+
+    fieldsets = (
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz",
+            ),
+        }),
+        (None, {
+            "fields": (
+                "faculty",
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru",
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en",
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            try:
+                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
+            except Exception as e:
+                kwargs["queryset"] = posts.Posts.objects.none()
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
+
+
+@admin.register(posts.EducationalAreas)
+class EducationalAreasAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    search_fields = ("name_uz", )
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name_uz")
+    list_display = ("id", "name_uz", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "study_degree", "faculty", "pdf_file", 
+                ("full_time_fee", "full_time_night_fee", "full_time_external_fee")
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", "desc_uz", "application_procedure_uz",
+                "tuition_fee_uz", "contact_uz", "you_may_become_uz"
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", "desc_ru", "application_procedure_ru",
+                "tuition_fee_ru", "contact_ru", "you_may_become_ru"
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", "desc_en", "application_procedure_en",
+                "tuition_fee_en", "contact_en", "you_may_become_en"
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
+    
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
+            
+        if db_field.name == "study_degree":
+            kwargs["queryset"] = posts.StudyDegrees.objects.all()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+@admin.register(posts.ModuleOfStudyPrograme)
+class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    search_fields = ("name_uz", )
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name_uz")
+    list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+               "semester", "educational_area", "pdf_file", 
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", 
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
     

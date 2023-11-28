@@ -306,3 +306,18 @@ class EventTypes(models.Model):
         managed = True
         verbose_name = _("Tadbir turlari")
         verbose_name_plural = _("Tadbir turlari")
+
+
+class Semesters(models.Model):
+    """ semesterlar """
+    name = models.CharField(max_length=123, blank=True, null=True, verbose_name=_("Nomi"))
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        db_table = 'semesters'
+        managed = True
+        verbose_name = _("Semesterlar")
+        verbose_name_plural = _("Semesterlar")

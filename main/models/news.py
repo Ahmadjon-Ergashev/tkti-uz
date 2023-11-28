@@ -171,11 +171,6 @@ class Events(widgets.AbstractTemplate):
         else:
             super().save(*args, **kwargs)
 
-""" Find Your Studies Model """
 
-# class StudentsLevel(models.Model):
-#     """ students level types ['Bacheler's degree', 'Magister degree'] """
-#     name = models.CharField(max_length=123, blank=True, null=True, verbose_name=_("Nomi"))
-#     added_at = models.DateTimeField(auto_now_add=True)
 
 

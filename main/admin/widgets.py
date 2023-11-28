@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from main.models import widgets
 
 
+
 @admin.register(widgets.SocialNetworks)
 class SocialNetworkingAdmin(GuardedModelAdmin):     
     search_fields = ("name_uz", )
@@ -39,7 +40,7 @@ class SocialNetworkingAdmin(GuardedModelAdmin):
                 "name_en", 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'classes': ('collapse', ),
             'fields': (
                 "author", "update_user", "added_at", "updated_at"
@@ -97,7 +98,7 @@ class LinksAdmin(GuardedModelAdmin):
                 "name_en", 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "add_time", 
             ),
@@ -140,7 +141,7 @@ class QuickLinksAdmin(admin.ModelAdmin):
                 "name_en", 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "added_at", 
             ),
@@ -174,7 +175,7 @@ class EventTypesAdmin(admin.ModelAdmin):
                 "name_en", 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "added_at", 
             ),
@@ -214,7 +215,7 @@ class StatistikaAdmin(admin.ModelAdmin):
                 "name_en", 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "added_at", 
             ),
@@ -377,10 +378,42 @@ class FaqAdmin(admin.ModelAdmin):
                 "title_en", "answer_en" 
             ),
         }),
-        ("Automatik to'ldiriladigan fieldlar", {
+        (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "added_at", 
             ),
         }),
     )
     
+
+@admin.register(widgets.Semesters)
+class SemestersAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name")
+
+    fieldsets = (
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", 
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at", 
+            ),
+        }),
+    )

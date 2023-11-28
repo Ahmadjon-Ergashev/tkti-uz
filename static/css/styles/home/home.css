@@ -429,4 +429,10 @@
 }
 .section_title .photo button:hover a {
   color: white;
+}
+
+.search_btn {
+  font-weight: 600;
+  color: white;
+  background: #111;
 }/*# sourceMappingURL=home.css.map */

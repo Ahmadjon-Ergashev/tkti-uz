@@ -64,6 +64,22 @@ class TalentedStudentsTranslation(TranslationOptions):
 @register(posts.BossSection)
 class BossSectionTranslation(TranslationOptions):
     fields = ("f_name", )
+    
+
+@register(posts.StudyDegrees)
+class StudyDegreesTranslation(TranslationOptions):
+    fields = ("name", )
+    
+
+@register(posts.EducationalAreas)
+class EducationalAreasTranslation(TranslationOptions):
+    fields = ("name", "desc", "application_procedure", "tuition_fee", "contact", "you_may_become")
+    
+
+@register(posts.ModuleOfStudyPrograme)
+class ModuleOfStudyProgrameTranslation(TranslationOptions):
+    fields = ("name", )
+
 
 """ news models translations file """
     
@@ -147,3 +163,8 @@ class FaqCategoryTranslation(TranslationOptions):
 @register(widgets.Faq)
 class FaqTranslation(TranslationOptions):
     fields = ("title", "answer")
+
+
+@register(widgets.Semesters)
+class SemestersTranslation(TranslationOptions):
+    fields = ("name", )
