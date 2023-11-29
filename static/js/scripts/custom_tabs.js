@@ -24,3 +24,15 @@ news_tab_btns.forEach((tab, index) => {
         news_content[index].classList.add("d-block")
     })
 })
+
+const sem_tab_btns = document.querySelectorAll("#module_by_semesters .tab_btn");
+const sem_content = document.querySelectorAll("#module_by_semesters .content");
+sem_tab_btns.forEach((tab, index) => {
+    tab.addEventListener("click", (e)=>{
+        sem_tab_btns.forEach(tab=>{tab.classList.remove("active_tap")})
+        tab.classList.add("active_tap")
+        sem_content.forEach((sem_content)=>{sem_content.classList.remove("d-block")})
+        sem_content[index].classList.add("d-block")
+    })
+})
+

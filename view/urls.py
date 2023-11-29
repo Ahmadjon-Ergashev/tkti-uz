@@ -11,7 +11,8 @@ posts = [
     path("posts/navbar/<slug:navbar_slug>/", posts.PostsListView.as_view(), name="posts_nav"),
     path("posts/sections/<slug:post_slug>/", posts.SectionsDetailView.as_view(), name="sect_nav"),
     path("posts/navbar/post/<slug:post_slug>/", posts.PostDetailView.as_view(), name="post_detail"),
-    path("posts/departments/<slug:dept_slug>/", posts.DepartmentsDetailView.as_view(), name="dept_detail")
+    path("posts/departments/<slug:dept_slug>/", posts.DepartmentsDetailView.as_view(), name="dept_detail"),
+    path("posts/eduacational_area/<int:id>/", posts.EducationalAreaView.as_view(), name="educational_area_detail"),
 ]
 news = [
     path("upload/images/", news.Upload_Images),

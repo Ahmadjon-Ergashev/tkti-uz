@@ -81,6 +81,11 @@ class ModuleOfStudyProgrameTranslation(TranslationOptions):
     fields = ("name", )
 
 
+@register(posts.LearningWay)
+class LearningWayTranslation(TranslationOptions):
+    fields = ("name", )
+
+
 """ news models translations file """
     
 

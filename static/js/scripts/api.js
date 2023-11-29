@@ -2,14 +2,13 @@ $(document).ready(function(){
     $NF404 = $("#not_found_404").data("not-found");
     $.ajax({
         type: "GET",
-        url: "api/widgets/years",
+        url: "api/posts/study_degree",
         data: {},
         success: function(data) {
             if (data.length !== 0) {
                 data.map((item)=>{
-                    // console.log(item)
-                    select_year = `<option value="${item.id}">${item.year}</option>`
-                    $("#id_year").append(select_year)
+                    select_type = `<option value="${item.id}">${item.name}</option>`
+                    $("#id_type").append(select_type)
                 })
             }
         }
@@ -19,13 +18,13 @@ $(document).ready(function(){
         $("#id_faculty").append(`<option value="">--------------------</option>`)
         $.ajax({
             type: "GET",
-            url: "api/posts/faculty_list",
+            url: `api/posts/study_degree/${$("#id_type").val()}`,
             data: {},
             success: function(data) {
+                console.log(data)
                 if (data.length !== 0) {
-                    data.map((item)=>{
-                        // console.log(item)
-                        select_faculty = `<option value="${item.id}">${item.title}</option>`
+                    data.faculty.map((i)=>{
+                        select_faculty = `<option value="${i.id}">${i.title}</option>`
                         $("#id_faculty").append(select_faculty)
                     })
                 }
@@ -33,21 +32,19 @@ $(document).ready(function(){
         });
     })
     $("#id_faculty").on("change", ()=> {
-        $("#id_dept").empty()
-        $("#id_dept").append(`<option value="">--------------------</option>`)
-        // console.log($("#id_faculty").val())
+        $("#id_way").empty()
+        $("#id_way").append(`<option value="">--------------------</option>`)
         $.ajax({
             type: "GET",
-            url: "api/posts/departments_list",
+            url: "api/posts/learning_way",
             data: {
                 faculty: $("#id_faculty").val()
             },
             success: function(data) {
                 if (data.length !== 0) {
                     data.map((item)=>{
-                        // console.log(item)
                         select_dept = `<option value="${item.id}">${item.name}</option>`
-                        $("#id_dept").append(select_dept)
+                        $("#id_way").append(select_dept)
                     })
                 }
             }
@@ -95,6 +92,7 @@ $(document).ready(function(){
             }
         });
     });
+
     // faculty and departments
     $.ajax({
         type: 'GET',

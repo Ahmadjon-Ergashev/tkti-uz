@@ -22,6 +22,7 @@ def global_variables(request):
         "about": _("Xaqida"),
         "previous": _("ortga"),
         "target": _("Maqsadi"),
+        "home": _("Bosh sahifaq"),
         "ads_tab": _("E'lonlar"),
         "workers": _("Xodimlar"),
         "activity": _("Faoliyati"),

@@ -662,19 +662,66 @@ class StudyDegreesAdmin(admin.ModelAdmin):
                 kwargs["queryset"] = posts.Posts.objects.none()
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
+# "study_degree", "faculty",
+
+@admin.register(posts.LearningWay)
+class LearningWayAdmin(admin.ModelAdmin):
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name")
+    list_display = ("id", "name", "study_degree", "faculty", "added_at")
+    
+    fieldsets = (
+        (None, {
+            "fields": (
+               "study_degree", "faculty",
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz",
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru",
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en",
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
+            
+        if db_field.name == "study_degree":
+            kwargs["queryset"] = posts.StudyDegrees.objects.all()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
 
 @admin.register(posts.EducationalAreas)
 class EducationalAreasAdmin(admin.ModelAdmin):
     actions = [simple_clone]
     search_fields = ("name_uz", )
-    readonly_fields = ("added_at", )
     list_display_links = ("id", "name_uz")
     list_display = ("id", "name_uz", "added_at")
+    readonly_fields = ("added_at", "post_viewed_count")
 
     fieldsets = (
         (None, {
             "fields": (
-                "study_degree", "faculty", "pdf_file", 
+                "study_way", "pdf_file", "author_post",
                 ("full_time_fee", "full_time_night_fee", "full_time_external_fee")
             ),
         }),
@@ -701,18 +748,11 @@ class EducationalAreasAdmin(admin.ModelAdmin):
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "added_at",
+                "added_at", "post_viewed_count"
             ),
         })
     )
     
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "faculty":
-            kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
-            
-        if db_field.name == "study_degree":
-            kwargs["queryset"] = posts.StudyDegrees.objects.all()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(posts.ModuleOfStudyPrograme)

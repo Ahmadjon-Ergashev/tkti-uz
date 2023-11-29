@@ -63,5 +63,28 @@ class TalentedStudentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.TalentedStudents.objects.all().order_by("-added_at")
     serializer_class = serializers.TalentedStudentsSerializers
 
+
+class StudyDegreeView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = posts.StudyDegrees.objects.all().order_by("name")
+    serializer_class = serializers.StudyDegreesSerialziers
+
+
+class LearningWayView(mixins.ListModelMixin, viewsets.GenericViewSet):
+    queryset = posts.LearningWay.objects.all().order_by("name")
+    serializer_class = serializers.LearningWaySerializers
+    
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        faculty = self.request.query_params.get("faculty")
+        if faculty:
+            queryset = queryset.filter(faculty=faculty).order_by("-added_at")
+        else:
+            queryset = queryset.none()
+        return queryset
+    
+    @swagger_auto_schema(manual_parameters=query_params.department_query())
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
     
     

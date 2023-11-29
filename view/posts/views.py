@@ -36,12 +36,9 @@ def Home(request):
         "search": _("Qidirish"),
         "events": _("Voqealar"),
         "title": _("Bosh sahifa"),
-        "sp_year": _("Yilni tanlang"),
-        "high_degree": _("Bakalavriat"),
         "faculty_title": _("Fakultetlar"),
-        "sp_dept": _("Kafedrani tanlang"),
         "ads_section_title": _("E'lonlar"),
-        "higher_degree": _("Magistraturat"),
+        "sp_way": _("Yo'nalishni tanlang"),
         "sp_type": _("Ta'lim turini tanlang"),
         "sp_faculty": _("Fakultetni tanlang"),
         "videos_section_title": _("Videolar"),
@@ -181,6 +178,34 @@ class SectionsDetailView(DetailView):
         except AttributeError:
             data["category_list"] = navbar.get_children()    
         return data
-    
-    
+
+
+class EducationalAreaView(DetailView):
+    model = posts.EducationalAreas
+    template_name = "pages/study_way/study_way_detail.html"
+
+    def get_object(self, queryset=None):
+        id = self.kwargs["id"]
+        obj = get_object_or_404(posts.EducationalAreas, id=id)
+        obj.post_viewed_count += 1
+        obj.save()
+        return obj
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        semesters = widgets.Semesters.objects.all()
+        modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(semester=semester) for semester in semesters}
+        obj = data["object"]
+        data["name"] = _("Nomi")
+        data["title"] = obj.name
+        data["view"] = _("Ko'rish")
+        data["desc"] = _("Ta'lim dasturi xaqida")
+        data["requarements"] = _("Kirish talablari")
+        data["modules_by_semester"] = modules_by_semester
+        data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
+        data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
+        data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
+        data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
+        data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
+        return data
     

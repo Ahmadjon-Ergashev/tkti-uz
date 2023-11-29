@@ -158,7 +158,6 @@ class AdsAdmin(admin.ModelAdmin):
     
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("title_uz", )}
-        return {"slug": ("title_uz", )}
 
 
 @admin.register(news.Events)
@@ -232,18 +231,18 @@ class EventsAdmin(admin.ModelAdmin):
         return {"slug": ("title_uz", )}
     
 
-@admin.register(news.Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_editable = ("order_num", )
-    list_display = ("name_uz", "order_num", "added_at")
+# @admin.register(news.Category)
+# class CategoryAdmin(admin.ModelAdmin):
+#     list_editable = ("order_num", )
+#     list_display = ("name_uz", "order_num", "added_at")
 
-    fieldsets = (
-        (None, {
-            'fields': (
-                ("name_uz", "name_ru", "name_en"), "order_num"
-            ),
-        }),
-    )
+#     fieldsets = (
+#         (None, {
+#             'fields': (
+#                 ("name_uz", "name_ru", "name_en"), "order_num"
+#             ),
+#         }),
+#     )
 
 
 @admin.register(news.VideoGallery)

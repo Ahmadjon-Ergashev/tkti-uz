@@ -17,6 +17,12 @@ class PostsSerializers(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class ShortPostsSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = posts.Posts
+        fields = ["id", "title"]
+
+
 class FacultySerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.Posts
@@ -61,5 +67,26 @@ class TalentedStudentsSerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.TalentedStudents
         fields = '__all__'
+
+
+class StudyDegreesSerialziers(serializers.ModelSerializer):
+    faculty = FacultySerializers(many=True)
+    class Meta:
+        model = posts.StudyDegrees
+        fields = ["id", "name", "faculty"]
+    
+
+class LearningWaySerializers(serializers.ModelSerializer):
+    class Meta:
+        model = posts.LearningWay
+        fields = "__all__"
+    
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data["study_degree"] = StudyDegreesSerialziers(instance=instance.study_degree).data
+        data["faculty"] = ShortPostsSerializers(instance=instance.faculty).data
+        return data
+
+
 
     

@@ -353,12 +353,27 @@ class StudyDegrees(models.Model):
         verbose_name_plural = _("Ta'lim darajalari")
 
 
-
-class EducationalAreas(models.Model):
-    """ ta'lim yo'nalishlari """
+class LearningWay(models.Model):
+    """ study ways """
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
     faculty = models.ForeignKey(Posts, verbose_name=_("Fakultet nomi"), on_delete=models.SET_NULL, null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'learning_way'
+        managed = True
+        verbose_name = _("Yo'nashish bo'limlari")
+        verbose_name_plural = _("Yo'nashish bo'limlari")
+
+
+class EducationalAreas(models.Model):
+    """ ta'lim yo'nalishlari """
+    study_way = models.ForeignKey(LearningWay, on_delete=models.SET_NULL, null=True, verbose_name=_("Yo'nashish bo'limi"))
+    name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     desc = QuillField(verbose_name=_("Yo'nalish xaqida"), null=True)
     pdf_file = models.FileField(
         _("PDF fayl"), upload_to="pdf/educational_areas/%Y-%m-%d/", 
@@ -370,6 +385,8 @@ class EducationalAreas(models.Model):
     full_time_fee = models.IntegerField(default=0, verbose_name=_("Kundizgi ta'lim uchun"))
     full_time_night_fee = models.IntegerField(default=0, verbose_name=_("Kechgi ta'lim uchun"))
     full_time_external_fee = models.IntegerField(default=0, verbose_name=_("Sirtqi ta'lim uchun"))
+    post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
+    author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
