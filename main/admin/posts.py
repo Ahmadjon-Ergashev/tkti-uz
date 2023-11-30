@@ -755,42 +755,42 @@ class EducationalAreasAdmin(admin.ModelAdmin):
     
 
 
-@admin.register(posts.ModuleOfStudyPrograme)
-class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
-    actions = [simple_clone]
-    search_fields = ("name_uz", )
-    readonly_fields = ("added_at", )
-    list_display_links = ("id", "name_uz")
-    list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
+# @admin.register(posts.ModuleOfStudyPrograme)
+# class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
+#     actions = [simple_clone]
+#     search_fields = ("name_uz", )
+#     readonly_fields = ("added_at", )
+#     list_display_links = ("id", "name_uz")
+#     list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
 
-    fieldsets = (
-        (None, {
-            "fields": (
-               "semester", "educational_area", "pdf_file", 
-            ),
-        }),
-        (_("O'zbek tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "name_uz", 
-            ),
-        }),
-        (_("Rus tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "name_ru", 
-            ),
-        }),
-        (_("Ingiliz tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "name_en", 
-            ),
-        }),
-        (_("Automatik to'ldiriladigan fieldlar"), {
-            'fields': (
-                "added_at",
-            ),
-        })
-    )
+#     fieldsets = (
+#         (None, {
+#             "fields": (
+#                "semester", "educational_area", "pdf_file", 
+#             ),
+#         }),
+#         (_("O'zbek tilida"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "name_uz", 
+#             ),
+#         }),
+#         (_("Rus tilida"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "name_ru", 
+#             ),
+#         }),
+#         (_("Ingiliz tilida"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "name_en", 
+#             ),
+#         }),
+#         (_("Automatik to'ldiriladigan fieldlar"), {
+#             'fields': (
+#                 "added_at",
+#             ),
+#         })
+#     )
     
