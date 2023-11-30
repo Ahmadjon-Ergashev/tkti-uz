@@ -250,6 +250,31 @@ REST_FRAMEWORK = {
 }
 
 # MODELTRANSLATION_TRANSLATION_FILES
+QUILL_CONFIGS = {
+    'default':{
+        'theme': 'snow',
+        'modules': {
+            'syntax': True,
+            'toolbar': [
+                [
+                    {'font': []},
+                    {'header': []},
+                    {'align': []},
+                    'bold', 'italic', 'underline', 'strike', 'blockquote',
+                    {'color': []},
+                    {'background': []},
+                ],
+                ["image"],
+                ['code-block', 'link'],
+                ['clean'],
+            ]
+        }
+    }
+}
 
 from config.jazzmin import JAZZMIN_SETTINGS
 JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+
+# JAZZMIN_UI_TWEAKS = {
+#     "theme": "darkly"
+# }

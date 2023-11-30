@@ -85,7 +85,7 @@ JAZZMIN_SETTINGS = {
     "hide_models": [],
 
     # List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
-    "order_with_respect_to": ["auth", "main", "main.news", "main.posts"],
+    "order_with_respect_to": ["auth", "main", "main.news", "main.posts", "main.navbar"],
 
     # Custom links to append to app groups, keyed on app name
     # "custom_links": {
@@ -118,8 +118,8 @@ JAZZMIN_SETTINGS = {
     # UI Tweaks #
     #############
     # Relative paths to custom CSS/JS scripts (must be present in static files)
-    "custom_css": None,
-    "custom_js": None,
+    "custom_css": "../static/css/modules/admin/custom_admin.css",
+    "custom_js": "../static/js/admin/custom_admin.js",
     # Whether to link font from fonts.googleapis.com (use custom_css to supply font otherwise)
     "use_google_fonts_cdn": True,
     # Whether to show the UI customizer on the sidebar
