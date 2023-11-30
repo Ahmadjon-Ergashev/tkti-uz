@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
+    "jazzmin",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -249,3 +250,6 @@ REST_FRAMEWORK = {
 }
 
 # MODELTRANSLATION_TRANSLATION_FILES
+
+from config.jazzmin import JAZZMIN_SETTINGS
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
