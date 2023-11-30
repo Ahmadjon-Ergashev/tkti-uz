@@ -666,6 +666,7 @@ class StudyDegreesAdmin(admin.ModelAdmin):
 
 @admin.register(posts.LearningWay)
 class LearningWayAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     readonly_fields = ("added_at", )
     list_display_links = ("id", "name")
     list_display = ("id", "name", "study_degree", "faculty", "added_at")
