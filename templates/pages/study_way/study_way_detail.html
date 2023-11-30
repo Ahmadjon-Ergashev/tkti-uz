@@ -27,6 +27,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'learing_way_detail' id=parent.id %}">{{ parent }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
             </ol>
         </nav>
@@ -39,19 +40,19 @@
             <a href="{{ object.pdf_file.url }}" class="btn btn-sm btn-dark" target="_blank">{{ desc }}</a>
         </div>
     </div>
-
+    
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ requarements }}</h1>
         </div>
     </div>
-
-    <div class="container my-5">
+    
+    <div class="container my-3">
         <div class="object_body">
             <p>{{ object.application_procedure.html|safe }}</p>
         </div>
     </div>
-    <div class="container my-5">
+    <div class="container my-3">
         <div class="object_body">
             <div class="row">
                 <div class="col-12 col-lg-8">
@@ -77,13 +78,13 @@
             </div>
         </div>
     </div>
-
+    
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ modul_title }}</h1>
         </div>
     </div>
-
+    
     <div class="container">
         <div id="module_by_semesters">
             <div class="_container">
@@ -124,19 +125,19 @@
             </div>
         </div>
     </div>
-
+    
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ you_may_become }}</h1>
         </div>
     </div>
-
+    
     <div class="container my-5">
         <div class="object_body">
             <p>{{ object.you_may_become.html|safe }}</p>
         </div>
     </div>
-
+    
     <div class="container">
         <div class="post_footer">
             <p class="text-end fw-bold">{{ object.author_post }}</p>

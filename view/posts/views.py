@@ -178,9 +178,75 @@ class SectionsDetailView(DetailView):
         except AttributeError:
             data["category_list"] = navbar.get_children()    
         return data
+    
+
+class LearningWayDetailView(DetailView):
+    model = posts.LearningWay
+    template_name = "pages/study_way/study_way_list.html"
+
+    def get_object(self, queryset=None):
+        id = self.kwargs["id"]
+        obj = get_object_or_404(posts.LearningWay, id=id)
+        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
+        if len(edu_areas) == 1:
+            edu_area = edu_areas.first()
+            edu_area.post_viewed_count += 1
+            edu_area.save()
+        return obj
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        obj = data["object"]
+        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
+        if len(edu_areas) == 1:
+            semesters = widgets.Semesters.objects.all()
+            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=edu_areas.first().id, semester=semester) for semester in semesters}
+            data["modules_by_semester"] = modules_by_semester
+        data["title"] = obj.name
+        data["name"] = _("Nomi")
+        data["view"] = _("Ko'rish")
+        data["desc"] = _("Ta'lim dasturi xaqida")
+        data["requarements"] = _("Kirish talablari")
+        data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
+        data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
+        data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
+        data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
+        data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
+        data["educational_areas"] = posts.EducationalAreas.objects.filter(study_way=obj.id)
+        return data
 
 
-class EducationalAreaView(DetailView):
+class EducationalAreaView(ListView):
+    model = posts.EducationalAreas
+    template_name = "pages/study_way/study_way_list.html"
+
+    def get_queryset(self):
+        study_way = self.kwargs["study_way"]
+        queryset = super().get_queryset().filter(study_way=study_way)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        if len(data["object_list"]) == 1:
+            obj = data["object_list"][0]
+            semesters = widgets.Semesters.objects.all()
+            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=obj.id, semester=semester) for semester in semesters}
+            data["modules_by_semester"] = modules_by_semester
+
+        data["name"] = _("Nomi")
+        data["view"] = _("Ko'rish")
+        data["desc"] = _("Ta'lim dasturi xaqida")
+        data["title"] = data["object_list"][0].name 
+        data["requarements"] = _("Kirish talablari")
+        data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
+        data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
+        data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
+        data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
+        data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
+        return data
+    
+
+class EducationalAreaDetailView(DetailView):
     model = posts.EducationalAreas
     template_name = "pages/study_way/study_way_detail.html"
 
@@ -193,12 +259,13 @@ class EducationalAreaView(DetailView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        semesters = widgets.Semesters.objects.all()
-        modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(semester=semester) for semester in semesters}
         obj = data["object"]
+        semesters = widgets.Semesters.objects.all()
+        modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=obj.id, semester=semester) for semester in semesters}
         data["name"] = _("Nomi")
         data["title"] = obj.name
         data["view"] = _("Ko'rish")
+        data["parent"] = obj.study_way
         data["desc"] = _("Ta'lim dasturi xaqida")
         data["requarements"] = _("Kirish talablari")
         data["modules_by_semester"] = modules_by_semester

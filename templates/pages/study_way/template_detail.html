@@ -1,0 +1,114 @@
+<div class="container my-5">
+    <h3>{{ object.name }}</h3>
+    <div class="object_body">
+        <p>{{ object.desc.html|safe }}</p>
+        <a href="{{ object.pdf_file.url }}" class="btn btn-sm btn-dark" target="_blank">{{ desc }}</a>
+    </div>
+</div>
+
+<div class="section_title py-2">
+    <div class="container">
+        <h1>{{ requarements }}</h1>
+    </div>
+</div>
+
+<div class="container my-3">
+    <div class="object_body">
+        <p>{{ object.application_procedure.html|safe }}</p>
+    </div>
+</div>
+<div class="container my-3">
+    <div class="object_body">
+        <div class="row">
+            <div class="col-12 col-lg-8">
+                <p>{{ object.tuition_fee.html|safe }}</p>
+                <ul class="list-group list-group-flush w-50 w-50-l">
+                    <li class="list-group-item d-flex justify-content-between px-0">
+                        <span>{{ full_time_fee_title }}</span>
+                        <span>{{ object.full_time_fee }} so'm</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between px-0">
+                        <span>{{ full_time_night_fee_title }}</span>
+                        <span>{{ object.full_time_night_fee }} so'm</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between px-0">
+                        <span>{{ full_time_external_fee_title }}</span>
+                        <span>{{ object.full_time_external_fee }} so'm</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-12 col-lg-4">
+                <p>{{ object.contact.html|safe }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section_title py-2">
+    <div class="container">
+        <h1>{{ modul_title }}</h1>
+    </div>
+</div>
+
+<div class="container">
+    <div id="module_by_semesters">
+        <div class="_container">
+            <div class="tap_title">
+                <div class="tab_box container" style="padding: 0;">
+                    <div class="tab_btns">
+                        {% for semester in modules_by_semester %}
+                            <button class="tab_btn {% if forloop.first %}active_tap{% endif %}">{{ semester }}</button>
+                        {% endfor %}
+                    </div>  
+                </div>
+            </div>
+            <div class="content_box my-5 container">
+                {% for semester, modules in modules_by_semester.items %}
+                    <div class="content {% if forloop.first %}d-block{% endif %}">
+                        <ul class="list-group list-group-flush w-50-l w-50">
+                            {% for module in modules %}
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>{{ module.name }}</span>
+                                    <a type="button" class="text-primary" data-bs-toggle="offcanvas" data-bs-target="#StudyWay{{module.id}}" aria-controls="offcanvasScrolling">
+                                        {{ view }}
+                                    </a>
+                                </li>
+                                <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay{{module.id}}" aria-labelledby="offcanvasScrollingLabel">
+                                    <div class="offcanvas-header">
+                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">{{ module.name }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                    </div>
+                                    <div class="offcanvas-body">
+                                        <iframe src="{{ module.pdf_file.url }}" width="100%" height="100%" frameborder="0"></iframe>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section_title py-2">
+    <div class="container">
+        <h1>{{ you_may_become }}</h1>
+    </div>
+</div>
+
+<div class="container my-5">
+    <div class="object_body">
+        <p>{{ object.you_may_become.html|safe }}</p>
+    </div>
+</div>
+
+<div class="container">
+    <div class="post_footer">
+        <p class="text-end fw-bold">{{ object.author_post }}</p>
+        <div class="time_and_view">
+            <span><i class="fas fa-eye me-2"></i> {{ object.post_viewed_count }}</span>
+            <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+        </div>
+    </div>
+</div>

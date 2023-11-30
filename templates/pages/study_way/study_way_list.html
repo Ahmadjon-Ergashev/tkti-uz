@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <style>
+        .learning_way .banner_img {
+            height: 400px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .read{
+            position: absolute;
+            bottom: 10px;
+        }
+        .post_footer {
+            margin-top: 40px;
+        }
+        .post_footer p {
+            margin-bottom: 0;
+        }
+        .post_footer .time_and_view {
+            display: flex;
+            justify-content: space-between;
+        }
+        .post_footer .time_and_view span {
+            font-weight: 500;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/modules/tabs/tabs.css' %}">
+    {% if educational_areas|length != 1 %}
+        <div class="container my-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                </ol>
+            </nav>
+        </div>
+    {% else %}
+        <div class="container mt-3 mb-1">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'learing_way_detail' id=object.id %}">{{ title }}</a></li>
+                    {% for object in educational_areas %}
+                        <li class="breadcrumb-item active" aria-current="page">{{ object.name }}</li>
+                    {% endfor %}
+                </ol>
+            </nav>
+        </div>
+    {% endif %}
+    <div class="container">
+        <div class="learning_way">
+            {% if educational_areas|length != 1 %}
+                <div class="banner_img" style="background-image: url('{{ object.image.url }}');"></div>
+                <h2><b>{{ object.name }}</b></h2>
+                <div class="object_body">
+                    <p>{{ object.post.html|safe }}</p>
+                </div>
+                <hr/>
+            {% else %}
+            {% endif %}
+            <!-- childrens -->
+            <div class="row">
+                {% if educational_areas|length == 1 %}
+                    {% for object in educational_areas %}
+                        {% include "./template_detail.html" %}
+                    {% endfor %}
+                {% else %}
+                    {% for edu in educational_areas %}
+                        <div class="col-12 col-md-4 col-lg-3">
+                            <div class="card" style="height: 120px;">
+                                <div class="card-body position-relative">
+                                    <h6 class="card-subtitle mb-2 text-body-secondary">
+                                        {{ edu.name | truncatechars:100 }}
+                                    </h6>  
+                                    <a href="{% url 'educational_area_detail' id=edu.id %}" class="card-link read">{{ read_more }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/scripts/custom_tabs.js' %}"></script>
+
+{% endblock content %}

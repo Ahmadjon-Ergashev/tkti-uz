@@ -358,6 +358,8 @@ class LearningWay(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
     faculty = models.ForeignKey(Posts, verbose_name=_("Fakultet nomi"), on_delete=models.SET_NULL, null=True)
+    image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
+    post = QuillField(verbose_name=_("Xaqida"), null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):

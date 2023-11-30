@@ -2,7 +2,6 @@ function submitForm(){
     document.getElementById('lang').submit(); 
 } 
 $(document).ready(function(){
-    AOS.init();
     $(".social_networks_links").each(function() {
         $color = $(this).data("social-color");
         $a = $(this).find("a");

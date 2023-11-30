@@ -673,25 +673,25 @@ class LearningWayAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-               "study_degree", "faculty",
+               "study_degree", "faculty", "image"
             ),
         }),
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz",
+                "name_uz", "post_uz"
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru",
+                "name_ru", "post_ru"
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en",
+                "name_en", "post_en"
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {

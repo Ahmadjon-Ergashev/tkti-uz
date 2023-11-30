@@ -1,5 +1,24 @@
 $(document).ready(function(){
     $NF404 = $("#not_found_404").data("not-found");
+    $("#id_link").addClass("bg-secondary disabled");
+    function checkFields() {
+        var field1 = $("#id_type").val() !== "--------------------" ? $("#id_type").val() : false;
+        var field2 = $("#id_faculty").val() !== "--------------------" ? $("#id_faculty").val() : false;
+        var field3 = $("#id_way").val() !== "--------------------" ? $("#id_way").val() : false;
+        if (field1 && field2 && field3) {
+            $("#id_link").removeClass("bg-secondary disabled");
+            $("#id_link").attr("href", `/posts/learing_way/detail/${field3}/`);         
+        } else {
+            $("#id_link").addClass("disabled");
+        }
+        if (!field1 | !field2 | !field3) {
+            $("#id_link").addClass("bg-secondary disabled");
+        }
+    }
+    $("#id_type, #id_faculty, #id_way").change(function () {
+        checkFields();
+    });
+
     $.ajax({
         type: "GET",
         url: "api/posts/study_degree",
@@ -21,7 +40,7 @@ $(document).ready(function(){
             url: `api/posts/study_degree/${$("#id_type").val()}`,
             data: {},
             success: function(data) {
-                console.log(data)
+                // console.log(data)
                 if (data.length !== 0) {
                     data.faculty.map((i)=>{
                         select_faculty = `<option value="${i.id}">${i.title}</option>`
@@ -50,48 +69,49 @@ $(document).ready(function(){
             }
         });
     })
-    $('#filter_study_way').submit(function(event) {
-        event.preventDefault();
-        $.ajax({
-            type: 'GET',
-            url: "api/posts/study_programs/", 
-            data: {
-                year: $("#id_year").val() !== "--------------------" ? $("#id_year").val(): "",
-                faculty: $("#id_faculty").val() !== "--------------------" ? $("#id_faculty").val(): "",
-                department: $("#id_dept").val() !== "--------------------" ? $("#id_dept").val(): "",
-                study_way: $("#id_type").val() !== "--------------------" ? $("#id_type").val(): ""
-            },
-            success: function(data) {
-                $('#result_data').empty();
-                if (data.length !== 0) { 
-                    data.map((item) => {
-                        console.log(item)
-                        var listItem = `
-                            <ul class="list-group list-group-flush border-bottom-1">
-                                <li class="list-group-item"><span>${item.title}</span> 
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a class="btn btn-primary" href="${item.pdf_file}" download="${item.pdf_file}">yuklab olish</a>
-                                    <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${item.id}" aria-controls="offcanvasScrolling">Ko'rish</a></li>
-                                </div>
-                                <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${item.id}" aria-labelledby="offcanvasScrollingLabel">
-                                    <div class="offcanvas-header">
-                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">${item.title}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                    </div>
-                                    <div class="offcanvas-body">
-                                        <iframe src="${item.pdf_file}" width="100%" height="100%" frameborder="0"></iframe>
-                                    </div>
-                                </div>
-                            </ul>
-                        `
-                        $('#result_data').append(listItem);
-                    })                  
-                } else {
-                    $('#result_data').append(`<p class="text-center">Afsuski ma'lumotlar to'pilmadi</p>`); 
-                }
-            }
-        });
-    });
+
+    // $('#filter_study_way').submit(function(event) {
+    //     event.preventDefault();
+    //     $.ajax({
+    //         type: 'GET',
+    //         url: "api/posts/study_programs/", 
+    //         data: {
+    //             year: $("#id_year").val() !== "--------------------" ? $("#id_year").val(): "",
+    //             faculty: $("#id_faculty").val() !== "--------------------" ? $("#id_faculty").val(): "",
+    //             department: $("#id_dept").val() !== "--------------------" ? $("#id_dept").val(): "",
+    //             study_way: $("#id_type").val() !== "--------------------" ? $("#id_type").val(): ""
+    //         },
+    //         success: function(data) {
+    //             $('#result_data').empty();
+    //             if (data.length !== 0) { 
+    //                 data.map((item) => {
+    //                     // console.log(item)
+    //                     var listItem = `
+    //                         <ul class="list-group list-group-flush border-bottom-1">
+    //                             <li class="list-group-item"><span>${item.title}</span> 
+    //                             <div class="btn-group" role="group" aria-label="Basic example">
+    //                                 <a class="btn btn-primary" href="${item.pdf_file}" download="${item.pdf_file}">yuklab olish</a>
+    //                                 <a class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#StudyWay${item.id}" aria-controls="offcanvasScrolling">Ko'rish</a></li>
+    //                             </div>
+    //                             <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay${item.id}" aria-labelledby="offcanvasScrollingLabel">
+    //                                 <div class="offcanvas-header">
+    //                                     <h5 class="offcanvas-title" id="offcanvasScrollingLabel">${item.title}</h5>
+    //                                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    //                                 </div>
+    //                                 <div class="offcanvas-body">
+    //                                     <iframe src="${item.pdf_file}" width="100%" height="100%" frameborder="0"></iframe>
+    //                                 </div>
+    //                             </div>
+    //                         </ul>
+    //                     `
+    //                     $('#result_data').append(listItem);
+    //                 })                  
+    //             } else {
+    //                 $('#result_data').append(`<p class="text-center">Afsuski ma'lumotlar to'pilmadi</p>`); 
+    //             }
+    //         }
+    //     });
+    // });
 
     // faculty and departments
     $.ajax({
