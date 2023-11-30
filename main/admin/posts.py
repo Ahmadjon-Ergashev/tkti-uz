@@ -327,54 +327,54 @@ class DeptAdminstraAdmin(admin.ModelAdmin):
 
 
 
-@admin.register(posts.StudyProgram)
-class StudyAdmin(admin.ModelAdmin):
-    actions = [simple_clone]
-    readonly_fields = ("added_at", )
-    list_display_links = ("title_uz", )
-    autocomplete_fields = ("department", )
-    search_fields = ("title_uz", "title_ru", "title_en")
-    list_display = ("id", "title_uz", "year", "faculty", "department", "added_at")
+# @admin.register(posts.StudyProgram)
+# class StudyAdmin(admin.ModelAdmin):
+#     actions = [simple_clone]
+#     readonly_fields = ("added_at", )
+#     list_display_links = ("title_uz", )
+#     autocomplete_fields = ("department", )
+#     search_fields = ("title_uz", "title_ru", "title_en")
+#     list_display = ("id", "title_uz", "year", "faculty", "department", "added_at")
 
-    fieldsets = (
-        (None, {
-            "fields": (
-                "year", "faculty", "department", "study_way", "pdf_file", "study_time"
-            ),
-        }),
-        (_("O'zbek tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "title_uz", 
-            ),
-        }),
-        (_("Rus tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "title_ru", 
-            ),
-        }),
-        (_("Ingiliz tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "title_en", 
-            ),
-        }),
-        (_("Automatik to'ldiriladigan bo'limlar"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "added_at",
-            )
-        })
-    )
+#     fieldsets = (
+#         (None, {
+#             "fields": (
+#                 "year", "faculty", "department", "study_way", "pdf_file", "study_time"
+#             ),
+#         }),
+#         (_("O'zbek tilida"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "title_uz", 
+#             ),
+#         }),
+#         (_("Rus tilida"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "title_ru", 
+#             ),
+#         }),
+#         (_("Ingiliz tilida"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "title_en", 
+#             ),
+#         }),
+#         (_("Automatik to'ldiriladigan bo'limlar"), {
+#             'classes': ('collapse', ),
+#             "fields": (
+#                 "added_at",
+#             )
+#         })
+#     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "faculty":
-            try:
-                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True).all()
-            except Exception as e:
-                kwargs["queryset"] = posts.Posts.objects.none()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
+#         if db_field.name == "faculty":
+#             try:
+#                 kwargs["queryset"] = posts.Posts.objects.filter(faculty=True).all()
+#             except Exception as e:
+#                 kwargs["queryset"] = posts.Posts.objects.none()
+#         return super().formfield_for_foreignkey(db_field, request, **kwargs)
     
 
 
@@ -755,42 +755,42 @@ class EducationalAreasAdmin(admin.ModelAdmin):
     
 
 
-# @admin.register(posts.ModuleOfStudyPrograme)
-# class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
-#     actions = [simple_clone]
-#     search_fields = ("name_uz", )
-#     readonly_fields = ("added_at", )
-#     list_display_links = ("id", "name_uz")
-#     list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
+@admin.register(posts.ModuleOfStudyPrograme)
+class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    search_fields = ("name_uz", )
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name_uz")
+    list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
 
-#     fieldsets = (
-#         (None, {
-#             "fields": (
-#                "semester", "educational_area", "pdf_file", 
-#             ),
-#         }),
-#         (_("O'zbek tilida"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "name_uz", 
-#             ),
-#         }),
-#         (_("Rus tilida"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "name_ru", 
-#             ),
-#         }),
-#         (_("Ingiliz tilida"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "name_en", 
-#             ),
-#         }),
-#         (_("Automatik to'ldiriladigan fieldlar"), {
-#             'fields': (
-#                 "added_at",
-#             ),
-#         })
-#     )
+    fieldsets = (
+        (None, {
+            "fields": (
+               "semester", "educational_area", "pdf_file", 
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", 
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
     
