@@ -128,7 +128,8 @@ class PostDetailView(DetailView):
         post = context["object"]
         navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
         context["title"] = navbar.name
-        context["depended_news"] = _("Mavzuga aloqador yangiliklar")
+        context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
+        # error bor
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
         context["parent"] = navbar.parent.name

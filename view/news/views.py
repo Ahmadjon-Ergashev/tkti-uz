@@ -60,7 +60,6 @@ class HashtagSearchView(ListView):
         hashtag = self.kwargs["hashtag"]
         hashtag_ = widgets.Hashtag.objects.get(name=hashtag)
         data =  super().get_queryset().filter(hashtag=hashtag_)
-        print(data)
         return data    
     
     def get_context_data(self, **kwargs):
@@ -132,7 +131,6 @@ class PhotoGallaryView(ListView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Rasmlar")
-        print(data)
         return data
     
 
