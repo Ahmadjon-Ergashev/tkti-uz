@@ -57,6 +57,7 @@ $(document).ready(function(){
             type: "GET",
             url: "api/posts/learning_way",
             data: {
+                study_degree: $("#id_type").val(),
                 faculty: $("#id_faculty").val()
             },
             success: function(data) {

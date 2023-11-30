@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from datetime import datetime, timedelta
+from django.utils.translation import gettext_lazy as _
 
 
 from main.models import news
@@ -42,7 +43,7 @@ class VideoSerializers(serializers.ModelSerializer):
 class EventsSerializers(serializers.ModelSerializer):
     class Meta:
         model = news.Events
-        fields = ["id", "title", "location", "image", "event_type", "slug", "added_at"]
+        fields = ["id", "title", "location", "location_url", "image", "event_type", "slug", "added_at"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -52,4 +53,5 @@ class EventsSerializers(serializers.ModelSerializer):
         new_date_time = datetime_val + timedelta(hours=5)
         data["added_at"] = new_date_time.strftime("%Y-%m-%d %H:%M")
         data["event_type"] = EventTypeSerializers(instance=instance.event_type).data
+        data["read_more"] = _("Batafsil")
         return data

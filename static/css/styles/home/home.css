@@ -435,4 +435,25 @@
   font-weight: 600;
   color: white;
   background: #111;
+}
+
+.col-12 {
+  position: relative;
+}
+.col-12 .card .event_modal {
+  top: 0;
+  left: -5%;
+  width: 480px;
+  z-index: 7777;
+  display: none;
+  background: #fff;
+  position: absolute;
+  transition: all 0.3s ease-in;
+}
+.col-12 .card .event_modal .modal_window .row .col-7 {
+  padding: 15px 0px 10px 20px;
+}
+.col-12 .card:hover .event_modal {
+  display: block;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 }/*# sourceMappingURL=home.css.map */

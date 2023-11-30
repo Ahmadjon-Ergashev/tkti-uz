@@ -344,7 +344,7 @@ class StudyDegrees(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.name}"
 
     class Meta:
         db_table = 'study_degrees'
@@ -363,7 +363,7 @@ class LearningWay(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return self.name
+        return f"{self.study_degree}|{self.faculty}|{self.name}"
 
     class Meta:
         db_table = 'learning_way'
@@ -411,7 +411,7 @@ class ModuleOfStudyPrograme(models.Model):
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.semester}|{self.name}"
 
     class Meta:
         db_table = 'module_study_programes'

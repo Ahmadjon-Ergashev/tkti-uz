@@ -75,14 +75,15 @@ class LearningWayView(mixins.ListModelMixin, viewsets.GenericViewSet):
     
     def get_queryset(self):
         queryset = super().get_queryset()
+        study_degree = self.request.query_params.get("study_degree")
         faculty = self.request.query_params.get("faculty")
-        if faculty:
-            queryset = queryset.filter(faculty=faculty).order_by("-added_at")
+        if faculty and study_degree:
+            queryset = queryset.filter(study_degree=study_degree, faculty=faculty).order_by("-added_at")
         else:
             queryset = queryset.none()
         return queryset
     
-    @swagger_auto_schema(manual_parameters=query_params.department_query())
+    @swagger_auto_schema(manual_parameters=query_params.learning_way_query())
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
 
