@@ -198,7 +198,7 @@ class EventsAdmin(admin.ModelAdmin):
             "classes": ("extrapretty"),
             "fields": (
                 "status", "event_type", "phone", 
-                "added_at", "author_post", "location_url", "extra_phone"
+                "added_at", "author_post", "extra_phone"
             ),
         }),
         (_("Media fayllar"), {
