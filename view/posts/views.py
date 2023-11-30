@@ -84,6 +84,12 @@ class PostsListView(ListView):
             qs = posts.TalentedStudents.objects.all().order_by("-added_at")
         else:
             qs = super().get_queryset().filter(status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
+
+        one_obj = posts.Posts.objects.filter(navbar__slug=navbar_slug)
+        if len(one_obj) == 1:
+            one_obj = one_obj.first()
+            one_obj.post_viewed_count += 1
+            one_obj.save()
         return qs 
     
     def get_context_data(self, **kwargs):
@@ -100,7 +106,7 @@ class PostsListView(ListView):
             context["pdf_file"] = context["object_list"][0].pdf_file
         except Exception:
             context["pdf_file"] = ""
-        context["home"] = _("Asosiy sahifa")
+        context["home"] = _("Bosh sahifa")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         return context
 
@@ -134,6 +140,7 @@ class PostDetailView(DetailView):
             context["pdf_file"] = ""
         return context
 
+
 class DepartmentsDetailView(DetailView):
     """ departments detail view """
     model = posts.Departments
@@ -153,7 +160,7 @@ class DepartmentsDetailView(DetailView):
         context["title"] = obj.name
         context["title_bar"] = _("Kafedralar")     
         return context
-    
+
 
 class SectionsDetailView(DetailView):
     """ bo'lim va markazlar """

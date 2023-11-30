@@ -13,7 +13,7 @@
             padding: 10px;
             color: $text_white;
             background: $color1;
-        }
+        }   
     }
     .body{
         ul{
@@ -135,16 +135,16 @@ $unactiveHoverColor: #dddddd;
     }
 
     section {
-        font-family: "Droid Serif";
         clear: both;
+        font-family: "Droid Serif";
 
         div {
-            padding: 20px;
             width: 100%;
-            border: 1px solid #ddd;
+            padding: 20px;
             background: #fff;
             line-height: 1.5em;
             letter-spacing: 0.3px;
+            border: 1px solid #ddd;
             color: #444;
             ul{
                 li{
@@ -154,7 +154,7 @@ $unactiveHoverColor: #dddddd;
                         font-size: 13px;
                         font-family: "Droid Serif";
                         &:hover{
-                            color: $color1;
+                            color: $dark;
                         }
                     }
                     &::after{
@@ -174,7 +174,7 @@ $unactiveHoverColor: #dddddd;
                         display: flex;
                         justify-content: space-between;
                         span{
-                            color: $color1;
+                            color: $dark;
                         }
                     }
                     .body_tabs_section{

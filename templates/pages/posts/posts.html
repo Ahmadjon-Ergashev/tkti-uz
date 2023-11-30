@@ -8,47 +8,140 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/styles/posts/posts_list.css' %}">
     <div class="container mt-4">
-        <div class="row d-flex justify-content-between py-3">
-            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
-                {% include "../../widgets/left_sidebar.html" %}
+        {% if title_slug == 'fakultet' %}
+            <div class="container my-5">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                        <li class="breadcrumb-item"><a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                    </ol>
+                </nav>
             </div>
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 posts">
-                {% if object_list|length == 1 %}
-                    {% for object in object_list %}
-                        <div class="post_detail">
-                            <div class="post_img" id="object_base_img">
-                                <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="">
-                            </div>
-                            <h3>{{ object.title }}</h3>
-                            {% if object.video_file %}
-                                <div class="post_video">
-                                    <video width="100%" controls>
-                                        <source src="{{ object.video_file.url }}" type="video/mp4">
-                                    </video>
+            <div class="faculty_card_box">
+                {% for object in object_list %}  
+                <a href="{% url 'post_detail' post_slug=object.slug %}" class="d-block">
+                    <div class="faculty_card" style="background-image: url('{{ object.image.url }}');"></div>
+                </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
+                    {% include "../../widgets/left_sidebar.html" %}
+                </div>
+                <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 posts">
+                    {% if object_list|length == 1 %}
+                        {% for object in object_list %}
+                            <div class="post_detail">
+                                <!-- <div class="post_img" id="object_base_img">
+                                    <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="">
+                                </div> -->
+                                <div class="post_img_bg" id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
+                                <h3>{{ object.title }}</h3>
+                                {% if object.video_file %}
+                                    <div class="post_video">
+                                        <video width="100%" controls>
+                                            <source src="{{ object.video_file.url }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                {% endif %}
+                                {% if object.pdf_file %}
+                                    <div class="post_pdf mt-3">
+                                        <iframe 
+                                            src="{{ pdf_file }}" 
+                                            width="100%" 
+                                            height="700" 
+                                            style="border:0;" 
+                                            allowfullscreen="" 
+                                            loading="lazy" 
+                                            referrerpolicy="no-referrer-when-downgrade">
+                                        </iframe>
+                                    </div>
+                                {% endif %}
+                                {% if object.post %}
+                                    <div class="post_text mt-3" id="object_post">
+                                        {{ object.post.html | safe }}
+                                    </div>
+                                {% endif %}
+                                <div class="row">
+                                    {% for obj in object.bosssection_set.all %}
+                                        <div class="col-12 col-md-4 col-xl-4">
+                                            <div class="card">
+                                                <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
+                                                <div class="card-header">
+                                                    <b>{{ obj.position }}</b>
+                                                </div>
+                                                <div class="card-body">
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
+                                                        <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
+                                                        <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    {% endfor %}
                                 </div>
-                            {% endif %}
-                            {% if object.pdf_file %}
-                                <div class="post_pdf mt-3">
-                                    <iframe 
-                                        src="{{ pdf_file }}" 
-                                        width="100%" 
-                                        height="700" 
-                                        style="border:0;" 
-                                        allowfullscreen="" 
-                                        loading="lazy" 
-                                        referrerpolicy="no-referrer-when-downgrade">
-                                    </iframe>
-                                    <!-- <embed src="https://fcdc-185-139-139-244.ngrok-free.app/media/posts/pdf-files/2023-09-26/TurgunovZohidilloPythonProgrammer_RESUME.pdf" type="application/pdf" width="100%" height="600px" /> -->
+                                <div class="post_footer">
+                                    <p class="text-end fw-bold">{{ object.author_post }}</p>
+                                    <div class="time_and_view">
+                                        <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
+                                        <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+                                    </div>
                                 </div>
-                            {% endif %}
-                            {% if object.post %}
-                                <div class="post_text mt-3" id="object_post">
-                                    {{ object.post.html | safe }}
-                                </div>
-                            {% endif %}
+                            </div>  
+                        {% endfor %}
+                    {% else %}
+                        {% if title_slug == 'boglanish' %}
+                            <!-- CONTACT section -->
                             <div class="row">
-                                {% for obj in object.bosssection_set.all %}
-                                    <div class="col-12 col-md-4 col-xl-4">
+                                {% for object in object_list %}                          
+                                    <div class="col-12 col-md-6">
+                                        <div class="card" style="height: 450px; max-height: 450px;">
+                                            <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
+                                            <div class="card-body">
+                                                <p class="card-text fw-bold">
+                                                    {{ object.title }}
+                                                </p>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item"><i class="fas fa-phone"></i> {{ object.phone }}</li>
+                                                    <li class="list-group-item"><i class="fas fa-envelope"></i> {{ object.email }}</li>
+                                                    <li class="list-group-item">
+                                                        <a href="{{ object.address_url }}" target="_blank">
+                                                            <i class="fas fa-map-marked-alt"></i> 
+                                                            {{ object.address }}
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% elif title_slug == 'bolim-va-markazlar' %}
+                            <div class="row">
+                                {% for object in object_list %}                          
+                                    <div class="col-12 col-md-4 col-lg-4">
+                                        <div class="card" style="height: 230px; max-height: 230px;">
+                                            <a href="{% url 'sect_nav' post_slug=object.slug %}">
+                                                <img src="{% static 'images/default.png' %}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
+                                            </a>
+                                            <div class="card-body">
+                                                <p class="card-text text-center">
+                                                    <a href="{% url 'sect_nav' post_slug=object.slug %}" class="text-dark">
+                                                        {{ object.title }}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% elif title_slug == 'institut-rahbariyati' %}
+                            <div class="row" id="adminstations">
+                                <!-- {% for obj in object_list %}
+                                    <div class="col-12 col-md-4 col-lg-4">
                                         <div class="card">
                                             <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
                                             <div class="card-header">
@@ -59,140 +152,73 @@
                                                     <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
                                                     <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
                                                     <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
+                                                    <li class="list-group-item"><i class="fas fa-calendar me-1"></i> {{ obj.admission_days }}</li>
+                                                    <li class="list-group-item">
+                                                        <a href="{{ obj.facebook }}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>
+                                                        <a href="{{ obj.instagram }}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>
+                                                        <a href="{{ obj.linkedin }}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>
+                                                    </li>
                                                 </ul>
                                             </div>
-                                        </div>
-                                    </div>    
-                                {% endfor %}
-                            </div>
-                        </div>  
-                    {% endfor %}
-                {% else %}
-                    {% if title_slug == 'boglanish' %}
-                        <!-- CONTACT section -->
-                        <div class="row">
-                            {% for object in object_list %}                          
-                                <div class="col-12 col-md-6">
-                                    <div class="card" style="height: 450px; max-height: 450px;">
-                                        <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
-                                        <div class="card-body">
-                                            <p class="card-text fw-bold">
-                                                {{ object.title }}
-                                            </p>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><i class="fas fa-phone"></i> {{ object.phone }}</li>
-                                                <li class="list-group-item"><i class="fas fa-envelope"></i> {{ object.email }}</li>
-                                                <li class="list-group-item">
-                                                    <a href="{{ object.address_url }}" target="_blank">
-                                                        <i class="fas fa-map-marked-alt"></i> 
-                                                        {{ object.address }}
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% elif title_slug == 'bolim-va-markazlar' %}
-                        <div class="row">
-                            {% for object in object_list %}                          
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="card" style="height: 230px; max-height: 230px;">
-                                        <a href="{% url 'sect_nav' post_slug=object.slug %}">
-                                            <img src="{% static 'images/default.png' %}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
-                                        </a>
-                                        <div class="card-body">
-                                            <p class="card-text text-center">
-                                                <a href="{% url 'sect_nav' post_slug=object.slug %}" class="text-dark">
-                                                    {{ object.title }}
-                                                </a>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    {% elif title_slug == 'institut-rahbariyati' %}
-                        <div class="row" id="adminstations">
-                            <!-- {% for obj in object_list %}
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="card">
-                                        <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
-                                        <div class="card-header">
-                                            <b>{{ obj.position }}</b>
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
-                                                <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
-                                                <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
-                                                <li class="list-group-item"><i class="fas fa-calendar me-1"></i> {{ obj.admission_days }}</li>
-                                                <li class="list-group-item">
-                                                    <a href="{{ obj.facebook }}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>
-                                                    <a href="{{ obj.instagram }}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>
-                                                    <a href="{{ obj.linkedin }}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                        <div class="card-footer text-center">
-                                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ obj.id }}">{{ read_more }}</a>
-                                            
-                                            
-                                            <div class="modal fade" id="staticBackdrop{{ obj.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5" id="exampleModalLabel"><b>{{ obj.f_name }}</b></h1>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="accordion accordion-flush" id="accordionExample">
-                                                                <div class="accordion-item">
-                                                                    <h2 class="accordion-header">
-                                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                            <b>{{ short_info }}</b>
-                                                                        </button>
-                                                                    </h2>
-                                                                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                        <div class="accordion-body text-start">
-                                                                            {{ obj.short_info.html | safe }}
+                                            <div class="card-footer text-center">
+                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ obj.id }}">{{ read_more }}</a>
+                                                
+                                                
+                                                <div class="modal fade" id="staticBackdrop{{ obj.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-xl">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><b>{{ obj.f_name }}</b></h1>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="accordion accordion-flush" id="accordionExample">
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                                                <b>{{ short_info }}</b>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body text-start">
+                                                                                {{ obj.short_info.html | safe }}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="accordion-item">
-                                                                    <h2 class="accordion-header">
-                                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                            <b>{{ scientific_direction }}</b>
-                                                                        </button>
-                                                                    </h2>
-                                                                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                        <div class="accordion-body text-start">
-                                                                            {{ obj.scientific_direction.html | safe }}
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                                                                <b>{{ scientific_direction }}</b>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body text-start">
+                                                                                {{ obj.scientific_direction.html | safe }}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="accordion-item">
-                                                                    <h2 class="accordion-header">
-                                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                                            <b>{{ main_tasks_in_position }}</b>
-                                                                        </button>
-                                                                    </h2>
-                                                                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                        <div class="accordion-body text-start">
-                                                                            {{ obj.main_tasks_in_position.html | safe }}
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                                                                <b>{{ main_tasks_in_position }}</b>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body text-start">
+                                                                                {{ obj.main_tasks_in_position.html | safe }}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="accordion-item">
-                                                                    <h2 class="accordion-header">
-                                                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
-                                                                            <b>{{ scientific_activity }}</b>
-                                                                        </button>
-                                                                    </h2>
-                                                                    <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                        <div class="accordion-body text-start">
-                                                                            {{ obj.scientific_activity.html | safe }}
+                                                                    <div class="accordion-item">
+                                                                        <h2 class="accordion-header">
+                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+                                                                                <b>{{ scientific_activity }}</b>
+                                                                            </button>
+                                                                        </h2>
+                                                                        <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                                                            <div class="accordion-body text-start">
+                                                                                {{ obj.scientific_activity.html | safe }}
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -203,78 +229,56 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %} -->
-                        </div>
-                    {% elif title_slug == 'iqtidorli-talabalar' %}
-                        <div class="row" id="talented_students">
-                            <!-- {% for obj in object_list %}
-                                <div class="col-12 col-md-4 col-lg-4">
-                                    <div class="card" style="height: 390px; min-height: 390px;">
-                                        <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
-                                        <div class="card-header">
-                                            <b>{{ obj.f_name }}</b>
-                                        </div>
-                                        <div class="card-body">
-                                            <p class="card-text">
-                                                {{ obj.desc }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            {% endfor %} -->
-                        </div>
-                    {% elif title_slug == 'fakultet' %}
-                        <!-- faculty section -->
-                            {% for object in object_list %}                          
-                                <div class="projcard projcard-blue">
-                                    <div class="projcard-innerbox">
-                                        <a href="{% url 'post_detail' post_slug=object.slug %}"><img class="projcard-img" src="{{ object.image.url }}" /></a>
-                                        <div class="projcard-textbox">
-                                            <div class="projcard-title"><a href="{% url 'post_detail' post_slug=object.slug %}">{{ object.title }}</a></div>
-                                            <div class="projcard-bar"></div>
-                                            <div class="projcard-description">
-                                                <ul class="list-group">
-                                                    {% for dp in object.departments_set.all %}
-                                                        <li class="list-group-item border-0 p-0 py-1" style="background: none;">
-                                                            <a href="{% url 'dept_detail' dept_slug=dp.slug %}">{{ dp }}</a>
-                                                        </li>
-                                                    {% endfor %}
-                                                </ul>  
+                                {% endfor %} -->
+                            </div>
+                        {% elif title_slug == 'iqtidorli-talabalar' %}
+                            <div class="row" id="talented_students">
+                                <!-- {% for obj in object_list %}
+                                    <div class="col-12 col-md-4 col-lg-4">
+                                        <div class="card" style="height: 390px; min-height: 390px;">
+                                            <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
+                                            <div class="card-header">
+                                                <b>{{ obj.f_name }}</b>
+                                            </div>
+                                            <div class="card-body">
+                                                <p class="card-text">
+                                                    {{ obj.desc }}
+                                                </p>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endfor %}
-                    {% else %}
-                        <!-- Start Blog Layout -->
-                        <div class="row ">
-                            {% for object in object_list %}
-                                <div class="projcard projcard-blue">
-                                    <div class="projcard-innerbox">
-                                        <img class="projcard-img" src="{{ object.image.url }}"/>
-                                        <div class="projcard-textbox">
-                                            <div class="projcard-title"><b>{{ object.title | truncatechars:120 }}</b></div>
-                                            <div class="projcard-bar"></div>
-                                            <div class="projcard-description">
-                                                {{ object.subtitle | truncatechars:220 }}
+                                {% endfor %} -->
+                            </div>
+                        {% else %}
+                            <!-- Start Blog Layout -->
+                            <div class="row ">
+                                {% for object in object_list %}
+                                    <div class="projcard projcard-blue">
+                                        <div class="projcard-innerbox">
+                                            <img class="projcard-img" src="{{ object.image.url }}"/>
+                                            <div class="projcard-textbox">
+                                                <div class="projcard-title"><b>{{ object.title | truncatechars:120 }}</b></div>
+                                                <div class="projcard-bar"></div>
+                                                <div class="projcard-description">
+                                                    {{ object.subtitle | truncatechars:220 }}
+                                                </div>
+                                                <a class="read_more" href="{% url 'post_detail' post_slug=object.slug %}">{{ read_more }}</a>
                                             </div>
-                                            <a class="read_more" href="{% url 'post_detail' post_slug=object.slug %}">{{ read_more }}</a>
                                         </div>
                                     </div>
-                                </div>
-                            {% empty %}
-                                <p class="text-center">
-                                    {{ empty }}
-                                </p>
-                            {% endfor %}
-                            <!-- pagination -->
-                        </div>
+                                {% empty %}
+                                    <p class="text-center">
+                                        {{ empty }}
+                                    </p>
+                                {% endfor %}
+                                <!-- pagination -->
+                            </div>
+                        {% endif %}
+                        {% include "../../widgets/pagination.html" %}
                     {% endif %}
-                    {% include "../../widgets/pagination.html" %}
-                {% endif %}
+                </div>
+            {% endif %}
             </div>
-        </div>
     </div>
     <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'js/scripts/posts/posts_inside.js' %}"></script>

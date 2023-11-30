@@ -14,9 +14,10 @@
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
-                    <div class="post_img mb-3" id="object_base_img">
+                    <!-- <div class="post_img mb-3" id="object_base_img">
                         <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="tkti.uz">
-                    </div>
+                    </div> -->
+                    <div class="post_img_bg"  id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
                     <h2>{{ object.title }}</h2>
                     {% if object.video_file %}
                         <div class="post_video">

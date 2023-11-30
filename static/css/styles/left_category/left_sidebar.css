@@ -96,16 +96,16 @@
   border-right-width: 0;
 }
 .pc-tab section {
-  font-family: "Droid Serif";
   clear: both;
+  font-family: "Droid Serif";
 }
 .pc-tab section div {
-  padding: 20px;
   width: 100%;
-  border: 1px solid #ddd;
+  padding: 20px;
   background: #fff;
   line-height: 1.5em;
   letter-spacing: 0.3px;
+  border: 1px solid #ddd;
   color: #444;
 }
 .pc-tab section div ul li {
@@ -117,7 +117,7 @@
   font-family: "Droid Serif";
 }
 .pc-tab section div ul li a:hover {
-  color: #26597E;
+  color: #111;
 }
 .pc-tab section div ul li::after {
   content: "";
@@ -137,7 +137,7 @@
   justify-content: space-between;
 }
 .pc-tab section div ul li .header_tabs_section span {
-  color: #26597E;
+  color: #111;
 }
 .pc-tab section div ul li .body_tabs_section {
   padding: 0;
