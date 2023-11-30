@@ -9,6 +9,7 @@ from django.core.files import File
 
 # local
 from main.models import widgets
+from main.models import posts
 
 
 class Category(models.Model):
@@ -30,7 +31,7 @@ class Category(models.Model):
 
 class News(widgets.AbstractTemplate):
     """ model for news  """
-    category = models.ForeignKey(Category, verbose_name=_("Bo'lim nomi"), on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey(posts.Posts, verbose_name=_("Bo'lim nomi"), on_delete=models.SET_NULL, null=True, blank=True)
     hashtag = models.ManyToManyField(widgets.Hashtag, related_name="news_hashtags")
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 

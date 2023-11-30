@@ -1,10 +1,12 @@
 import random
+from django.db.models import Q
 from django.contrib import admin
 from datetime import datetime, timedelta
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 from main.models import news
+from main.models import posts
 
 
 # django admin actions
@@ -33,7 +35,7 @@ class NewsAdmin(admin.ModelAdmin):
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                # "category", 
+                "category", 
                 "status",
                 "added_at", "author_post", "hashtag"          
             ),
@@ -72,6 +74,25 @@ class NewsAdmin(admin.ModelAdmin):
             ),
         }),
     )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "category":
+            try:
+                # centers = [s for s in posts.SectionsAndCenters.objects.all()]
+                # posts_list = [p for p in posts.Posts.objects.filter(
+                #     Q(faculty=True) | Q(navbar__slug="doktorantura") |
+                #     Q(navbar__slug="doktorantura-qabul")
+                # )]
+                # kwargs["queryset"] = centers + posts_list
+                centers = posts.SectionsAndCenters.objects.all()
+                posts_list = posts.Posts.objects.filter(
+                    Q(faculty=True) | Q(navbar__slug="doktorantura") |
+                    Q(navbar__slug="doktorantura-qabul")
+                )
+                kwargs["queryset"] = posts_list
+            except Exception as e:
+                kwargs["queryset"] = posts.Posts.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_image_file(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' alt='asosiy rasm' width=200/>")

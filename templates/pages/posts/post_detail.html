@@ -98,6 +98,38 @@
                             </div>
                         </div>
                     {% endif %}
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <h3 class="fw-bold p-0 m-0">{{ depended_news }}</h3>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {% if object.news_set.all %}
+                                        <div class="row gap-1">
+                                            {% for obj in object.news_set.all %}
+                                                <div class="col-12 col-md-2 col-lg-4 p-0">
+                                                    <div class="card w-100">
+                                                        <div class="card-body">
+                                                            <p class="">
+                                                                <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:80 }}</a>
+                                                            </p>  
+                                                            <div class="d-flex justify-content-between">
+                                                                <span><i class="fas fa-calendar-alt me-2"></i> {{ obj.added_at|date:'d-M-Y' }}</span>
+                                                                <span><i class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                     <div class="post_footer">
                         <p class="text-end fw-bold">{{ object.author_post }}</p>
                         <div class="time_and_view">
