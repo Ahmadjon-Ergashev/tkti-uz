@@ -1,6 +1,4 @@
 .card_box .col-12 .card {
-  height: 300px;
-  min-height: 350px;
   position: relative;
 }
 .card_box .col-12 .card img {
@@ -10,4 +8,14 @@
   bottom: 10px;
   width: 100%;
   position: absolute;
+}
+
+.news_ads_videos .card {
+  height: 300px;
+  min-height: 300px;
+}
+
+.all_events .card {
+  height: 260px;
+  min-height: 260px;
 }/*# sourceMappingURL=news.css.map */

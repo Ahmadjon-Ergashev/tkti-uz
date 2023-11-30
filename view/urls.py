@@ -21,9 +21,11 @@ news = [
     path("ads/", news.AdsView.as_view(), name="ads"),
     path("news/", news.NewsView.as_view(), name="news"),
     path("videos/", news.VideoView.as_view(), name="videos"),
+    path("events/", news.EventsView.as_view(), name="events"),
     path("photo/gallary/", news.PhotoGallaryView.as_view(), name="photo_gallary"),
     path("ads/detail/<slug:obj_slug>/", news.AdsDetailView.as_view(), name="ads_detail"),
     path("news/detail/<slug:obj_slug>/", news.NewsDetailView.as_view(), name="news_detail"),
+    path("events/detail/<slug:slug>/", news.EventsDetailView.as_view(), name="events_detail"),
     path("news/hashtags/<str:hashtag>/", news.HashtagSearchView.as_view(), name="hashtag_news"),
     path("videos/detail/<slug:obj_slug>/", news.VideosDetailView.as_view(), name="video_detail"),
 ]

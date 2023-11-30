@@ -176,8 +176,8 @@ class EventsAdmin(admin.ModelAdmin):
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                "status", "event_type",
-                "added_at", "author_post", "location_url"
+                "status", "event_type", "phone", 
+                "added_at", "author_post", "location_url", "extra_phone"
             ),
         }),
         (_("Media fayllar"), {

@@ -1,3 +1,5 @@
+from typing import Any
+from django.db import models
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404, render
@@ -168,3 +170,37 @@ class VideosDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Video lavhalar")
         return context
+    
+
+class EventsView(ListView):
+    model = news.Events
+    template_name = "pages/events/events_list.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super().get_queryset().filter(status="pub").order_by("added_at")
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Voqealar")
+        context["read_more"] = _("Batafsil")
+        return context
+    
+
+class EventsDetailView(DetailView):
+    model = news.Events
+    template_name = "pages/events/events_detail.html"
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs["slug"]
+        object = get_object_or_404(news.Events, slug=slug)
+        object.post_viewed_count += 1
+        object.save()
+        return object
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["all_events"] = _("Barcha voqealar")
+        return context
+    

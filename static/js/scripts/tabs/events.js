@@ -30,7 +30,7 @@ $(document).ready(function(){
                                                 <li class="list-group-item ps-0"><span class="font-monospace">${item.event_type.name}</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>${item.added_at}</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>${item.location}</span></li>
-                                                <li class="list-group-item ps-0"><a href="" class="search_btn">${item.read_more}</a></li>
+                                                <li class="list-group-item ps-0"><a href="/events/detail/${item.slug}/" class="search_btn">${item.read_more}</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-5">
@@ -80,7 +80,7 @@ $(document).ready(function(){
                                                 <li class="list-group-item ps-0"><span class="font-monospace">${item.event_type.name}</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>${item.added_at}</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>${item.location}</span></li>
-                                                <li class="list-group-item ps-0"><a href="" class="search_btn">${item.read_more}</a></li>
+                                                <li class="list-group-item ps-0"><a href="/events/detail/${item.slug}/" class="search_btn">${item.read_more}</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-5">
@@ -130,7 +130,7 @@ $(document).ready(function(){
                                                 <li class="list-group-item ps-0"><span class="font-monospace">${item.event_type.name}</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>${item.added_at}</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>${item.location}</span></li>
-                                                <li class="list-group-item ps-0"><a href="" class="search_btn">${item.read_more}</a></li>
+                                                <li class="list-group-item ps-0"><a href="/events/detail/${item.slug}/" class="search_btn">${item.read_more}</a></li>
                                             </ul>
                                         </div>
                                         <div class="col-5">

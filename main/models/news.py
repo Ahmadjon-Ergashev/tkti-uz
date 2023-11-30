@@ -136,6 +136,8 @@ class Events(widgets.AbstractTemplate):
     event_type = models.ForeignKey(widgets.EventTypes, on_delete=models.SET_NULL, null=True, verbose_name=_("Tadbir turini tanlang."))
     location = models.CharField(verbose_name=_("Tadbir manzili"), max_length=255)
     location_url = models.URLField(verbose_name=_("Tadbirning url manzili"), max_length=255)
+    phone = models.CharField(max_length=20, verbose_name=_("Bog'lanish uchun telefon raqam"), null=True)
+    extra_phone = models.CharField(max_length=20, verbose_name=_("Qo'shimcha telefon raqam"), null=True, blank=True)
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
