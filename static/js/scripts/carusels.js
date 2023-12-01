@@ -1,6 +1,7 @@
 $(document).ready(function(){
     $("#statistika").slick({
         dots: true,
+        arrows: false,
         infinite: true,
         autoplay: true,
         slidesToShow: 3,

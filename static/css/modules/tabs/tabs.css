@@ -17,6 +17,12 @@
   min-height: 150px;
   max-height: 150px;
 }
+@media screen and (max-width: 480px) {
+  #events .content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}
 #events .view_all_btn {
   right: 5px;
   bottom: 5px;
@@ -30,15 +36,29 @@
   color: white;
   background-color: #111;
 }
+@media screen and (max-width: 480px) {
+  #events .view_all_btn {
+    left: 10px;
+    bottom: 10px;
+    position: relative;
+  }
+}
 
 #news_ads_videos {
   padding: 50px 0px;
   margin-bottom: 50px;
 }
 #news_ads_videos .content_box .content {
+  width: 100%;
   position: relative;
   min-height: 760px;
   max-height: 760px;
+}
+@media screen and (max-width: 480px) {
+  #news_ads_videos .content_box .content {
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
 }
 #news_ads_videos .content_box .content .view_all_btn {
   right: 5px;
@@ -52,6 +72,13 @@
 #news_ads_videos .content_box .content .view_all_btn:hover {
   color: white;
   background-color: #111;
+}
+@media screen and (max-width: 480px) {
+  #news_ads_videos .content_box .content .view_all_btn {
+    left: 10px;
+    bottom: 10px;
+    position: relative;
+  }
 }
 
 #module_by_semesters .tap_title {
@@ -98,17 +125,6 @@
 }
 ._container .content_box .content {
   display: none;
-  animation: moving 0.8s ease;
-}
-@keyframes moving {
-  from {
-    transform: translateY(-50px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0px);
-    opacity: 1;
-  }
 }
 ._container .content_box .content .row .card .card-body .card-title_h5 {
   font-size: 16px;

@@ -15,6 +15,12 @@
             min-height: 150px;
             max-height: 150px;
         }
+        @media screen and (max-width: 480px) {
+            &{
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+        }
     }
     .view_all_btn{
         right: 5px;
@@ -28,6 +34,13 @@
             color: white;
             background-color: #111;
         }
+        @media screen and (max-width: 480px) {
+            &{
+                left: 10px;
+                bottom: 10px;
+                position: relative;
+            }
+        }
     }
 }
 #news_ads_videos{
@@ -35,9 +48,16 @@
     margin-bottom: 50px;
     .content_box{
         .content{
+            width: 100%;
             position: relative;
             min-height: 760px;
             max-height: 760px;
+            @media screen and (max-width: 480px) {
+                &{
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                }
+            }
             .view_all_btn{
                 right: 5px;
                 bottom: 5px;
@@ -49,6 +69,13 @@
                 &:hover{
                     color: white;
                     background-color: #111;
+                }
+                @media screen and (max-width: 480px) {
+                    &{
+                        left: 10px;
+                        bottom: 10px;
+                        position: relative;
+                    }
                 }
             }
         }
@@ -101,17 +128,17 @@
         padding: 20px 0;
         .content{
             display: none;
-            animation: moving .8s ease;
-            @keyframes moving {
-                from{
-                    transform: translateY(-50px); 
-                    opacity: 0;
-                }
-                to{
-                    transform: translateY(0px); 
-                    opacity: 1;
-                }
-            }
+            // animation: moving .8s ease;
+            // @keyframes moving {
+            //     from{
+            //         transform: translateY(-50px); 
+            //         opacity: 0;
+            //     }
+            //     to{
+            //         transform: translateY(0px); 
+            //         opacity: 1;
+            //     }
+            // }
             .row {
                 .card{
                     .card-body{

@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -57,8 +58,16 @@ def Home(request):
         "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
         "talented_students": posts.TalentedStudents.objects.order_by("-added_at").all(),
         "the_photos_home": widgets.PhotoGallary.objects.order_by("-added_at")[:6].all(),
+        "all_events": news.Events.objects.filter(status="pub").order_by("added_at")[:8].all(),
         "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].all(),
-        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all()
+        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
+        "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].all(),
+        "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
+        "the_last_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].all(),
+        "the_most_view_news_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
+        "the_most_view_news_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].all(),
+        "arxiv_events": news.Events.objects.filter(status="pub", added_at__lte=timezone.now()).order_by("added_at")[:8].all(),
+        "upcoming_events": news.Events.objects.filter(status="pub", added_at__gte=timezone.now()).order_by("added_at")[:8].all(),
     }
     context = translate_words | objects_list | about_us 
     return render(request, "home.html", context)
