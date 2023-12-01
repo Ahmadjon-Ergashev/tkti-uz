@@ -274,46 +274,26 @@
 }
 @media screen and (min-width: 350px) {
   .faculty_card_box {
-    margin-bottom: 10px;
+    gap: 10px;
     grid-template-columns: auto;
   }
 }
 @media screen and (max-width: 600px) {
   .faculty_card_box {
-    margin-bottom: 10px;
-    grid-template-columns: auto;
+    gap: 10px;
+    grid-template-columns: auto auto;
   }
 }
 @media screen and (min-width: 601px) {
   .faculty_card_box {
     grid-template-columns: auto auto auto;
-    margin-bottom: 10px;
+    gap: 10px;
   }
 }
 @media screen and (max-width: 790px) {
   .faculty_card_box {
     grid-template-columns: auto auto auto;
-    margin-bottom: 10px;
-  }
-}
-@media screen and (min-width: 791px) {
-  .faculty_card_box {
-    grid-template-columns: auto auto auto auto;
     gap: 10px;
-  }
-  .faculty_card_box .faculty_card {
-    width: 300px;
-    height: 300px;
-  }
-}
-@media screen and (max-width: 1080px) {
-  .faculty_card_box {
-    grid-template-columns: auto auto auto auto;
-    gap: 10px;
-  }
-  .faculty_card_box .faculty_card {
-    width: 300px;
-    height: 300px;
   }
 }
 .faculty_card_box .faculty_card {

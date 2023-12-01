@@ -302,48 +302,26 @@
 	grid-template-columns: auto auto auto auto auto;
 	@media screen and (min-width:350px) {
 		&{
-			margin-bottom: 10px;
+			gap: 10px;
 			grid-template-columns: auto;
 		}
 	}
 	@media screen and (max-width:600px) {
 		&{
-			margin-bottom: 10px;
-			grid-template-columns: auto;
+			gap: 10px;
+			grid-template-columns: auto auto;
 		}
 	}
 	@media screen and (min-width:601px) {
 		&{
 			grid-template-columns: auto auto auto;
-			margin-bottom: 10px;
-
+			gap: 10px;
 		}
 	}
 	@media screen and (max-width:790px) {
 		&{
 			grid-template-columns: auto auto auto;
-			margin-bottom: 10px;
-
-		}
-	}
-	@media screen and (min-width:791px) {
-		&{
-			grid-template-columns: auto auto auto auto;
 			gap: 10px;
-			.faculty_card{
-				width: 300px;
-				height: 300px;
-			}
-		}
-	}
-	@media screen and (max-width:1080px) {
-		&{
-			grid-template-columns: auto auto auto auto;
-			gap: 10px;
-			.faculty_card{
-				width: 300px;
-				height: 300px;
-			}
 		}
 	}
 	.faculty_card{
