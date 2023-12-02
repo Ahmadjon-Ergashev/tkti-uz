@@ -230,17 +230,17 @@ CORS_ALLOW_HEADERS = ['*']
 CSRF_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "https://tkti.uz",
+    "https://tkti.toshvil.uz",
 ]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
-    "https://tkti.uz",
+    "https://tkti.toshvil.uz",
 ]
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r"^http://\\localhost:8000\$",
     r"^http://\\127.0.0.1:8000\$",
-    r"^https://\\tkti.uz\$",
+    r"^https://\\tkti.toshvil.uz\$",
 ]
 
 REST_FRAMEWORK = {
