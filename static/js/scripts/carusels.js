@@ -39,6 +39,13 @@ $(document).ready(function(){
         infinite: true,
         arrows: false,
         autoplay: true,
+        autoplaySpeed: 4000,
+    });
+
+    $("#news_gallary").slick({
+        infinite: true,
+        arrows: false,
+        autoplay: true,
         autoplaySpeed: 3000,
     });
 

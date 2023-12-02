@@ -241,16 +241,6 @@ admin.site.register(widgets.Year)
 admin.site.register(widgets.Hashtag)
 
 
-@admin.register(widgets.PhotoGallary)
-class PhotoGallary(admin.ModelAdmin):
-    readonly_fields = ("get_image", )
-    list_display_links = ("id", "get_image")
-    list_display = ("id", "image", "get_image")
-
-    def get_image(self, obj):
-        return mark_safe(f"<img src='{obj.image.url}' width=250 />")
-
-
 @admin.register(widgets.Flag)
 class FlagAdmin(admin.ModelAdmin):
     actions = [simple_clone]

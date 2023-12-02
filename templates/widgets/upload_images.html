@@ -33,14 +33,24 @@
             border-radius: 3px;
             background: #123465;
         }
-
+        .news{
+            padding: 10px;
+        }
+        form{
+            margin-bottom: 30px;
+        }
     </style>
 </head>
 <body>
     {% if user.is_authenticated %}
         <div class="container">
-            <form action="" method="post" enctype="multipart/form-data">
+            <form action="" method="post" class="" enctype="multipart/form-data">
                 {% csrf_token %}
+                <select name="news_list_id" class="news" id="">
+                    {% for n in last_news %}
+                        <option value="{{ n.id }}">{{ n.title }}</option>
+                    {% endfor %}
+                </select>
                 <label for="id_bg_img" class="uploder">
                     Rasmlarni tanlash
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">

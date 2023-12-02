@@ -276,4 +276,14 @@ class VideoGallyadmin(admin.ModelAdmin):
             ),
         }),
     )
+
+@admin.register(news.PhotoGallary)
+class PhotoGallary(admin.ModelAdmin):
+    readonly_fields = ("get_image", )
+    list_display_links = ("id", "get_image")
+    list_display = ("id", "image", "news", "get_image")
+
+    def get_image(self, obj):
+        return mark_safe(f"<img src='{obj.image.url}' width=250 />")
+
     

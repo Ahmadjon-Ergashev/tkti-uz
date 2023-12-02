@@ -28,6 +28,7 @@ news = [
     path("events/detail/<slug:slug>/", news.EventsDetailView.as_view(), name="events_detail"),
     path("news/hashtags/<str:hashtag>/", news.HashtagSearchView.as_view(), name="hashtag_news"),
     path("videos/detail/<slug:obj_slug>/", news.VideosDetailView.as_view(), name="video_detail"),
+    path("photo/gallary/<int:news_id>/", news.PhotoGallaryFilterView.as_view(), name="photo_gallary_news"),
 ]
 widgets = [
     path("faq", widgets.FaqView.as_view(), name="faq"),

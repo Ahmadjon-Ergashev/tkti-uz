@@ -5,13 +5,25 @@
 {% endblock title %}
 
 {% block content %}
+    <style>
+        .extra_img{
+            width: 100%;
+            height: 500px;
+            max-height: 500px;
+            padding: 10px 0;
+            background-size: cover;
+            background-color: #111;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+    </style>
     <link rel="stylesheet" href="{% static 'css/styles/posts/detail/post.css' %}">
     <div class="container mt-4">
         <div class="row d-flex justify-content-between py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
                 {% include "../../widgets/left_sidebar.html" %}
             </div>
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border posts">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
                     <!-- <div class="post_img">
@@ -49,6 +61,31 @@
                             <a href="{% url 'hashtag_news' hashtag=h.name %}" class="hashtag">#{{ h.name }}</a>  
                         {% endfor %}
                     </div>
+                    {% if news_photos %}
+                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                        <span class="fw-bold p-0 m-0">{{ photos_list }}</span>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body px-2">
+                                        <div class="row" id="news_gallary">
+                                            {% for obj in news_photos %}
+                                                <div class="col-12 col-md-12 p-0">
+                                                    <div class="extra_img p-1" style="background-image: url('{{ obj.image.url }}');"></div>
+                                                </div> 
+                                            {% endfor %}
+                                        </div>
+                                        <span class="d-block text-end mt-3 pe-0">
+                                            <a href="/photo/gallary/{{ object.id }}" class="btn btn-sm btn-primary" target="_blank">{{ all_images }}</a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>    
+                    {% endif %}
                     <div class="post_footer">
                         <p class="text-end fw-bold">{{ object.author_post }}</p>
                         <div class="time_and_view">
@@ -60,5 +97,8 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/modules/slickjs/slick.min.js' %}"></script>
+
 {% endblock content %}
     

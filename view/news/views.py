@@ -1,5 +1,6 @@
 from typing import Any
 from django.db import models
+from django.db.models.query import QuerySet
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.shortcuts import get_object_or_404, render
@@ -43,6 +44,8 @@ class NewsDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         object = context["object"]
         context["title"] = _("Yangilik")
+        context["photos_list"] = _("Ko'proq rasmlarni ko'rish")
+        context["news_photos"] = news.PhotoGallary.objects.filter(news=object).order_by("-added_at")[:10]
         try:
             domain = self.request.get_host()
             context["pdf_file"] = f"http://{domain}" + object.pdf_file.url
@@ -115,18 +118,43 @@ class AdsDetailView(DetailView):
 def Upload_Images(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            data = request.FILES.getlist('images') 
-            for d in data:
-                img = widgets.PhotoGallary.objects.create(image=d)
-                img.save()
+            try:
+                data = request.FILES.getlist('images') 
+                news_id = int(request.POST.get("news_list_id"))
+                news_obj = news.News.objects.get(id=news_id)
+                for d in data:
+                    img = news.PhotoGallary.objects.create(news=news_obj, image=d)
+                    img.save()
+            except Exception as e:
+                print(e)
     return render(request, "widgets/upload_images.html") 
 
 
 class PhotoGallaryView(ListView):
     """ photo gallary view """
-    model = widgets.PhotoGallary
+    model = news.PhotoGallary
     template_name = "pages/photos/gallary.html"
     paginate_by = 20
+
+    def get_queryset(self):
+        return super().get_queryset().order_by("-added_at")
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = _("Rasmlar")
+        return data
+
+
+class PhotoGallaryFilterView(ListView):
+    """ photo gallary view """
+    model = news.PhotoGallary
+    template_name = "pages/photos/gallary.html"
+    paginate_by = 20
+
+    def get_queryset(self):
+        news_id = self.kwargs["news_id"]
+        data = super().get_queryset().filter(news=news_id).order_by("-added_at")
+        return data
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -149,7 +177,6 @@ class VideoView(ListView):
         context["title"] = _("Video lavhalar")
         context["data_number"] = 2
         return context
-    
 
 
 class VideosDetailView(DetailView):
