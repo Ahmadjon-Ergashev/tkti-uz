@@ -619,7 +619,6 @@ class StudyDegreesAdmin(admin.ModelAdmin):
     actions = [simple_clone]
     search_fields = ("name_uz", )
     readonly_fields = ("added_at", )  
-    filter_horizontal = ("faculty", )
     list_display_links = ("id", "name_uz")
     list_display = ("id", "name_uz", "added_at")
 
@@ -628,11 +627,6 @@ class StudyDegreesAdmin(admin.ModelAdmin):
             'classes': ('collapse', ),
             "fields": (
                 "name_uz",
-            ),
-        }),
-        (None, {
-            "fields": (
-                "faculty",
             ),
         }),
         (_("Rus tilida"), {
@@ -654,27 +648,68 @@ class StudyDegreesAdmin(admin.ModelAdmin):
         })
     )
 
-    def formfield_for_manytomany(self, db_field, request, **kwargs):
-        if db_field.name == "faculty":
-            try:
-                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
-            except Exception as e:
-                kwargs["queryset"] = posts.Posts.objects.none()
-        return super().formfield_for_manytomany(db_field, request, **kwargs)
+    # def formfield_for_manytomany(self, db_field, request, **kwargs):
+    #     if db_field.name == "faculty":
+    #         try:
+    #             kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
+    #         except Exception as e:
+    #             kwargs["queryset"] = posts.Posts.objects.none()
+    #     return super().formfield_for_manytomany(db_field, request, **kwargs)
 
 # "study_degree", "faculty",
+
+
+@admin.register(posts.FieldOfEducation)
+class FieldOfEducationAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    search_fields = ["name", ]
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name")
+    list_display = ("id", "name", "code", "added_at")
+    
+    fieldsets = (
+        (None, {
+            "fields": (
+               "study_degree", "code" 
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz", 
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru", 
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en", 
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
+
 
 @admin.register(posts.LearningWay)
 class LearningWayAdmin(admin.ModelAdmin):
     actions = [simple_clone]
     readonly_fields = ("added_at", )
     list_display_links = ("id", "name")
-    list_display = ("id", "name", "study_degree", "faculty", "added_at")
+    list_display = ("id", "name", "study_degree", "fields_edu", "added_at")
     
     fieldsets = (
         (None, {
             "fields": (
-               "study_degree", "faculty", "image"
+               "study_degree", "fields_edu", "image"
             ),
         }),
         (_("O'zbek tilida"), {
@@ -702,13 +737,13 @@ class LearningWayAdmin(admin.ModelAdmin):
         })
     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "faculty":
-            kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
+    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
+    #     if db_field.name == "faculty":
+    #         kwargs["queryset"] = posts.FieldOfEducation.objects.filter(faculty=True)
             
-        if db_field.name == "study_degree":
-            kwargs["queryset"] = posts.StudyDegrees.objects.all()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+    #     if db_field.name == "study_degree":
+    #         kwargs["queryset"] = posts.StudyDegrees.objects.all()
+    #     return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(posts.EducationalAreas)
@@ -722,29 +757,29 @@ class EducationalAreasAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "study_way", "pdf_file", "author_post",
-                ("full_time_fee", "full_time_night_fee", "full_time_external_fee")
+                "study_way", "pdf_file", "author_post", "phone", "extra_phone", "email",
+                "full_time_fee", "full_time_night_fee", "full_time_external_fee"
             ),
         }),
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
                 "name_uz", "desc_uz", "application_procedure_uz",
-                "tuition_fee_uz", "contact_uz", "you_may_become_uz"
+                "tuition_fee_uz", "address_uz", "you_may_become_uz"
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
                 "name_ru", "desc_ru", "application_procedure_ru",
-                "tuition_fee_ru", "contact_ru", "you_may_become_ru"
+                "tuition_fee_ru", "address_ru", "you_may_become_ru"
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
                 "name_en", "desc_en", "application_procedure_en",
-                "tuition_fee_en", "contact_en", "you_may_become_en"
+                "tuition_fee_en", "address_en", "you_may_become_en"
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -753,7 +788,6 @@ class EducationalAreasAdmin(admin.ModelAdmin):
             ),
         })
     )
-    
 
 
 @admin.register(posts.ModuleOfStudyPrograme)

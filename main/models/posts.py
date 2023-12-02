@@ -321,7 +321,7 @@ class TalentedStudents(models.Model):
         managed = True
         verbose_name = _("Iqtidorli talabalar")
         verbose_name_plural = _("Iqtidorli talabalar")    
-    
+
 
 class BossSection(models.Model):
     post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, null=True)
@@ -335,12 +335,11 @@ class BossSection(models.Model):
 
     def __str__(self):
         return self.f_name
-    
+
 
 class StudyDegrees(models.Model):
     """ students degree bachelor, phd """
     name = models.CharField(max_length=123, blank=True, null=True, verbose_name=_("Nomi"))
-    faculty = models.ManyToManyField(Posts, related_name="students_degree_faculty")
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -353,17 +352,34 @@ class StudyDegrees(models.Model):
         verbose_name_plural = _("Ta'lim darajalari")
 
 
+class FieldOfEducation(models.Model):
+    """ ta'lim sohasi """
+    study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasini tanlang"), on_delete=models.SET_NULL, null=True)
+    name = models.CharField(verbose_name=_("Nomi"), max_length=250, null=True)
+    code = models.CharField(_("Ta'lim sohasi kodi"), max_length=150, null=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'field_of_education'
+        managed = True
+        verbose_name = _("Ta'lim sohalari")
+        verbose_name_plural = _("Ta'lim sohalari")
+
+
 class LearningWay(models.Model):
     """ study ways """
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
-    faculty = models.ForeignKey(Posts, verbose_name=_("Fakultet nomi"), on_delete=models.SET_NULL, null=True)
+    fields_edu = models.ForeignKey(FieldOfEducation, on_delete=models.SET_NULL, null=True, verbose_name=_("Ta'lim sohasi"))
     image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
     post = QuillField(verbose_name=_("Xaqida"), null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
-        return f"{self.study_degree}|{self.faculty}|{self.name}"
+        return f"{self.study_degree}|{self.fields_edu}|{self.name}"
 
     class Meta:
         db_table = 'learning_way'
@@ -382,7 +398,10 @@ class EducationalAreas(models.Model):
         help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255)
     application_procedure = QuillField(_("Ariza berish tartibi"), null=True)
     tuition_fee = QuillField(_("O'qish to'lovi xaqida"), null=True)
-    contact = QuillField(_("Bog'lanish"), null=True)
+    phone = models.CharField(_("Telefon raqam"), max_length=20, null=True)
+    extra_phone = models.CharField(_("Qo'shimcha Telefon raqam"), max_length=20, null=True)
+    email = models.EmailField(_("E-Pochta"), max_length=100, null=True)
+    address = models.CharField(_("Manzil"), max_length=150, null=True)
     you_may_become = QuillField(_("Siz bo'lishingiz mumkun"), null=True)
     full_time_fee = models.IntegerField(default=0, verbose_name=_("Kundizgi ta'lim uchun"))
     full_time_night_fee = models.IntegerField(default=0, verbose_name=_("Kechgi ta'lim uchun"))

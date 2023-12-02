@@ -4,25 +4,6 @@ from drf_yasg.utils import swagger_auto_schema
 from main.models import posts, widgets
 from api.posts import query_params, serializers
 
-
-
-class StudyProgramView(mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = posts.StudyProgram.objects.all().order_by("-added_at")
-    serializer_class = serializers.StudyProgramSerializer
-
-    def get_queryset(self):
-        queryset = super().get_queryset().none()
-        year = self.request.query_params.get("year")
-        faculty = self.request.query_params.get("faculty")
-        study_way = self.request.query_params.get("study_way")
-        department = self.request.query_params.get("department")
-        if year and faculty and department and study_way:
-            queryset = super().get_queryset().filter(year=year, faculty=faculty, department=department, study_way=study_way)
-        return queryset
-    
-    @swagger_auto_schema(manual_parameters=query_params.study_program_query())
-    def list(self, request, *args, **kwargs):
-        return super(StudyProgramView, self).list(request, *args, **kwargs)
     
 
 class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -78,7 +59,7 @@ class LearningWayView(mixins.ListModelMixin, viewsets.GenericViewSet):
         study_degree = self.request.query_params.get("study_degree")
         faculty = self.request.query_params.get("faculty")
         if faculty and study_degree:
-            queryset = queryset.filter(study_degree=study_degree, faculty=faculty).order_by("-added_at")
+            queryset = queryset.filter(study_degree=study_degree, fields_edu=faculty).order_by("-added_at")
         else:
             queryset = queryset.none()
         return queryset

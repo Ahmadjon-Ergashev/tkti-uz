@@ -66,6 +66,11 @@ class BossSectionTranslation(TranslationOptions):
     fields = ("f_name", )
     
 
+@register(posts.FieldOfEducation)
+class FieldOfEducationTranslation(TranslationOptions):
+    fields = ("name", )
+
+
 @register(posts.StudyDegrees)
 class StudyDegreesTranslation(TranslationOptions):
     fields = ("name", )
@@ -73,7 +78,7 @@ class StudyDegreesTranslation(TranslationOptions):
 
 @register(posts.EducationalAreas)
 class EducationalAreasTranslation(TranslationOptions):
-    fields = ("name", "desc", "application_procedure", "tuition_fee", "contact", "you_may_become")
+    fields = ("name", "desc", "application_procedure", "tuition_fee", "address", "you_may_become")
     
 
 @register(posts.ModuleOfStudyPrograme)

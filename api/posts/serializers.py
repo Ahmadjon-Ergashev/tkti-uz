@@ -5,12 +5,6 @@ from django.utils.translation import gettext_lazy as _
 from main.models import posts
 
 
-class StudyProgramSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = posts.StudyProgram
-        fields = "__all__"
-
-
 class PostsSerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.Posts
@@ -69,23 +63,29 @@ class TalentedStudentsSerializers(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class FieldOfEducationSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = posts.FieldOfEducation
+        fields = "__all__"
+
+
 class StudyDegreesSerialziers(serializers.ModelSerializer):
-    faculty = FacultySerializers(many=True)
+    field_edu = FieldOfEducationSerializers(many=True, source='fieldofeducation_set')
+
     class Meta:
         model = posts.StudyDegrees
-        fields = ["id", "name", "faculty"]
+        fields = ["id", "name", "field_edu"]
     
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        return data
+
 
 class LearningWaySerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.LearningWay
-        fields = "__all__"
-    
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data["study_degree"] = StudyDegreesSerialziers(instance=instance.study_degree).data
-        data["faculty"] = ShortPostsSerializers(instance=instance.faculty).data
-        return data
+        fields = ["id", "name"]
+
 
 
 
