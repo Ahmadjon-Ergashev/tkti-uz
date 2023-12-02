@@ -754,7 +754,7 @@ class EducationalAreasAdmin(admin.ModelAdmin):
         (None, {
             "fields": (
                 "study_way", "pdf_file", "author_post", "phone", "extra_phone", "email",
-                "full_time_fee", "full_time_night_fee", "full_time_external_fee"
+                "full_time_fee", "dept_fee", "dept_fee_bank_url"
             ),
         }),
         (_("O'zbek tilida"), {

@@ -40,14 +40,11 @@
                         <span>{{ object.full_time_fee }} so'm</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between px-0">
-                        <span>{{ full_time_night_fee_title }}</span>
-                        <span>{{ object.full_time_night_fee }} so'm</span>
+                        <span>{{ dept_fee_title }}</span>
+                        <span>{{ object.dept_fee }} so'm</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between px-0">
-                        <span>{{ full_time_external_fee_title }}</span>
-                        <span>{{ object.full_time_external_fee }} so'm</span>
-                    </li>   
                 </ul>
+                <a href="{{ object.dept_fee_bank_url }}" class="btn btn-sm btn-dark mt-2" target="_blank">{{ money_priz }}</a>
             </div>
             <div class="col-12 col-lg-4">
                 <ul class="list-group list-group-flush">

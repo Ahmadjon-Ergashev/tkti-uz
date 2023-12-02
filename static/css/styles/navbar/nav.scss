@@ -17,6 +17,7 @@
             list-style-type: none;
             a{
                 color: $dark;
+                font-size: 13px;
                 &:hover{
                     text-decoration: underline;
                 }
@@ -59,7 +60,7 @@
             }
             .nav-item{
                 .nav_name{
-                    font-size: 18px;
+                    font-size: 15px;
                     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
                 }
                 .dropdown-menu{

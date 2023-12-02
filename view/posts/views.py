@@ -225,10 +225,9 @@ class LearningWayDetailView(DetailView):
         data["view"] = _("Ko'rish")
         data["desc"] = _("Ta'lim dasturi xaqida")
         data["requarements"] = _("Kirish talablari")
-        data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
-        data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
+        data["dept_fee_title"] = _("Kridit miqdori")
+        data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
-        data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         data["educational_areas"] = posts.EducationalAreas.objects.filter(study_way=obj.id)
         return data
@@ -286,10 +285,9 @@ class EducationalAreaDetailView(DetailView):
         data["desc"] = _("Ta'lim dasturi xaqida")
         data["requarements"] = _("Kirish talablari")
         data["modules_by_semester"] = modules_by_semester
-        data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
-        data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
+        data["dept_fee_title"] = _("Kridit miqdori")
+        data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
-        data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         return data
     

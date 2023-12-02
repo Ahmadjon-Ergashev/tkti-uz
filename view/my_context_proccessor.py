@@ -33,9 +33,10 @@ def global_variables(request):
         "address_title" : _("Manzil"),
         "phone_title" : _("Telefon raqam"),
         "contact_edu_area": _("Bog'lanish"),
+        "money_priz" : _("Moliyaviy imtiyoz"),
         "photo_grid_title": _("Foto lavhalar"),
         "quick_link_title": _("Tezkor havolalar"),
         "social_networks_title": _("Ijtimoiy tarmoqlar"),
-        "extra_phone_title" : _("Qo'shimcha Telefon raqam")
+        "extra_phone_title" : _("Qo'shimcha Telefon raqam"),
     }
     return context
