@@ -69,7 +69,7 @@
                 <!-- quick links -->
 
             </div>
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-8 border posts">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
                     <h1 class="text-center fw-bold">{{ object.name }}</h1>
@@ -91,7 +91,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <h5 class=" fw-bold">{{ about }}</h5>
+                                    <span class=" fw-bold">{{ about }}</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" class="accordion-collapse show" data-bs-parent="#accordionFlushExample">
@@ -104,7 +104,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    <h5 class=" fw-bold">{{ target }}</h5>
+                                    <span class=" fw-bold">{{ target }}</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -116,7 +116,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-                                    <h5 class=" fw-bold">{{ activity }}</h5>
+                                    <span class="fw-bold">{{ activity }}</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -128,7 +128,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header">
                                 <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
-                                    <h5 class=" fw-bold">{{ workers }}</h5>
+                                    <span class=" fw-bold">{{ workers }}</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -158,6 +158,36 @@
                                 </div>
                             </div>
                         </div>
+                        {% if conn_departments %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefinal" aria-expanded="false" aria-controls="flush-collapsefinal">
+                                        <span class="fw-bold">{{ depended_news }}</span>
+                                    </button>
+                                </h2>
+                                <div id="flush-collapsefinal" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body px-0 py-2">
+                                        <div class="row">
+                                            {% for obj in conn_departments %}
+                                                <div class="col-12 col-md-4">
+                                                    <div class="card" style="height: 110px; ">
+                                                        <div class="card-body">
+                                                            <p class="">
+                                                                <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:80 }}</a>
+                                                            </p>  
+                                                            <div class="d-flex justify-content-between">
+                                                                <span><i class="fas fa-calendar-alt me-2"></i> {{ obj.added_at|date:'d-M-Y' }}</span>
+                                                                <span><i class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
+                                                            </div>  
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="post_footer">
                         <div class="time_and_view">

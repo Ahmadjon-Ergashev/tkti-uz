@@ -107,6 +107,12 @@ class PostsListView(ListView):
         context["title"] = navbar_name.name
         context["parent"] = navbar_name.parent
         context["title_slug"] = navbar_name.slug
+        if len(context["object_list"]) == 1:
+            try:
+                context["connected_faculty_dact"] = news.News.objects.filter(faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12]
+                print(context["connected_faculty_dact"])
+            except Exception as e:
+                print(e, 141) 
         try:
             context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
@@ -116,6 +122,7 @@ class PostsListView(ListView):
         except Exception:
             context["pdf_file"] = ""
         context["home"] = _("Bosh sahifa")
+        context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         return context
 
@@ -135,6 +142,10 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context["object"]
+        try:
+            context["connected_faculty_dact"] = news.News.objects.filter(faculty_dact=post.id, status="pub").order_by("-added_at")[:12]
+        except Exception as e:
+            print(e, 141) 
         navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
         context["title"] = navbar.name
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
@@ -167,6 +178,11 @@ class DepartmentsDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         obj = context["object"]
+        try:
+            context["conn_departments"] = news.News.objects.filter(departments=obj.id, status="pub").order_by("-added_at")[:12]
+        except Exception as e:
+            print(e, 141)
+        context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         context["departments_list"] = posts.Departments.objects.all().order_by("name")
         context["title"] = obj.name
         context["title_bar"] = _("Kafedralar")     
@@ -187,10 +203,15 @@ class SectionsDetailView(DetailView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
+        try:
+            data["conn_section_and_centers"] = news.News.objects.filter(section_and_centers=obj.id, status="pub").order_by("-added_at")[:12]
+        except Exception as e:
+            print(e, 141) 
         navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
         data["title"] = obj.title
         data["title"] = navbar.name
         data["parent"] = navbar.parent.name
+        data["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         try:
             data["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
         except AttributeError:

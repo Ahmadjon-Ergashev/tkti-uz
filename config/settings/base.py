@@ -36,7 +36,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    "jazzmin", # for custom admin panel
+    # "jazzmin", # for custom admin panel
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -272,8 +272,8 @@ QUILL_CONFIGS = {
     }
 }
 
-from config.jazzmin import JAZZMIN_SETTINGS
-JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
+# from config.jazzmin import JAZZMIN_SETTINGS
+# JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 # JAZZMIN_UI_TWEAKS = {
 #     "theme": "darkly"

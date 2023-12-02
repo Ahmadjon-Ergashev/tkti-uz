@@ -24,23 +24,31 @@ class NewsAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
     list_editable = ("status", )
-    filter_horizontal = ["hashtag"]
     list_display_links = ("title_uz", )
     list_filter = ("status", "added_at")
     search_fields = ("title_uz", "title_en", "title_ru")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
     list_display = ("id", "title_uz", "post_viewed_count", "status", "added_at")
+    filter_horizontal = ["hashtag", "faculty_dact", "departments", "section_and_centers"]
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
             "classes": ("extrapretty"),
             "fields": (
-                "category", 
                 "status",
                 "added_at", "author_post", "hashtag"          
             ),
         }),
+        (_("Aloqadorlar"), {
+            "classes": ("collapse", ),
+            "fields": (
+                "faculty_dact",       
+                "departments",
+                "section_and_centers",
+            ),
+        }),
         (_("Media fayllar"), {
+            "classes": ("collapse", ),
             "fields": (
                 ("image", "get_image_file"),
                 ("pdf_file", "video_file")                
@@ -75,16 +83,9 @@ class NewsAdmin(admin.ModelAdmin):
         }),
     )
 
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "category":
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "faculty_dact":
             try:
-                # centers = [s for s in posts.SectionsAndCenters.objects.all()]
-                # posts_list = [p for p in posts.Posts.objects.filter(
-                #     Q(faculty=True) | Q(navbar__slug="doktorantura") |
-                #     Q(navbar__slug="doktorantura-qabul")
-                # )]
-                # kwargs["queryset"] = centers + posts_list
-                centers = posts.SectionsAndCenters.objects.all()
                 posts_list = posts.Posts.objects.filter(
                     Q(faculty=True) | Q(navbar__slug="doktorantura") |
                     Q(navbar__slug="doktorantura-qabul")
@@ -92,7 +93,7 @@ class NewsAdmin(admin.ModelAdmin):
                 kwargs["queryset"] = posts_list
             except Exception as e:
                 kwargs["queryset"] = posts.Posts.objects.none()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+        return super().formfield_for_manytomany(db_field, request, **kwargs)
 
     def get_image_file(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' alt='asosiy rasm' width=200/>")

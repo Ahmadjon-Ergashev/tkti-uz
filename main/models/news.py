@@ -30,8 +30,10 @@ class Category(models.Model):
 
 
 class News(widgets.AbstractTemplate):
-    """ model for news  """
-    category = models.ForeignKey(posts.Posts, verbose_name=_("Bo'lim nomi"), on_delete=models.SET_NULL, null=True, blank=True)
+    """ model for news """
+    faculty_dact = models.ManyToManyField(posts.Posts, verbose_name=_("Yangilikka aloqador postlarlar"), related_name="connected_faculty_dact", blank=True)
+    departments = models.ManyToManyField(posts.Departments, verbose_name=_("Yangilikka aloqadorlar kafedralar"), related_name="connected_departments", blank=True)
+    section_and_centers = models.ManyToManyField(posts.SectionsAndCenters, verbose_name=_("Yangilikka aloqadorlar bo'lim va markazlar"), related_name="connected_section_and_centers", blank=True)
     hashtag = models.ManyToManyField(widgets.Hashtag, related_name="news_hashtags")
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
