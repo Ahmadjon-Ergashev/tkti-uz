@@ -7,10 +7,19 @@ from main.models import widgets
 
 
 
+@admin.action(description=_("Nusxa ko'chirish"))
+def simple_clone(modeladmin, request, queryset):
+    for i in queryset:
+        i.pk = None
+        i.save()
+
+
+
 @admin.register(widgets.SocialNetworks)
 class SocialNetworkingAdmin(GuardedModelAdmin):     
-    search_fields = ("name_uz", )
+    actions = [simple_clone]
     ordering = ("-added_at", )
+    search_fields = ("name_uz", )
     list_display_links = ("name_uz", )
     list_editable = ("order_num", "color")
     list_display = ("id", "name_uz", "order_num", "color", "added_at")
@@ -58,6 +67,7 @@ class SocialNetworkingAdmin(GuardedModelAdmin):
 
 @admin.register(widgets.HeaderIMG)
 class HeaderIMGAdmin(GuardedModelAdmin):
+    actions = [simple_clone]
     list_editable = ("order_num", )
     readonly_fields = ["get_image"]
     list_display_links = ("get_image", )
@@ -69,6 +79,7 @@ class HeaderIMGAdmin(GuardedModelAdmin):
 
 @admin.register(widgets.UsefullLinks)
 class LinksAdmin(GuardedModelAdmin):
+    actions = [simple_clone]
     list_display_links = ("name_uz", )
     readonly_fields = ("add_time", "get_logo",)
     search_fields = ("name_uz", "name_ru", "name_en")
@@ -112,6 +123,7 @@ class LinksAdmin(GuardedModelAdmin):
 @admin.register(widgets.QuickLinks)
 class QuickLinksAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
+    actions = [simple_clone]
     readonly_fields = ("added_at", )
     list_display_links = ("name_uz", )
     list_editable = ("order_num", "url")
@@ -152,6 +164,7 @@ class QuickLinksAdmin(admin.ModelAdmin):
 @admin.register(widgets.EventTypes)
 class EventTypesAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
+    actions = [simple_clone]
     readonly_fields = ("added_at", )
     list_display_links = ("name_uz", )
     list_display = ("id", "name_uz", "added_at")
@@ -186,8 +199,9 @@ class EventTypesAdmin(admin.ModelAdmin):
 @admin.register(widgets.Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
     ordering = ("-added_at", )
-    list_display_links = ("name_uz", )
+    actions = [simple_clone]
     readonly_fields = ("added_at", )
+    list_display_links = ("name_uz", )
     list_editable = ("order_num", "quantity")
     list_display = ("id", "name_uz", "quantity", "order_num", "added_at")
 
@@ -239,6 +253,7 @@ class PhotoGallary(admin.ModelAdmin):
 
 @admin.register(widgets.Flag)
 class FlagAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     list_display = ("id", "title_uz")
     list_display_links = ("title_uz", )
 
@@ -267,6 +282,7 @@ class FlagAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.CoatofArms)
 class CoatofArmsAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     list_display = ("id", "title_uz")
     list_display_links = ("title_uz", )
 
@@ -294,6 +310,7 @@ class CoatofArmsAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Anthem)
 class AnthemAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     list_display = ("id", "title_uz")
     list_display_links = ("title_uz", )
 
@@ -321,6 +338,7 @@ class AnthemAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.FaqCategory)
 class FaqCategoryAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     list_display = ("id", "name")
     list_display_links = ("id", "name")
 
@@ -348,6 +366,7 @@ class FaqCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Faq)
 class FaqAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     list_filter = ("category", )
     list_editable = ("is_active", )
     readonly_fields = ("added_at", )
@@ -388,6 +407,7 @@ class FaqAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Semesters)
 class SemestersAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
     list_display = ("id", "name")
     readonly_fields = ("added_at", )
     list_display_links = ("id", "name")

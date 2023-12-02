@@ -250,7 +250,6 @@ class EducationalAreaView(ListView):
             semesters = widgets.Semesters.objects.all()
             modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=obj.id, semester=semester) for semester in semesters}
             data["modules_by_semester"] = modules_by_semester
-
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
         data["desc"] = _("Ta'lim dasturi xaqida")

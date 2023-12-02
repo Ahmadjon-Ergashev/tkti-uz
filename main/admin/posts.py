@@ -1,9 +1,5 @@
 import random
-from typing import Any
 from django.contrib import admin
-from django.db.models.fields.related import ForeignKey, ManyToManyField
-from django.forms.models import ModelChoiceField, ModelMultipleChoiceField
-from django.http.request import HttpRequest
 from mptt.admin import MPTTModelAdmin
 from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe

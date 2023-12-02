@@ -2,7 +2,19 @@
     <h3>{{ object.name }}</h3>
     <div class="object_body">
         <p>{{ object.desc.html|safe }}</p>
-        <a href="{{ object.pdf_file.url }}" class="btn btn-sm btn-dark" target="_blank">{{ desc }}</a>
+        <!-- <a href="{{ object.pdf_file.url }}" class="btn btn-sm btn-dark" target="_blank">{{ desc }}</a> -->
+        <a type="button" class="btn btn-sm btn-dark text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area" aria-controls="offcanvasScrolling">
+            {{ desc }}
+        </a>
+        <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="main_pdf_edu_area" aria-labelledby="offcanvasScrollingLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">{{ object.name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <iframe src="{{ object.pdf_file.url }}" width="100%" height="100%" frameborder="0"></iframe>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -34,11 +46,29 @@
                     <li class="list-group-item d-flex justify-content-between px-0">
                         <span>{{ full_time_external_fee_title }}</span>
                         <span>{{ object.full_time_external_fee }} so'm</span>
-                    </li>
+                    </li>   
                 </ul>
             </div>
             <div class="col-12 col-lg-4">
-                <p>{{ object.contact.html|safe }}</p>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item fw-bold ps-0">{{ contact_edu_area }}</li>
+                    <li class="list-group-item d-flex justify-content-between w-50-l ps-0">
+                        <span class="fw-bold">{{ phone_title }}: </span>
+                        <span>{{ object.phone }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between ps-0">
+                        <span class="fw-bold">{{ extra_phone_title }}: </span>
+                        <span>{{ object.extra_phone }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between ps-0">
+                        <span class="fw-bold">{{ email_title }}: </span>
+                        <span>{{ object.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between ps-0">
+                        <span class="fw-bold">{{ address_title }}: </span>
+                        <span>{{ object.address }}</span>   
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

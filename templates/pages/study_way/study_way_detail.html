@@ -73,7 +73,27 @@
                     </ul>
                 </div>
                 <div class="col-12 col-lg-4">
-                    <p>{{ object.contact.html|safe }}</p>
+                    <div class="col-12 col-lg-4">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item fw-bold ps-0">{{ contact_edu_area }}</li>
+                            <li class="list-group-item d-flex justify-content-between w-50-l ps-0">
+                                <span class="fw-bold">{{ phone_title }}: </span>
+                                <span>{{ object.phone }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between ps-0">
+                                <span class="fw-bold">{{ extra_phone_title }}: </span>
+                                <span>{{ object.extra_phone }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between ps-0">
+                                <span class="fw-bold">{{ email_title }}: </span>
+                                <span>{{ object.email }}</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between ps-0">
+                                <span class="fw-bold">{{ address_title }}: </span>
+                                <span>{{ object.address }}</span>
+                            </li>
+                        </ul>
+                    </div>  
                 </div>
             </div>
         </div>
