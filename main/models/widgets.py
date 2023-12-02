@@ -43,7 +43,7 @@ class AbstractTemplate(models.Model):
     subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=255, null=True)
     post = QuillField(verbose_name=_("To'liq mazmuni"), null=True, blank=True)
     status = models.CharField(verbose_name=_("status"), max_length=50, choices=Status.choices, default=Status.pendding)
-    slug = models.SlugField(max_length=255, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
+    slug = models.SlugField(max_length=50, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
     added_at = models.DateTimeField(verbose_name=_("Vaqt & sana"))
