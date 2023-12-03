@@ -35,6 +35,7 @@
         }
         .news{
             padding: 10px;
+            margin-bottom: 15px;
         }
         form{
             margin-bottom: 30px;
@@ -50,7 +51,7 @@
                     {% for n in last_news %}
                         <option value="{{ n.id }}">{{ n.title }}</option>
                     {% endfor %}
-                </select>
+                </select> <br>
                 <label for="id_bg_img" class="uploder">
                     Rasmlarni tanlash
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-arrow-up" viewBox="0 0 16 16">

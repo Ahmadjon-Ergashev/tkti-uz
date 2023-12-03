@@ -41,7 +41,7 @@ def Home(request):
         "ads_section_title": _("E'lonlar"),
         "sp_way": _("Yo'nalishni tanlang"),
         "sp_type": _("Ta'lim turini tanlang"),
-        "sp_faculty": _("Fakultetni tanlang"),
+        "sp_faculty": _("Sohani tanlang"),
         "videos_section_title": _("Videolar"),
         "the_most_read": _("Top yangiliklar"),
         "upcoming": _("Yaqinlashib kelayotganlar"),
