@@ -35,8 +35,11 @@ widgets = [
     path("flag", widgets.FlagView.as_view(), name="flag"),
     path("anthem", widgets.AnthemView.as_view(), name="anthem"),
     path("sitemap", widgets.SiteMapView.as_view(), name="site_map"),
+    path("supports", widgets.OpportunitiesView.as_view(), name="opports_view"),
     path("coat_of_arms", widgets.CoatofArmsView.as_view(), name="coat_of_arms"),
     path("searching/results", widgets.SearchAroundProgram.as_view(), name="search"),
+    path("supports/edu_credit/", widgets.EduCreditView.as_view(), name="edu_credit_view"),
+    path("supports/credit/opportunity/", widgets.CreditOpportView.as_view(), name="credit_opport_view"),
 ]
 
 urlpatterns = [] + posts + news + widgets

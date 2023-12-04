@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+    <style>
+        .card{
+            height: 250px;
+            text-align: center;
+        }
+        .card_img{
+            padding: 15px 10px;
+        }
+        .card-body{
+            width: 100%;
+            padding: 15px 10px;
+            position: relative;
+        }
+        .card-body p{
+            left: 0px;
+            width: 100%;
+            bottom: 10px;
+            text-align: center;
+            position: absolute;
+        }
+        .card_img i{
+            color: #0083FC;
+            font-size: 150px;
+        }
+    </style>
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card_img">
+                        <a href="/supports/edu_credit/">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <a href="/supports/edu_credit/" class="text-dark">
+                                {{ education_credit }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                <div class="card">
+                    <div class="card_img">
+                        <a href="/supports/credit/opportunity/">
+                            <i class="fas fa-graduation-cap"></i>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <a href="/supports/credit/opportunity/" class="text-dark">
+                                {{ education_credit_opportunity }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

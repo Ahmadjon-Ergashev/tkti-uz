@@ -1,3 +1,5 @@
+from typing import Any
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.postgres import search as s
 from django.utils.translation import gettext_lazy as _
@@ -83,3 +85,33 @@ class SearchAroundProgram(ListView):
             "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :(")
         }
         return render(request, self.template_name, context)
+    
+
+
+class OpportunitiesView(TemplateView):
+    template_name = "opportunities/main.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = _("Moliyaviy imtiyozlar")
+        data["education_credit"] = _("Ta'lim kriditi")
+        data["education_credit_opportunity"] = _("Talabalar uchun soliq imtiyozlari")
+        return data
+
+
+class EduCreditView(TemplateView):
+    template_name = "opportunities/edu_credit.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = _("Ta'lim kriditi")
+        return data
+
+
+class CreditOpportView(TemplateView):
+    template_name = "opportunities/credit_opport.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = _("Talabalar uchun soliq imtiyozlari")
+        return data

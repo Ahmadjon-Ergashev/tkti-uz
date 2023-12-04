@@ -1,0 +1,183 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
+                <li class="breadcrumb-item"><a href="/supports">Moliyaviy imtiyozlar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="invisible">1111111111111111</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th colspan="2">Imtiyoz haqida</th>
+                            <td colspan="1">
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        O‘zbekiston Respublikasi Prezidentining 2021 yil 13 iyuldagi “Yoshlarni har tomonlama qo‘llab-quvvatlash va ularning ijtimoiy faolligini yana-da oshirishga oid qo‘shimcha chora-tadbirlar to‘g‘risida”gi PF-6260-son Farmoni bilan talabalar uchun taʼlim kreditlari berishga doir tartibot soddalashtirilgan.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Chunonchi, respublikadagi oliy taʼlim muassasalarida to‘lov-kontrakt asosida o‘qiyotgan talabalar uchun Markaziy bankning asosiy foiz stavkasi miqdorida va o‘qish muddati tugagandan keyin yettinchi oydan boshlab 7 yil muddatda qaytarish shartlari asosida taʼlim kreditlari beriladi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Imtiyoz yuzasidan batafsil maʼlumot olish havolalar:
+                                    </li>
+                                    <li class="list-group-item">
+                                        Maxsus qonun hujjati: <a href="https://lex.uz/docs/5512119">lex.uz</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Sayt: <a href="https://www.mf.uz/">mf.uz</a>     
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Mas’ul tashkilot</th>
+                            <td>Markaziy bank va Tijorat banklari</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Kimlar uchun?</th>
+                            <td>
+                                <ol>
+                                    <li>
+                                        Taʼlim kreditlari oliy taʼlim tashkilotlarining kunduzgi taʼlim shaklida bakalavriat va magistraturaga to‘lov-kontrakt asosida o‘qishga tavsiya etilgan, shuningdek o‘qishini ko‘chirgan O‘zbekiston fuqarosi bo‘lgan talabalarga beriladi.
+                                    </li>
+                                    <li>
+                                        Biroq, taʼlim kreditlari chet el fuqarolari va fuqaroligi bo‘lmagan shaxslarga, shuningdek tijorat banklari tomonidan Jamg‘arma mablag‘laridan tashqari boshqa manbalar hisobidan beriladigan taʼlim kreditlariga nisbatan tatbiq etilmaydi.
+                                    </li>
+                                    <li>
+                                        Qolaversa, taʼlim kreditlari tabaqalashtirilgan to‘lov-kontraktni va uning minimal miqdoriga teng bir martalik boshqa to‘lovlarni amalga oshirish uchun ajratilmaydi.
+                                    </li>
+                                </ol>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Imtiyozni taqdim etish tartibi va muddatlari</th>
+                            <td>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">
+                                        Talabalarga to‘lov-kontrakt asosida o‘qish uchun taʼlim kreditlarini ajratish tartibi Vazirlar Mahkamasining 18.08.2021 yildagi 527-son qarori bilan belgilandi.    
+                                    </li>
+                                    <li class="list-group-item">
+                                        Mazkur qaror bilan Moliya vazirligi huzuridagi Taʼlim kreditini moliyalashtirish jamg‘armasi hisobidan oliy taʼlim tashkilotlarida to‘lov-kontrakt asosida o‘qish uchun taʼlim kreditlarini ajratish tartibi to‘g‘risidagi nizom tasdiqlangan.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Nizomga ko‘ra, taʼlim kreditlari oliy taʼlim tashkilotlarining kunduzgi taʼlim shaklida bakalavriat va magistraturaga to‘lov-kontrakt asosida o‘qishga tavsiya etilgan, shuningdek o‘qishini ko‘chirgan O‘zbekiston fuqarosi bo‘lgan talabalarga beriladi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Bunda, kredit oluvchining doimiy daromad manbaiga ega oila aʼzolari (ota-onasi, aka-ukasi, opa-singlisi, eri yoki xotini) yoki vasiylari birgalikda kredit oluvchi sifatida qatnashishi mumkin.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Taʼlim kreditining asosiy qarzi talabaning rasmiy o‘qish muddati tugagandan so‘ng 7-chi oydan boshlab 7 yil davomida qaytariladi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Taʼlim kreditini olish uchun Moliya vazirligining rasmiy veb-saytida eʼlon qilingan tijorat banklariga quyidagi hujjatlar taqdim etiladi:    
+                                    </li>
+                                    <li class="list-group-item">
+                                        <ol>
+                                            <li>
+                                                ariza;
+                                            </li>
+                                            <li>
+                                                to‘lov-kontrakt shartnomasi va unga ilova qilinadigan hisob varaqasi/fakturasi (mavjud bo‘lganda). Shartnomada o‘qishni tamomlashning belgilangan muddati va bir yil uchun to‘lov miqdori ko‘rsatilgan bo‘lishi lozim;    
+                                            </li>
+                                            <li>
+                                                taʼlim krediti qaytarilishining taʼminoti bo‘yicha hujjat. Bunda “Ijtimoiy himoya yagona reyestri”ga kirgan oilalarning farzandlariga ajratiladigan taʼlim krediti bo‘yicha garov va kafillik talab etilmaydi;
+                                            </li>
+                                            <li>
+                                                “Ijtimoiy himoya yagona reyestri”ga kiritilganligini tasdiqlovchi maʼlumotnoma (“Ijtimoiy himoya yagona reyestri”ga kiritilgan oilalar farzandlari uchun);
+                                            </li>
+                                            <li>
+                                                birgalikda kredit oluvchiga tegishli maʼlumot.
+                                            </li>
+                                        </ol>
+                                    </li>
+                                    <li class="list-group-item">
+                                        Hujjatlar 5 ish kunida ko‘rib chiqiladi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Taʼlim krediti shartnomasi to‘lov-kontrakt shartnomasida ko‘rsatilgan bir yillik to‘lov summasiga teng miqdordagi summaga tuziladi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Taʼlim krediti kredit oluvchiga Markaziy bankning asosiy stavkasi miqdorida ajratiladi. Bunda, Markaziy bankning asosiy stavkasi pasaytirilgan taqdirda, taʼlim krediti bo‘yicha foiz stavkasi mutanosib ravishda pasayadi, Markaziy bankning asosiy stavkasi oshirilgan taqdirda yesa taʼlim krediti bo‘yicha foiz stavkasi o‘zgarishsiz qoladi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Taʼlim kreditini ajratishning qayd etilgan tartibi chet el fuqarolari va fuqaroligi bo‘lmagan shaxslarga, shuningdek tijorat banklari tomonidan Jamg‘arma mablag‘laridan tashqari boshqa manbalar hisobidan beriladigan taʼlim kreditlariga nisbatan tatbiq etilmaydi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Qolaversa, tabaqalashtirilgan to‘lov-kontraktni va uning minimal miqdoriga teng bir martalik boshqa to‘lovlarni amalga oshirish uchun taʼlim krediti ajratilmaydi.
+                                    </li>
+                                    <li class="list-group-item">
+                                        Chunonchi, 2021-2022 o‘quv yilida to‘lov kontrakt asosida tahsil oluvchi talabalar taʼlim krediti ajratuvchi banklarga quyidagi telefon raqamlari orqali murojaat qilish mumkin:
+                                    </li>
+                                    <li class="list-group-item">
+                                        Milliy bank, tel.: (78) 148-00-10;
+                                    </li>
+                                    <li class="list-group-item">
+                                        Xalq banki, tel.: (71) 210-20-02;
+                                    </li>
+                                    <li class="list-group-item">
+                                        Sanoatqurilishbank, tel.: (71) 200-43-43;
+                                    </li>
+                                    <li class="list-group-item">
+                                        Qishloqqurilishbank, tel.: 1254; (78) 150-00-55;
+                                    </li>
+                                    <li class="list-group-item">
+                                        Asakabank, tel.: 1152;
+                                    </li>
+                                    <li class="list-group-item">
+                                        Xamkorbank, tel.: 1256;
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Huquqiy asos</th>
+                            <td>
+                                O‘zbekiston Respublikasi Prezidentining 2021 yil 13 iyuldagi “Yoshlarni har tomonlama qo‘llab-quvvatlash ва ularning ijtimoiy faolligini yana-da oshirishga oid qo‘shimcha chora-tadbirlar to‘g‘risida”gi PF-6260-son Farmoni
+                                <br> <a href="https://cbu.uz/oz/">Batafsil cbu.uz</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Aloqa ma’lumotlari</th>
+                            <td>
+                                Sayt: <a href="https://soliq.uz/?lang=uz">soliq.uz</a><br>
+                                Tel.: (+998 71) 212-62-05, <br>
+                                Milliy bank, tel.: (78) 148-00-10;<br>
+                                Xalq banki, tel.: (71) 210-20-02;<br>
+                                Sanoatqurilishbank, tel.: (71) 200-43-43;<br>
+                                Qishloqqurilishbank, tel.: 1254; (78) 150-00-55;<br>
+                                Asakabank, tel.: 1152;<br>
+                                Xamkorbank, tel.: 1256;<br>
+                                Agrobank, tel.: 1216;<br>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
