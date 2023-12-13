@@ -72,8 +72,6 @@ class HashtagSearchView(ListView):
         return context
 
 
-
-
 class AdsView(ListView):
     """ all ads items with pagination """
     model = news.Ads
@@ -160,7 +158,7 @@ class PhotoGallaryFilterView(ListView):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Rasmlar")
         return data
-    
+
 
 class VideoView(ListView):
     """ all videos """

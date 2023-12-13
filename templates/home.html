@@ -13,6 +13,17 @@
 <link rel="stylesheet" href="{% static 'css/modules/extextions/tabs.css' %}">
 <link rel="stylesheet" href="{% static 'css/styles/image_grid/home/home_grid.css' %}">
 
+<style>
+    .a_disabled{
+    pointer-events: none;
+    background: #3f85c7;
+    }
+
+    .a_able{
+        background:#15446f;
+    }
+</style>
+
 <!-- headers img -->
 <div class="header">
     <div id="headerIMG">
@@ -390,7 +401,7 @@
                                 </div>
                                 <div class="item_body">
                                     <h4>
-                                        <a href="{% url 'ads_detail' obj_slug=i.slug %}">
+                                        <a href="/ads/detail/{{ i.slug }}">
                                             {{ i.title | truncatechars:120 }}
                                         </a>
                                     </h4>
@@ -403,14 +414,14 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="border mx-4"></div>
+                <!-- <div class="border mx-4"></div> -->
                 <div class="row small_news" id="the_last_ads_8">
                     {% for i in the_last_ads_8 %}
                         <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
                             <div class="news_box">
                                 <div class="news_box_body">
                                     <p>
-                                        <a href="{% url 'ads_detail' obj_slug=i.slug %}">
+                                        <a href="/ads/detail/{{ i.slug }}">
                                             {{ i.title | truncatechars:80 }}
                                         </a>
                                     </p>
@@ -426,16 +437,25 @@
                 <a href="ads/" class="view_all_btn">{{ all }}</a>
             </div>
             <div class="content">
-                <div class="row videos_tab" id="the_videos">
+                <div class="row videos_tab big_box" id="the_videos">
                     {% for obj in the_last_videos %}
-                        <div class="col-12 col-lg-4 col-xxl-4 mb-3">
-                            <div class="video">
-                                <video class="video_tab_item" controls id="video_{{ obj.id }}" width="100%" poster="{{ obj.poster }}">
-                                    <source src="{{ obj.video_file.url }}" type="video/mp4">
-                                </video>
+                        <div class="col-12 col-lg-4 col-xxl-3 mb-3">
+                            <div class="item">
+                                <div class="item_img">
+                                    <img src="{{ obj.poster.url }}" alt="{{ obj.title }} | tkti.uz">
+                                </div>
+                                <div class="item_body">
+                                    <h4>
+                                        <a href="/videos/detail/{{ obj.slug }}">
+                                            {{ obj.title|truncatechars:80 }}
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div class="item_footer">
+                                    <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                    <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                </div>
                             </div>
-                            <p>{{ obj.title|truncatechars:80 }}</p>
-                            <span>{{ obj.added_at|date:"D, d-M Y" }}</span>
                         </div>  
                     {% endfor %}
                 </div>
@@ -523,7 +543,7 @@
 
 <!-- photo gallary -->
 
-
+<!-- 
 <div class="section_title">
     <div class="photo ">
         <h1>{{ photo_grid_title }}</h1>
@@ -538,7 +558,7 @@
             </div>
         </div>
     {% endfor %}
-</section>
+</section> -->
 
 <!-- photo gallary -->
 

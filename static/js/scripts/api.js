@@ -1,18 +1,19 @@
 $(document).ready(function(){
     $NF404 = $("#not_found_404").data("not-found");
-    $("#id_link").addClass("bg-secondary disabled");
+    $("#id_link").addClass("a_disabled");   
     function checkFields() {
         var field1 = $("#id_type").val() !== "--------------------" ? $("#id_type").val() : false;
         var field2 = $("#id_faculty").val() !== "--------------------" ? $("#id_faculty").val() : false;
         var field3 = $("#id_way").val() !== "--------------------" ? $("#id_way").val() : false;
         if (field1 && field2 && field3) {
-            $("#id_link").removeClass("bg-secondary disabled");
+            $("#id_link").removeClass("a_disabled");
+            $("#id_link").addClass("a_able");
             $("#id_link").attr("href", `/posts/learing_way/detail/${field3}/`);         
         } else {
-            $("#id_link").addClass("disabled");
+            $("#id_link").addClass("a_disabled");
         }
         if (!field1 | !field2 | !field3) {
-            $("#id_link").addClass("bg-secondary disabled");
+            $("#id_link").addClass("a_disabled");
         }
     }
     $("#id_type, #id_faculty, #id_way").change(function () {

@@ -1,3 +1,6 @@
+@import "../../styles/variables/colors";
+
+
 *{
     margin: 0;
     padding: 0;
@@ -28,11 +31,11 @@
         color: #111;
         position: absolute;
         padding: 10px 25px;
-        border: 1px solid #111;
+        border: 1px solid $color1;
         transition: all 0.1s ease;
         &:hover{
             color: white;
-            background-color: #111;
+            background-color: $color1;
         }
         @media screen and (max-width: 480px) {
             &{
@@ -64,11 +67,11 @@
                 color: #111;
                 position: absolute;
                 padding: 10px 25px;
-                border: 1px solid #111;
+                border: 1px solid $color1;
                 transition: all 0.1s ease;
                 &:hover{
                     color: white;
-                    background-color: #111;
+                    background-color: $color1;
                 }
                 @media screen and (max-width: 480px) {
                     &{
@@ -119,7 +122,7 @@
                 }
                 .active_tap{
                     color: white;
-                    background-color: #111;
+                    background-color: $color1;
                 }
             }
         }
@@ -128,25 +131,12 @@
         padding: 20px 0;
         .content{
             display: none;
-            // animation: moving .8s ease;
-            // @keyframes moving {
-            //     from{
-            //         transform: translateY(-50px); 
-            //         opacity: 0;
-            //     }
-            //     to{
-            //         transform: translateY(0px); 
-            //         opacity: 1;
-            //     }
-            // }
             .row {
                 .card{
                     .card-body{
                         .card-title_h5{
                             font-size: 16px;
                             line-height: 1.5;
-                            // font-weight: 600;
-                            // font-family: 'Courier New', Courier, monospace;
                         }
                         .box_footer{
                             span{

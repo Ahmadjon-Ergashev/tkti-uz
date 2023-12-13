@@ -29,12 +29,12 @@
   color: #111;
   position: absolute;
   padding: 10px 25px;
-  border: 1px solid #111;
+  border: 1px solid #26597E;
   transition: all 0.1s ease;
 }
 #events .view_all_btn:hover {
   color: white;
-  background-color: #111;
+  background-color: #26597E;
 }
 @media screen and (max-width: 480px) {
   #events .view_all_btn {
@@ -66,12 +66,12 @@
   color: #111;
   position: absolute;
   padding: 10px 25px;
-  border: 1px solid #111;
+  border: 1px solid #26597E;
   transition: all 0.1s ease;
 }
 #news_ads_videos .content_box .content .view_all_btn:hover {
   color: white;
-  background-color: #111;
+  background-color: #26597E;
 }
 @media screen and (max-width: 480px) {
   #news_ads_videos .content_box .content .view_all_btn {
@@ -118,7 +118,7 @@
 }
 ._container .tap_title .tab_box .tab_btns .active_tap {
   color: white;
-  background-color: #111;
+  background-color: #26597E;
 }
 ._container .content_box {
   padding: 20px 0;

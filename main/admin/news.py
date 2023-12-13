@@ -266,7 +266,7 @@ class VideoGallyadmin(admin.ModelAdmin):
         (None, {
             "fields": (
                 ("title_uz", "title_en", "title_ru"), 
-                "added_at", "poster", "video_file", "status"
+                "added_at", "poster", "status", "post",
             ),
         }),
         

@@ -1,4 +1,5 @@
 from django.db import models
+from django_quill.fields import QuillField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 
@@ -117,8 +118,8 @@ class VideoGallery(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Sarlavha"), null=True)
     status = models.CharField(_("Status"), choices=widgets.Status.choices, default=widgets.Status.pendding, max_length=50)
     poster = models.ImageField(verbose_name=_("video uchun foster"), default="default/default.png", null=True, upload_to="video/poster/%Y-%m-%d/")
-    video_file = models.FileField(verbose_name=_("Video file"), upload_to="video/gallary/%Y-%m-%d/", null=True)
-    slug = models.SlugField(unique=True, verbose_name=_("Slug"), help_text=_("Majburyat tug'ulmasa tegmang"), max_length=255)
+    post = QuillField(verbose_name="Video file", null=True, blank=True)
+    slug = models.SlugField(unique=True, verbose_name=_("Slug"), help_text=_("Majburyat tug'ulmasa tegmang"), max_length=50)
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     added_at = models.DateTimeField(_("Vaqt & sana"))
     update_at = models.DateTimeField(auto_now=True)
@@ -131,7 +132,7 @@ class VideoGallery(models.Model):
 
     def __str__(self):
         return f"{self.title}"
-    
+
 
 class Events(widgets.AbstractTemplate):
     """ university events plans """
