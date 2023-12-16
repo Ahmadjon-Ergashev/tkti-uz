@@ -12,7 +12,8 @@ migrations
 .env.dev
 .env
 __pycache__/
-
+.idea
+.vscode
 # Backup files # 
 *.bak 
 

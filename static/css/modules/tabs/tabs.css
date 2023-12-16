@@ -82,21 +82,20 @@
 }
 
 #module_by_semesters .tap_title {
-  background-color: #fff;
+  background-color: #F5F5F5;
 }
 
 ._container {
   background-color: white;
 }
 ._container .tap_title {
-  background-color: #F3F2EF;
+  background-color: #F5F5F5;
 }
 ._container .tap_title .tab_box {
   width: 100%;
   display: flex;
   position: relative;
   justify-content: space-between;
-  border-bottom: 2px solid rgb(229, 229, 229);
 }
 ._container .tap_title .tab_box .tab_box_title {
   display: flex;

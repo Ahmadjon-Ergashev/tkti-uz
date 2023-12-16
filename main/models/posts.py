@@ -420,7 +420,6 @@ class EducationalAreas(models.Model):
         verbose_name_plural = _("Ta'lim yo'nalishlari")
 
 
-
 class ModuleOfStudyPrograme(models.Model):
     """ Module of the study programme by semesters """
     educational_area = models.ForeignKey(EducationalAreas, verbose_name=_("Ta'lim yo'nalishi"), on_delete=models.SET_NULL, null=True)

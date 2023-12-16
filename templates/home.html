@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-{{ title }}
+    {{ title }}
 {% endblock title %}
 
 {% block content %}
@@ -33,19 +33,18 @@
         {% endfor %}
     </div>
     <!-- statistika -->
-
     <div class="container">
         <div id="statistika">
             {% for obj in statistika %}
                 <div class="card">
                     <div class="card-body">
                         <div class="card_icon">
-                            <i class="{{ obj.icon }}"></i>
+                            <a href="{{ obj.url }}" target="_blank"><i class="{{ obj.icon }}"></i></a>
                         </div>
                         <p>
-                            {{ obj.quantity }}
+                            <a href="{{ obj.url }}" target="_blank">{{ obj.quantity }}</a>
                         </p>
-                        <h3>{{ obj.name }}</h3>
+                        <h3><a href="{{ obj.url }}" target="_blank">{{ obj.name }}</a></h3>
                     </div>
                 </div>
             {% endfor %}

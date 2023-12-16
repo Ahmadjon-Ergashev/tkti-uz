@@ -133,6 +133,7 @@
                                         </div>
                                     </div>  
                                 {% endif %}
+
                                 <div class="post_footer">
                                     <p class="text-end fw-bold">{{ object.author_post }}</p>
                                     <div class="time_and_view">
@@ -322,6 +323,35 @@
                                     </p>
                                 {% endfor %}
                                 <!-- pagination -->
+                            </div>
+                        {% endif %}
+                        {% if connected_faqs %}
+                            <div class="accordion accordion-flush" id="accordionFlushFAQ">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFAQ" aria-expanded="false" aria-controls="flush-collapseFAQ">
+                                            <h5 class="fw-bold p-0 m-0">{{ depended_faq }}</h5>
+                                        </button>
+                                    </h2>
+                                    <div id="flush-collapseFAQ" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                        <div class="accordion-body px-0 py-2">
+                                            {% for obj in connected_faqs %}
+                                                <div class="card">
+                                                        <div class="card-body">
+                                                            <h3>
+                                                                <p class="">
+                                                                    {{ obj.title }}
+                                                                </p>
+                                                            </h3>
+                                                            <p class="">
+                                                                {{ obj.answer.html|safe }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         {% endif %}
                         {% include "../../widgets/pagination.html" %}

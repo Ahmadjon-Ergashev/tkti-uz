@@ -6,13 +6,11 @@ from django.utils.translation import gettext_lazy as _
 from main.models import widgets
 
 
-
 @admin.action(description=_("Nusxa ko'chirish"))
 def simple_clone(modeladmin, request, queryset):
     for i in queryset:
         i.pk = None
         i.save()
-
 
 
 @admin.register(widgets.SocialNetworks)
@@ -75,7 +73,7 @@ class HeaderIMGAdmin(GuardedModelAdmin):
 
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width=100 />")
-    
+
 
 @admin.register(widgets.UsefullLinks)
 class LinksAdmin(GuardedModelAdmin):
@@ -208,7 +206,7 @@ class StatistikaAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "order_num", "quantity", "icon"
+                "order_num", "quantity", "icon", "url"
             ),
         }),
         (_("O'zbek tilida"), {

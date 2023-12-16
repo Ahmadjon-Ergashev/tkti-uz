@@ -66,12 +66,13 @@ def Home(request):
         "the_last_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].all(),
         "the_most_view_news_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
         "the_most_view_news_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].all(),
-        "arxiv_events": news.Events.objects.filter(status="pub", added_at__lte=timezone.now()).order_by("added_at")[:8].all(),
-        "upcoming_events": news.Events.objects.filter(status="pub", added_at__gte=timezone.now()).order_by("added_at")[:8].all(),
+        "arxiv_events": news.Events.objects.filter(
+            status="pub", added_at__lte=timezone.now()).order_by("added_at")[:8].all(),
+        "upcoming_events": news.Events.objects.filter(
+            status="pub", added_at__gte=timezone.now()).order_by("added_at")[:8].all(),
     }
     context = translate_words | objects_list | about_us 
     return render(request, "home.html", context)
-
 
 
 class PostsListView(ListView):
@@ -92,7 +93,8 @@ class PostsListView(ListView):
         elif navbar_slug == "iqtidorli-talabalar":
             qs = posts.TalentedStudents.objects.all().order_by("-added_at")
         else:
-            qs = super().get_queryset().filter(status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
+            qs = super().get_queryset().filter(
+                status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
 
         one_obj = posts.Posts.objects.filter(navbar__slug=navbar_slug)
         if len(one_obj) == 1:
@@ -109,8 +111,8 @@ class PostsListView(ListView):
         context["title_slug"] = navbar_name.slug
         if len(context["object_list"]) == 1:
             try:
-                context["connected_faculty_dact"] = news.News.objects.filter(faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12]
-                print(context["connected_faculty_dact"])
+                context["connected_faculty_dact"] = news.News.objects.filter(
+                    faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12]
             except Exception as e:
                 print(e, 141) 
         try:
@@ -121,8 +123,10 @@ class PostsListView(ListView):
             context["pdf_file"] = context["object_list"][0].pdf_file
         except Exception:
             context["pdf_file"] = ""
+        context["connected_faqs"] = widgets.Faq.objects.filter(is_active=True, category=navbar_name.id)
         context["home"] = _("Bosh sahifa")
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
+        context["depended_faq"] = _("Mavzuga aloqador savol va javoblar")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         return context
 
@@ -143,7 +147,8 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         post = context["object"]
         try:
-            context["connected_faculty_dact"] = news.News.objects.filter(faculty_dact=post.id, status="pub").order_by("-added_at")[:12]
+            context["connected_faculty_dact"] = news.News.objects.filter(
+                faculty_dact=post.id, status="pub").order_by("-added_at")[:12]
         except Exception as e:
             print(e, 141) 
         navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
@@ -179,7 +184,8 @@ class DepartmentsDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         obj = context["object"]
         try:
-            context["conn_departments"] = news.News.objects.filter(departments=obj.id, status="pub").order_by("-added_at")[:12]
+            context["conn_departments"] = news.News.objects.filter(
+                departments=obj.id, status="pub").order_by("-added_at")[:12]
         except Exception as e:
             print(e, 141)
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
@@ -198,13 +204,13 @@ class SectionsDetailView(DetailView):
         post_slug = self.kwargs["post_slug"]
         obj = get_object_or_404(posts.SectionsAndCenters, slug=post_slug)
         return obj
-    
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
         try:
-            data["conn_section_and_centers"] = news.News.objects.filter(section_and_centers=obj.id, status="pub").order_by("-added_at")[:12]
+            data["conn_section_and_centers"] = news.News.objects.filter(
+                section_and_centers=obj.id, status="pub").order_by("-added_at")[:12]
         except Exception as e:
             print(e, 141) 
         navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
@@ -239,7 +245,8 @@ class LearningWayDetailView(DetailView):
         edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
         if len(edu_areas) == 1:
             semesters = widgets.Semesters.objects.all()
-            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=edu_areas.first().id, semester=semester) for semester in semesters}
+            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
+                educational_area=edu_areas.first().id, semester=semester) for semester in semesters}
             data["modules_by_semester"] = modules_by_semester
         data["title"] = obj.name
         data["name"] = _("Nomi")
@@ -268,7 +275,8 @@ class EducationalAreaView(ListView):
         if len(data["object_list"]) == 1:
             obj = data["object_list"][0]
             semesters = widgets.Semesters.objects.all()
-            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=obj.id, semester=semester) for semester in semesters}
+            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
+                educational_area=obj.id, semester=semester) for semester in semesters}
             data["modules_by_semester"] = modules_by_semester
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")

@@ -160,6 +160,7 @@ class Statistika(models.Model):
     name = models.CharField(_("Nomi"), max_length=80, unique=True)
     icon = models.CharField(_("icon"), max_length=50, null=True)
     quantity = models.IntegerField(_("soni"), default=0)
+    url = models.URLField(max_length=70, verbose_name="url manzil", null=True, blank=True)
     order_num = models.IntegerField(_("Tartib raqam"), default=0)
     added_at = models.DateTimeField(auto_now_add=True)   
 
@@ -244,25 +245,6 @@ class FaqCategory(models.Model):
         return self.name
 
 
-
-class Faq(models.Model):
-    """ faq model (ko'p berilgan savollar) """
-    category = models.ForeignKey(FaqCategory, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    title = models.CharField(_("Savol"), max_length=255, unique=True, null=True)
-    answer = QuillField(_("Javob"), null=True, blank=True)
-    is_active = models.BooleanField(_('Aktiv'), default=True)
-    added_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.title
-    
-    class Meta:
-        db_table = 'faq'
-        managed = True
-        verbose_name = _("Ko'p beriladigan savollar")
-        verbose_name_plural = _("Ko'p beriladigan savollar")
-
-
 class EventTypes(models.Model):
     """ event types model """
     name = models.CharField(_("Nomi"), max_length=255, null=True)
@@ -291,3 +273,23 @@ class Semesters(models.Model):
         managed = True
         verbose_name = _("Semesterlar")
         verbose_name_plural = _("Semesterlar")
+
+
+class Faq(models.Model):
+    """ faq model (ko'p berilgan savollar) """
+    from main.models import posts
+    from mptt.models import TreeForeignKey
+    category = TreeForeignKey(posts.Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
+    title = models.CharField(_("Savol"), max_length=255, unique=True, null=True)
+    answer = QuillField(_("Javob"), null=True, blank=True)
+    is_active = models.BooleanField(_('Aktiv'), default=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'faq'
+        managed = True
+        verbose_name = _("Ko'p beriladigan savollar")
+        verbose_name_plural = _("Ko'p beriladigan savollar")

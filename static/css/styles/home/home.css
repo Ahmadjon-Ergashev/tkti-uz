@@ -15,15 +15,21 @@
   padding: 50px 0;
   text-align: center;
 }
-.header #statistika .card .card-body .card_icon i {
+.header #statistika .card .card-body .card_icon a {
   color: #26597E;
+}
+.header #statistika .card .card-body .card_icon a i {
   font-size: 50px;
 }
-.header #statistika .card .card-body p {
+.header #statistika .card .card-body p a {
+  font-size: 18px;
+  color: #111;
   font-weight: 700;
-  font-family: serif;
+  font-family: monospace;
 }
-.header #statistika .card .card-body h3 {
+.header #statistika .card .card-body h3 a {
+  color: #111;
+  font-size: 25px;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
