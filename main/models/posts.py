@@ -45,7 +45,6 @@ class Navbar(MPTTModel):
         return self.name
 
 
-
 class Posts(widgets.AbstractTemplate):
     """ Posts """
     author = models.ForeignKey(
@@ -87,7 +86,6 @@ class Posts(widgets.AbstractTemplate):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
-
 
 
 class FacultyAdministration(models.Model): 

@@ -32,10 +32,18 @@ class Category(models.Model):
 
 class News(widgets.AbstractTemplate):
     """ model for news """
-    faculty_dact = models.ManyToManyField(posts.Posts, verbose_name=_("Yangilikka aloqador postlarlar"), related_name="connected_faculty_dact", blank=True)
-    departments = models.ManyToManyField(posts.Departments, verbose_name=_("Yangilikka aloqadorlar kafedralar"), related_name="connected_departments", blank=True)
-    section_and_centers = models.ManyToManyField(posts.SectionsAndCenters, verbose_name=_("Yangilikka aloqadorlar bo'lim va markazlar"), related_name="connected_section_and_centers", blank=True)
-    hashtag = models.ManyToManyField(widgets.Hashtag, related_name="news_hashtags")
+    faculty_dact = models.ManyToManyField(posts.Posts,
+                                          verbose_name=_("Yangilikka aloqador postlarlar"),
+                                          related_name="connected_faculty_dact", blank=True)
+    departments = models.ManyToManyField(posts.Departments,
+                                         verbose_name=_("Yangilikka aloqadorlar kafedralar"),
+                                         related_name="connected_departments", blank=True)
+    section_and_centers = models.ManyToManyField(posts.SectionsAndCenters,
+                                                 verbose_name=_("Yangilikka aloqadorlar bo'lim va markazlar"),
+                                                 related_name="connected_section_and_centers", blank=True)
+    hashtag = models.ManyToManyField(widgets.Hashtag, related_name="news_hashtags", blank=True)
+    brm = models.ManyToManyField(widgets.BRMItems, related_name="news_brm_items",
+                                 verbose_name="Barqaror rivojlanish maqsadlari", blank=True)
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
@@ -45,7 +53,8 @@ class News(widgets.AbstractTemplate):
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="author_news")
-    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_news_user")
+    update_user = models.ForeignKey(User, on_delete=models.SET_NULL,
+                                    null=True, blank=True, related_name="update_news_user")
 
     class Meta:
         db_table = "news"
@@ -54,7 +63,7 @@ class News(widgets.AbstractTemplate):
         verbose_name_plural = _("Yangiliklar")
 
     def __str__(self):
-        return str(self.title) if self.title else None
+        return str(self.title)
 
     def save(self, *args, **kwargs):
         if self._state.adding:
@@ -72,7 +81,6 @@ class News(widgets.AbstractTemplate):
             super().save(*args, **kwargs)
     
 
-    
 class Ads(widgets.AbstractTemplate):
     """ model for ads """
     hashtag = models.ManyToManyField(widgets.Hashtag, related_name="ads_hashtags")

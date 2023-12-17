@@ -391,7 +391,7 @@ class FaqAdmin(admin.ModelAdmin):
             ),
         }),
     )
-    
+
 
 @admin.register(widgets.Semesters)
 class SemestersAdmin(admin.ModelAdmin):
@@ -422,6 +422,45 @@ class SemestersAdmin(admin.ModelAdmin):
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
                 "added_at", 
+            ),
+        }),
+    )
+
+
+@admin.register(widgets.BRMItems)
+class BRMItemsAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    list_display = ("id", "name")
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+                "image", "color", "number"
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz",
+            )
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru",
+            )
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_en",
+            )
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
             ),
         }),
     )

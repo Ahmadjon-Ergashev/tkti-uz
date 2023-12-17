@@ -33,7 +33,6 @@ def simple_clone(modeladmin, request, queryset):
         i.save()
 
 
-
 @admin.register(posts.Navbar)
 class NavbarAdmin(MPTTModelAdmin):
     """ Admin view for Navigation bar model """
@@ -86,7 +85,6 @@ class NavbarAdmin(MPTTModelAdmin):
     
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("name_uz", )}
-
 
 
 @admin.register(posts.Posts)
@@ -260,7 +258,6 @@ class DepartmentsAdmin(admin.ModelAdmin):
             )
         })
     )
-    
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "faculty":
@@ -322,58 +319,6 @@ class DeptAdminstraAdmin(admin.ModelAdmin):
     get_image.short_description = _("Tanlangan rasm")
 
 
-
-# @admin.register(posts.StudyProgram)
-# class StudyAdmin(admin.ModelAdmin):
-#     actions = [simple_clone]
-#     readonly_fields = ("added_at", )
-#     list_display_links = ("title_uz", )
-#     autocomplete_fields = ("department", )
-#     search_fields = ("title_uz", "title_ru", "title_en")
-#     list_display = ("id", "title_uz", "year", "faculty", "department", "added_at")
-
-#     fieldsets = (
-#         (None, {
-#             "fields": (
-#                 "year", "faculty", "department", "study_way", "pdf_file", "study_time"
-#             ),
-#         }),
-#         (_("O'zbek tilida"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "title_uz", 
-#             ),
-#         }),
-#         (_("Rus tilida"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "title_ru", 
-#             ),
-#         }),
-#         (_("Ingiliz tilida"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "title_en", 
-#             ),
-#         }),
-#         (_("Automatik to'ldiriladigan bo'limlar"), {
-#             'classes': ('collapse', ),
-#             "fields": (
-#                 "added_at",
-#             )
-#         })
-#     )
-
-#     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-#         if db_field.name == "faculty":
-#             try:
-#                 kwargs["queryset"] = posts.Posts.objects.filter(faculty=True).all()
-#             except Exception as e:
-#                 kwargs["queryset"] = posts.Posts.objects.none()
-#         return super().formfield_for_foreignkey(db_field, request, **kwargs)
-    
-
-
 @admin.register(posts.ContactSection)
 class ContactSectionAdmin(admin.ModelAdmin):
     actions = [simple_clone]
@@ -407,7 +352,6 @@ class ContactSectionAdmin(admin.ModelAdmin):
             ),
         }),
     )
-    
 
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width='250' />")
@@ -461,7 +405,6 @@ class SectionsAdmin(admin.ModelAdmin):
     list_display = ("id", "title_uz", "added_at")
     prepopulated_fields = ({"slug": ("title_uz", )})
     search_fields = ("title_uz", "title_ru", "title_en")
-
 
     fieldsets = (
         (None, {
@@ -540,7 +483,6 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width='250' />")
     get_image.short_description = _("Tanlangan rasm")
-
 
 
 @admin.register(posts.TalentedStudents)
@@ -644,16 +586,6 @@ class StudyDegreesAdmin(admin.ModelAdmin):
         })
     )
 
-    # def formfield_for_manytomany(self, db_field, request, **kwargs):
-    #     if db_field.name == "faculty":
-    #         try:
-    #             kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
-    #         except Exception as e:
-    #             kwargs["queryset"] = posts.Posts.objects.none()
-    #     return super().formfield_for_manytomany(db_field, request, **kwargs)
-
-# "study_degree", "faculty",
-
 
 @admin.register(posts.FieldOfEducation)
 class FieldOfEducationAdmin(admin.ModelAdmin):
@@ -733,18 +665,58 @@ class LearningWayAdmin(admin.ModelAdmin):
         })
     )
 
-    # def formfield_for_foreignkey(self, db_field, request, **kwargs):
-    #     if db_field.name == "faculty":
-    #         kwargs["queryset"] = posts.FieldOfEducation.objects.filter(faculty=True)
-            
-    #     if db_field.name == "study_degree":
-    #         kwargs["queryset"] = posts.StudyDegrees.objects.all()
-    #     return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+@admin.register(posts.ModuleOfStudyPrograme)
+class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
+    model = posts.ModuleOfStudyPrograme
+    actions = [simple_clone]
+    search_fields = ("name_uz", )
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name_uz")
+    list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
+
+    fieldsets = (
+        (None, {
+            "fields": (
+               "semester", "educational_area", "pdf_file",
+            ),
+        }),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_uz",
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_ru",
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse', ),
+            "fields": (
+                "name_en",
+            ),
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'fields': (
+                "added_at",
+            ),
+        })
+    )
+
+
+class ModuleOfStudyProgrameTabularInline(admin.TabularInline):
+    model = posts.ModuleOfStudyPrograme
+    extra = 1
+    exclude = ["name"]
 
 
 @admin.register(posts.EducationalAreas)
 class EducationalAreasAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    inlines = [ModuleOfStudyProgrameTabularInline]
     search_fields = ("name_uz", )
     list_display_links = ("id", "name_uz")
     list_display = ("id", "name_uz", "added_at")
@@ -785,43 +757,3 @@ class EducationalAreasAdmin(admin.ModelAdmin):
         })
     )
 
-
-@admin.register(posts.ModuleOfStudyPrograme)
-class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
-    actions = [simple_clone]
-    search_fields = ("name_uz", )
-    readonly_fields = ("added_at", )
-    list_display_links = ("id", "name_uz")
-    list_display = ("id", "name_uz", "semester", "educational_area", "added_at")
-
-    fieldsets = (
-        (None, {
-            "fields": (
-               "semester", "educational_area", "pdf_file", 
-            ),
-        }),
-        (_("O'zbek tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "name_uz", 
-            ),
-        }),
-        (_("Rus tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "name_ru", 
-            ),
-        }),
-        (_("Ingiliz tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "name_en", 
-            ),
-        }),
-        (_("Automatik to'ldiriladigan fieldlar"), {
-            'fields': (
-                "added_at",
-            ),
-        })
-    )
-    

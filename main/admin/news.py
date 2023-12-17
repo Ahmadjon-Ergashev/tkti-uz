@@ -45,6 +45,7 @@ class NewsAdmin(admin.ModelAdmin):
                 "faculty_dact",       
                 "departments",
                 "section_and_centers",
+                "brm",
             ),
         }),
         (_("Media fayllar"), {

@@ -5,6 +5,7 @@ from main.models import posts, news, widgets
 
 """ posts models translations file """
 
+
 @register(posts.Navbar)
 class NavbarTranslation(TranslationOptions):
     fields = ("name", )
@@ -177,4 +178,9 @@ class FaqTranslation(TranslationOptions):
 
 @register(widgets.Semesters)
 class SemestersTranslation(TranslationOptions):
+    fields = ("name", )
+
+
+@register(widgets.BRMItems)
+class BRMItemsTranslation(TranslationOptions):
     fields = ("name", )

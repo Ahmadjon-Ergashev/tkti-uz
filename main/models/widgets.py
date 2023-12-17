@@ -293,3 +293,22 @@ class Faq(models.Model):
         managed = True
         verbose_name = _("Ko'p beriladigan savollar")
         verbose_name_plural = _("Ko'p beriladigan savollar")
+
+
+class BRMItems(models.Model):
+    """ BRM items model """
+    name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True)
+    number = models.IntegerField(default=0, verbose_name="Raqami")
+    color = ColorField(null=True, verbose_name="Rangi", default="#FF0000")
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="images/brm/%Y-%m-%d/", null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return str(self.name)
+
+    class Meta:
+        db_table = 'brm_items'
+        managed = True
+        verbose_name = _("BRM")
+        verbose_name_plural = _("BRM")
+
