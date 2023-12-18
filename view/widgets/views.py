@@ -1,8 +1,10 @@
-from typing import Any
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.postgres import search as s
+from django.views.generic.detail import DetailView
 from django.utils.translation import gettext_lazy as _
+from django.shortcuts import render, get_object_or_404
+
 
 # local
 from main.models import posts, widgets, news
@@ -115,3 +117,23 @@ class CreditOpportView(TemplateView):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Talabalar uchun soliq imtiyozlari")
         return data
+    
+
+class BRMItemsDetailView(DetailView):
+    """ brm detail and filter by BRM """
+    model = widgets.BRMItems
+    template_name = "pages/news_and_ads/news_filter_brm.html"
+
+    def get_object(self, queryset=None):
+        pk = self.kwargs["pk"]
+        obj = get_object_or_404(widgets.BRMItems, pk=pk)
+        return obj
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        object = context["object"]
+        context["title"] = object.name
+        context["connected_news_title"] = _("Mavzuga aloqador yangiliklar.")
+        context["connected_news"] = news.News.objects.filter(status=widgets.Status.published, brm=object.id).order_by("-added_at")
+        return context
+    

@@ -29,11 +29,11 @@ class NewsAdmin(admin.ModelAdmin):
     search_fields = ("title_uz", "title_en", "title_ru")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
     list_display = ("id", "title_uz", "post_viewed_count", "status", "added_at")
-    filter_horizontal = ["hashtag", "faculty_dact", "departments", "section_and_centers"]
+    filter_horizontal = ["hashtag", "faculty_dact", "departments", "section_and_centers", "brm"]
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
-            "classes": ("extrapretty"),
+            "classes": ("extrapretty", ),
             "fields": (
                 "status",
                 "added_at", "author_post", "hashtag"          

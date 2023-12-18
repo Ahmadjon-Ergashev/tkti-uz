@@ -7,6 +7,14 @@ $(document).ready(function(){
         $a = $(this).find("a");
         $a.find("i").css("color", $color)
     })
+    $(".brm_card").each(function() {
+        $color = $(this).data("brm-color");
+        $a = $(this).css("background", $color);
+    })
+    $(".brm_color").each(function() {
+        $color = $(this).data("brm-color");
+        $a = $(this).css("background", $color);
+    })
     $("#social_media_btn").hide()
     $("#show_social_media_btn").click(function(){
         $("#social_media_btn").fadeToggle()  

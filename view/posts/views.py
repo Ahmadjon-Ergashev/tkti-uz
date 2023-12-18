@@ -128,6 +128,7 @@ class PostsListView(ListView):
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         context["depended_faq"] = _("Mavzuga aloqador savol va javoblar")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
+        context["brm"] = widgets.BRMItems.objects.all().order_by("number")
         return context
 
 
