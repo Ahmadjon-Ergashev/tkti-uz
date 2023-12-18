@@ -298,6 +298,7 @@ class Faq(models.Model):
 class BRMItems(models.Model):
     """ BRM items model """
     name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True)
+    desc = QuillField(null=True, blank=True, verbose_name=_("Xaqida"))
     number = models.IntegerField(default=0, verbose_name="Raqami")
     color = ColorField(null=True, verbose_name="Rangi", default="#FF0000")
     image = models.ImageField(verbose_name=_("Rasmi"), upload_to="images/brm/%Y-%m-%d/", null=True, blank=True)

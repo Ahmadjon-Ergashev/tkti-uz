@@ -55,7 +55,7 @@
   transition: 0.5s all;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover {
-  background-color: #111;
+  background-color: #26597E;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .dropdown-menu li:hover a:hover {
   color: #ffffff;

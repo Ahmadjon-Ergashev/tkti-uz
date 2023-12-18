@@ -68,7 +68,7 @@
                     li{
                         transition: 0.5s all;
                         &:hover{
-                            background-color: #111;
+                            background-color: $color1;
                             a:hover{
                                 color: $text_white;
                             }

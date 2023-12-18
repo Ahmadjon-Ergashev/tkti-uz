@@ -183,4 +183,4 @@ class SemestersTranslation(TranslationOptions):
 
 @register(widgets.BRMItems)
 class BRMItemsTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name", "desc")

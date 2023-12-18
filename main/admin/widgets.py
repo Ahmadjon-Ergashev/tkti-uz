@@ -443,19 +443,19 @@ class BRMItemsAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz",
+                "name_uz", "desc_uz"
             )
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru",
+                "name_ru", "desc_ru"
             )
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse',),
             "fields": (
-                "name_en",
+                "name_en", "desc_en"
             )
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
