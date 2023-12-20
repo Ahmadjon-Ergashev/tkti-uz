@@ -54,30 +54,6 @@
 </div>
 <!-- headers img -->
 
-<!-- <section id="about">
-    <div class="container about_container">
-        <div class="row">
-            <h1 class="text-center">{{ about_us }}</h1>
-            <div class="col-12 col-md-4 col-lg-5">
-                <div class="img">
-                    <img src="{% static 'images/tkti.jpg' %}" class="img-fluid" alt="">
-                </div>
-            </div>
-            <div class="col-12 col-md-8 col-lg-7">
-                <p class="card-text">
-                    {{ section_1 }}
-                    <br>
-                    <br>
-                    {{ section_2 }}
-                    <br>
-                    <br>
-                    {{ section_3 }}
-                </p>
-            </div>
-        </div>    
-    </div>
-</section> -->
-
 <!-- study way  -->
 <div class="section_title py-2">
     <div class="container">
@@ -166,7 +142,7 @@
                                 <div class="event_modal">
                                     <div class="modal_window">
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="col-12 p-4">
                                                 <h5>{{ upc.title }}</h5>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
@@ -174,12 +150,6 @@
                                                     <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
                                                     <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
                                                 </ul>
-                                            </div>
-                                            <div class="col-5">
-                                                <iframe 
-                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5992.611411878445!2d69.2526138524833!3d41.323965330062755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b737f1f4161%3A0xab6842dfd7a53fdf!2sToshkent%20kimyo-texnologiya%20instituti%20(TKTI)!5e0!3m2!1suz!2s!4v1695310071406!5m2!1suz!2s" 
-                                                    width="100%" height="360px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                                </iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -210,7 +180,7 @@
                                 <div class="event_modal">
                                     <div class="modal_window">
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="col-12 p-4">
                                                 <h5>{{ upc.title }}</h5>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
@@ -218,12 +188,6 @@
                                                     <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
                                                     <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
                                                 </ul>
-                                            </div>
-                                            <div class="col-5">
-                                                <iframe 
-                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5992.611411878445!2d69.2526138524833!3d41.323965330062755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b737f1f4161%3A0xab6842dfd7a53fdf!2sToshkent%20kimyo-texnologiya%20instituti%20(TKTI)!5e0!3m2!1suz!2s!4v1695310071406!5m2!1suz!2s" 
-                                                    width="100%" height="360px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                                </iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -254,7 +218,7 @@
                                 <div class="event_modal">
                                     <div class="modal_window">
                                         <div class="row">
-                                            <div class="col-7">
+                                            <div class="col-12 p-4">
                                                 <h5>{{ upc.title }}</h5>
                                                 <ul class="list-group list-group-flush">
                                                     <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
@@ -262,12 +226,6 @@
                                                     <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
                                                     <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
                                                 </ul>
-                                            </div>
-                                            <div class="col-5">
-                                                <iframe 
-                                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5992.611411878445!2d69.2526138524833!3d41.323965330062755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8b737f1f4161%3A0xab6842dfd7a53fdf!2sToshkent%20kimyo-texnologiya%20instituti%20(TKTI)!5e0!3m2!1suz!2s!4v1695310071406!5m2!1suz!2s" 
-                                                    width="100%" height="360px" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                                                </iframe>
                                             </div>
                                         </div>
                                     </div>
@@ -467,47 +425,6 @@
 
 <!-- news ads videos -->
 
-<!-- faculty and departments -->
-
-<!-- <div class="container">
-    <div id="faculty_and_departments">
-        <h1 class="text-center text-decoration-underline">{{ faculty_title }}</h1>
-        <div id="faculties">
-            <div class="card_box">
-                <div class="faculty">
-                        <div class="card_img" style="background-image: url('https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg');">
-                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sunt, iure.</p>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <div id="departments">
-            <div class="box">
-                <div class="wrapper">
-                    <span id="faculty_title"></span><span> {{ nth_faculty }}</span>
-                </div>
-                <div class="row">
-            
-                    <div class="col-12 col-lg-4 col-xxl-3 mb-3">
-                        <div class="dept-item">
-                            <p>
-                                <a href="">
-                                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem, cum!
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
-            <div id="not_found_dept">
-
-            </div>
-        </div>
-    </div>
-</div> -->
-
-<!-- faculty and departments -->
 
 <!-- Talented students -->
 
@@ -540,27 +457,6 @@
 
 <!-- Talented students -->
 
-<!-- photo gallary -->
-
-<!-- 
-<div class="section_title">
-    <div class="photo ">
-        <h1>{{ photo_grid_title }}</h1>
-        <button type="button" class="p-3"><a href="{% url 'photo_gallary' %}">{{ read_more }}</a></button>
-    </div>
-</div>
-<section class="photo_grid">
-    {% for p in the_photos_home %}   
-        <div class="card">          
-            <div class="card__img"> 
-                <img src="{{ p.image.url }}" alt="tkti.uz">
-            </div>
-        </div>
-    {% endfor %}
-</section> -->
-
-<!-- photo gallary -->
-
 <section>
     <div class="section_title py-2">
         <div class="photo">
@@ -592,8 +488,4 @@
 
 
 <script src="{% static 'js/scripts/api.js' %}"></script>
-<!-- <script src="{% static 'js/scripts/tabs/ads.js' %}"></script>
-<script src="{% static 'js/scripts/tabs/news.js' %}"></script>
-<script src="{% static 'js/scripts/tabs/videos.js' %}"></script>
-<script src="{% static 'js/scripts/tabs/events.js' %}"></script> -->
 {% endblock content %}
