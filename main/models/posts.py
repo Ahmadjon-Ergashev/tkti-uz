@@ -400,10 +400,10 @@ class EducationalAreas(models.Model):
     extra_phone = models.CharField(_("Qo'shimcha Telefon raqam"), max_length=20, null=True)
     email = models.EmailField(_("E-Pochta"), max_length=100, null=True)
     address = models.CharField(_("Manzil"), max_length=150, null=True)
+    you_may_become_image = models.ImageField(verbose_name=_("Rasm"), null=True, blank=True, upload_to="image/you_may_become_image")
     you_may_become = QuillField(_("Siz bo'lishingiz mumkun"), null=True)
     full_time_fee = models.IntegerField(default=0, verbose_name=_("Kantrakt miqdori"))
     dept_fee = models.IntegerField(default=0, verbose_name=_("Kridit miqdori"))
-    dept_fee_bank_url = models.URLField(verbose_name=_("Moliyaviy Imtiyozlar"), null=True, blank=True, default="https://")
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
     added_at = models.DateTimeField(auto_now_add=True)
@@ -416,6 +416,21 @@ class EducationalAreas(models.Model):
         managed = True
         verbose_name = _("Ta'lim yo'nalishlari")
         verbose_name_plural = _("Ta'lim yo'nalishlari")
+
+    def save(self, *args, **kwargs):
+        if self._state.adding:
+            im = Image.open(self.you_may_become_image)
+            im = im.convert('RGB')
+            im = ImageOps.exif_transpose(im)
+            im_io = BytesIO()
+            im.save(im_io, 'JPEG', quality=25)
+            filename = os.path.splitext(self.you_may_become_image.name)[0]
+            filename = f"{filename}.jpg"
+            new_image = File(im_io, name=filename)
+            self.you_may_become_image = new_image
+            super().save(*args, **kwargs)
+        else:
+            super().save(*args, **kwargs)
 
 
 class ModuleOfStudyPrograme(models.Model):

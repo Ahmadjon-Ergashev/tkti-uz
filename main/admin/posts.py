@@ -726,14 +726,14 @@ class EducationalAreasAdmin(admin.ModelAdmin):
         (None, {
             "fields": (
                 "study_way", "pdf_file", "author_post", "phone", "extra_phone", "email",
-                "full_time_fee", "dept_fee", "dept_fee_bank_url"
+                "full_time_fee", "dept_fee"
             ),
         }),
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
                 "name_uz", "desc_uz", "application_procedure_uz",
-                "tuition_fee_uz", "address_uz", "you_may_become_uz"
+                "tuition_fee_uz", "address_uz", ("you_may_become_image", "you_may_become_uz")
             ),
         }),
         (_("Rus tilida"), {

@@ -3,7 +3,7 @@
     <div class="object_body">
         <p>{{ object.desc.html|safe }}</p>
         <!-- <a href="{{ object.pdf_file.url }}" class="btn btn-sm btn-dark" target="_blank">{{ desc }}</a> -->
-        <a type="button" class="btn btn-sm btn-dark text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area" aria-controls="offcanvasScrolling">
+        <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area" aria-controls="offcanvasScrolling">
             {{ desc }}
         </a>
         <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="main_pdf_edu_area" aria-labelledby="offcanvasScrollingLabel">
@@ -44,7 +44,7 @@
                         <span>{{ object.dept_fee }} so'm</span>
                     </li>
                 </ul>
-                <a href="/supports" class="btn btn-sm btn-dark mt-2" target="_blank">{{ money_priz }}</a>
+                <a href="/supports" class="btn btn-sm btn-primary mt-2" target="_blank">{{ money_priz }}</a>
             </div>
             <div class="col-12 col-lg-4">
                 <ul class="list-group list-group-flush">
@@ -124,9 +124,16 @@
     </div>
 </div>
 
-<div class="container my-5">
+<div class="container mb-5">
     <div class="object_body">
-        <p>{{ object.you_may_become.html|safe }}</p>
+        <div class="row">
+            <div class="col-12 col-md-4 p-1">
+                <div class="you_become_img" style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
+            </div>
+            <div class="col-12 col-md-8 p-1">
+                <p>{{ object.you_may_become.html|safe }}</p>
+            </div>
+        </div>
     </div>
 </div>
 
