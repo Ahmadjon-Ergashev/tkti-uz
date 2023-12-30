@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "django.contrib.postgres", # for multi model search
     "whitenoise.runserver_nostatic", # for static files
     'django.contrib.staticfiles',
+    "debug_toolbar", # django debug toolbar
     "drf_yasg", # swagger-ui
 ]
 
@@ -78,6 +79,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware", # for debug toolbar
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -248,6 +250,10 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny'
     ],
 }
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # MODELTRANSLATION_TRANSLATION_FILES
 # QUILL_CONFIGS = {

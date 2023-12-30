@@ -75,10 +75,6 @@ class StudyDegreesSerialziers(serializers.ModelSerializer):
     class Meta:
         model = posts.StudyDegrees
         fields = ["id", "name", "field_edu"]
-    
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        return data
 
 
 class LearningWaySerializers(serializers.ModelSerializer):
@@ -89,4 +85,3 @@ class LearningWaySerializers(serializers.ModelSerializer):
 
 
 
-    

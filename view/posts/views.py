@@ -1,4 +1,6 @@
 from django.utils import timezone
+from django.core.cache import cache
+from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -11,26 +13,7 @@ from main.models import (
 
 def Home(request):
     """ for home page view """
-    about_us = {
-        "about_us": _("Biz xaqimizda"),
-        "section_1": _("""
-            Toshkent kimyo-texnologiya instituti (TKTI, http://tkti.uz) - kimyoviy texnologiya (organik va noorganik moddalar, 
-            polimerlar, silikat va qiyin eruvchan materiallar, nodir va kamyob metallar kimyoviy texnologiyasi), oziq-ovqat texnologiyasi, 
-            neft va gazni qayta ishlash, ekologiya, biotexnologiya, enologiya, sellyuloza va yogʻochga ishlov berish texnologiyasi va b. yo‘nalishlar 
-            boyicha yuqori malakali mutaxassislar tayyorlashga ixtisoslashgan Markaziy Osiyodagi yetakchi universitetlardan biri hisoblanadi.
-        """),
-        "section_2": _("""
-            Toshkent kimyo-texnologiya instituti 1991-yil 6-maydagi O‘zbekiston Respublikasi Prezidentining Farmoni bilan tashkil etilgan. 
-            TKTI respublikada oliy texnik ta’lim darajasini oshirish, 
-            muhandislik va ilmiy kadrlar tayyorlashni takomillashtirish maqsadida 1929 yildan beri faoliyat yuritayotgan sobiq Toshkent politexnika institutining bir necha fakultetlari negizida tashkil etilgan. 
-            Institut o‘z faoliyati davomida mamlakatimiz kimyo, neft-gaz, oziq-ovqat, qurilish sanoati va iqtisodiyotining boshqa tarmoqlari uchun 10 mingdan ortiq yuqori malakali muhandis-texnologlar tayyorladi.
-        """),
-        "section_3": _("""
-            Toshkent kimyo-texnologiya instituti Oʻzbekistondagi yetakchi kimyo-texnologiya oliy oʻquv yurtiboʻlib, oʻquv, ilmiy-tadqiqot, 
-            pedagogik va tarbiyaviy faoliyatni amalga oshiradi. Institut tuzilmasiga Toshkent shahridagi Bosh kampus, Shahrisabz va Yangiyerdagi filiallar kiradi.
-            Toshkent shahridagi Bosh kampusda 5 ta fakultet, 24 ta kafedra, 6 ta ishlab chiqarish oʻquv markazlari va 12 ta ilmiylaboratoriyalar mavjud.
-        """)
-    }
+
     translate_words = {
         "arxiv": _("Arxiv"),
         "all": _("Barchasi"),
@@ -38,10 +21,10 @@ def Home(request):
         "events": _("Voqealar"),
         "title": _("Bosh sahifa"),
         "faculty_title": _("Fakultetlar"),
+        "sp_faculty": _("Sohani tanlang"),
         "ads_section_title": _("E'lonlar"),
         "sp_way": _("Yo'nalishni tanlang"),
         "sp_type": _("Ta'lim turini tanlang"),
-        "sp_faculty": _("Sohani tanlang"),
         "videos_section_title": _("Videolar"),
         "the_most_read": _("Top yangiliklar"),
         "upcoming": _("Yaqinlashib kelayotganlar"),
@@ -53,25 +36,49 @@ def Home(request):
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
     objects_list = {
-        "header_img": widgets.HeaderIMG.objects.all().order_by("order_num"),
+        "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
         "statistika": widgets.Statistika.objects.all().order_by("-added_at"),
         "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
-        "the_photos_home": news.PhotoGallary.objects.order_by("-added_at")[:6].all(),
-        "talented_students": posts.TalentedStudents.objects.order_by("-added_at").all(),
-        "all_events": news.Events.objects.filter(status="pub").order_by("added_at")[:8].all(),
-        "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].all(),
-        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
-        "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].all(),
-        "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].all(),
-        "the_last_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].all(),
-        "the_most_view_news_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
-        "the_most_view_news_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].all(),
-        "arxiv_events": news.Events.objects.filter(
-            status="pub", added_at__lte=timezone.now()).order_by("added_at")[:8].all(),
-        "upcoming_events": news.Events.objects.filter(
-            status="pub", added_at__gte=timezone.now()).order_by("added_at")[:8].all(),
+        "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
+            "image", "f_name", "desc"
+        ),
+        "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].only(
+            "title", "added_at", "image", "slug", "post_viewed_count"
+        ),
+        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].only(
+            "title", "added_at", "slug", "post_viewed_count"
+        ),
     }
-    context = translate_words | objects_list | about_us 
+    news_dict = {
+        "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].only(
+            "title", "added_at", "image", "slug", "post_viewed_count"
+        ),
+        "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].only(
+            "title", "added_at", "slug", "post_viewed_count"
+        ),
+        "the_last_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].only(
+            "title", "added_at", "poster", "slug", "post_viewed_count"
+        ),
+        "the_most_view_news_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].only(
+            "title", "added_at", "image", "slug", "post_viewed_count"
+        ),
+        "the_most_view_news_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].only(
+            "title", "added_at", "slug", "post_viewed_count"
+        ),
+    }
+    events = {
+        "arxiv_events": news.Events.objects.filter(
+            status="pub", added_at__lte=timezone.now()).order_by("added_at")[:8].only(
+            "id", "title", "added_at", "event_type__name", "location", "slug").prefetch_related("event_type"),
+
+        "upcoming_events": news.Events.objects.filter(
+            status="pub", added_at__gte=timezone.now()).order_by("added_at")[:8].only(
+            "id", "title", "added_at", "event_type__name", "location", "slug").prefetch_related("event_type"),
+
+        "all_events": news.Events.objects.filter(status="pub").order_by("added_at")[:8].only(
+            "id", "title", "added_at", "event_type__name", "location", "slug").prefetch_related("event_type"),
+    }
+    context = translate_words | objects_list | events | news_dict
     return render(request, "home.html", context)
 
 
@@ -89,7 +96,7 @@ class PostsListView(ListView):
         elif navbar_slug == "bolim-va-markazlar":
             qs = posts.SectionsAndCenters.objects.all().order_by("-added_at")
         elif navbar_slug == "institut-rahbariyati":
-            qs = posts.UniversityAdmistrations.objects.all().order_by("order_num")
+            qs = posts.UniversityAdmistrations.objects.order_by("order_num").all()
         elif navbar_slug == "iqtidorli-talabalar":
             qs = posts.TalentedStudents.objects.all().order_by("-added_at")
         else:

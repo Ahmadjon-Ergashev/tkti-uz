@@ -7,16 +7,25 @@ from main.models import (
 )
 
 
-
 def global_variables(request):
     context = {
         "today": datetime.now(),
-        "quick_links": widgets.QuickLinks.objects.all().order_by("order_num"),
-        "social_networks": widgets.SocialNetworks.objects.all().order_by("order_num"),
+        "quick_links": widgets.QuickLinks.objects.all().order_by("order_num").only(
+            "url", "name"
+        ),
+        "social_networks": widgets.SocialNetworks.objects.all().order_by("order_num").only(
+            "name", "color", "url", "icon"
+        ),
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
-        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num"),
-        "most_read_ads": news.Ads.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
-        "most_read_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].all(),
+        "most_read_ads": news.Ads.objects.filter(status="pub").order_by("-post_viewed_count")[:4].only(
+            "title", "added_at", "post_viewed_count", "slug",
+        ),
+        "most_read_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].only(
+            "title", "added_at", "post_viewed_count", "slug",
+        ),
+        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
+            "name", "slug", "id"
+        ).prefetch_related("children"),
 
         # text variables
         "next": _("oldinga"),

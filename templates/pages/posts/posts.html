@@ -13,7 +13,9 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a></li>
+                        <li class="breadcrumb-item">
+                            <a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a>
+                        </li>
                         <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
                     </ol>
                 </nav>

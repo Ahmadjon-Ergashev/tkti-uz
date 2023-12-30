@@ -1,6 +1,6 @@
+<!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -33,7 +33,8 @@
         <ul id="social_media_btn">
             {% for nets in social_networks %}    
                 <li class="social_networks_links" data-social-color="{{ nets.color }}">
-                    <a href="{{ nets.url }}" target="_blank" data-bs-toggle="tooltip" data-bs-placement="right" title="{{ nets.name }}">
+                    <a href="{{ nets.url }}" target="_blank" data-bs-toggle="tooltip"
+                        data-bs-placement="right" title="{{ nets.name }}">
                         <i class="{{ nets.icon }}"></i>
                     </a>
                 </li>
@@ -220,7 +221,7 @@
                     <ul class="navbar-nav ms-auto">
                         {% for nav in navbar %}
                             <li class="nav-item dropdown btn-group main_nav_item">
-                                <a href="{% url 'posts_nav' navbar_slug=nav.slug %}" class="nav-link nav_name active">
+                                <a href="/posts/navbar/{{nav.slug}}" class="nav-link nav_name active">
                                     {{ nav.name }}
                                 </a>
                                 <button class="p-1 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -230,7 +231,7 @@
                                     {% for child in nav.children.all %}
                                         <li class="nav-item dropdown" style="width: 300px;">
                                             <li class="nav-item">
-                                                <a href="{% url 'posts_nav' navbar_slug=child.slug %}" class="nav-link mx-2 active">{{ child.name }}</a>
+                                                <a href="/posts/navbar/{{child.slug}}" class="nav-link mx-2 active">{{ child.name }}</a>
                                             </li>
                                         </li>
                                     {% endfor %}
