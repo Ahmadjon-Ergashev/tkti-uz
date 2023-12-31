@@ -301,7 +301,7 @@ class BRMItems(models.Model):
     desc = QuillField(null=True, blank=True, verbose_name=_("Xaqida"))
     number = models.IntegerField(default=0, verbose_name="Raqami")
     color = ColorField(null=True, verbose_name="Rangi", default="#FF0000")
-    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="images/brm/%Y-%m-%d/", null=True, blank=True)
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/brm/%Y-%m-%d/", null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

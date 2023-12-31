@@ -1,6 +1,6 @@
 @import "../variables/colors";
-@import url(https://fonts.googleapis.com/css?family=Merriweather:400,300,700);
-@import url(https://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import "../variables/fonts";
+
 
 .posts {
     background: #fff;
@@ -84,7 +84,7 @@
     }
 
     a {
-        font-family: 'Montserrat', sans-serif;
+        font-family: $cinzel;
         font-size: 12px;
         text-transform: uppercase;
         color: $dark;
@@ -119,7 +119,7 @@
     cursor: pointer;
 
     a {
-        font-family: 'Merriweather', serif;
+        font-family: $cinzel;
         font-size: 14px;
         font-weight: 400;
         color: #999;
@@ -395,53 +395,3 @@
         }
     }
 }
-// #brm_items{
-//     .brm_card{
-//         height: 200px;
-// 		transition: all 0.1s ease-in-out;
-// 		box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-// 		opacity: 0.9;
-// 		&:hover{
-// 			opacity: 1;
-// 			box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-// 		}
-//         .top{
-// 			padding: 10px;
-// 			height: 100px;
-// 			display: flex;
-// 			justify-items: center;
-// 			vertical-align: middle;
-//             // border: 1px solid darkblue;
-// 			.left_number{
-// 				span{
-// 					a{
-// 						color: white;
-// 						font-size: 45px;
-// 						margin-right: 10px;
-// 						font-family: 'Courier New', Courier, monospace;
-// 					}
-// 				}
-// 			}
-// 			.right_name{
-// 				padding-top: 10px;	
-// 				span{
-// 					a{
-// 						color: white;
-// 						line-height: 1;
-// 						font-size: 30px;
-// 						font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-// 					}
-// 				}
-// 			}
-//         }
-//         .bottom{
-// 			height: 100px;
-// 			padding: 10px;
-// 			text-align: center;
-//             // border: 1px solid darkblue;
-// 			img{
-// 				height: 80px;
-// 			}
-//         }
-//     }
-// }

@@ -17,7 +17,6 @@ class NewsSerizliers(serializers.ModelSerializer):
         return data
     
 
-
 class AdsSerizliers(serializers.ModelSerializer):
     class Meta:
         model = news.Ads
@@ -30,7 +29,7 @@ class AdsSerizliers(serializers.ModelSerializer):
     
 
 class VideoSerializers(serializers.ModelSerializer):
-    class Meta:
+    class Meta: 
         model = news.VideoGallery
         fields = ["id", "title", "video_file", "poster", "added_at"]
 

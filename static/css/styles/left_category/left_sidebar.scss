@@ -1,8 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700);
-@import url(https://fonts.googleapis.com/css?family=Raleway:100,400,700);
-
-
 @import "../variables/colors";
+@import "../variables/fonts";
 
 
 // quick links
@@ -110,7 +107,7 @@ $unactiveHoverColor: #dddddd;
             label {
                 width: 50%;
                 text-align: center;
-                font-family: "Raleway";
+                font-family: $cinzel;
                 float: left;
                 font-weight: 900;
                 padding: 15px 25px;
@@ -136,7 +133,7 @@ $unactiveHoverColor: #dddddd;
 
     section {
         clear: both;
-        font-family: "Droid Serif";
+        font-family: $roboto_mono;
 
         div {
             width: 100%;
@@ -152,7 +149,7 @@ $unactiveHoverColor: #dddddd;
                     a{
                         color: $dark;
                         font-size: 13px;
-                        font-family: "Droid Serif";
+                        font-family: $noto;
                         &:hover{
                             color: $dark;
                         }
