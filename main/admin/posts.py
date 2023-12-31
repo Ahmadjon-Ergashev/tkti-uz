@@ -1,7 +1,6 @@
 import random
 from django.contrib import admin
 from mptt.admin import MPTTModelAdmin
-from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -88,7 +87,7 @@ class NavbarAdmin(MPTTModelAdmin):
 
 
 @admin.register(posts.Posts)
-class PostsAdmin(GuardedModelAdmin):
+class PostsAdmin(admin.ModelAdmin):
     """ Admin view for Posts """
     ordering = ("-added_at", )
     actions = (duplicate, )
@@ -164,7 +163,7 @@ class PostsAdmin(GuardedModelAdmin):
 
 
 @admin.register(posts.FacultyAdministration)
-class FacultyAdmistrationAdmin(GuardedModelAdmin):
+class FacultyAdmistrationAdmin(admin.ModelAdmin):
     actions = [clone]
     ordering = ("order_num", )
     list_filter = ("added_at", )

@@ -1,7 +1,6 @@
 import random
 from django.db.models import Q
 from django.contrib import admin
-from datetime import datetime, timedelta
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 

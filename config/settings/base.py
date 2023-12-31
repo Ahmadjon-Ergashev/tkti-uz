@@ -55,13 +55,10 @@ LOCALE_APPS = [
 
 GLOBAL_APPS = [
     "mptt",
-    "guardian", 
     "colorfield",
     "compressor", 
     'corsheaders',
-    "bootstrap5",
     "django_quill",
-    "django_filters",
     "rest_framework",
     "modeltranslation",
 ]
@@ -116,18 +113,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': env("POSTGRES_ENGINE"),
-#         'NAME': env("POSTGRES_DB"),
-#         'USER': env("POSTGRES_USER"),
-#         'PASSWORD': env("POSTGRES_PASSWORD"),
-#         'HOST': env("POSTGRES_HOST"),
-#         'PORT': env("POSTGRES_PORT"),
-#     }
-# }
-
 
 
 # Password validation
@@ -184,6 +169,12 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
+# extra settings
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # media
@@ -196,21 +187,13 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# extra settings
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'compressor.finders.CompressorFinder',
-)
+
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # default
     'guardian.backends.ObjectPermissionBackend',
 )
 
 # corsheaders
-# X_FRAME_OPTIONS = 'ALLOW-FROM http://127.0.0.1:8000/media/'
-# X_FRAME_OPTIONS = 'DENY'
-
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_METHODS = [
@@ -254,29 +237,6 @@ REST_FRAMEWORK = {
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
-
-# MODELTRANSLATION_TRANSLATION_FILES
-# QUILL_CONFIGS = {
-#     'default':{
-#         'theme': 'snow',
-#         'modules': {
-#             'syntax': True,
-#             'toolbar': [
-#                 [
-#                     {'font': []},
-#                     {'header': []},
-#                     {'align': []},
-#                     'bold', 'italic', 'underline', 'strike', 'blockquote',
-#                     {'color': []},
-#                     {'background': []},
-#                 ],
-#                 ["image"],
-#                 ['code-block', 'link'],
-#                 ['clean'],
-#             ]
-#         }
-#     }
-# }
 
 # from config.jazzmin import JAZZMIN_SETTINGS
 # JAZZMIN_SETTINGS = JAZZMIN_SETTINGS

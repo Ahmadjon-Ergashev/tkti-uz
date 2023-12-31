@@ -1,5 +1,4 @@
 from django.contrib import admin
-from guardian.admin import GuardedModelAdmin
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
@@ -14,7 +13,7 @@ def simple_clone(modeladmin, request, queryset):
 
 
 @admin.register(widgets.SocialNetworks)
-class SocialNetworkingAdmin(GuardedModelAdmin):     
+class SocialNetworkingAdmin(admin.ModelAdmin):     
     actions = [simple_clone]
     ordering = ("-added_at", )
     search_fields = ("name_uz", )
@@ -64,7 +63,7 @@ class SocialNetworkingAdmin(GuardedModelAdmin):
     
 
 @admin.register(widgets.HeaderIMG)
-class HeaderIMGAdmin(GuardedModelAdmin):
+class HeaderIMGAdmin(admin.ModelAdmin):
     actions = [simple_clone]
     list_editable = ("order_num", )
     readonly_fields = ["get_image"]
@@ -76,7 +75,7 @@ class HeaderIMGAdmin(GuardedModelAdmin):
 
 
 @admin.register(widgets.UsefullLinks)
-class LinksAdmin(GuardedModelAdmin):
+class LinksAdmin(admin.ModelAdmin):
     actions = [simple_clone]
     list_display_links = ("name_uz", )
     readonly_fields = ("add_time", "get_logo",)
