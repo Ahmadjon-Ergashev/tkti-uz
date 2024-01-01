@@ -29,6 +29,10 @@ class FlagView(ListView):
     model = widgets.Flag
     template_name = "widgets/flag.html"
 
+    def get_queryset(self):
+        qs = super().get_queryset().only("title", "description")
+        return qs
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("O`zbekiston Respublikasining davlat bayrog`i")

@@ -1,3 +1,4 @@
+from django.db.models import F
 from django.utils import timezone
 from django.core.cache import cache
 from django.core.paginator import Paginator
@@ -37,8 +38,12 @@ def Home(request):
     }
     objects_list = {
         "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
-        "statistika": widgets.Statistika.objects.all().order_by("-added_at"),
-        "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time"),
+        "statistika": widgets.Statistika.objects.all().order_by("order_num").only(
+            "name", "icon", "url", "quantity"
+        ),
+        "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time").only(
+            "name", "logo", "link"
+        ),
         "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
             "image", "f_name", "desc"
         ),
@@ -92,22 +97,21 @@ class PostsListView(ListView):
     def get_queryset(self):
         navbar_slug = self.kwargs["navbar_slug"]
         if navbar_slug == "boglanish":
-            qs = posts.ContactSection.objects.all().order_by("order_num")
+            qs = posts.ContactSection.objects.all().order_by("order_num").select_related("navbar")
         elif navbar_slug == "bolim-va-markazlar":
-            qs = posts.SectionsAndCenters.objects.all().order_by("-added_at")
+            qs = posts.SectionsAndCenters.objects.all().order_by("-added_at").select_related("navbar")
         elif navbar_slug == "institut-rahbariyati":
-            qs = posts.UniversityAdmistrations.objects.order_by("order_num").all()
+            qs = posts.UniversityAdmistrations.objects.order_by("order_num").select_related("navbar")
         elif navbar_slug == "iqtidorli-talabalar":
             qs = posts.TalentedStudents.objects.all().order_by("-added_at")
         else:
             qs = super().get_queryset().filter(
-                status=widgets.Status.published, navbar__slug=navbar_slug).order_by("-added_at")
+                status=widgets.Status.published, navbar__slug=navbar_slug
+            ).order_by("-added_at").select_related("author", "update_user", "navbar")
 
         one_obj = posts.Posts.objects.filter(navbar__slug=navbar_slug)
         if len(one_obj) == 1:
-            one_obj = one_obj.first()
-            one_obj.post_viewed_count += 1
-            one_obj.save()
+            one_obj = one_obj.update(post_viewed_count=F("post_viewed_count") + 1)
         return qs 
     
     def get_context_data(self, **kwargs):
@@ -119,7 +123,9 @@ class PostsListView(ListView):
         if len(context["object_list"]) == 1:
             try:
                 context["connected_faculty_dact"] = news.News.objects.filter(
-                    faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12]
+                    faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12].only(
+                        "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                            "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
             except Exception as e:
                 print(e, 141) 
         try:
@@ -130,7 +136,7 @@ class PostsListView(ListView):
             context["pdf_file"] = context["object_list"][0].pdf_file
         except Exception:
             context["pdf_file"] = ""
-        context["connected_faqs"] = widgets.Faq.objects.filter(is_active=True, category=navbar_name.id)
+        context["connected_faqs"] = widgets.Faq.objects.filter(is_active=True, category=navbar_name.id).select_related("category")
         context["home"] = _("Bosh sahifa")
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         context["depended_faq"] = _("Mavzuga aloqador savol va javoblar")
@@ -146,9 +152,8 @@ class PostDetailView(DetailView):
 
     def get_object(self, queryset=None):
         post_slug = self.kwargs["post_slug"]
+        posts.Posts.objects.filter(slug=post_slug).update(post_viewed_count=F("post_viewed_count") + 1)
         obj = get_object_or_404(posts.Posts, slug=post_slug)
-        obj.post_viewed_count += 1
-        obj.save()
         return obj
     
     def get_context_data(self, **kwargs):
@@ -156,7 +161,9 @@ class PostDetailView(DetailView):
         post = context["object"]
         try:
             context["connected_faculty_dact"] = news.News.objects.filter(
-                faculty_dact=post.id, status="pub").order_by("-added_at")[:12]
+                faculty_dact=post.id, status="pub").order_by("-added_at")[:12].only(
+                        "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                            "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
         except Exception as e:
             print(e, 141) 
         navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
@@ -183,9 +190,8 @@ class DepartmentsDetailView(DetailView):
 
     def get_object(self, queryset=None):
         dept_slug = self.kwargs['dept_slug']
+        posts.Departments.objects.filter(slug=dept_slug).update(post_viewed_count=F("post_viewed_count") + 1)
         obj = get_object_or_404(posts.Departments, slug=dept_slug)
-        obj.post_viewed_count += 1
-        obj.save()
         return obj
     
     def get_context_data(self, **kwargs):
@@ -193,7 +199,9 @@ class DepartmentsDetailView(DetailView):
         obj = context["object"]
         try:
             context["conn_departments"] = news.News.objects.filter(
-                departments=obj.id, status="pub").order_by("-added_at")[:12]
+                departments=obj.id, status="pub").order_by("-added_at")[:12].only(
+                        "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                            "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
         except Exception as e:
             print(e, 141)
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
@@ -218,7 +226,9 @@ class SectionsDetailView(DetailView):
         obj = data["object"]
         try:
             data["conn_section_and_centers"] = news.News.objects.filter(
-                section_and_centers=obj.id, status="pub").order_by("-added_at")[:12]
+                section_and_centers=obj.id, status="pub").order_by("-added_at")[:12].only(
+                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                        "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
         except Exception as e:
             print(e, 141) 
         navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
@@ -240,22 +250,26 @@ class LearningWayDetailView(DetailView):
     def get_object(self, queryset=None):
         id = self.kwargs["id"]
         obj = get_object_or_404(posts.LearningWay, id=id)
-        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
+        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id).select_related("study_way")
         if len(edu_areas) == 1:
-            edu_area = edu_areas.first()
-            edu_area.post_viewed_count += 1
-            edu_area.save()
+            edu_areas.update(post_viewed_count=F("post_viewed_count") + 1)
         return obj
     
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
+
         edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
-        if len(edu_areas) == 1:
+        first_edu_area = edu_areas.first()
+
+        if first_edu_area:
             semesters = widgets.Semesters.objects.all()
             modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
-                educational_area=edu_areas.first().id, semester=semester) for semester in semesters}
+                educational_area=first_edu_area.id, semester=semester).select_related(
+                "educational_area", "semester") for semester in semesters}
+            edu_areas.prefetch_related("moduleofstudyprograme__semester")
             data["modules_by_semester"] = modules_by_semester
+
         data["title"] = obj.name
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
@@ -275,17 +289,22 @@ class EducationalAreaView(ListView):
 
     def get_queryset(self):
         study_way = self.kwargs["study_way"]
-        queryset = super().get_queryset().filter(study_way=study_way)
+        queryset = super().get_queryset().filter(study_way=study_way).select_related("study_way")
         return queryset
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
-        if len(data["object_list"]) == 1:
-            obj = data["object_list"][0]
+        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
+        first_edu_area = edu_areas.first()
+
+        if first_edu_area:
             semesters = widgets.Semesters.objects.all()
             modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
-                educational_area=obj.id, semester=semester) for semester in semesters}
+                educational_area=first_edu_area.id, semester=semester).select_related(
+                "educational_area").prefetch_related("semester") for semester in semesters}
+            edu_areas.prefetch_related("module_of_study_programe_set__semester")
             data["modules_by_semester"] = modules_by_semester
+
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
         data["desc"] = _("Ta'lim dasturi xaqida")
@@ -305,16 +324,17 @@ class EducationalAreaDetailView(DetailView):
 
     def get_object(self, queryset=None):
         id = self.kwargs["id"]
-        obj = get_object_or_404(posts.EducationalAreas, id=id)
-        obj.post_viewed_count += 1
-        obj.save()
+        posts.EducationalAreas.objects.update(post_viewed_count=F("post_viewed_count") + 1)
+        obj = posts.EducationalAreas.objects.filter(id=id).select_related("study_way")
         return obj
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
-        semesters = widgets.Semesters.objects.all()
-        modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(educational_area=obj.id, semester=semester) for semester in semesters}
+        semesters = widgets.Semesters.objects.order_by("name").only("name")
+        modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
+            educational_area=obj.id, semester=semester).select_related(
+            "educational_area", "semester") for semester in semesters}
         data["name"] = _("Nomi")
         data["title"] = obj.name
         data["view"] = _("Ko'rish")

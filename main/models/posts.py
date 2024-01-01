@@ -435,8 +435,10 @@ class EducationalAreas(models.Model):
 
 class ModuleOfStudyPrograme(models.Model):
     """ Module of the study programme by semesters """
-    educational_area = models.ForeignKey(EducationalAreas, verbose_name=_("Ta'lim yo'nalishi"), on_delete=models.SET_NULL, null=True)
-    semester = models.ForeignKey(widgets.Semesters, verbose_name=_("Semesterni tanlang"), on_delete=models.SET_NULL, null=True)
+    educational_area = models.ForeignKey(EducationalAreas, verbose_name=_("Ta'lim yo'nalishi"),
+                                         on_delete=models.SET_NULL, null=True)
+    semester = models.ForeignKey(widgets.Semesters, verbose_name=_("Semesterni tanlang"),
+                                 on_delete=models.SET_NULL, null=True)
     name = models.CharField(_("Modul nomi"), max_length=250, null=True)
     pdf_file = models.FileField(_("PDF fayl"), upload_to="pdf/modules_of_study_programe/%Y-%m-%d/", max_length=255)
     added_at = models.DateTimeField(auto_now_add=True)
