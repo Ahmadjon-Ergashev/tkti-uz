@@ -16,6 +16,7 @@ __pycache__/
 .vscode
 # Backup files # 
 *.bak 
+manage.py
 
 # If you are using PyCharm # 
 # User-specific stuff
