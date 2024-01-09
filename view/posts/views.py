@@ -294,6 +294,8 @@ class EducationalAreaView(ListView):
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
+        obj = data["object"]
+
         edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
         first_edu_area = edu_areas.first()
 

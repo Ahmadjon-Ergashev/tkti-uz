@@ -1,3 +1,6 @@
+from typing import Any
+from django.db.models.base import Model as Model
+from django.db.models.query import QuerySet
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.postgres import search as s
@@ -81,10 +84,19 @@ class SearchAroundProgram(ListView):
         search_query = request.POST.get("search_query", "")
         vector = s.SearchVector("title", "subtitle")
         query = s.SearchQuery(search_query)
-        posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query)
-        news_results = news.News.objects.annotate(search=vector).filter(search=query)
-        ads_results = news.Ads.objects.annotate(search=vector).filter(search=query)
-        combined_results = list(chain(posts_results, news_results, ads_results))
+        posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query).only(
+            "title", "image", "slug"
+        )
+        news_results = news.News.objects.annotate(search=vector).filter(search=query).only(
+            "title", "image", "slug"
+        )
+        ads_results = news.Ads.objects.annotate(search=vector).filter(search=query).only(
+            "title", "image", "slug"
+        )
+        events_results = news.Events.objects.annotate(search=vector).filter(search=query).only(
+            "title", "image", "slug"
+        )
+        combined_results = list(chain(posts_results, news_results, ads_results, events_results))
         context = {
             "search_results": combined_results,
             "title": _("Qidituv natijalari"),
@@ -93,6 +105,43 @@ class SearchAroundProgram(ListView):
         return render(request, self.template_name, context)
     
 
+class SearchDetail(DetailView):
+    template_name = "widgets/search_detail.html"
+
+    def get_object(self, queryset=None):
+        slug = self.kwargs["slug"]
+        if len(posts.Posts.objects.filter(slug=slug)) != 0:
+            return posts.Posts.objects.filter(slug=slug).first()
+        
+        elif len(news.News.objects.filter(slug=slug)) != 0:
+            return news.News.objects.filter(slug=slug).first()
+        
+        elif len(news.Ads.objects.filter(slug=slug)) != 0:
+            return news.Ads.objects.filter(slug=slug).first()
+        
+        elif len(news.Events.objects.filter(slug=slug)) != 0:
+            return news.Events.objects.filter(slug=slug).first()
+        
+        return None
+        
+    
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        obj = data["object"]
+        try:
+            data["conn_section_and_centers"] = news.News.objects.filter(
+                section_and_centers=obj.id, status="pub").order_by("-added_at")[:12].only(
+                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                        "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+        except Exception as e:
+            print(e, 141)     
+        try:
+            navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
+            data["parent"] = navbar.parent.name
+        except Exception as e:
+            ...
+        data["depended_news"] = _("Mavzuga aloqador yangiliklar") 
+        return data
 
 class OpportunitiesView(TemplateView):
     template_name = "opportunities/main.html"

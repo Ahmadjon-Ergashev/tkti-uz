@@ -8,12 +8,14 @@
     <div class="container mt-4">
         <div class="row">
             {% for o in search_results %}
-                <div class="col-12 col-md-4 col-lg-3">
-                    <div class="card">
-                        <img src="{{ o.image.url }}" class="card-img-top" alt="{{ o.title }} | tkti.uz">
+                <div class="col-12 col-md-4 col-lg-3 py-0 px-2">
+                    <div class="card rounded-0" style="min-height: 270px;">
+                        <img src="{{ o.image.url }}" alt="tkti.uz|{{ o.title }}" height="200px">
                         <div class="card-body">
                             <p class="card-text">
-                                {{ o.title }}
+                                <a href="/searching/result/detail/{{ o.slug }}/">
+                                    {{ o.title|truncatechars:100 }}
+                                </a>
                             </p>
                         </div>
                     </div>

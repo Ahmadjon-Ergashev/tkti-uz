@@ -40,6 +40,7 @@ widgets = [
     path("searching/results", widgets.SearchAroundProgram.as_view(), name="search"),
     path("brm_detail/<int:pk>/", widgets.BRMItemsDetailView.as_view(), name="brm_detail"),
     path("supports/edu_credit/", widgets.EduCreditView.as_view(), name="edu_credit_view"),
+    path("searching/result/detail/<slug:slug>", widgets.SearchDetail.as_view(), name="search_detail"),
     path("supports/credit/opportunity/", widgets.CreditOpportView.as_view(), name="credit_opport_view"),
 ]
 

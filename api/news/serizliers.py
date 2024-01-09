@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 from main.models import news
 from api.widgets.serializers import EventTypeSerializers
 
+
 class NewsSerizliers(serializers.ModelSerializer):
     class Meta:
         model = news.News
