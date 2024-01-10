@@ -3,7 +3,7 @@ from config.settings.base import *
 
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-CSP_FRAME_ANCESTORS = "http://185.74.5.139"
+CSP_FRAME_ANCESTORS = "http://213.230.99.101"
 
 DATABASES = {
     'default': {
@@ -15,3 +15,7 @@ DATABASES = {
         'PORT': 5432,
     }
 }
+
+# media
+MEDIA_URL = "/var/www/tkti/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "/var/www/tkti/media/")
