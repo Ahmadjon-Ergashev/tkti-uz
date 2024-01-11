@@ -9,13 +9,17 @@ services:
     command: bash ./entrypoint.sh
     volumes:
       - .:/usr/src/app
+      - media_volume:/var/www/tkti_uz/media
       - ./static:/usr/src/app/static
-      - ./media:/usr/src/app/media
     ports:
       - 8000:8000
     env_file:
       - .env.dev
     networks:
       - my_network
+
 networks:
-  my_network: 
+  my_network:
+
+volumes:
+  media_volume:
