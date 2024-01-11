@@ -13,12 +13,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 import environ
 from pathlib import Path
-env = environ.Env() # for .env.dev
+env = environ.Env()  # for .env.dev
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
-environ.Env.read_env(os.path.join(BASE_DIR, '.env.dev')) # for .env.dev
+environ.Env.read_env(os.path.join(BASE_DIR, '.env.dev'))  # for .env.dev
  
 
 # Quick-start development settings - unsuitable for production
@@ -42,11 +42,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages', 
-    "django.contrib.postgres", # for multi model search
-    "whitenoise.runserver_nostatic", # for static files
+    "django.contrib.postgres",  # for multi model search
+    "whitenoise.runserver_nostatic",  # for static files
     'django.contrib.staticfiles',
-    "debug_toolbar", # django debug toolbar
-    "drf_yasg", # swagger-ui
+    "debug_toolbar",  # django debug toolbar
+    "drf_yasg",  # swagger-ui
 ]
 
 LOCALE_APPS = [
@@ -66,17 +66,17 @@ GLOBAL_APPS = [
 INSTALLED_APPS += LOCALE_APPS + GLOBAL_APPS
 
 MIDDLEWARE = [
-    "corsheaders.middleware.CorsMiddleware", # for coresheaders
-    "whitenoise.middleware.WhiteNoiseMiddleware", # for static files
+    "corsheaders.middleware.CorsMiddleware",  # for coresheaders
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # for static files
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    "django.middleware.locale.LocaleMiddleware", # for multi lang 
+    "django.middleware.locale.LocaleMiddleware",  # for multi lang
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    "debug_toolbar.middleware.DebugToolbarMiddleware", # for debug toolbar
+    "debug_toolbar.middleware.DebugToolbarMiddleware",  # for debug toolbar
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -107,12 +107,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
@@ -189,8 +189,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend', # default
-    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',  # default
 )
 
 # corsheaders

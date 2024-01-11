@@ -4,9 +4,14 @@ set -o errexit
 set -o pipefail
 # exits if any of your variables is not set
 set -o nounset
+export DJANGO_SETTINGS_MODULE=config.settings.prod_settings
 
+echo "Running migrations..."
 python manage.py makemigrations main --noinput
 python manage.py migrate main --noinput
+echo "Collecting static files..."
 python manage.py collectstatic --noinput
+echo "Running tests..."
 python manage.py test
+echo "Starting Gunicorn..."
 gunicorn config.wsgi:application --bind 0.0.0.0:8000
