@@ -17,5 +17,5 @@ DATABASES = {
 }
 
 # media
-MEDIA_URL = "/var/www/tkti/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "/var/www/tkti/media/")
+MEDIA_URL = "/var/www/tkti_uz/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "/var/www/tkti_uz/media/")
