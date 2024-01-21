@@ -24,17 +24,23 @@
                 <div class="row">
                     {% for object in object_list %}  
                         <div class="col-12 col-md-6">
-                            <div class="card mb-3">
+                            <div class="card mb-3 p-3">
                                 <div class="row g-0">
                                     <div class="col-md-4">
                                         <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="TkTI Axborot xizmati">
                                     </div>
                                     <div class="col-md-8">
-                                        <div class="card-body">
-                                            <span class=""><a href="/posts/navbar/post/{{ object.slug }}" target="_blank" class="text-dark">{{ object.title }}</a></span>
-                                            <ul class="list-group list-group-flush overflow-scroll" style="height: 150px;">
+                                        <div class="card-body p-0">
+                                            <!-- <span class="faculty-title ps-2">
+                                                <a href="/posts/navbar/post/{{ object.slug }}" target="_blank" class="text-dark">
+                                                    {{ object.title }}
+                                                </a>
+                                            </span> -->
+                                            <ul class="mb-0 pt-4" style="height: 186px">
                                                 {% for dp in object.departments_set.all %}  
-                                                    <li class="list-group-item"><a href="/posts/departments/{{ dp.slug }}">{{ dp.name }}</a></li>
+                                                    <li class="list-group-item">
+                                                        <span class="text-warning">👉</span>
+                                                        <a href="/posts/departments/{{ dp.slug }}">{{ dp.name }}</a></li>
                                                 {% endfor %}
                                             </ul>
                                         </div>

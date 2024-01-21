@@ -276,6 +276,17 @@
     grid-template-columns: auto;
   }
 }
+.faculty_card_box .faculty-title a {
+  font-size: 16px;
+}
+.faculty_card_box .card {
+  border: 2px solid black;
+  border-radius: 0;
+}
+.faculty_card_box .card-body ul li a {
+  color: black;
+  font-size: 12px;
+}
 .faculty_card_box .faculty_card {
   width: 250px;
   height: 250px;
@@ -317,7 +328,7 @@
   gap: 5px;
 }
 #brm_items .brm_card {
-  height: 200px;
+  height: 220px;
   transition: all 0.1s ease-in-out;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
   opacity: 0.9;
@@ -349,7 +360,7 @@
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 #brm_items .brm_card .bottom {
-  height: 100px;
+  height: 120px;
   padding: 10px;
   text-align: center;
 }
