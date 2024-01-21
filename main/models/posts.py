@@ -40,7 +40,6 @@ class Navbar(MPTTModel):
         verbose_name = _("Bo'limlar")
         verbose_name_plural = _("Bo'limlar")
 
-
     def __str__(self):
         return self.name
 
@@ -70,7 +69,7 @@ class Posts(widgets.AbstractTemplate):
         verbose_name_plural = _("Postlar")
 
     def __str__(self):
-        return f"{self.navbar} | {self.title[:30]}"
+        return f"{self.navbar.name} | {self.title[:30]}"
     
     def save(self, *args, **kwargs):
         if self._state.adding:

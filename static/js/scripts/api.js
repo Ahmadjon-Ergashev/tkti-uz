@@ -20,11 +20,7 @@ $(document).ready(function(){
         checkFields();
     });
 
-    $("#id_type").on("click", ()=>{
-        $("#id_type").prop("disabled", true);
-        $("#id_type").empty();
-        $("#id_type").append(`<option value="">--------------------</option>`)
-        $.ajax({
+    $.ajax({
             type: "GET",
             url: "api/posts/study_degree",
             data: {},
@@ -40,7 +36,13 @@ $(document).ready(function(){
                 $("#id_type").prop("disabled", false);
             }
         });
-    })
+
+    // $("#id_type").on("click", ()=>{
+    //     $("#id_type").prop("disabled", true);
+    //     $("#id_type").empty();
+    //     $("#id_type").append(`<option value="">--------------------</option>`)
+    //
+    // })
     $("#id_type").on("change", () => {
         $("#id_faculty").empty()
         $("#id_faculty").append(`<option value="">--------------------</option>`)

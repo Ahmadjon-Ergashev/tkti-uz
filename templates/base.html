@@ -221,9 +221,13 @@
                     <ul class="navbar-nav ms-auto">
                         {% for nav in navbar %}
                             <li class="nav-item dropdown btn-group main_nav_item">
-                                <a href="/posts/navbar/{{nav.slug}}" class="nav-link nav_name active">
+<!--                                <a href="/posts/navbar/{{nav.slug}}" class="nav-link nav_name active">-->
+<!--                                    {{ nav.name }}-->
+<!--                                </a>-->
+
+                                <button class="p-1 btn" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ nav.name }}
-                                </a>
+                                </button>
                                 <button class="p-1 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
                                 </button>
@@ -330,7 +334,7 @@
 
     <!-- jQuery -->
     <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
-    <!-- <script src="{% static 'js/modules/visually_impaired/uhpv_full.min.js' %}"></script> -->
+     <script src="{% static 'js/modules/visually_impaired/uhpv_full.min.js' %}"></script>
 
     <script src="{% static 'js/modules/slickjs/slick.min.js' %}"></script>
     <script src="{% static 'js/modules/bootstrap/bootstrap.bundle.min.js' %}"></script>

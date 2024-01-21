@@ -20,6 +20,7 @@ def duplicate(modeladmin, request, queryset):
 @admin.register(news.News)
 class NewsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
+    list_max_show_all = 20
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
     list_editable = ("status", )
@@ -89,14 +90,14 @@ class NewsAdmin(admin.ModelAdmin):
                 posts_list = posts.Posts.objects.filter(
                     Q(faculty=True) | Q(navbar__slug="doktorantura") |
                     Q(navbar__slug="doktorantura-qabul")
-                )
+                ).select_related("author", "update_user", "navbar")
                 kwargs["queryset"] = posts_list
             except Exception as e:
                 kwargs["queryset"] = posts.Posts.objects.none()
         return super().formfield_for_manytomany(db_field, request, **kwargs)
 
     def get_image_file(self, obj):
-        return mark_safe(f"<img src='{obj.image.url}' alt='asosiy rasm' width=200/>")
+        return mark_safe(f"<img src='{obj.image.url}' alt='asosiy rasm' width=100/>")
     get_image_file.short_description = _("Yangilik uchun tanlangan rasmli fayl")
 
     def save_model(self, request, obj, form, change):
@@ -108,6 +109,13 @@ class NewsAdmin(admin.ModelAdmin):
     
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("title_uz", )}
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request).select_related(
+            "author", "update_user").prefetch_related(
+            "faculty_dact", "departments", "section_and_centers",
+            "hashtag", "brm")
+        return qs
 
 
 @admin.register(news.Ads)

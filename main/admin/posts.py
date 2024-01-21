@@ -89,8 +89,9 @@ class NavbarAdmin(MPTTModelAdmin):
 @admin.register(posts.Posts)
 class PostsAdmin(admin.ModelAdmin):
     """ Admin view for Posts """
-    ordering = ("-added_at", )
     actions = (duplicate, )
+    list_max_show_all = 20
+    ordering = ("-added_at", )
     date_hierarchy = "added_at"
     list_editable = ("status", )
     list_display_links = ("title", )
@@ -98,7 +99,7 @@ class PostsAdmin(admin.ModelAdmin):
     search_fields = ("title", "navbar__name")
     list_filter = ("navbar", "status", "author", "added_at")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
-    list_display = ("id", "title", "navbar", "status", "post_viewed_count", "author", "added_at", "updated_at")
+    list_display = ("id", "title", "navbar", "status", "post_viewed_count", "added_at")
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
@@ -146,7 +147,7 @@ class PostsAdmin(admin.ModelAdmin):
     )
 
     def get_image_file(self, obj):
-        return mark_safe(f"<img src='{obj.image.url}' alt='asosiy rasm' width=200/>")
+        return mark_safe(f"<img src='{obj.image.url}' alt='asosiy rasm' width=100/>")
     get_image_file.short_description = _("Post uchun tanlangan rasmli fayl")
 
     def save_model(self, request, obj, form, change):
@@ -160,6 +161,11 @@ class PostsAdmin(admin.ModelAdmin):
     
     def get_prepopulated_fields(self, request, obj):
         return {"slug": ("title_uz", )}
+
+    def get_queryset(self, request):
+        qs = super().get_queryset(request).select_related(
+            "author", "update_user", "navbar")
+        return qs
 
 
 @admin.register(posts.FacultyAdministration)
