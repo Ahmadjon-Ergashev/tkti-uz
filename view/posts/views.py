@@ -115,7 +115,7 @@ class PostsListView(ListView):
     def get_paginate_by(self, queryset):
         navbar_slug = self.kwargs["navbar_slug"]
         if navbar_slug == "bolim-va-markazlar":
-            return 22
+            return 32
         else:
             return self.paginate_by
 
