@@ -228,6 +228,7 @@ class FacultyAdmistrationAdmin(admin.ModelAdmin):
 class DepartmentsAdmin(admin.ModelAdmin):
     actions = [duplicate]
     search_fields = ("name_uz", )
+    list_editable = ("faculty", )
     list_display_links = ("name_uz", )
     list_display = ("id", "name_uz", "faculty")
     readonly_fields = ("added_at", "post_viewed_count")

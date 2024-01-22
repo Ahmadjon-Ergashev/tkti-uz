@@ -311,15 +311,11 @@
 			font-size: 16px;
 		}
 	}
-	.card{
-		border: 2px solid black;
-		border-radius: 0;
-	}
 	.card-body{
 		ul{
 			li{
 				a{
-					color: black;
+					color: $color1;
 					font-size: 12px;
 				}
 			}

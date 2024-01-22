@@ -33,15 +33,15 @@
                                     </div>
                                     <div class="col-md-8">
                                         <div class="card-body p-0">
-                                            <!-- <span class="faculty-title ps-2">
+                                            <span class="faculty-title ps-2">
                                                 <a href="/posts/navbar/post/{{ object.slug }}" target="_blank" class="text-dark">
                                                     {{ object.title }}
                                                 </a>
-                                            </span> -->
-                                            <ul class="mb-0 pt-4" style="height: 186px">
+                                            </span>
+                                            <ul class="mb-0" style="height: 186px">
                                                 {% for dp in object.departments_set.all %}  
                                                     <li class="list-group-item">
-                                                        <span class="text-warning">👉</span>
+                                                        <!-- <span class="text-warning">👉</span> -->
                                                         <a href="/posts/departments/{{ dp.slug }}">{{ dp.name }}</a></li>
                                                 {% endfor %}
                                             </ul>
