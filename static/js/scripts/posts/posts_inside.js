@@ -8,12 +8,12 @@ $(document).ready(function(){
             data.map((item) => {
                 let card_item = `
                     <div class="col-12 col-md-4 col-lg-4">
-                        <div class="card">
+                        <div class="card" style="height: 740px">
                             <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
                             <div class="card-header">
                                 <b>${item.position}</b>
                             </div>
-                            <div class="card-body">
+                            <div class="card-body p-0">
                                 <ul class="list-group list-group-flush">
                                     <li class="list-group-item"><b>${item.f_name}</b></li>
                                     <li class="list-group-item"><i class="fas fa-envelope me-1"></i> ${item.email}</li>

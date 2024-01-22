@@ -1,0 +1,19 @@
+{% load static %}
+<div class="row">
+    {% for obj in object_list %}                          
+        <div class="col-12 col-md-4 col-lg-4">
+            <div class="card" style="height: 230px; max-height: 230px;">
+                <a href="{% url 'sect_nav' post_slug=obj.slug %}">
+                    <img src="{% static 'images/default.png' %}" class="card-img-top" alt="{{ obj.title }} | tkti.uz">
+                </a>
+                <div class="card-body">
+                    <p class="card-text text-center">
+                        <a href="{% url 'sect_nav' post_slug=obj.slug %}" class="text-dark">
+                            {{ obj.title }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

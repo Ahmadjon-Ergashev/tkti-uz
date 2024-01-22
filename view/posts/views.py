@@ -1,7 +1,5 @@
 from django.db.models import F
 from django.utils import timezone
-from django.core.cache import cache
-from django.core.paginator import Paginator
 from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
@@ -97,13 +95,13 @@ class PostsListView(ListView):
     def get_queryset(self):
         navbar_slug = self.kwargs["navbar_slug"]
         if navbar_slug == "boglanish":
-            qs = posts.ContactSection.objects.all().order_by("order_num").select_related("navbar")
+            qs = posts.ContactSection.objects.order_by("order_num").select_related("navbar")
         elif navbar_slug == "bolim-va-markazlar":
-            qs = posts.SectionsAndCenters.objects.all().order_by("-added_at").select_related("navbar")
+            qs = posts.SectionsAndCenters.objects.order_by("-added_at").select_related("navbar")
         elif navbar_slug == "institut-rahbariyati":
             qs = posts.UniversityAdmistrations.objects.order_by("order_num").select_related("navbar")
         elif navbar_slug == "iqtidorli-talabalar":
-            qs = posts.TalentedStudents.objects.all().order_by("-added_at")
+            qs = posts.TalentedStudents.objects.order_by("-added_at")
         else:
             qs = super().get_queryset().filter(
                 status=widgets.Status.published, navbar__slug=navbar_slug
@@ -114,6 +112,13 @@ class PostsListView(ListView):
             one_obj = one_obj.update(post_viewed_count=F("post_viewed_count") + 1)
         return qs 
     
+    def get_paginate_by(self, queryset):
+        navbar_slug = self.kwargs["navbar_slug"]
+        if navbar_slug == "bolim-va-markazlar":
+            return 22
+        else:
+            return self.paginate_by
+
     def get_context_data(self, **kwargs):
         navbar_name = posts.Navbar.objects.get(slug=self.kwargs["navbar_slug"])
         context = super().get_context_data(**kwargs)

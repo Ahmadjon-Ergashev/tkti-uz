@@ -9,92 +9,9 @@
     <link rel="stylesheet" href="{% static 'css/styles/posts/posts_list.css' %}">
     <div class="container mt-4">
         {% if title_slug == 'fakultet' %}
-            <div class="container my-5">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                        <li class="breadcrumb-item">
-                            <a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a>
-                        </li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="faculty_card_box">
-                <div class="row">
-                    {% for object in object_list %}  
-                        <div class="col-12 col-md-6">
-                            <div class="card mb-3 p-3" style="min-height: 250px; max-height: 250px;">
-                                <div class="row g-0">
-                                    <div class="col-md-4">
-                                        <a href="/posts/navbar/post/{{ object.slug }}">
-                                            <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="TkTI Axborot xizmati">
-                                        </a>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body p-0">
-                                            <span class="faculty-title ps-2">
-                                                <a href="/posts/navbar/post/{{ object.slug }}" target="_blank" class="text-dark">
-                                                    {{ object.title }}
-                                                </a>
-                                            </span>
-                                            <ul class="mb-0" style="height: 186px">
-                                                {% for dp in object.departments_set.all %}  
-                                                    <li class="list-group-item">
-                                                        <!-- <span class="text-warning">👉</span> -->
-                                                        <a href="/posts/departments/{{ dp.slug }}">{{ dp.name }}</a></li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                  </div>
-                                </div>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            </div>
+            {% include "./posts_sections/faculty.html" %}
         {% elif title_slug == 'brm' %}
-            <div class="container my-5">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                        <li class="breadcrumb-item"><a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-                    </ol>
-                </nav>
-            </div>
-            <div class="container my-5">
-                {% for object in object_list %}
-                    <h1 class="text-center fw-bold" style="color: #26597E;">{{ object.title }}</h1>
-                    <div class="post_text mt-3" id="object_post">
-                        {{ object.post.html | safe }}
-                    </div>
-                    <div class="" id="brm_items">
-                        {% for b in brm %}
-                            <div class="brm_card" data-brm-color="{{ b.color }}">
-                                <div class="top">
-                                    <div class="left_number">
-                                        <span><a href="/brm_detail/{{ b.id }}">{{ b.number }}</a></span>
-                                    </div>
-                                    <div class="right_name">
-                                        <span><a href="/brm_detail/{{ b.id }}">{{ b.name }}</a></span>
-                                    </div>
-                                </div>
-                                <div class="bottom">
-                                    <a href="/brm_detail/{{ b.id }}"><img src="{{ b.image.url }}" alt="tkti"></a>
-                                </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="post_footer">
-                        <p class="text-end fw-bold">{{ object.author_post }}</p>
-                        <div class="time_and_view">
-                            <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
-                            <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
+            {% include "./posts_sections/brm.html" %}
         {% else %}
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
@@ -197,175 +114,28 @@
                         {% endfor %}
                     {% else %}
                         {% if title_slug == 'boglanish' %}
-                            <!-- CONTACT section -->
-                            <div class="row">
-                                {% for object in object_list %}                          
-                                    <div class="col-12 col-md-6">
-                                        <div class="card" style="height: 450px; max-height: 450px;">
-                                            <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
-                                            <div class="card-body">
-                                                <p class="card-text fw-bold">
-                                                    {{ object.title }}
-                                                </p>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><i class="fas fa-phone"></i> {{ object.phone }}</li>
-                                                    <li class="list-group-item"><i class="fas fa-envelope"></i> {{ object.email }}</li>
-                                                    <li class="list-group-item">
-                                                        <a href="{{ object.address_url }}" target="_blank">
-                                                            <i class="fas fa-map-marked-alt"></i> 
-                                                            {{ object.address }}
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                            {% include "./posts_sections/contact.html" %}
                         {% elif title_slug == 'bolim-va-markazlar' %}
-                            <div class="row">
-                                {% for object in object_list %}                          
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <div class="card" style="height: 230px; max-height: 230px;">
-                                            <a href="{% url 'sect_nav' post_slug=object.slug %}">
-                                                <img src="{% static 'images/default.png' %}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
-                                            </a>
-                                            <div class="card-body">
-                                                <p class="card-text text-center">
-                                                    <a href="{% url 'sect_nav' post_slug=object.slug %}" class="text-dark">
-                                                        {{ object.title }}
-                                                    </a>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            </div>
+                            {% include "./posts_sections/sections_and_centers.html" %}
+                            {% include "../../widgets/pagination.html" %}
                         {% elif title_slug == 'institut-rahbariyati' %}
-                            <div class="row" id="adminstations">
-                                <!-- {% for obj in object_list %}
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <div class="card">
-                                            <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
-                                            <div class="card-header">
-                                                <b>{{ obj.position }}</b>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
-                                                    <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
-                                                    <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
-                                                    <li class="list-group-item"><i class="fas fa-calendar me-1"></i> {{ obj.admission_days }}</li>
-                                                    <li class="list-group-item">
-                                                        <a href="{{ obj.facebook }}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>
-                                                        <a href="{{ obj.instagram }}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>
-                                                        <a href="{{ obj.linkedin }}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="card-footer text-center">
-                                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{ obj.id }}">{{ read_more }}</a>
-                                                
-                                                
-                                                <div class="modal fade" id="staticBackdrop{{ obj.id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-xl">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><b>{{ obj.f_name }}</b></h1>
-                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="accordion accordion-flush" id="accordionExample">
-                                                                    <div class="accordion-item">
-                                                                        <h2 class="accordion-header">
-                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                                <b>{{ short_info }}</b>
-                                                                            </button>
-                                                                        </h2>
-                                                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body text-start">
-                                                                                {{ obj.short_info.html | safe }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="accordion-item">
-                                                                        <h2 class="accordion-header">
-                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                                <b>{{ scientific_direction }}</b>
-                                                                            </button>
-                                                                        </h2>
-                                                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body text-start">
-                                                                                {{ obj.scientific_direction.html | safe }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="accordion-item">
-                                                                        <h2 class="accordion-header">
-                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                                                <b>{{ main_tasks_in_position }}</b>
-                                                                            </button>
-                                                                        </h2>
-                                                                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body text-start">
-                                                                                {{ obj.main_tasks_in_position.html | safe }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="accordion-item">
-                                                                        <h2 class="accordion-header">
-                                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
-                                                                                <b>{{ scientific_activity }}</b>
-                                                                            </button>
-                                                                        </h2>
-                                                                        <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                                            <div class="accordion-body text-start">
-                                                                                {{ obj.scientific_activity.html | safe }}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %} -->
-                            </div>
+                            {% include "./posts_sections/admistrations.html" %}
                         {% elif title_slug == 'iqtidorli-talabalar' %}
-                            <div class="row" id="talented_students">
-                                <!-- {% for obj in object_list %}
-                                    <div class="col-12 col-md-4 col-lg-4">
-                                        <div class="card" style="height: 390px; min-height: 390px;">
-                                            <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
-                                            <div class="card-header">
-                                                <b>{{ obj.f_name }}</b>
-                                            </div>
-                                            <div class="card-body">
-                                                <p class="card-text">
-                                                    {{ obj.desc }}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %} -->
-                            </div>
+                            {% include "./posts_sections/talented_students.html" %}
                         {% else %}
                             <!-- Start Blog Layout -->
-                            <div class="row ">
-                                {% for object in object_list %}
+                            <div class="row">
+                                {% for obj in object_list %}
                                     <div class="projcard projcard-blue">
                                         <div class="projcard-innerbox">
-                                            <img class="projcard-img" src="{{ object.image.url }}"/>
+                                            <img class="projcard-img" src="{{ obj.image.url }}"/>
                                             <div class="projcard-textbox">
-                                                <div class="projcard-title"><b>{{ object.title | truncatechars:120 }}</b></div>
+                                                <div class="projcard-title"><b>{{ obj.title | truncatechars:120 }}</b></div>
                                                 <div class="projcard-bar"></div>
                                                 <div class="projcard-description">
-                                                    {{ object.subtitle | truncatechars:220 }}
+                                                    {{ obj.subtitle | truncatechars:220 }}
                                                 </div>
-                                                <a class="read_more" href="{% url 'post_detail' post_slug=object.slug %}">{{ read_more }}</a>
+                                                <a class="read_more" href="{% url 'post_detail' post_slug=obj.slug %}">{{ read_more }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -375,42 +145,16 @@
                                     </p>
                                 {% endfor %}
                                 <!-- pagination -->
+                                {% include "../../widgets/pagination.html" %}
                             </div>
                         {% endif %}
                         {% if connected_faqs %}
-                            <div class="accordion accordion-flush" id="accordionFlushFAQ">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header">
-                                        <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFAQ" aria-expanded="false" aria-controls="flush-collapseFAQ">
-                                            <h5 class="fw-bold p-0 m-0">{{ depended_faq }}</h5>
-                                        </button>
-                                    </h2>
-                                    <div id="flush-collapseFAQ" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                        <div class="accordion-body px-0 py-2">
-                                            {% for obj in connected_faqs %}
-                                                <div class="card">
-                                                        <div class="card-body">
-                                                            <h3>
-                                                                <p class="">
-                                                                    {{ obj.title }}
-                                                                </p>
-                                                            </h3>
-                                                            <p class="">
-                                                                {{ obj.answer.html|safe }}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            {% include "./posts_sections/faqs.html" %}
                         {% endif %}
-                        {% include "../../widgets/pagination.html" %}
                     {% endif %}
                 </div>
             {% endif %}
-            </div>
+        </div>
     </div>
     <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
     <script src="{% static 'js/scripts/posts/posts_inside.js' %}"></script>

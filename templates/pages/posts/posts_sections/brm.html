@@ -1,0 +1,41 @@
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+        </ol>
+    </nav>
+</div>
+<div class="container my-5">
+    {% for object in object_list %}
+        <h1 class="text-center fw-bold" style="color: #26597E;">{{ object.title }}</h1>
+        <div class="post_text mt-3" id="object_post">
+            {{ object.post.html | safe }}
+        </div>
+        <div class="" id="brm_items">
+            {% for b in brm %}
+                <div class="brm_card" data-brm-color="{{ b.color }}">
+                    <div class="top">
+                        <div class="left_number">
+                            <span><a href="/brm_detail/{{ b.id }}">{{ b.number }}</a></span>
+                        </div>
+                        <div class="right_name">
+                            <span><a href="/brm_detail/{{ b.id }}">{{ b.name }}</a></span>
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <a href="/brm_detail/{{ b.id }}"><img src="{{ b.image.url }}" alt="tkti"></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="post_footer">
+            <p class="text-end fw-bold">{{ object.author_post }}</p>
+            <div class="time_and_view">
+                <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
+                <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+            </div>
+        </div>
+    {% endfor %}
+</div>

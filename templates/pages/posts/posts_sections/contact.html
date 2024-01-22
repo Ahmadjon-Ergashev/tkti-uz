@@ -1,0 +1,25 @@
+<!-- CONTACT section -->
+<div class="row">
+    {% for object in object_list %}                          
+        <div class="col-12 col-md-6">
+            <div class="card" style="height: 450px; max-height: 450px;">
+                <img src="{{ object.image.url }}" class="card-img-top" alt="{{ object.title }} | tkti.uz">
+                <div class="card-body">
+                    <p class="card-text fw-bold">
+                        {{ object.title }}
+                    </p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><i class="fas fa-phone"></i> {{ object.phone }}</li>
+                        <li class="list-group-item"><i class="fas fa-envelope"></i> {{ object.email }}</li>
+                        <li class="list-group-item">
+                            <a href="{{ object.address_url }}" target="_blank">
+                                <i class="fas fa-map-marked-alt"></i> 
+                                {{ object.address }}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
