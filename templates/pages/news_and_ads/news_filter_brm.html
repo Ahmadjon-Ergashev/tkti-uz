@@ -48,7 +48,7 @@
                             {% endfor %}
                         </h5>
                         <div class="card-body">
-                            <h5 class="">{{ i.title }}</h5>
+                            <h5 class="">{{ i.title|truncatechars:90 }}</h5>
                             <a href="/news/detail/{{ i.slug }}">{{ read_more }}</a>
                         </div>
                         <div class="card-footer d-flex w-100 justify-content-between">
