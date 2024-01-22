@@ -8,7 +8,7 @@ $(document).ready(function(){
             data.map((item) => {
                 let card_item = `
                     <div class="col-12 col-md-4 col-lg-4">
-                        <div class="card" style="height: 740px">
+                        <div class="card" style="height: 560px">
                             <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
                             <div class="card-header">
                                 <b>${item.position}</b>

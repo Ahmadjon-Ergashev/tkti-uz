@@ -148,9 +148,9 @@
                                 {% include "../../widgets/pagination.html" %}
                             </div>
                         {% endif %}
-                        {% if connected_faqs %}
-                            {% include "./posts_sections/faqs.html" %}
-                        {% endif %}
+                    {% endif %}
+                    {% if connected_faqs %}
+                        {% include "./posts_sections/faqs.html" %}
                     {% endif %}
                 </div>
             {% endif %}
