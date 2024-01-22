@@ -41,7 +41,7 @@
         <div class="row" id="brm_connected_news">
             {% for i in connected_news %}
                 <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card">
+                    <div class="card" style="height: 250px;">
                         <h5 class="card-header">
                             {% for b in i.brm.all %}
                                 <a href="/brm_detail/{{ b.id }}"><button class="brm_color" data-brm-color="{{ b.color }}">{{ b.number }}</button></a>
