@@ -33,7 +33,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                <li class="breadcrumb-item"><a href="{% url 'learing_way_detail' id=parent.id %}">{{ parent.name }}</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'learning_way_detail' id=parent.id %}">{{ parent.name }}</a></li>
                 <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
             </ol>
         </nav>
@@ -49,7 +49,7 @@
     
     <div class="section_title py-2">
         <div class="container">
-            <h1>{{ requarements }}</h1>
+            <h1>{{ requirements }}</h1>
         </div>
     </div>
     

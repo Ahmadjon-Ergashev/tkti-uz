@@ -28,7 +28,7 @@
                                     </a>
                                 </span>
                                 <ul class="mb-0" style="height: 186px">
-                                    {% for dp in object.departments_set.all %}  
+                                    {% for dp in object.departments_set.all %}
                                         <li class="list-group-item border-bottom">
                                             <!-- <span class="text-warning">👉</span> -->
                                             <a href="/posts/departments/{{ dp.slug }}">{{ dp.name }}</a></li>

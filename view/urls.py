@@ -12,7 +12,7 @@ posts = [
     path("posts/sections/<slug:post_slug>/", posts.SectionsDetailView.as_view(), name="sect_nav"),
     path("posts/navbar/post/<slug:post_slug>/", posts.PostDetailView.as_view(), name="post_detail"),
     path("posts/departments/<slug:dept_slug>/", posts.DepartmentsDetailView.as_view(), name="dept_detail"),
-    path("posts/learing_way/detail/<int:id>/", posts.LearningWayDetailView.as_view(), name="learing_way_detail"),
+    path("posts/learing_way/detail/<int:id>/", posts.LearningWayDetailView.as_view(), name="learning_way_detail"),
     path("posts/eduacational_area/<int:study_way>/", posts.EducationalAreaView.as_view(), name="educational_area_list"),
     path("posts/eduacational_area/detail/<int:id>/", posts.EducationalAreaDetailView.as_view(), name="educational_area_detail"),
 ]

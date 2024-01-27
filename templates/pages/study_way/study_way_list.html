@@ -51,7 +51,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'learing_way_detail' id=object.id %}">{{ title }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'learning_way_detail' id=object.id %}">{{ title }}</a></li>
                     {% for object in educational_areas %}
                         <li class="breadcrumb-item active" aria-current="page">{{ object.name }}</li>
                     {% endfor %}

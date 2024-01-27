@@ -141,7 +141,8 @@ class PostsListView(ListView):
             context["pdf_file"] = context["object_list"][0].pdf_file
         except Exception:
             context["pdf_file"] = ""
-        context["connected_faqs"] = widgets.Faq.objects.filter(is_active=True, category=navbar_name.id).select_related("category")
+        context["connected_faqs"] = widgets.Faq.objects.filter(
+            is_active=True, category=navbar_name.id).select_related("category")
         context["home"] = _("Bosh sahifa")
         context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         context["depended_faq"] = _("Mavzuga aloqador savol va javoblar")
@@ -158,7 +159,10 @@ class PostDetailView(DetailView):
     def get_object(self, queryset=None):
         post_slug = self.kwargs["post_slug"]
         posts.Posts.objects.filter(slug=post_slug).update(post_viewed_count=F("post_viewed_count") + 1)
-        obj = get_object_or_404(posts.Posts, slug=post_slug)
+        obj = get_object_or_404(
+            posts.Posts.objects.select_related("author", "update_user", "navbar"),
+            slug=post_slug
+        )
         return obj
     
     def get_context_data(self, **kwargs):
@@ -246,45 +250,48 @@ class SectionsDetailView(DetailView):
         except AttributeError:
             data["category_list"] = navbar.get_children()    
         return data
-    
+
 
 class LearningWayDetailView(DetailView):
     model = posts.LearningWay
     template_name = "pages/study_way/study_way_list.html"
 
     def get_object(self, queryset=None):
-        id = self.kwargs["id"]
-        obj = get_object_or_404(posts.LearningWay, id=id)
-        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id).select_related("study_way")
-        if len(edu_areas) == 1:
-            edu_areas.update(post_viewed_count=F("post_viewed_count") + 1)
-        return obj
-    
+        obj_id = self.kwargs["id"]
+        this_object = get_object_or_404(
+            posts.LearningWay, id=obj_id
+        )
+        return this_object
+
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
+        education_areas = posts.EducationalAreas.objects.filter(
+            study_way=obj.id).select_related(
+                "study_way"
+        )
+        if len(education_areas) == 1:
+            education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
 
-        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
-        first_edu_area = edu_areas.first()
-
-        if first_edu_area:
-            semesters = widgets.Semesters.objects.all()
-            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
-                educational_area=first_edu_area.id, semester=semester).select_related(
-                "educational_area", "semester") for semester in semesters}
-            edu_areas.prefetch_related("moduleofstudyprograme__semester")
-            data["modules_by_semester"] = modules_by_semester
+            grouped_data = {}
+            for edu_area in education_areas:
+                for module in edu_area.moduleofstudyprograme_set.select_related("semester", "educational_area"):
+                    if module.semester in grouped_data:
+                        grouped_data[module.semester].append(module)
+                    else:
+                        grouped_data[module.semester] = [module]
+            data["modules_by_semester"] = grouped_data
 
         data["title"] = obj.name
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
         data["desc"] = _("Ta'lim dasturi xaqida")
-        data["requarements"] = _("Kirish talablari")
+        data["requirements"] = _("Kirish talablari")
         data["dept_fee_title"] = _("Kridit miqdori")
         data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
-        data["educational_areas"] = posts.EducationalAreas.objects.filter(study_way=obj.id)
+        data["educational_areas"] = education_areas
         return data
 
 
@@ -301,22 +308,27 @@ class EducationalAreaView(ListView):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
 
-        edu_areas = posts.EducationalAreas.objects.filter(study_way=obj.id)
-        first_edu_area = edu_areas.first()
+        education_areas = posts.EducationalAreas.objects.filter(
+            study_way=obj.id).select_related(
+                "study_way"
+        )
+        if len(education_areas) == 1:
+            education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
 
-        if first_edu_area:
-            semesters = widgets.Semesters.objects.all()
-            modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
-                educational_area=first_edu_area.id, semester=semester).select_related(
-                "educational_area").prefetch_related("semester") for semester in semesters}
-            edu_areas.prefetch_related("module_of_study_programe_set__semester")
-            data["modules_by_semester"] = modules_by_semester
+            grouped_data = {}
+            for edu_area in education_areas:
+                for module in edu_area.moduleofstudyprograme_set.select_related("semester", "educational_area"):
+                    if module.semester in grouped_data:
+                        grouped_data[module.semester].append(module)
+                    else:
+                        grouped_data[module.semester] = [module]
+            data["modules_by_semester"] = grouped_data
 
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
         data["desc"] = _("Ta'lim dasturi xaqida")
-        data["title"] = data["object_list"][0].name 
-        data["requarements"] = _("Kirish talablari")
+        data["title"] = data["object_list"][0].name
+        data["requirements"] = _("Kirish talablari")
         data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
         data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
@@ -338,17 +350,27 @@ class EducationalAreaDetailView(DetailView):
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         obj = data["object"]
-        semesters = widgets.Semesters.objects.order_by("name").only("name")
-        modules_by_semester = {semester: posts.ModuleOfStudyPrograme.objects.filter(
-            educational_area=obj.id, semester=semester).select_related(
-            "educational_area", "semester") for semester in semesters}
+        education_areas = posts.EducationalAreas.objects.filter(
+            study_way=obj.id).select_related(
+            "study_way"
+        )
+        if len(education_areas) == 1:
+            education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
+
+            grouped_data = {}
+            for edu_area in education_areas:
+                for module in edu_area.moduleofstudyprograme_set.select_related("semester", "educational_area"):
+                    if module.semester in grouped_data:
+                        grouped_data[module.semester].append(module)
+                    else:
+                        grouped_data[module.semester] = [module]
+            data["modules_by_semester"] = grouped_data
         data["name"] = _("Nomi")
         data["title"] = obj.name
         data["view"] = _("Ko'rish")
         data["parent"] = obj.study_way
         data["desc"] = _("Ta'lim dasturi xaqida")
-        data["requarements"] = _("Kirish talablari")
-        data["modules_by_semester"] = modules_by_semester
+        data["requirements"] = _("Kirish talablari")
         data["dept_fee_title"] = _("Kridit miqdori")
         data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
