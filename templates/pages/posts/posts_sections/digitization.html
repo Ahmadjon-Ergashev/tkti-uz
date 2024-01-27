@@ -1,0 +1,119 @@
+<style>
+    .card{
+        height: 250px;
+        text-align: center;
+    }
+    .card_img{
+        padding: 15px 10px;
+    }
+    .card-body{
+        width: 100%;
+        padding: 15px 10px;
+        position: relative;
+    }
+    .card-body p{
+        left: 0px;
+        width: 100%;
+        bottom: 10px;
+        text-align: center;
+        position: absolute;
+    }
+    .card_img i{
+        color: #15446F;
+        font-size: 150px;
+    }
+</style>
+<div class="container my-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+            <li class="breadcrumb-item">
+                <a href="{% url 'posts_nav' navbar_slug=parent.slug %}">{{ parent.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+        </ol>
+    </nav>
+</div>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card_img">
+                    <a href="">
+                        <i class="fas fa-pencil-alt"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <a href="" class="text-dark">
+                            {{ appeal }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card_img">
+                    <a href="">
+                        <i class="fas fa-sync"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <a href="" class="text-dark">
+                            {{ change_last_name }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card_img">
+                    <a href="">
+                        <i class="fas fa-sign-in-alt"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <a href="" class="text-dark">
+                            {{ login_cabinet }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card_img">
+                    <a href="">
+                        <i class="fas fa-calendar-alt"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <a href="" class="text-dark">
+                            {{ lessons_schedule }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card">
+                <div class="card_img">
+                    <a href="">
+                        <i class="fas fa-hotel"></i>
+                    </a>
+                </div>
+                <div class="card-body">
+                    <p>
+                        <a href="" class="text-dark">
+                            {{ students_hotel }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
