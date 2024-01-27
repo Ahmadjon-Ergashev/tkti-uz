@@ -185,7 +185,6 @@ class Events(widgets.AbstractTemplate):
             super().save(*args, **kwargs)
 
 
-
 class PhotoGallary(models.Model):
     """ photos model """
     news = models.ForeignKey(News, verbose_name=_("Yangilik"), on_delete=models.SET_NULL, null=True)

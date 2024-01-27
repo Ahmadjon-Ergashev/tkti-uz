@@ -112,7 +112,7 @@ class AdsDetailView(DetailView):
         except ValueError:
             context["pdf_file"] = ""
         return context
-    
+
 
 def Upload_Images(request):
     if request.user.is_authenticated:
@@ -120,10 +120,13 @@ def Upload_Images(request):
             try:
                 data = request.FILES.getlist('images') 
                 news_id = int(request.POST.get("news_list_id"))
-                news_obj = news.News.objects.get(id=news_id)
-                for d in data:
-                    img = news.PhotoGallary.objects.create(news=news_obj, image=d)
-                    img.save()
+                img_objects = [
+                    news.PhotoGallary(
+                        news_id=news_id,
+                        image=image
+                    ) for image in data
+                ]
+                news.PhotoGallary.objects.bulk_create(img_objects)
             except Exception as e:
                 print(e)
     return render(request, "widgets/upload_images.html") 

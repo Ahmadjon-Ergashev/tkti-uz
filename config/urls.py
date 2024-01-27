@@ -26,9 +26,9 @@ urlpatterns = [
     path('swagger/doc/', yasg_schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('swagger/', yasg_schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ] + i18n_patterns(
+    path("api/", include("api.urls")),
     path("", include("view.urls")),
-    path('admin/', admin.site.urls),
-    path("api/", include("api.urls")),        
+    path('admin/', admin.site.urls, name="admin"),
     path('i18/', include('django.conf.urls.i18n')),
 )
 
