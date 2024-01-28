@@ -4,7 +4,6 @@ from rest_framework import serializers
 from main.models import widgets
 
 
-
 class YearSerializers(serializers.ModelSerializer):
     class Meta:
         model = widgets.Year

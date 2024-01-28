@@ -7,7 +7,7 @@ from config.settings.base import *
 #     }
 # }
 
-
+DEBUG = 1
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 CSP_FRAME_ANCESTORS = "http://127.0.0.1:8000"
