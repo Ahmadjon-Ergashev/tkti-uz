@@ -44,6 +44,9 @@
                             {{ object.post.html | safe }}
                         </div>
                     {% endif %}
+                    {% if extra_pdf_list %}
+                        {% include './posts_sections/extra_pdf.html' %}
+                    {% endif %}
                     {% if object.departments_set.all %}
                         <br>
                         <hr>

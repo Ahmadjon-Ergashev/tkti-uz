@@ -53,6 +53,9 @@
                                         {{ object.post.html | safe }}
                                     </div>
                                 {% endif %}
+                                {% if extra_pdf_list %}
+                                    {% include './posts_sections/extra_pdf.html' %}
+                                {% endif %}
                                 <div class="row">
                                     {% for obj in object.bosssection_set.all %}
                                         <div class="col-12 col-md-4 col-xl-4">

@@ -125,14 +125,16 @@ class PostsListView(ListView):
         context["title"] = navbar_name.name
         context["parent"] = navbar_name.parent
         context["title_slug"] = navbar_name.slug
+        context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
+            post=context["object_list"][0]).only("name", "pdf_file")
         if len(context["object_list"]) == 1:
             try:
                 context["connected_faculty_dact"] = news.News.objects.filter(
                     faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12].only(
-                        "title", "slug", "added_at", "post_viewed_count").prefetch_related(
-                            "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                    "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
             except Exception as e:
-                print(e, 141) 
+                print(e, 141)
         try:
             context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
@@ -144,7 +146,7 @@ class PostsListView(ListView):
         context["connected_faqs"] = widgets.Faq.objects.filter(
             is_active=True, category=navbar_name.id).select_related("category")
         context["home"] = _("Bosh sahifa")
-        context["depended_news"] = _("Mavzuga aloqador yangiliklar") 
+        context["depended_news"] = _("Mavzuga aloqador yangiliklar")
         context["depended_faq"] = _("Mavzuga aloqador savol va javoblar")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         context["brm"] = widgets.BRMItems.objects.all().order_by("number")
@@ -153,6 +155,7 @@ class PostsListView(ListView):
         context["login_cabinet"] = _("Shaxsiy kabinetga kirish")
         context["lessons_schedule"] = _("Dars jadvali")
         context["students_hotel"] = _("Talabalar turar joyiga onlayn ariza berish")
+
         return context
 
 
@@ -187,6 +190,9 @@ class PostDetailView(DetailView):
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
         context["parent"] = navbar.parent.name
+        context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
+            post=post).only("name", "pdf_file")
+
         try:
             context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
             context["pdf_file"] = post.pdf_file.url

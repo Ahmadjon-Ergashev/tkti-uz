@@ -71,13 +71,18 @@ class Hashtag(models.Model):
 class SocialNetworks(models.Model):
     """ for social networks models exa: facebook, telegram and ... """
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="author_networking")
-    name = models.CharField(max_length=50, verbose_name=_("Nomi"), unique=True, null=True, help_text=_("ishtimoiy tarmoq nomlarini kiriting, m: facebook, instagram"))
-    icon = models.CharField(max_length=50, verbose_name=_("Icon"), null=True, help_text=_("messangerning icon class nomi, class nomlarini olish uchun https://fontawesome.com/v5/search shu saytga kiring, m: fab fa-facebook"))
+    name = models.CharField(max_length=50, verbose_name=_("Nomi"),
+                            unique=True, null=True,
+                            help_text=_("ishtimoiy tarmoq nomlarini kiriting, m: facebook, instagram"))
+    icon = models.CharField(
+        max_length=50, verbose_name=_("Icon"), null=True,
+        help_text=_("messangerning icon class nomi, class nomlarini olish uchun https://fontawesome.com/v5/search shu saytga kiring, m: fab fa-facebook"))
     color = ColorField(verbose_name=_("rangi"), null=True)
     url = models.URLField(verbose_name=_("url manzil"))
     order_num = models.IntegerField(default=0)
     added_at = models.DateTimeField(auto_now_add=True)
-    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_network_user")
+    update_user = models.ForeignKey(
+        User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_network_user")
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
@@ -124,7 +129,8 @@ class HeaderIMG(models.Model):
 class UsefullLinks(models.Model):
     """ foydali havolar uchun model """
     name = models.CharField(verbose_name=_("Nomi"), max_length=255, unique=True)
-    logo = models.ImageField(verbose_name=_("rasmi"), default="default/gerb.png", null=True, blank=True, upload_to="image/usefull_links/%Y-%m-%d/")
+    logo = models.ImageField(verbose_name=_("rasmi"), default="default/gerb.png",
+                             null=True, blank=True, upload_to="image/usefull_links/%Y-%m-%d/")
     link = models.URLField(verbose_name=_("Saytga havola"), max_length=150)
     add_time = models.DateTimeField(auto_now_add=True)
 
@@ -313,3 +319,22 @@ class BRMItems(models.Model):
         verbose_name = _("BRM")
         verbose_name_plural = _("BRM")
 
+
+class ExtraFile(models.Model):
+    from main.models import posts
+    post = models.ForeignKey(posts.Posts, on_delete=models.SET_NULL, null=True, blank=True, related_name="extra_file")
+    name = models.CharField(max_length=255, verbose_name="File nomi", null=True, blank=True)
+    pdf_file = models.FileField(upload_to="pdf/extra_files/%Y/%m/%d", null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        db_table = 'extra_files'
+        managed = True
+        ordering = ["post"]
+        verbose_name = _("Qo'shimcha PDF fayllar")
+        verbose_name_plural = _("Qo'shimcha PDF fayllar")
+
+    

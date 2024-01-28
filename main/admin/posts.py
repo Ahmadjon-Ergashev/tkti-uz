@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 
 
-from main.models import posts
+from main.models import posts, widgets
 
 
 # django admin actions
@@ -86,10 +86,16 @@ class NavbarAdmin(MPTTModelAdmin):
         return {"slug": ("name_uz", )}
 
 
+class ExtraFilesTabularInline(admin.TabularInline):
+    model = widgets.ExtraFile
+    extra = 1
+
+
 @admin.register(posts.Posts)
 class PostsAdmin(admin.ModelAdmin):
     """ Admin view for Posts """
     actions = (duplicate, )
+    inlines = [ExtraFilesTabularInline]
     list_max_show_all = 20
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
