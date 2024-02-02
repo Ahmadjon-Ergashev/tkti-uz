@@ -337,4 +337,23 @@ class ExtraFile(models.Model):
         verbose_name = _("Qo'shimcha PDF fayllar")
         verbose_name_plural = _("Qo'shimcha PDF fayllar")
 
-    
+
+class FinancialBenefit(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True, blank=True)
+    icon = models.CharField(max_length=100, verbose_name=_("Icon"), null=True, blank=True)
+    about = QuillField(verbose_name=_("Imtiyoz haqida"), null=True, blank=True)
+    responsible_organization = models.CharField(max_length=255, verbose_name=_("Mas'ul tashkilot"), null=True, blank=True)
+    for_who = QuillField(verbose_name=_("Kimlar uchun"), null=True, blank=True)
+    deadline = QuillField(verbose_name=_("Imtiyozni taqdim etish tartibi va muddatlari"),
+                          null=True, blank=True)
+    main_lower = QuillField(verbose_name=_("Huquqiy asos"), null=True, blank=True)
+    contact = QuillField(verbose_name=_("Aloqa ma’lumotlari"), null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        db_table = 'financial_benefits'
+        verbose_name = _("Moliyaviy imtiyozlar")
+        verbose_name_plural = _("Moliyaviy imtiyozlar")

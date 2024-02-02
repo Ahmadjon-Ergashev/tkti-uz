@@ -1,6 +1,4 @@
-from typing import Any
-from django.db.models.base import Model as Model
-from django.db.models.query import QuerySet
+from django.views import View
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.contrib.postgres import search as s
@@ -143,6 +141,7 @@ class SearchDetail(DetailView):
         data["depended_news"] = _("Mavzuga aloqador yangiliklar") 
         return data
 
+
 class OpportunitiesView(TemplateView):
     template_name = "opportunities/main.html"
 
@@ -189,4 +188,34 @@ class BRMItemsDetailView(DetailView):
         context["connected_news_title"] = _("Mavzuga aloqador yangiliklar.")
         context["connected_news"] = news.News.objects.filter(status=widgets.Status.published, brm=object.id).order_by("-added_at")
         return context
-    
+
+
+class FinancialBenefitView(View):
+    template_name = "opportunities/main.html"
+
+    def get(self, request, *args, **kwargs):
+        objects = widgets.FinancialBenefit.objects.all()
+        return render(request, self.template_name, {
+            "objects_list": objects,
+            "title": _("Moliyaviy imtiyozlar")
+        })
+
+
+class FinancialBenefitDetailView(View):
+    template_name = "opportunities/credit_opport.html"
+
+    def get(self, request, *args, **kwargs):
+        translation_words = {
+            "about": _("Imtiyoz haqida"),
+            "responsible_org": _("Mas’ul tashkilot"),
+            "who_for": _("Kimlar uchun"),
+            "order_and_time": _("Imtiyozni taqdim etish tartibi va muddatlari"),
+            "lower_base": _("Huquqiy asos"),
+            "contact": _("Aloqa ma’lumotlari")
+        }
+        pk = self.kwargs.get("pk")
+        if pk:
+            obj = widgets.FinancialBenefit.objects.filter(pk=pk).first()
+            data = {"object": obj, "title": obj.name}
+            context = translation_words | data
+            return render(request, self.template_name, context)

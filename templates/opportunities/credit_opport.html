@@ -32,146 +32,37 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <th colspan="2">Imtiyoz haqida</th>
+                            <th colspan="2">{{ about }}</th>
                             <td colspan="1">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Soliq kodeksining 378-moddasi 16-bandiga binoan, taʼlim kontrakti to‘lovini ish haqi yoki boshqa daromadlardan amalga oshirgan shaxs soliq imtiyozlari olsa bo‘ladi.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Imtiyozlarning mazmuni shundaki, fuqarolarning OTMlarda taʼlim olish uchun ajratilgan daromadlari soliqqa tortilmaydi.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Imtiyozdan foydalanishi mumkin:
-                                        <ol>
-                                            <li>
-                                                26 yoshga to‘lmagan farzandlari shartnoma asosida o‘qiydigan ota-onalar;
-                                            </li>
-                                            <li>
-                                                26 yoshga to‘lmagan turmush o‘rtoqlari shartnoma asosida o‘qiydigan shaxslar;
-                                            </li>
-                                            <li>
-                                                Yoshidan qatʼi nazar daromad oluvchi (rasman ishlayotgan) talabalar.
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Ushbu imtiyoz yaqin qarindoshlar, yaʼni aka-uka va opa-singillar, xola, amaki va boshqalarning shartnomalarini to‘lashga qo‘llanilmaydi.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Soliq imtiyozi quyidagi manbalar hisobidan o‘qish uchun to‘lov amalga oshirilganda taqdim etiladi:
-                                        <ol>
-                                            <li>
-                                                O‘z mablag‘lari
-                                            </li>
-                                            <li>
-                                                Jismoniy shaxsga tijorat banklari tomonidan berilgan taʼlim kreditlari
-                                            </li>
-                                            <li>
-                                                Yuridik shaxslar tomonidan jismoniy shaxslarga qaytarish sharti bilan berilgan mablag‘lar (ssudalar)        
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Imtiyoz yuzasidan batafsil maʼlumot olish havolalar
-                                    </li>
-                                    <li class="list-group-item">
-                                        Maxsus qonun hujjati: <a href="https://lex.uz/ru/docs/4674902#4687278">Batafsil</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Sayt: <a href="https://soliq.uz/?lang=uz">soliq.uz</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Tel.: 71 202-32-82, 1198
-                                    </li>
-                                </ul>
+                                {{ object.about.html|safe }}
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="2">Mas’ul tashkilot</th>
-                            <td>Moliya vazirligi / Davlat soliq qo‘mitasi</td>
+                            <th colspan="2">{{ responsible_org }}</th>
+                            <td>{{ object.responsible_organization }}</td>
                         </tr>
                         <tr>
-                            <th colspan="2">Kimlar uchun?</th>
+                            <th colspan="2">{{ who_for }} ?</th>
                             <td>
-                                <ol>
-                                    <li>Oliy o‘quv yurti talabasi (yosh cheklanmagan)</li>
-                                    <li>26 yoshga to‘lmagan talabaning ota-onasi, turmush o‘rtog‘i</li>
-                                </ol>
+                                {{ object.for_who.html | safe }}
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="2">Imtiyozni taqdim etish tartibi va muddatlari</th>
+                            <th colspan="2">{{ order_and_time }}</th>
                             <td>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">
-                                        Imtiyoz fuqaroning jami yillik daromadi to‘g‘risidagi deklaratsiyasini soliq organlariga topshirgan holda yoki soliq to‘lovchining to‘lov manbaiga (misol, ish joyi) yozma arizasi asosida olinishi mumkin.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Agar soliq imtiyozi ish joyidan qo‘llanilsa, fuqaro quyidagilarni tashkilot buxgalteriyasiga taqdim etadi:
-                                    </li>
-                                    <li class="list-group-item">
-                                        <ol>
-                                            <li>
-                                                Talaba bilan oliy o‘quv yurti o‘rtasida to‘lovli-kontrakt asosida o‘qitish to‘g‘risida tuzilgan shartnoma nusxasi;
-                                            </li>
-                                            <li>
-                                                Tijorat banki bilan taʼlim kreditini olish uchun tuzilgan shartnoma nusxasi (agar taʼlim krediti olgan bo‘lsa);
-                                            </li>
-                                            <li>Taʼlim oluvchining pasporti yoki tug‘ilganlik to‘g‘risidagi guvohnomasi nusxasi.</li>
-                                        </ol>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Bu holda, tashkilot buxgalteriyasi kontrakt to‘lash uchun ajratilgan mabg‘lani maoshdan ushlab qolib, OTM hisobiga tushuradi.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Bunda, daromadlarning 50 foizidan ko‘prog‘ini ushlab qolinishi man etiladi.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Agar imtiyoz shaxsning jami yillik daromadi to‘g‘risidagi deklaratsiyasi asosida qo‘llanilsa, quyidagilarni turar joyidagi soliq organlariga taqdim etadi:
-                                    </li>
-                                    <li class="list-group-item">
-                                        <ol>
-                                            <li>
-                                                Talaba (talabalar) bilan oliy o‘quv yurti o‘rtasida to‘lovli-kontrakt asosida o‘qitish to‘g‘risida tuzilgan shartnoma (shartnomalar) nusxasi;
-                                            </li>
-                                            <li>
-                                                Tijorat banki bilan taʼlim kreditini olish uchun tuzilgan shartnoma (shartnomalar) nusxasi (agar taʼlim krediti olgan bo‘lsa);
-                                            </li>
-                                            <li>
-                                                Oliy o‘quv yurtlari hisob raqamiga (taʼlim kreditini qoplaganda tijorat banki hisob raqamiga) pul mablag‘larini mustaqil to‘laganligini tasdiqlovchi hujjatlar nusxasi;
-                                            </li>
-                                            <li>
-                                                Pasport nusxasi (soliq imtiyozi taʼlim oluvchining o‘zi tomonidan qo‘llanilganda);
-                                            </li>
-                                            <li>
-                                                Pasport nusxasi (soliq imtiyozi ota-ona tomonidan qo‘llanilganda) va taʼlim oluvchining (taʼlim oluvchilarning) tug‘ilganlik to‘g‘risidagi guvohnomasi nusxasi;
-                                            </li>
-                                            <li>
-                                                Pasport nusxasi (soliq imtiyozi turmush o‘rtog‘i tomonidan qo‘llanilganda) va taʼlim oluvchining (taʼlim oluvchilarning) nikoh to‘g‘risidagi guvohnoma nusxasi.
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li class="list-group-item">
-                                        Jami yillik daromadlar to‘g‘risidagi deklaratsiyani elektron shaklda soliq to‘lovchining shaxsiy kabinetida, ro‘yxatdan o‘tgan pochta orqali yoki soliq idorasiga shaxsan tashrif buyurib topshirilishi mumkin.
-                                    </li>
-                                    <li class="list-group-item">
-                                        Soliq chegirmasini olish bo‘yicha ariza bir oy ichida ko‘rib chiqiladi.
-                                    </li>
-                                </ul>
+                                {{ object.deadline.html | safe }}
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="2">Huquqiy asos</th>
+                            <th colspan="2">{{ lower_base }}</th>
                             <td>
-                                Soliq kodeksi 378-moddasi 16-bandi <br> <a href="https://lex.uz/ru/docs/4674902#4687278">Batafsil lex.uz</a>
+                                {{ object.main_lower.html | safe }}
                             </td>
                         </tr>
                         <tr>
-                            <th colspan="2">Aloqa ma’lumotlari</th>
+                            <th colspan="2">{{ contact }}</th>
                             <td>
-                                Sayt: <a href="https://soliq.uz/?lang=uz">soliq.uz</a><br>
-                                Tel.: 71 202-32-82, 1198
+                                {{ object.contact.html | safe }}
                             </td>
                         </tr>
                     </tbody>

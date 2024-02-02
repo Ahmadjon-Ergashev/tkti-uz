@@ -463,3 +463,43 @@ class BRMItemsAdmin(admin.ModelAdmin):
             ),
         }),
     )
+
+
+@admin.register(widgets.FinancialBenefit)
+class FinancialBenefitAdmin(admin.ModelAdmin):
+    search_fields = ("name", )
+    list_filter = ("added_at", )
+    readonly_fields = ("added_at", )
+    list_display_links = ("id", "name")
+    list_display = ("id", "name", "added_at")
+
+    fieldsets = (
+        (None, {"fields": ("icon", )}),
+        (_("O'zbek tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_uz", "about_uz", "responsible_organization_uz",
+                "for_who_uz", "deadline_uz", "main_lower_uz", "contact_uz"
+            )
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_ru", "about_ru", "responsible_organization_ru",
+                "for_who_ru", "deadline_ru", "main_lower_ru", "contact_ru"
+            )
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_en", "about_en", "responsible_organization_en",
+                "for_who_en", "deadline_en", "main_lower_en", "contact_en"
+            )
+        }),
+        (_("Automatik to'ldiriladigan fieldlar"), {
+            'classes': ('collapse',),
+            'fields': (
+                "added_at",
+            ),
+        }),
+    )

@@ -121,11 +121,13 @@ class VideoGalleryTranslation(TranslationOptions):
 
 
 """ widgets models translations file """
-    
+
+
 @register(widgets.EventTypes)
 class EventTypesTranslation(TranslationOptions):
     fields = ("name", )
-    
+
+
 @register(widgets.Hashtag)
 class HashtagTranslation(TranslationOptions):
     fields = ("name", )
@@ -184,3 +186,9 @@ class SemestersTranslation(TranslationOptions):
 @register(widgets.BRMItems)
 class BRMItemsTranslation(TranslationOptions):
     fields = ("name", "desc")
+
+
+@register(widgets.FinancialBenefit)
+class FinancialBenefitsTranslation(TranslationOptions):
+    fields = ("name", "about", "responsible_organization",
+              "for_who", "deadline", "main_lower", "contact")

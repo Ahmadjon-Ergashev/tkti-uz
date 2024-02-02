@@ -109,7 +109,7 @@ class PostsListView(ListView):
 
         one_obj = posts.Posts.objects.filter(navbar__slug=navbar_slug)
         if len(one_obj) == 1:
-            one_obj = one_obj.update(post_viewed_count=F("post_viewed_count") + 1)
+            one_obj.update(post_viewed_count=F("post_viewed_count") + 1)
         return qs 
     
     def get_paginate_by(self, queryset):
