@@ -1,3 +1,4 @@
+{% load static %}
 <!-- inside navbar -->
 <div class="quick_links border">
     <div class="title bg-light">
@@ -80,40 +81,48 @@
     </nav>
     <section>
         <div class="tab1">
-            <ul>
-                {% for news in most_read_news %}                  
-                    <li>
-                        <div class="header_tabs_section">
-                            <span><a href="/news/detail/{{ news.slug }}/">{{ news.added_at|date:"D, d M, Y" }}</a></span>
-                            <span><i class="fas fa-eye"></i> {{ news.post_viewed_count }}</span>
-                        </div>
-                        <div class="body_tabs_section">
-                            <a href="/news/detail/{{ news.slug }}/">
-                                {{ news.title | truncatechars:55 }}
-                            </a>
-                        </div>
-                    </li>
-                {% endfor %}
+            <ul id="most_read_news_4">
+                {% comment %}
+                    {% for news in most_read_news %}
+                        <li>
+                            <div class="header_tabs_section">
+                                <span><a href="/news/detail/{{ news.slug }}/">{{ news.added_at|date:"D, d M, Y" }}</a></span>
+                                <span><i class="fas fa-eye"></i> {{ news.post_viewed_count }}</span>
+                            </div>
+                            <div class="body_tabs_section">
+                                <a href="/news/detail/{{ news.slug }}/">
+                                    {{ news.title | truncatechars:55 }}
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endcomment %}
             </ul>
         </div>
         <div class="tab2">
-            <ul>
-                {% for ads in most_read_ads %}                  
-                    <li>
-                        <div class="header_tabs_section">
-                            <span><a href="/ads/detail/{{ ads.slug }}">{{ ads.added_at|date:"D, d M, Y" }}</a></span>
-                            <span><i class="fas fa-eye"></i> {{ ads.post_viewed_count }}</span>
-                        </div>
-                        <div class="body_tabs_section">
-                            <a href="/ads/detail/{{ ads.slug }}">
-                                {{ ads.title | truncatechars:55 }}
-                            </a>
-                        </div>
-                    </li>
-                {% endfor %}
+            <ul id="most_read_ads_4">
+                {% comment %}
+                    {% for ads in most_read_ads %}
+                        <li>
+                            <div class="header_tabs_section">
+                                <span><a href="/ads/detail/{{ ads.slug }}">{{ ads.added_at|date:"D, d M, Y" }}</a></span>
+                                <span><i class="fas fa-eye"></i> {{ ads.post_viewed_count }}</span>
+                            </div>
+                            <div class="body_tabs_section">
+                                <a href="/ads/detail/{{ ads.slug }}">
+                                    {{ ads.title | truncatechars:55 }}
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endcomment %}
             </ul>
         </div>
     </section>
 </div>
+
+<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/scripts/posts/left_sidebar_news.js' %}"></script>
+
 
 <!-- news tabs -->

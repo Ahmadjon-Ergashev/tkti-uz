@@ -7,11 +7,14 @@
 {% block content %}
     <link rel="stylesheet" href="{% static 'css/styles/posts/detail/post.css' %}">
     <div class="container mt-4">
-        <div class="row d-flex justify-content-between py-3">
-            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
-                {% include "./left_sidebar.html" %}
-            </div>
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
+            </ol>
+        </nav>
+        <div class="row d-flex justify-content-between">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-10 m-auto border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
                     <div class="post_img_bg"  id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>

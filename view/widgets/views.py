@@ -75,7 +75,7 @@ from itertools import chain
 from django.shortcuts import redirect, render
 
 
-class SearchAroundProgram(ListView):
+class SearchAroundProgram(View):
     template_name = "widgets/search.html"
     
     def post(self, request, *args, **kwargs):
@@ -108,6 +108,7 @@ class SearchDetail(DetailView):
 
     def get_object(self, queryset=None):
         slug = self.kwargs["slug"]
+        print(slug)
         if len(posts.Posts.objects.filter(slug=slug)) != 0:
             return posts.Posts.objects.filter(slug=slug).first()
         
@@ -121,7 +122,6 @@ class SearchDetail(DetailView):
             return news.Events.objects.filter(slug=slug).first()
         
         return None
-        
     
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)

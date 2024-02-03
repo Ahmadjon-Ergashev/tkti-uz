@@ -5,20 +5,31 @@
 {% endblock title %}
 
 {% block content %}
+    <style>
+        .card_bg{
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
     <div class="container mt-4">
         <div class="row">
             {% for o in search_results %}
-                <div class="col-12 col-md-4 col-lg-3 py-0 px-2">
-                    <div class="card rounded-0" style="min-height: 270px;">
-                        <img src="{{ o.image.url }}" alt="tkti.uz|{{ o.title }}" height="200px">
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="height: 300px">
+                        <div class="card_bg" style="background-image: url('{{ o.image.url }}')"></div>
+<!--                        <img src="{{ o.image.url }}" class="card-img-top" alt="...">-->
                         <div class="card-body">
                             <p class="card-text">
-                                <a href="/searching/result/detail/{{ o.slug }}/">
-                                    {{ o.title|truncatechars:100 }}
+                                {{ o.title|truncatechars:100 }}<br>
+                                <a href="detail/{{ o.slug }}">
+                                    {{ read_more }}
                                 </a>
                             </p>
                         </div>
                     </div>
+
                 </div>
             {% empty %}
                 <p class="text-center p-5">{{ not_found_404 }}</p>

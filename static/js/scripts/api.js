@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $NF404 = $("#not_found_404").data("not-found");
+    let $NF404 = $("#not_found_404").data("not-found");
     $("#id_link").addClass("a_disabled");   
     function checkFields() {
         var field1 = $("#id_type").val() !== "--------------------" ? $("#id_type").val() : false;

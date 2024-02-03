@@ -7,7 +7,7 @@ from main.models import news
 from api.widgets.serializers import EventTypeSerializers
 
 
-class NewsSerizliers(serializers.ModelSerializer):
+class NewsSerializers(serializers.ModelSerializer):
     class Meta:
         model = news.News
         fields = ["id", "title", "image", "slug", "post_viewed_count", "added_at"]
@@ -18,7 +18,7 @@ class NewsSerizliers(serializers.ModelSerializer):
         return data
     
 
-class AdsSerizliers(serializers.ModelSerializer):
+class AdsSerializers(serializers.ModelSerializer):
     class Meta:
         model = news.Ads
         fields = ["id", "title", "image", "slug", "post_viewed_count", "added_at"]
@@ -32,7 +32,7 @@ class AdsSerizliers(serializers.ModelSerializer):
 class VideoSerializers(serializers.ModelSerializer):
     class Meta: 
         model = news.VideoGallery
-        fields = ["id", "title", "video_file", "poster", "added_at"]
+        fields = ["id", "title", "poster", "post_viewed_count", "added_at"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -43,7 +43,7 @@ class VideoSerializers(serializers.ModelSerializer):
 class EventsSerializers(serializers.ModelSerializer):
     class Meta:
         model = news.Events
-        fields = ["id", "title", "location", "location_url", "image", "event_type", "slug", "added_at"]
+        fields = ["id", "title", "location", "slug", "added_at"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
@@ -52,6 +52,6 @@ class EventsSerializers(serializers.ModelSerializer):
         datetime_val = datetime.combine(date, time)
         new_date_time = datetime_val + timedelta(hours=5)
         data["added_at"] = new_date_time.strftime("%Y-%m-%d %H:%M")
-        data["event_type"] = EventTypeSerializers(instance=instance.event_type).data
+        data["event_type_name"] = instance.event_type_name
         data["read_more"] = _("Batafsil")
         return data

@@ -1,6 +1,7 @@
 from enum import Enum
 from drf_yasg import openapi
 
+
 class GetType(Enum):
     latest: str = "latest"
     most_read: str = "most_read"

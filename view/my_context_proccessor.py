@@ -10,19 +10,13 @@ from main.models import (
 def global_variables(request):
     context = {
         "today": datetime.now(),
-        "quick_links": widgets.QuickLinks.objects.all().order_by("order_num").only(
+        "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
             "url", "name"
         ),
-        "social_networks": widgets.SocialNetworks.objects.all().order_by("order_num").only(
+        "social_networks": widgets.SocialNetworks.objects.order_by("order_num").only(
             "name", "color", "url", "icon"
         ),
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
-        "most_read_ads": news.Ads.objects.filter(status="pub").order_by("-post_viewed_count")[:4].only(
-            "title", "added_at", "post_viewed_count", "slug",
-        ),
-        "most_read_news": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].only(
-            "title", "added_at", "post_viewed_count", "slug",
-        ),
         "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
             "name", "slug", "id"
         ).prefetch_related("children"),
@@ -52,4 +46,25 @@ def global_variables(request):
         "social_networks_title": _("Ijtimoiy tarmoqlar"),
         "extra_phone_title": _("Qo'shimcha Telefon raqam"),
     }
-    return context
+    translate_words = {
+        "arxiv": _("Arxiv"),
+        "all": _("Barchasi"),
+        "search": _("Qidirish"),
+        "events": _("Voqealar"),
+        "title": _("Bosh sahifa"),
+        "faculty_title": _("Fakultetlar"),
+        "sp_faculty": _("Sohani tanlang"),
+        "ads_section_title": _("E'lonlar"),
+        "sp_way": _("Yo'nalishni tanlang"),
+        "sp_type": _("Ta'lim turini tanlang"),
+        "videos_section_title": _("Videolar"),
+        "the_most_read": _("Top yangiliklar"),
+        "upcoming": _("Yaqinlashib kelayotganlar"),
+        "nth_faculty": _("tarkibidagi kafedralar"),
+        "usuful_links_title": _("Foydali havolalar"),
+        "the_last_news": _("Eng so'ngi yangiliklar"),
+        "study_way_title": _("Ta'lim dasturi katalogi"),
+        "talented_student_title": _("Iqtidorli talabalar"),
+        "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
+    }
+    return context | translate_words

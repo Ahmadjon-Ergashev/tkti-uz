@@ -1,3 +1,4 @@
+from django.db.models import F
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.viewsets import mixins, GenericViewSet
 
@@ -8,7 +9,7 @@ from api.news import query_params
 
 class NewsView(mixins.ListModelMixin, GenericViewSet):
     queryset = news.News.objects.all()
-    serializer_class = serizliers.NewsSerizliers
+    serializer_class = serizliers.NewsSerializers
 
     def get_queryset(self):
         qs = super().get_queryset().none()
@@ -30,7 +31,7 @@ class NewsView(mixins.ListModelMixin, GenericViewSet):
 
 class AdsView(mixins.ListModelMixin, GenericViewSet):
     queryset = news.Ads.objects.all()
-    serializer_class = serizliers.AdsSerizliers
+    serializer_class = serizliers.AdsSerializers
 
     def get_queryset(self):
         qs = super().get_queryset().none()
@@ -93,13 +94,10 @@ class EventView(mixins.ListModelMixin, GenericViewSet):
                 qs = super().get_queryset().filter(status='pub', added_at__gte=timezone.now()).order_by('added_at')[int(start):int(end)]
             elif get_type == query_params.EventGetType.past.value:
                 qs = super().get_queryset().filter(status='pub', added_at__lte=timezone.now()).order_by('-added_at')[int(start):int(end)]
-        return qs
+        return qs.annotate(
+            event_type_name=F("event_type__name")
+        )
     
     @swagger_auto_schema(manual_parameters=query_params.events_queries())
     def list(self, request, *args, **kwargs):
         return super(EventView, self).list(request, *args, **kwargs)
-
-
-
-    
-    

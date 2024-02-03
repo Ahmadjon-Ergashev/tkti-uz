@@ -34,13 +34,11 @@ class NewsDetailView(DetailView):
     model = news.News
     template_name = "pages/news_and_ads/detail.html"
 
-
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
         news.News.objects.filter(slug=slug).update(post_viewed_count=F("post_viewed_count") + 1)
         object = news.News.objects.filter(slug=slug).select_related("author").first()
         return object
-    
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

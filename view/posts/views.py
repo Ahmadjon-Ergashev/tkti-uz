@@ -1,3 +1,4 @@
+from django.views import View
 from django.db.models import F
 from django.utils import timezone
 from django.views.generic import ListView, DetailView
@@ -10,79 +11,24 @@ from main.models import (
 )
 
 
-def Home(request):
-    """ for home page view """
+class Home(View):
+    template_name = 'home.html'
 
-    translate_words = {
-        "arxiv": _("Arxiv"),
-        "all": _("Barchasi"),
-        "search": _("Qidirish"),
-        "events": _("Voqealar"),
-        "title": _("Bosh sahifa"),
-        "faculty_title": _("Fakultetlar"),
-        "sp_faculty": _("Sohani tanlang"),
-        "ads_section_title": _("E'lonlar"),
-        "sp_way": _("Yo'nalishni tanlang"),
-        "sp_type": _("Ta'lim turini tanlang"),
-        "videos_section_title": _("Videolar"),
-        "the_most_read": _("Top yangiliklar"),
-        "upcoming": _("Yaqinlashib kelayotganlar"),
-        "nth_faculty": _("tarkibidagi kafedralar"),
-        "usuful_links_title": _("Foydali havolalar"),
-        "the_last_news": _("Eng so'ngi yangiliklar"),
-        "study_way_title": _("Ta'lim dasturi katalogi"),
-        "talented_student_title": _("Iqtidorli talabalar"),
-        "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
-    }
-    objects_list = {
-        "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
-        "statistika": widgets.Statistika.objects.all().order_by("order_num").only(
-            "name", "icon", "url", "quantity"
-        ),
-        "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time").only(
-            "name", "logo", "link"
-        ),
-        "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
-            "image", "f_name", "desc"
-        ),
-        "the_last_ads_4": news.Ads.objects.filter(status="pub").order_by("-added_at")[:4].only(
-            "title", "added_at", "image", "slug", "post_viewed_count"
-        ),
-        "the_last_ads_8": news.Ads.objects.filter(status="pub").order_by("-added_at")[4:12].only(
-            "title", "added_at", "slug", "post_viewed_count"
-        ),
-    }
-    news_dict = {
-        "the_last_news_4": news.News.objects.filter(status="pub").order_by("-added_at")[:4].only(
-            "title", "added_at", "image", "slug", "post_viewed_count"
-        ),
-        "the_last_news_8": news.News.objects.filter(status="pub").order_by("-added_at")[4:12].only(
-            "title", "added_at", "slug", "post_viewed_count"
-        ),
-        "the_last_videos": news.VideoGallery.objects.filter(status="pub").order_by("-added_at")[:6].only(
-            "title", "added_at", "poster", "slug", "post_viewed_count"
-        ),
-        "the_most_view_news_4": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[:4].only(
-            "title", "added_at", "image", "slug", "post_viewed_count"
-        ),
-        "the_most_view_news_8": news.News.objects.filter(status="pub").order_by("-post_viewed_count")[4:12].only(
-            "title", "added_at", "slug", "post_viewed_count"
-        ),
-    }
-    events = {
-        "arxiv_events": news.Events.objects.filter(
-            status="pub", added_at__lte=timezone.now()).order_by("added_at")[:8].only(
-            "id", "title", "added_at", "event_type__name", "location", "slug").prefetch_related("event_type"),
-
-        "upcoming_events": news.Events.objects.filter(
-            status="pub", added_at__gte=timezone.now()).order_by("added_at")[:8].only(
-            "id", "title", "added_at", "event_type__name", "location", "slug").prefetch_related("event_type"),
-
-        "all_events": news.Events.objects.filter(status="pub").order_by("added_at")[:8].only(
-            "id", "title", "added_at", "event_type__name", "location", "slug").prefetch_related("event_type"),
-    }
-    context = translate_words | objects_list | events | news_dict
-    return render(request, "home.html", context)
+    def get(self, request, *args, **kwargs):
+        objects_list = {
+            "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
+            "statistika": widgets.Statistika.objects.all().order_by("order_num").only(
+                "name", "icon", "url", "quantity"
+            ),
+            "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time").only(
+                "name", "logo", "link"
+            ),
+            "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
+                "image", "f_name", "desc"
+            ),
+        }
+        context = objects_list
+        return render(request, self.template_name, context)
 
 
 class PostsListView(ListView):
@@ -190,9 +136,11 @@ class PostDetailView(DetailView):
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
         context["parent"] = navbar.parent.name
-        context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
-            post=post).only("name", "pdf_file")
-
+        try:
+            context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
+                post=post).only("name", "pdf_file")
+        except Exception as e:
+            print(e)
         try:
             context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
             context["pdf_file"] = post.pdf_file.url

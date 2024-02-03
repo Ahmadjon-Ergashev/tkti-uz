@@ -127,114 +127,120 @@
         <div class="content_box my-5 container">
             <div class="content d-block">
                 <div class="row" id="upcoming_events">
-                    {% for upc in upcoming_events %}  
-                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card_header">
-                                        <h5 class="card-title_h5">
-                                            {{ upc.title|truncatechars:80 }}
-                                        </h5>
+                    {% comment %}
+                        {% for upc in upcoming_events %}
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card_header">
+                                            <h5 class="card-title_h5">
+                                                {{ upc.title|truncatechars:80 }}
+                                            </h5>
+                                        </div>
+                                        <div class="box_footer">
+                                            <span class="time">{{ upc.added_at|date:'d-M-Y H:i' }}</span> <br>
+                                            <span>{{ upc.event_type.name }}</span>
+                                        </div>
                                     </div>
-                                    <div class="box_footer">
-                                        <span class="time">{{ upc.added_at|date:'d-M-Y H:i' }}</span> <br>
-                                        <span>{{ upc.event_type.name }}</span>
-                                    </div>
-                                </div>
-                                <div class="event_modal">
-                                    <div class="modal_window">
-                                        <div class="row">
-                                            <div class="col-12 p-4">
-                                                <h5>{{ upc.title }}</h5>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
-                                                    <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ upc.added_at|date:"D, d-M Y" }}</span></li>
-                                                    <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
-                                                    <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
-                                                </ul>
+                                    <div class="event_modal">
+                                        <div class="modal_window">
+                                            <div class="row">
+                                                <div class="col-12 p-4">
+                                                    <h5>{{ upc.title }}</h5>
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
+                                                        <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ upc.added_at|date:"D, d-M Y" }}</span></li>
+                                                        <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
+                                                        <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="events/" class="view_all_btn">{{ all }}</a>
 
             </div>
             <div class="content">
                 <div class="row" id="all_events">
-                    {% for upc in all_events %}  
-                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card_header">
-                                        <h5 class="card-title_h5">
-                                            {{ upc.title|truncatechars:80 }}
-                                        </h5>
+                    {% comment %}
+                        {% for upc in all_events %}
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card_header">
+                                            <h5 class="card-title_h5">
+                                                {{ upc.title|truncatechars:80 }}
+                                            </h5>
+                                        </div>
+                                        <div class="box_footer">
+                                            <span class="time">{{ upc.added_at|date:'d-M-Y H:i' }}</span> <br>
+                                            <span>{{ upc.event_type.name }}</span>
+                                        </div>
                                     </div>
-                                    <div class="box_footer">
-                                        <span class="time">{{ upc.added_at|date:'d-M-Y H:i' }}</span> <br>
-                                        <span>{{ upc.event_type.name }}</span>
-                                    </div>
-                                </div>
-                                <div class="event_modal">
-                                    <div class="modal_window">
-                                        <div class="row">
-                                            <div class="col-12 p-4">
-                                                <h5>{{ upc.title }}</h5>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
-                                                    <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ upc.added_at|date:"D, d-M Y" }}</span></li>
-                                                    <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
-                                                    <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
-                                                </ul>
+                                    <div class="event_modal">
+                                        <div class="modal_window">
+                                            <div class="row">
+                                                <div class="col-12 p-4">
+                                                    <h5>{{ upc.title }}</h5>
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
+                                                        <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ upc.added_at|date:"D, d-M Y" }}</span></li>
+                                                        <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
+                                                        <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="events/" class="view_all_btn">{{ all }}</a>
 
             </div>
             <div class="content">
                 <div class="row" id="arxiv_events">
-                    {% for upc in arxiv_events %}  
-                        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="card_header">
-                                        <h5 class="card-title_h5">
-                                            {{ upc.title|truncatechars:80 }}
-                                        </h5>
+                    {% comment %}
+                        {% for upc in arxiv_events %}
+                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card_header">
+                                            <h5 class="card-title_h5">
+                                                {{ upc.title|truncatechars:80 }}
+                                            </h5>
+                                        </div>
+                                        <div class="box_footer">
+                                            <span class="time">{{ upc.added_at|date:'d-M-Y H:i' }}</span> <br>
+                                            <span>{{ upc.event_type.name }}</span>
+                                        </div>
                                     </div>
-                                    <div class="box_footer">
-                                        <span class="time">{{ upc.added_at|date:'d-M-Y H:i' }}</span> <br>
-                                        <span>{{ upc.event_type.name }}</span>
-                                    </div>
-                                </div>
-                                <div class="event_modal">
-                                    <div class="modal_window">
-                                        <div class="row">
-                                            <div class="col-12 p-4">
-                                                <h5>{{ upc.title }}</h5>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
-                                                    <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ upc.added_at|date:"D, d-M Y" }}</span></li>
-                                                    <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
-                                                    <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
-                                                </ul>
+                                    <div class="event_modal">
+                                        <div class="modal_window">
+                                            <div class="row">
+                                                <div class="col-12 p-4">
+                                                    <h5>{{ upc.title }}</h5>
+                                                    <ul class="list-group list-group-flush">
+                                                        <li class="list-group-item ps-0"><span class="font-monospace">{{ upc.event_type.name }}</span></li>
+                                                        <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ upc.added_at|date:"D, d-M Y" }}</span></li>
+                                                        <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ upc.location }}</span></li>
+                                                        <li class="list-group-item ps-0"><a href="/events/detail/{{ upc.slug }}" class="search_btn">{{ read_more }}</a></li>
+                                                    </ul>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="events/" class="view_all_btn">{{ all }}</a>
 
@@ -264,159 +270,173 @@
         <div class="content_box container">
             <div class="content d-block">
                 <div class="row big_box" id="the_last_news_4">
-                    {% for obj in the_last_news_4 %}
-                        <div class="col-12 col-md-4 col-xl-3 mb-2">
-                            <div class="item">
-                                <div class="item_img" style="background-image: url('{{ obj.image.url }}');">
-                                    <!-- <img src="{{ obj.image.url }}" alt="{{ obj.title }} | tkti.uz"> -->
-                                </div>
-                                <div class="item_body">
-                                    <h4>
-                                        <a href="news/detail/{{ obj.slug }}">
-                                            {{ obj.title|truncatechars:120 }}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="item_footer">
-                                    <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for obj in the_last_news_4 %}
+                            <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                <div class="item">
+                                    <div class="item_img" style="background-image: url('{{ obj.image.url }}');">
+                                        <!-- <img src="{{ obj.image.url }}" alt="{{ obj.title }} | tkti.uz"> -->
+                                    </div>
+                                    <div class="item_body">
+                                        <h4>
+                                            <a href="news/detail/{{ obj.slug }}">
+                                                {{ obj.title|truncatechars:120 }}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div class="item_footer">
+                                        <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>  
-                    {% endfor %}            
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <div class="row small_news mt-2" id="the_last_news_8">
-                    {% for obj in the_last_news_8 %}
-                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                            <div class="news_box">
-                                <div class="news_box_body">
-                                    <p>
-                                        <a href="news/detail/{{ obj.slug }}">
-                                            {{ obj.title|truncatechars:80 }}
-                                        </a>
-                                    </p>
-                                </div>
-                                <div class="news_box_footer">
-                                    <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for obj in the_last_news_8 %}
+                            <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                <div class="news_box">
+                                    <div class="news_box_body">
+                                        <p>
+                                            <a href="news/detail/{{ obj.slug }}">
+                                                {{ obj.title|truncatechars:80 }}
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="news_box_footer">
+                                        <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>  
-                    {% endfor %}    
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="news/" class="view_all_btn">{{ all }}</a>
             </div>
             <div class="content">
                 <div class="row big_box" id="the_most_read_4">
-                    {% for obj in the_most_view_news_4 %}
-                        <div class="col-12 col-md-4 col-xl-3 mb-2">
-                            <div class="item">
-                                <div class="item_img" style="background-image: url('{{ obj.image.url }}');">
-                                    <!-- <img src="{{ obj.image.url }}" alt="{{ obj.title }} | tkti.uz"> -->
-                                </div>
-                                <div class="item_body">
-                                    <h4>
-                                        <a href="news/detail/{{ obj.slug }}">
-                                            {{ obj.title|truncatechars:120 }}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="item_footer">
-                                    <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for obj in the_most_view_news_4 %}
+                            <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                <div class="item">
+                                    <div class="item_img" style="background-image: url('{{ obj.image.url }}');">
+                                        <!-- <img src="{{ obj.image.url }}" alt="{{ obj.title }} | tkti.uz"> -->
+                                    </div>
+                                    <div class="item_body">
+                                        <h4>
+                                            <a href="news/detail/{{ obj.slug }}">
+                                                {{ obj.title|truncatechars:120 }}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div class="item_footer">
+                                        <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <div class="row small_news" id="the_most_read_8">
-                    {% for obj in the_most_view_news_8 %}
-                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                            <div class="news_box">
-                                <div class="news_box_body">
-                                    <p>
-                                        <a href="news/detail/{{ obj.slug }}">
-                                            {{ obj.title|truncatechars:80 }}
-                                        </a>
-                                    </p>
-                                </div>
-                                <div class="news_box_footer">
-                                    <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for obj in the_most_view_news_8 %}
+                            <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                <div class="news_box">
+                                    <div class="news_box_body">
+                                        <p>
+                                            <a href="news/detail/{{ obj.slug }}">
+                                                {{ obj.title|truncatechars:80 }}
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="news_box_footer">
+                                        <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>  
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="news/" class="view_all_btn">{{ all }}</a>
             </div>
             <div class="content">
                 <div class="row big_box" id="the_last_ads_4">
-                    {% for i in the_last_ads_4 %}
-                        <div class="col-12 col-md-4 col-xl-3 mb-2">
-                            <div class="item">
-                                <div class="item_img" style="background-image: url('{{ i.image.url }}');">
-                                    <!-- <img src="{{ i.image.url }}" alt="{{ i.title }} | tkti.uz"> -->
-                                </div>
-                                <div class="item_body">
-                                    <h4>
-                                        <a href="/ads/detail/{{ i.slug }}">
-                                            {{ i.title | truncatechars:120 }}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="item_footer">
-                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for i in the_last_ads_4 %}
+                            <div class="col-12 col-md-4 col-xl-3 mb-2">
+                                <div class="item">
+                                    <div class="item_img" style="background-image: url('{{ i.image.url }}');">
+                                        <!-- <img src="{{ i.image.url }}" alt="{{ i.title }} | tkti.uz"> -->
+                                    </div>
+                                    <div class="item_body">
+                                        <h4>
+                                            <a href="/ads/detail/{{ i.slug }}">
+                                                {{ i.title | truncatechars:120 }}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div class="item_footer">
+                                        <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <!-- <div class="border mx-4"></div> -->
                 <div class="row small_news" id="the_last_ads_8">
-                    {% for i in the_last_ads_8 %}
-                        <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
-                            <div class="news_box">
-                                <div class="news_box_body">
-                                    <p>
-                                        <a href="/ads/detail/{{ i.slug }}">
-                                            {{ i.title | truncatechars:80 }}
-                                        </a>
-                                    </p>
-                                </div>
-                                <div class="news_box_footer">
-                                    <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for i in the_last_ads_8 %}
+                            <div class="d-none col-12 d-md-block col-md-4 col-xl-3 mb-2">
+                                <div class="news_box">
+                                    <div class="news_box_body">
+                                        <p>
+                                            <a href="/ads/detail/{{ i.slug }}">
+                                                {{ i.title | truncatechars:80 }}
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="news_box_footer">
+                                        <span><a href="">{{ i.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ i.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="ads/" class="view_all_btn">{{ all }}</a>
             </div>
             <div class="content">
                 <div class="row videos_tab big_box" id="the_videos">
-                    {% for obj in the_last_videos %}
-                        <div class="col-12 col-lg-4 col-xxl-3 mb-3">
-                            <div class="item">
-                                <div class="item_img" style="background-image: url('{{ obj.poster.url }}');">
-                                    <!-- <img src="{{ obj.image.url }}" alt="{{ obj.title }} | tkti.uz"> -->
-                                </div>
-                                <div class="item_body">
-                                    <h4>
-                                        <a href="/videos/detail/{{ obj.slug }}">
-                                            {{ obj.title|truncatechars:80 }}
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div class="item_footer">
-                                    <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
-                                    <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                    {% comment %}
+                        {% for obj in the_last_videos %}
+                            <div class="col-12 col-lg-4 col-xxl-3 mb-3">
+                                <div class="item">
+                                    <div class="item_img" style="background-image: url('{{ obj.poster.url }}');">
+                                        <!-- <img src="{{ obj.image.url }}" alt="{{ obj.title }} | tkti.uz"> -->
+                                    </div>
+                                    <div class="item_body">
+                                        <h4>
+                                            <a href="/videos/detail/{{ obj.slug }}">
+                                                {{ obj.title|truncatechars:80 }}
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div class="item_footer">
+                                        <span><a href="">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>  
-                    {% endfor %}
+                        {% endfor %}
+                    {% endcomment %}
                 </div>
                 <a href="videos/" class="view_all_btn">{{ all }}</a>
             </div>
@@ -490,4 +510,8 @@
 
 
 <script src="{% static 'js/scripts/api.js' %}"></script>
+<script src="{% static 'js/scripts/home/ads.js' %}"></script>
+<script src="{% static 'js/scripts/home/news.js' %}"></script>
+<script src="{% static 'js/scripts/home/videos.js' %}"></script>
+<script src="{% static 'js/scripts/home/events.js' %}"></script>
 {% endblock content %}

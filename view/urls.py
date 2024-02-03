@@ -7,7 +7,7 @@ from view.widgets import views as widgets
 
 
 posts = [
-    path("", posts.Home, name="home"),
+    path("", posts.Home.as_view(), name="home"),
     path("posts/navbar/<slug:navbar_slug>/", posts.PostsListView.as_view(), name="posts_nav"),
     path("posts/sections/<slug:post_slug>/", posts.SectionsDetailView.as_view(), name="sect_nav"),
     path("posts/navbar/post/<slug:post_slug>/", posts.PostDetailView.as_view(), name="post_detail"),
@@ -36,13 +36,11 @@ widgets = [
     path("anthem", widgets.AnthemView.as_view(), name="anthem"),
     path("sitemap", widgets.SiteMapView.as_view(), name="site_map"),
     path("coat_of_arms", widgets.CoatofArmsView.as_view(), name="coat_of_arms"),
+    path("searching/results/detail/<slug:slug>", widgets.SearchDetail.as_view()),
     path("supports/", widgets.FinancialBenefitView.as_view(), name="opports_view"),
-    path("searching/results", widgets.SearchAroundProgram.as_view(), name="search"),
+    path("searching/results/", widgets.SearchAroundProgram.as_view(), name="search"),
     path("brm_detail/<int:pk>/", widgets.BRMItemsDetailView.as_view(), name="brm_detail"),
     path("supports/<int:pk>/", widgets.FinancialBenefitDetailView.as_view(), name="opports_detail_view"),
-    # path("supports/edu_credit/", widgets.EduCreditView.as_view(), name="edu_credit_view"),
-    # path("searching/result/detail/<slug:slug>", widgets.SearchDetail.as_view(), name="search_detail"),
-    # path("supports/credit/opportunity/", widgets.FinancialBenefitView.as_view(), name="credit_opport_view"),
 ]
 
 urlpatterns = [] + posts + news + widgets
