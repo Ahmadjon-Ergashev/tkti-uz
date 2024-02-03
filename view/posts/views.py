@@ -72,9 +72,9 @@ class PostsListView(ListView):
         context["parent"] = navbar_name.parent
         context["title_slug"] = navbar_name.slug
         if len(context["object_list"]) == 1:
-            context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
-                post=context["object_list"][0]).only("name", "pdf_file")
             try:
+                context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
+                    post=context["object_list"][0]).only("name", "pdf_file")
                 context["connected_faculty_dact"] = news.News.objects.filter(
                     faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12].only(
                     "title", "slug", "added_at", "post_viewed_count").prefetch_related(
