@@ -21,15 +21,14 @@ def global_variables(request):
                 "social_networks": widgets.SocialNetworks.objects.order_by("order_num").only(
                     "name", "color", "url", "icon"
                 ),
-                "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
-                    "url", "name"
-                ),
             }
-            cache.set("navbar", navbar_list, 60*20)
+            cache.set("navbar", navbar_list, 60*30)
     except Exception as e:
         print(e)
-
     context = {
+        "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
+            "url", "name"
+        ),
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
 
         # text variables

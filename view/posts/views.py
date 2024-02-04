@@ -79,29 +79,18 @@ class PostsListView(ListView):
         context["parent"] = navbar_name.parent
         context["title_slug"] = navbar_name.slug
         if len(context["object_list"]) == 1:
-            extra_pdf_cache = {}
             try:
-                extra_pdf_cache = cache.get("extra_pdf_cache_list_view")
-                if not extra_pdf_cache:
-                    extra_pdf_list = widgets.ExtraFile.objects.filter(
-                        post=context["object_list"][0]).only("name", "pdf_file")
-                    connected_faculty_dact = news.News.objects.filter(
-                        faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12].only(
-                        "title", "slug", "added_at", "post_viewed_count").prefetch_related(
-                        "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+                extra_pdf_list = widgets.ExtraFile.objects.filter(
+                    post=context["object_list"][0]).only("name", "pdf_file")
+                connected_faculty_dact = news.News.objects.filter(
+                    faculty_dact=context["object_list"][0].id, status="pub").order_by("-added_at")[:12].only(
+                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                    "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
 
-                    cached_data = {
-                        "extra_pdf_list": extra_pdf_list,
-                        "connected_faculty_dact": connected_faculty_dact,
-                    }
-
-                    cache.set('extra_pdf_cache_list_view', cached_data, 60*20)
+                context["extra_pdf_list"] = extra_pdf_list
+                context["connected_faculty_dact"] = connected_faculty_dact
             except Exception as e:
                 print(e, 141)
-            if extra_pdf_cache is None:
-                extra_pdf_cache = {}
-            context["extra_pdf_list"] = extra_pdf_cache.get("extra_pdf_list", [])
-            context["connected_faculty_dact"] = extra_pdf_cache.get("connected_faculty_dact", [])
         try:
             context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar_name.parent.id)
         except AttributeError:
@@ -143,29 +132,17 @@ class PostDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = context["object"]
-        extra_pdf_cache = {}
         try:
-            extra_pdf_cache = cache.get("extra_pdf_cache_detail")
-            if not extra_pdf_cache:
-                extra_pdf_list = widgets.ExtraFile.objects.filter(
-                    post=post).only("name", "pdf_file")
-                connected_faculty_dact = news.News.objects.filter(
-                    faculty_dact=post, status="pub").order_by("-added_at")[:12].only(
-                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
-                    "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
-
-                cached_data = {
-                    "extra_pdf_list": extra_pdf_list,
-                    "connected_faculty_dact": connected_faculty_dact,
-                }
-
-                cache.set('extra_pdf_cache_detail', cached_data, 60 * 20)
+            extra_pdf_list = widgets.ExtraFile.objects.filter(
+                post=post).only("name", "pdf_file")
+            connected_faculty_dact = news.News.objects.filter(
+                faculty_dact=post, status="pub").order_by("-added_at")[:12].only(
+                "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+            context["extra_pdf_list"] = extra_pdf_list
+            context["connected_faculty_dact"] = connected_faculty_dact
         except Exception as e:
             print(e, 141)
-        if extra_pdf_cache is None:
-            extra_pdf_cache = {}
-        context["extra_pdf_list"] = extra_pdf_cache.get("extra_pdf_list", [])
-        context["connected_faculty_dact"] = extra_pdf_cache.get("connected_faculty_dact", [])
         navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
         context["title"] = navbar.name
         context["depended_news"] = _("Mavzuga aloqador yangiliklar")
