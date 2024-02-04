@@ -19,7 +19,7 @@ services:
       - my_network
 
   redis:
-    image: "regis:latest"
+    image: "redis:latest"
     container_name: "tkti_redis"
     restart: always
     networks:
