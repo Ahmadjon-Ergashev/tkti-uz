@@ -18,6 +18,13 @@ services:
     networks:
       - my_network
 
+  redis:
+    image: "regis:latest"
+    container_name: "tkti_redis"
+    restart: always
+    networks:
+      - my_network
+
 networks:
   my_network:
 
