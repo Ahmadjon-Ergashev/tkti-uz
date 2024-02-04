@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 
 # local
@@ -8,18 +9,28 @@ from main.models import (
 
 
 def global_variables(request):
+    navbar = {}
+    try:
+        navbar = cache.get("navbar")
+        if not navbar:
+            navbar_list = {
+                "today": datetime.now(),
+                "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
+                    "name", "slug", "id"
+                ).prefetch_related("children"),
+                "social_networks": widgets.SocialNetworks.objects.order_by("order_num").only(
+                    "name", "color", "url", "icon"
+                ),
+                "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
+                    "url", "name"
+                ),
+            }
+            cache.set("navbar", navbar_list, 60*20)
+    except Exception as e:
+        print(e)
+
     context = {
-        "today": datetime.now(),
-        "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
-            "url", "name"
-        ),
-        "social_networks": widgets.SocialNetworks.objects.order_by("order_num").only(
-            "name", "color", "url", "icon"
-        ),
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
-        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
-            "name", "slug", "id"
-        ).prefetch_related("children"),
 
         # text variables
         "next": _("oldinga"),
@@ -67,4 +78,6 @@ def global_variables(request):
         "talented_student_title": _("Iqtidorli talabalar"),
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
-    return context | translate_words
+    if navbar is None:
+        navbar = {}
+    return context | translate_words | navbar
