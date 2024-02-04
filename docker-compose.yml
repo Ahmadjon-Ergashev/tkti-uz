@@ -9,7 +9,7 @@ services:
     command: bash ./entrypoint.sh
     volumes:
       - .:/usr/src/app
-      - media_volume:/var/www/tkti_uz/media
+      - /var/www/tkti_uz/media:/var/www/tkti_uz/media
       - ./static:/usr/src/app/static
     ports:
       - 8000:8000
