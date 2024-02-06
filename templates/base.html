@@ -21,7 +21,16 @@
     <link rel="stylesheet" href="{% static 'css/styles/footer/footer.css' %}">
     <!-- bootstrap -->
     <link rel="stylesheet" href="{% static 'css/modules/bootstrap/bootstrap.min.css' %}">
-
+    <style>
+        .modal_text {
+            color: #222;
+            transition: 0.5s;
+        }
+        .modal_text:hover {
+            color: #111;
+            background-color: #ddd;
+        }
+    </style>
 </head>
 <body>
     <!-- social media -->
@@ -79,12 +88,12 @@
     <!-- bottom right buttons -->
     <div class="bottom_right_btns">
         <ul>
-<!--            <li>-->
-<!--                &lt;!&ndash; open search window button &ndash;&gt;-->
-<!--                <button type="button" id="open_search_window" class="open_search_window" title="Qidirish" data-bs-toggle="modal" data-bs-target="#search_window">-->
-<!--                    <i class="fas fa-search"></i>-->
-<!--                </button>-->
-<!--            </li>-->
+            <li>
+                <!-- open search window button -->
+                <button type="button" id="open_search_window" class="open_search_window" title="Qidirish" data-bs-toggle="modal" data-bs-target="#search_window">
+                    <i class="fas fa-search"></i>
+                </button>
+            </li>
             <li>
                 <!-- show social media buttons -->
                 <button type="button" id="show_social_media_btn" class="show_social_media" data-bs-toggle="tooltip" data-bs-placement="left" title="Ijtimoiy tarmoqlar">
@@ -148,6 +157,11 @@
                                     <img src="{% static 'images/the.jpg' %}" width="20" alt="tkti.uz">
                                 </a>
                             </li>
+                            <li class="ms-2">
+                                <a href="" type="button" data-bs-toggle="modal" data-bs-target="#entering_study_window" title="Qo'shma ta'lim qabul">
+                                    <img src="{% static 'images/study.jpg' %}" width="20" alt="tkti.uz">
+                                </a>
+                            </li>
                             <!-- <li>
                                 <a href="" class="p-0 again btn btn-sm dropdown-toggle dropdown-toggle-split" id="again_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {% blocktrans %}Yana{% endblocktrans %}
@@ -161,6 +175,30 @@
                                 </ul>
                             </li> -->
                         </ul>
+                    </div>
+                    <!-- Button trigger modal -->
+
+                    <div class="modal fade" id="entering_study_window" tabindex="-1" aria-labelledby="entering_study" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                        {% blocktrans %} 2023/2024 o‘quv yili {% endblocktrans %}
+                                    </h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <a href="https://qabul.tkti.uz/uz/application"
+                                       target="_blank" class="d-block p-3 border mb-2 modal_text">
+                                        {% blocktrans %}Toshkent kimyo-texnologiya instituti qo'shma talim dasturi{% endblocktrans %}
+                                    </a>
+                                    <a href="https://tkti-yangiyer.vercel.app/uz/application" target="_blank"
+                                       class="d-block p-3 border modal_text">
+                                        {% blocktrans %}Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer filiali){% endblocktrans %}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav text-xxl-end">
                         <ul>
