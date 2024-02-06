@@ -17,24 +17,25 @@ from main.models import (
 class Home(View):
     template_name = 'home.html'
 
-    @method_decorator(cache_page(60*30))
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
     def get(self, request, *args, **kwargs):
-        objects_list = {
-            "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
-            "statistika": widgets.Statistika.objects.all().order_by("order_num").only(
-                "name", "icon", "url", "quantity"
-            ),
-            "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time").only(
-                "name", "logo", "link"
-            ),
-            "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
-                "image", "f_name", "desc"
-            ),
-        }
-        context = objects_list
+        object_list_cache = cache.get('object_list_cache')
+        if not object_list_cache:
+            objects_list = {
+                "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
+                "statistika": widgets.Statistika.objects.all().order_by("order_num").only(
+                    "name", "icon", "url", "quantity"
+                ),
+                "usefull_links": widgets.UsefullLinks.objects.all().order_by("-add_time").only(
+                    "name", "logo", "link"
+                ),
+                "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
+                    "image", "f_name", "desc"
+                ),
+            }
+            cache.set('object_list_cache', objects_list, 60*30)
+            if object_list_cache is None:
+                object_list_cache = {}
+        context = object_list_cache
         return render(request, self.template_name, context)
 
 
