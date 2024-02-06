@@ -15,9 +15,6 @@ def global_variables(request):
         if not navbar:
             navbar_list = {
                 "today": datetime.now(),
-                "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
-                    "name", "slug", "id"
-                ).prefetch_related("children"),
                 "social_networks": widgets.SocialNetworks.objects.order_by("order_num").only(
                     "name", "color", "url", "icon"
                 ),
@@ -26,6 +23,9 @@ def global_variables(request):
     except Exception as e:
         print(e)
     context = {
+        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
+            "name", "slug", "id"
+        ).prefetch_related("children"),
         "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
             "url", "name"
         ),
