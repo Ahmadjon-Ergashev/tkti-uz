@@ -112,6 +112,8 @@ class PostsListView(ListView):
         context["login_cabinet"] = _("Shaxsiy kabinetga kirish")
         context["lessons_schedule"] = _("Dars jadvali")
         context["students_hotel"] = _("Talabalar turar joyiga onlayn ariza berish")
+        context["added_study"] = _("Toshkent kimyo-texnologiya instituti qo'shma talim dasturi")
+        context["added_study_branch"] = _("Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer filiali)")
 
         return context
 
