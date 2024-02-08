@@ -90,6 +90,31 @@ class ExtraFilesTabularInline(admin.TabularInline):
     model = widgets.ExtraFile
     extra = 1
 
+    fieldsets = (
+        (_("O'zbek tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_uz",
+            ),
+        }),
+        (_("Rus tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_ru",
+            ),
+        }),
+        (_("Ingiliz tilida"), {
+            'classes': ('collapse',),
+            "fields": (
+                "name_en",
+            ),
+        }),
+        (None, {
+            'classes': ('collapse',),
+            "fields": ("pdf_file", )
+        })
+    )
+
 
 @admin.register(posts.Posts)
 class PostsAdmin(admin.ModelAdmin):

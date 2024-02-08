@@ -32,7 +32,7 @@ class AdsSerializers(serializers.ModelSerializer):
 class VideoSerializers(serializers.ModelSerializer):
     class Meta: 
         model = news.VideoGallery
-        fields = ["id", "title", "poster", "post_viewed_count", "added_at"]
+        fields = ["id", "title", "poster", "post_viewed_count", "slug", "added_at"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)

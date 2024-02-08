@@ -107,6 +107,7 @@ class PostsListView(ListView):
         context["depended_faq"] = _("Mavzuga aloqador savol va javoblar")
         context["empty"] = _("Afsuski hozircha ma'lumotlar topilmadi :(")
         context["brm"] = widgets.BRMItems.objects.all().order_by("number")
+        context["digitizations"] = widgets.Digitization.objects.only("name", "icon")
         context["appeal"] = _("Rektorga murojaat")
         context["change_last_name"] = _("Familyani o'zgartirish")
         context["login_cabinet"] = _("Shaxsiy kabinetga kirish")

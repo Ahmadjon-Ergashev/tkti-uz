@@ -166,7 +166,7 @@ class Statistika(models.Model):
     name = models.CharField(_("Nomi"), max_length=80, unique=True)
     icon = models.CharField(_("icon"), max_length=50, null=True)
     quantity = models.IntegerField(_("soni"), default=0)
-    url = models.URLField(max_length=70, verbose_name="url manzil", null=True, blank=True)
+    url = models.URLField(max_length=300, verbose_name="url manzil", null=True, blank=True)
     order_num = models.IntegerField(_("Tartib raqam"), default=0)
     added_at = models.DateTimeField(auto_now_add=True)   
 
@@ -192,7 +192,6 @@ class Year(models.Model):
     
     def __str__(self):
         return self.year
-
 
 
 class Flag(models.Model):
@@ -357,3 +356,17 @@ class FinancialBenefit(models.Model):
         db_table = 'financial_benefits'
         verbose_name = _("Moliyaviy imtiyozlar")
         verbose_name_plural = _("Moliyaviy imtiyozlar")
+
+
+class Digitization(models.Model):
+    name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True, blank=True)
+    icon = models.CharField(max_length=255, verbose_name=_("Icon"), null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        db_table = 'digitizations'
+        verbose_name = _("Raqamlashtirish")
+        verbose_name_plural = _("Raqamlashtirish")

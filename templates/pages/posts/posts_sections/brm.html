@@ -30,6 +30,30 @@
                 </div>
             {% endfor %}
         </div>
+        {% if object.video_file %}
+            <div class="post_video">
+                <video width="100%" controls>
+                    <source src="{{ object.video_file.url }}" type="video/mp4">
+                </video>
+            </div>
+        {% endif %}
+        {% if object.pdf_file %}
+            <div class="post_pdf mt-5">
+                <iframe
+                    src="{{ object.pdf_file.url }}"
+                    width="100%"
+                    height="800"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        {% endif %}
+    <br><br>
+        {% if extra_pdf_list %}
+            {% include './extra_pdf.html' %}
+        {% endif %}
         <div class="post_footer">
             <p class="text-end fw-bold">{{ object.author_post }}</p>
             <div class="time_and_view">

@@ -11,13 +11,12 @@
 }
 
 .news_ads_videos .card {
-  height: 300px;
+  height: 350px;
   min-height: 300px;
 }
 
 .all_events .card {
-  height: 270px;
-  min-height: 270px;
+  height: 300px;
 }
 
 #brm_header .brm_card {

@@ -34,6 +34,7 @@
 </head>
 <body>
     <!-- social media -->
+    <marquee behavior="" direction=""><b>{% blocktrans %}Sayt test rejimida ishlamoqda{% endblocktrans %}</b></marquee>
     <div class="socials">    
         <ul id="social_media_btn">
             {% for nets in social_networks %}    
@@ -269,7 +270,8 @@
                                     {% for child in nav.children.all %}
                                         <li class="nav-item dropdown" style="width: 300px;">
                                             <li class="nav-item">
-                                                <a href="/posts/navbar/{{child.slug}}" class="nav-link mx-2 active">{{ child.name }}</a>
+                                                <a href="/posts/navbar/{{child.slug}}"
+                                                   class="nav-link mx-2 active children_nav">{{ child.name }}</a>
                                             </li>
                                         </li>
                                     {% endfor %}

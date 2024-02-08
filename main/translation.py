@@ -49,23 +49,23 @@ class WorkersTranslation(TranslationOptions):
 @register(posts.SectionsAndCenters)
 class SectionsAndCentersTranslation(TranslationOptions):
     fields = ("title", "about", "target", "activity")
-    
+
 
 @register(posts.UniversityAdmistrations)
 class UniversityAdmistrationsTranslation(TranslationOptions):
-    fields = ("f_name", "position", "admission_days", "short_info", 
+    fields = ("f_name", "position", "admission_days", "short_info",
               "scientific_direction", "main_tasks_in_position", "scientific_activity")
-    
+
 
 @register(posts.TalentedStudents)
 class TalentedStudentsTranslation(TranslationOptions):
     fields = ("f_name", "desc")
-    
+
 
 @register(posts.BossSection)
 class BossSectionTranslation(TranslationOptions):
     fields = ("f_name", )
-    
+
 
 @register(posts.FieldOfEducation)
 class FieldOfEducationTranslation(TranslationOptions):
@@ -75,12 +75,12 @@ class FieldOfEducationTranslation(TranslationOptions):
 @register(posts.StudyDegrees)
 class StudyDegreesTranslation(TranslationOptions):
     fields = ("name", )
-    
+
 
 @register(posts.EducationalAreas)
 class EducationalAreasTranslation(TranslationOptions):
     fields = ("name", "desc", "application_procedure", "tuition_fee", "address", "you_may_become")
-    
+
 
 @register(posts.ModuleOfStudyPrograme)
 class ModuleOfStudyProgrameTranslation(TranslationOptions):
@@ -93,27 +93,27 @@ class LearningWayTranslation(TranslationOptions):
 
 
 """ news models translations file """
-    
+
 
 @register(news.Category)
 class CategoryTranslation(TranslationOptions):
     fields = ("name", )
-    
+
 
 @register(news.News)
 class NewsTranslation(TranslationOptions):
     fields = ("title", "subtitle", "post")
-    
+
 
 @register(news.Ads)
 class AdsTranslation(TranslationOptions):
     fields = ("title", "subtitle", "post")
-    
+
 
 @register(news.Events)
 class EventsTranslation(TranslationOptions):
     fields = ("title", "subtitle", "post", "location")
-    
+
 
 @register(news.VideoGallery)
 class VideoGalleryTranslation(TranslationOptions):
@@ -121,6 +121,15 @@ class VideoGalleryTranslation(TranslationOptions):
 
 
 """ widgets models translations file """
+
+@register(widgets.Digitization)
+class DigitizationTranslation(TranslationOptions):
+    fields = ("name", )
+
+
+@register(widgets.ExtraFile)
+class ExtraFileTranslation(TranslationOptions):
+    fields = ("name", )
 
 
 @register(widgets.EventTypes)

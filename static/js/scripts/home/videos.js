@@ -10,6 +10,7 @@ $(document).ready(() => {
         },
         success: function (data){
             data.map((obj) => {
+                console.log(obj)
                 let item_card = `
                     <div class="col-12 col-lg-4 col-xxl-3 mb-3">
                         <div class="item">

@@ -32,5 +32,14 @@ $(document).ready(function() {
             $(this).prop("controls", false);
         }
     );
-    $(".ql-align-center").addClass("text-center");
+    $(".ql-align-center").addClass("text-center")
+    let regex = new RegExp("moliya")
+    $(".children_nav").map((item) => {
+        let text = $(".children_nav")[item].href
+        console.log()
+        if (regex.test(text)){
+            $(".children_nav")[item].href = "/supports/"
+        }
+    })
+
 });
