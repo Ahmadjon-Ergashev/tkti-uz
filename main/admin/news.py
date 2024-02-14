@@ -20,7 +20,7 @@ def duplicate(modeladmin, request, queryset):
 @admin.register(news.News)
 class NewsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
-    list_max_show_all = 20
+    list_per_page = 10
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
     list_editable = ("status", )
@@ -121,6 +121,7 @@ class NewsAdmin(admin.ModelAdmin):
 @admin.register(news.Ads)
 class AdsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
+    list_per_page = 10
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
     filter_horizontal = ["hashtag"]
@@ -193,6 +194,7 @@ class AdsAdmin(admin.ModelAdmin):
 @admin.register(news.Events)
 class EventsAdmin(admin.ModelAdmin):
     actions = (duplicate, )
+    list_per_page = 10
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
     list_display_links = ("title_uz", )
@@ -264,6 +266,7 @@ class EventsAdmin(admin.ModelAdmin):
 @admin.register(news.VideoGallery)
 class VideoGallyadmin(admin.ModelAdmin):
     actions = [duplicate]
+    list_per_page = 10
     list_editable = ("status", )
     list_display_links = ("id", "title_uz")
     prepopulated_fields = ({"slug": ("title_uz", )})
@@ -286,8 +289,10 @@ class VideoGallyadmin(admin.ModelAdmin):
         }),
     )
 
+
 @admin.register(news.PhotoGallary)
 class PhotoGallary(admin.ModelAdmin):
+    list_per_page = 5
     readonly_fields = ("get_image", )
     list_display_links = ("id", "get_image")
     list_display = ("id", "image", "news", "get_image")

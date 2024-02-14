@@ -14,6 +14,7 @@ def simple_clone(modeladmin, request, queryset):
 
 @admin.register(widgets.SocialNetworks)
 class SocialNetworkingAdmin(admin.ModelAdmin):     
+    list_per_page = 10
     actions = [simple_clone]
     ordering = ("-added_at", )
     search_fields = ("name_uz", )
@@ -64,6 +65,7 @@ class SocialNetworkingAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.HeaderIMG)
 class HeaderIMGAdmin(admin.ModelAdmin):
+    list_per_page = 10
     actions = [simple_clone]
     list_editable = ("order_num", )
     readonly_fields = ["get_image"]
@@ -76,6 +78,7 @@ class HeaderIMGAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.UsefullLinks)
 class LinksAdmin(admin.ModelAdmin):
+    list_per_page = 10
     actions = [simple_clone]
     list_display_links = ("name_uz", )
     readonly_fields = ("add_time", "get_logo",)
@@ -119,6 +122,7 @@ class LinksAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.QuickLinks)
 class QuickLinksAdmin(admin.ModelAdmin):
+    list_per_page = 10
     ordering = ("-added_at", )
     actions = [simple_clone]
     readonly_fields = ("added_at", )
@@ -160,6 +164,7 @@ class QuickLinksAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.EventTypes)
 class EventTypesAdmin(admin.ModelAdmin):
+    list_per_page = 10
     ordering = ("-added_at", )
     actions = [simple_clone]
     readonly_fields = ("added_at", )
@@ -195,6 +200,7 @@ class EventTypesAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
+    list_per_page = 10
     ordering = ("-added_at", )
     actions = [simple_clone]
     readonly_fields = ("added_at", )
@@ -240,6 +246,7 @@ admin.site.register(widgets.Hashtag)
 
 @admin.register(widgets.Flag)
 class FlagAdmin(admin.ModelAdmin):
+    list_per_page = 10
     actions = [simple_clone]
     list_display = ("id", "title_uz")
     list_display_links = ("title_uz", )
@@ -270,6 +277,7 @@ class FlagAdmin(admin.ModelAdmin):
 @admin.register(widgets.CoatofArms)
 class CoatofArmsAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     list_display = ("id", "title_uz")
     list_display_links = ("title_uz", )
 
@@ -298,6 +306,7 @@ class CoatofArmsAdmin(admin.ModelAdmin):
 @admin.register(widgets.Anthem)
 class AnthemAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     list_display = ("id", "title_uz")
     list_display_links = ("title_uz", )
 
@@ -326,6 +335,7 @@ class AnthemAdmin(admin.ModelAdmin):
 @admin.register(widgets.FaqCategory)
 class FaqCategoryAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     list_display = ("id", "name")
     list_display_links = ("id", "name")
 
@@ -354,6 +364,7 @@ class FaqCategoryAdmin(admin.ModelAdmin):
 @admin.register(widgets.Faq)
 class FaqAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     list_filter = ("category", )
     list_editable = ("is_active", )
     readonly_fields = ("added_at", )
@@ -394,6 +405,7 @@ class FaqAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Semesters)
 class SemestersAdmin(admin.ModelAdmin):
+    list_per_page = 10
     actions = [simple_clone]
     list_display = ("id", "name")
     readonly_fields = ("added_at", )
@@ -428,6 +440,7 @@ class SemestersAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.Digitization)
 class DigitizationAdmin(admin.ModelAdmin):
+    list_per_page = 10
     actions = [simple_clone]
     list_display = ("id", "name")
     readonly_fields = ("added_at", )
@@ -467,6 +480,7 @@ class DigitizationAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.BRMItems)
 class BRMItemsAdmin(admin.ModelAdmin):
+    list_per_page = 10
     actions = [simple_clone]
     list_display = ("id", "name")
     readonly_fields = ("added_at", )
@@ -506,6 +520,7 @@ class BRMItemsAdmin(admin.ModelAdmin):
 
 @admin.register(widgets.FinancialBenefit)
 class FinancialBenefitAdmin(admin.ModelAdmin):
+    list_per_page = 10
     search_fields = ("name", )
     list_filter = ("added_at", )
     readonly_fields = ("added_at", )

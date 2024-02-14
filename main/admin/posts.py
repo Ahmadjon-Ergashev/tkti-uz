@@ -35,6 +35,7 @@ def simple_clone(modeladmin, request, queryset):
 @admin.register(posts.Navbar)
 class NavbarAdmin(MPTTModelAdmin):
     """ Admin view for Navigation bar model """
+    list_per_page = 10
     ordering = ("name_uz", )
     date_hierarchy = "added_at"
     list_display_links = ("name_uz", )
@@ -121,7 +122,7 @@ class PostsAdmin(admin.ModelAdmin):
     """ Admin view for Posts """
     actions = (duplicate, )
     inlines = [ExtraFilesTabularInline]
-    list_max_show_all = 20
+    list_per_page = 10
     ordering = ("-added_at", )
     date_hierarchy = "added_at"
     list_editable = ("status", )
@@ -202,6 +203,7 @@ class PostsAdmin(admin.ModelAdmin):
 @admin.register(posts.FacultyAdministration)
 class FacultyAdmistrationAdmin(admin.ModelAdmin):
     actions = [clone]
+    list_per_page = 10
     ordering = ("order_num", )
     list_filter = ("added_at", )
     list_editable = ("order_num", )
@@ -258,6 +260,7 @@ class FacultyAdmistrationAdmin(admin.ModelAdmin):
 @admin.register(posts.Departments)
 class DepartmentsAdmin(admin.ModelAdmin):
     actions = [duplicate]
+    list_per_page = 10
     search_fields = ("name_uz", )
     list_editable = ("faculty", )
     list_display_links = ("name_uz", )
@@ -311,6 +314,7 @@ class DepartmentsAdmin(admin.ModelAdmin):
 @admin.register(posts.DepartmentsAdmistrations)
 class DeptAdminstraAdmin(admin.ModelAdmin):
     actions = [clone]
+    list_per_page = 10
     search_fields = ("f_name_uz", )
     list_editable = ("order_num", ) 
     list_display_links = ("f_name_uz", )
@@ -359,6 +363,7 @@ class DeptAdminstraAdmin(admin.ModelAdmin):
 @admin.register(posts.ContactSection)
 class ContactSectionAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     readonly_fields = ["get_image"]
     list_display_links = ("id", "title")
     list_display = ("id", "title", "order_num")
@@ -398,6 +403,7 @@ class ContactSectionAdmin(admin.ModelAdmin):
 @admin.register(posts.Workers)
 class WorkersAdmin(admin.ModelAdmin):
     actions = [clone]
+    list_per_page = 10
     readonly_fields = ["get_image"]
     list_display_links = ("f_name_uz", )
     search_fields = ("f_name_uz", "f_name_ru", "f_name_en")
@@ -438,6 +444,7 @@ class WorkersAdmin(admin.ModelAdmin):
 @admin.register(posts.SectionsAndCenters)
 class SectionsAdmin(admin.ModelAdmin):
     actions = [duplicate]
+    list_per_page = 10
     list_display_links = ("title_uz", )
     list_display = ("id", "title_uz", "added_at")
     prepopulated_fields = ({"slug": ("title_uz", )})
@@ -479,6 +486,7 @@ class SectionsAdmin(admin.ModelAdmin):
 @admin.register(posts.UniversityAdmistrations)
 class UniversityAdminsAdmin(admin.ModelAdmin):
     actions = [duplicate]
+    list_per_page = 10
     list_editable = ("order_num", )
     readonly_fields = ("get_image", "added_at")
     prepopulated_fields = ({"slug": ("f_name_uz", )})   
@@ -525,6 +533,7 @@ class UniversityAdminsAdmin(admin.ModelAdmin):
 @admin.register(posts.TalentedStudents)
 class TalentedStudentsAdmin(admin.ModelAdmin):
     actions = [clone]
+    list_per_page = 10
     search_fields = ("f_name_uz", )
     readonly_fields = ("get_image", "added_at")
     list_display_links = ("id", "get_image", "f_name_uz")
@@ -569,6 +578,7 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
 @admin.register(posts.BossSection)
 class BossSection(admin.ModelAdmin):
     actions = [clone]
+    list_per_page = 10
     list_display = ("id", "f_name")
     readonly_fields = ("get_image", )
     list_display_links = ("id", "f_name")
@@ -592,6 +602,7 @@ class BossSection(admin.ModelAdmin):
 @admin.register(posts.StudyDegrees)
 class StudyDegreesAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     search_fields = ("name_uz", )
     readonly_fields = ("added_at", )  
     list_display_links = ("id", "name_uz")
@@ -627,6 +638,7 @@ class StudyDegreesAdmin(admin.ModelAdmin):
 @admin.register(posts.FieldOfEducation)
 class FieldOfEducationAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     search_fields = ["name", ]
     readonly_fields = ("added_at", )
     list_display_links = ("id", "name")
@@ -667,6 +679,7 @@ class FieldOfEducationAdmin(admin.ModelAdmin):
 @admin.register(posts.LearningWay)
 class LearningWayAdmin(admin.ModelAdmin):
     actions = [simple_clone]
+    list_per_page = 10
     readonly_fields = ("added_at", )
     list_display_links = ("id", "name")
     list_display = ("id", "name", "study_degree", "fields_edu", "added_at")
@@ -706,6 +719,7 @@ class LearningWayAdmin(admin.ModelAdmin):
 @admin.register(posts.ModuleOfStudyPrograme)
 class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
     model = posts.ModuleOfStudyPrograme
+    list_per_page = 10
     actions = [simple_clone]
     search_fields = ("name_uz", )
     readonly_fields = ("added_at", )
@@ -753,10 +767,11 @@ class ModuleOfStudyProgrameTabularInline(admin.TabularInline):
 @admin.register(posts.EducationalAreas)
 class EducationalAreasAdmin(admin.ModelAdmin):
     actions = [simple_clone]
-    inlines = [ModuleOfStudyProgrameTabularInline]
+    list_per_page = 10
     search_fields = ("name_uz", )
     list_display_links = ("id", "name_uz")
     list_display = ("id", "name_uz", "added_at")
+    inlines = [ModuleOfStudyProgrameTabularInline]
     readonly_fields = ("added_at", "post_viewed_count")
 
     fieldsets = (
