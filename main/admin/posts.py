@@ -135,7 +135,7 @@ class PostsAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
-            "classes": ("extrapretty"),
+            "classes": ("extrapretty", ),
             "fields": (
                 "navbar", "status",
                 "added_at", "author_post"                 

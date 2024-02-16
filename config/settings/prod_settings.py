@@ -3,7 +3,7 @@ from config.settings.base import *
 
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS").split(" ")
 X_FRAME_OPTIONS = 'SAMEORIGIN'
-CSP_FRAME_ANCESTORS = "http://213.230.99.101"
+CSP_FRAME_ANCESTORS = "https://tkti.uz/"
 
 DATABASES = {
     'default': {
