@@ -33,7 +33,7 @@ def global_variables(request):
 
         # text variables
         "next": _("oldinga"),
-        "about": _("Xaqida"),
+        "about": _("Haqida"),
         "previous": _("ortga"),
         "target": _("Maqsadi"),
         "home": _("Bosh sahifa"),

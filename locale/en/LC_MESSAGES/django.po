@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-09 01:05+0500\n"
+"POT-Creation-Date: 2024-02-20 15:05+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,8 +69,8 @@ msgstr "English"
 msgid "Nusxa ko'chirish"
 msgstr "Copying"
 
-#: main/admin/news.py:35 main/admin/news.py:135 main/admin/news.py:206
-#: main/admin/posts.py:48 main/admin/posts.py:136 main/admin/posts.py:214
+#: main/admin/news.py:35 main/admin/news.py:136 main/admin/news.py:208
+#: main/admin/posts.py:49 main/admin/posts.py:137 main/admin/posts.py:216
 msgid "Umumiy o'zgaruvchilar"
 msgstr "Common variables"
 
@@ -78,64 +78,65 @@ msgstr "Common variables"
 msgid "Aloqadorlar"
 msgstr "Relates"
 
-#: main/admin/news.py:51 main/admin/news.py:142 main/admin/news.py:213
-#: main/admin/posts.py:143
+#: main/admin/news.py:51 main/admin/news.py:143 main/admin/news.py:215
+#: main/admin/posts.py:144
 msgid "Media fayllar"
 msgstr "Media files"
 
-#: main/admin/news.py:58 main/admin/news.py:148 main/admin/news.py:219
-#: main/admin/posts.py:94 main/admin/posts.py:149 main/admin/posts.py:373
-#: main/admin/posts.py:413 main/admin/posts.py:452 main/admin/posts.py:539
-#: main/admin/posts.py:601 main/admin/posts.py:641 main/admin/posts.py:680
-#: main/admin/posts.py:721 main/admin/posts.py:769 main/admin/widgets.py:31
-#: main/admin/widgets.py:91 main/admin/widgets.py:135 main/admin/widgets.py:170
-#: main/admin/widgets.py:211 main/admin/widgets.py:248
-#: main/admin/widgets.py:277 main/admin/widgets.py:305
-#: main/admin/widgets.py:333 main/admin/widgets.py:369
-#: main/admin/widgets.py:403 main/admin/widgets.py:442
-#: main/admin/widgets.py:481 main/admin/widgets.py:517
+#: main/admin/news.py:58 main/admin/news.py:149 main/admin/news.py:221
+#: main/admin/posts.py:95 main/admin/posts.py:150 main/admin/posts.py:378
+#: main/admin/posts.py:419 main/admin/posts.py:459 main/admin/posts.py:548
+#: main/admin/posts.py:612 main/admin/posts.py:653 main/admin/posts.py:693
+#: main/admin/posts.py:735 main/admin/posts.py:784 main/admin/widgets.py:32
+#: main/admin/widgets.py:94 main/admin/widgets.py:139 main/admin/widgets.py:175
+#: main/admin/widgets.py:217 main/admin/widgets.py:255
+#: main/admin/widgets.py:285 main/admin/widgets.py:314
+#: main/admin/widgets.py:343 main/admin/widgets.py:380
+#: main/admin/widgets.py:415 main/admin/widgets.py:455
+#: main/admin/widgets.py:495 main/admin/widgets.py:532
 msgid "O'zbek tilida"
 msgstr "In Uzbek language"
 
-#: main/admin/news.py:63 main/admin/news.py:154 main/admin/news.py:225
-#: main/admin/posts.py:100 main/admin/posts.py:155 main/admin/posts.py:379
-#: main/admin/posts.py:419 main/admin/posts.py:458 main/admin/posts.py:545
-#: main/admin/posts.py:607 main/admin/posts.py:647 main/admin/posts.py:686
-#: main/admin/posts.py:727 main/admin/posts.py:776 main/admin/widgets.py:37
-#: main/admin/widgets.py:97 main/admin/widgets.py:141 main/admin/widgets.py:176
-#: main/admin/widgets.py:217 main/admin/widgets.py:254
-#: main/admin/widgets.py:283 main/admin/widgets.py:311
-#: main/admin/widgets.py:339 main/admin/widgets.py:375
-#: main/admin/widgets.py:409 main/admin/widgets.py:448
-#: main/admin/widgets.py:487 main/admin/widgets.py:524
+#: main/admin/news.py:63 main/admin/news.py:155 main/admin/news.py:227
+#: main/admin/posts.py:101 main/admin/posts.py:156 main/admin/posts.py:384
+#: main/admin/posts.py:425 main/admin/posts.py:465 main/admin/posts.py:554
+#: main/admin/posts.py:618 main/admin/posts.py:659 main/admin/posts.py:699
+#: main/admin/posts.py:741 main/admin/posts.py:791 main/admin/widgets.py:38
+#: main/admin/widgets.py:100 main/admin/widgets.py:145
+#: main/admin/widgets.py:181 main/admin/widgets.py:223
+#: main/admin/widgets.py:261 main/admin/widgets.py:291
+#: main/admin/widgets.py:320 main/admin/widgets.py:349
+#: main/admin/widgets.py:386 main/admin/widgets.py:421
+#: main/admin/widgets.py:461 main/admin/widgets.py:501
+#: main/admin/widgets.py:539
 msgid "Rus tilida"
 msgstr "In Russion language"
 
-#: main/admin/news.py:69 main/admin/news.py:160 main/admin/news.py:231
-#: main/admin/posts.py:106 main/admin/posts.py:161 main/admin/posts.py:385
-#: main/admin/posts.py:425 main/admin/posts.py:464 main/admin/posts.py:551
-#: main/admin/posts.py:613 main/admin/posts.py:653 main/admin/posts.py:692
-#: main/admin/posts.py:733 main/admin/posts.py:783 main/admin/widgets.py:43
-#: main/admin/widgets.py:103 main/admin/widgets.py:147
-#: main/admin/widgets.py:182 main/admin/widgets.py:223
-#: main/admin/widgets.py:260 main/admin/widgets.py:289
-#: main/admin/widgets.py:317 main/admin/widgets.py:345
-#: main/admin/widgets.py:381 main/admin/widgets.py:415
-#: main/admin/widgets.py:454 main/admin/widgets.py:493
-#: main/admin/widgets.py:531
+#: main/admin/news.py:69 main/admin/news.py:161 main/admin/news.py:233
+#: main/admin/posts.py:107 main/admin/posts.py:162 main/admin/posts.py:390
+#: main/admin/posts.py:431 main/admin/posts.py:471 main/admin/posts.py:560
+#: main/admin/posts.py:624 main/admin/posts.py:665 main/admin/posts.py:705
+#: main/admin/posts.py:747 main/admin/posts.py:798 main/admin/widgets.py:44
+#: main/admin/widgets.py:106 main/admin/widgets.py:151
+#: main/admin/widgets.py:187 main/admin/widgets.py:229
+#: main/admin/widgets.py:267 main/admin/widgets.py:297
+#: main/admin/widgets.py:326 main/admin/widgets.py:355
+#: main/admin/widgets.py:392 main/admin/widgets.py:427
+#: main/admin/widgets.py:467 main/admin/widgets.py:507
+#: main/admin/widgets.py:546
 msgid "Ingiliz tilida"
 msgstr "In English"
 
-#: main/admin/news.py:75 main/admin/news.py:166 main/admin/news.py:237
-#: main/admin/news.py:281 main/admin/posts.py:66 main/admin/posts.py:167
-#: main/admin/posts.py:470 main/admin/posts.py:513 main/admin/posts.py:557
-#: main/admin/posts.py:619 main/admin/posts.py:659 main/admin/posts.py:698
-#: main/admin/posts.py:739 main/admin/posts.py:790 main/admin/widgets.py:49
-#: main/admin/widgets.py:109 main/admin/widgets.py:153
-#: main/admin/widgets.py:188 main/admin/widgets.py:229
-#: main/admin/widgets.py:387 main/admin/widgets.py:421
-#: main/admin/widgets.py:460 main/admin/widgets.py:499
-#: main/admin/widgets.py:538
+#: main/admin/news.py:75 main/admin/news.py:167 main/admin/news.py:239
+#: main/admin/news.py:284 main/admin/posts.py:67 main/admin/posts.py:168
+#: main/admin/posts.py:477 main/admin/posts.py:521 main/admin/posts.py:566
+#: main/admin/posts.py:630 main/admin/posts.py:671 main/admin/posts.py:711
+#: main/admin/posts.py:753 main/admin/posts.py:805 main/admin/widgets.py:50
+#: main/admin/widgets.py:112 main/admin/widgets.py:157
+#: main/admin/widgets.py:193 main/admin/widgets.py:235
+#: main/admin/widgets.py:398 main/admin/widgets.py:433
+#: main/admin/widgets.py:473 main/admin/widgets.py:513
+#: main/admin/widgets.py:553
 msgid "Automatik to'ldiriladigan fieldlar"
 msgstr "Auto-filled fields"
 
@@ -143,15 +144,15 @@ msgstr "Auto-filled fields"
 msgid "Yangilik uchun tanlangan rasmli fayl"
 msgstr "Selected image file for news"
 
-#: main/admin/news.py:180
+#: main/admin/news.py:181
 msgid "E'lonlar uchun tanlangan rasmli fayl"
 msgstr "Selected image file for ads"
 
-#: main/admin/news.py:251
+#: main/admin/news.py:253
 msgid "Tadbir uchun tanlangan rasmli fayl"
 msgstr "Selected image file for event"
 
-#: main/admin/posts.py:58 main/models/news.py:18 main/models/posts.py:22
+#: main/admin/posts.py:59 main/models/news.py:18 main/models/posts.py:22
 #: main/models/posts.py:339 main/models/posts.py:355 main/models/posts.py:371
 #: main/models/posts.py:391 main/models/widgets.py:59 main/models/widgets.py:74
 #: main/models/widgets.py:131 main/models/widgets.py:149
@@ -163,29 +164,29 @@ msgstr "Selected image file for event"
 msgid "Nomi"
 msgstr "Name"
 
-#: main/admin/posts.py:182
+#: main/admin/posts.py:183
 msgid "Post uchun tanlangan rasmli fayl"
 msgstr "Selected image file for post"
 
-#: main/admin/posts.py:219 main/admin/posts.py:273 main/admin/posts.py:328
+#: main/admin/posts.py:221 main/admin/posts.py:276 main/admin/posts.py:332
 msgid "O'zbek tilida ma'lumotlar"
 msgstr "Information in Uzbek"
 
-#: main/admin/posts.py:225 main/admin/posts.py:279 main/admin/posts.py:334
+#: main/admin/posts.py:227 main/admin/posts.py:282 main/admin/posts.py:338
 msgid "Rus tilida ma'lumotlar"
 msgstr "Information in Russion"
 
-#: main/admin/posts.py:231 main/admin/posts.py:285 main/admin/posts.py:340
+#: main/admin/posts.py:233 main/admin/posts.py:288 main/admin/posts.py:344
 msgid "Ingiliz tilida ma'lumotlar"
 msgstr "Information in English"
 
-#: main/admin/posts.py:237 main/admin/posts.py:291 main/admin/posts.py:346
+#: main/admin/posts.py:239 main/admin/posts.py:294 main/admin/posts.py:350
 msgid "Automatik to'ldiriladigan bo'limlar"
 msgstr "Autocomplete sections"
 
-#: main/admin/posts.py:247 main/admin/posts.py:356 main/admin/posts.py:395
-#: main/admin/posts.py:435 main/admin/posts.py:522 main/admin/posts.py:566
-#: main/admin/posts.py:589
+#: main/admin/posts.py:249 main/admin/posts.py:360 main/admin/posts.py:400
+#: main/admin/posts.py:441 main/admin/posts.py:530 main/admin/posts.py:575
+#: main/admin/posts.py:599
 msgid "Tanlangan rasm"
 msgstr "Selected picture"
 
@@ -410,9 +411,9 @@ msgstr "Department name"
 msgid "Faqat PDF formatidagi faylni joylang"
 msgstr "Just upload the file in PDF format"
 
-#: main/models/posts.py:119 main/models/posts.py:244 main/models/posts.py:375
-#: main/models/widgets.py:306 view/my_context_proccessor.py:36
-msgid "Xaqida"
+#: main/models/posts.py:119 main/models/posts.py:375
+#: view/my_context_proccessor.py:36
+msgid "Haqida"
 msgstr "About"
 
 #: main/models/posts.py:120 main/models/posts.py:245
@@ -512,6 +513,10 @@ msgstr "Name of department and center"
 #: main/models/posts.py:236 main/models/posts.py:237
 msgid "Bo'lim va Markazlar xodimlari"
 msgstr "Department and Center workers"
+
+#: main/models/posts.py:244 main/models/widgets.py:306
+msgid "Xaqida"
+msgstr "About"
 
 #: main/models/posts.py:256 main/models/posts.py:257
 msgid "Bo'lim va Markazlar"
@@ -615,7 +620,7 @@ msgid "Kantrakt miqdori"
 msgstr "Contract amount"
 
 #: main/models/posts.py:405 view/posts/views.py:278 view/posts/views.py:374
-msgid "Kridit miqdori"
+msgid "Kredit miqdori"
 msgstr "Credit amount"
 
 #: main/models/posts.py:407 main/models/widgets.py:48
@@ -847,8 +852,6 @@ msgid "Huquqiy asos"
 msgstr "Legal basis"
 
 #: main/models/widgets.py:349 view/widgets/views.py:214
-#, fuzzy
-#| msgid "Rus tilida ma'lumotlar"
 msgid "Aloqa ma’lumotlari"
 msgstr "Information in Russion"
 
@@ -1120,7 +1123,7 @@ msgid "Ko'rish"
 msgstr "view"
 
 #: view/posts/views.py:276 view/posts/views.py:328 view/posts/views.py:372
-msgid "Ta'lim dasturi xaqida"
+msgid "Ta'lim dasturi haqida"
 msgstr "About educational programme"
 
 #: view/posts/views.py:277 view/posts/views.py:330 view/posts/views.py:373

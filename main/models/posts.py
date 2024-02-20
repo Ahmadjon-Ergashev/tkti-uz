@@ -116,7 +116,7 @@ class Departments(models.Model):
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
     pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
-    about = QuillField(verbose_name=_("Xaqida"), null=True, blank=True)
+    about = QuillField(verbose_name=_("Haqida"), null=True, blank=True)
     target = QuillField(verbose_name=_("Maqsad"), null=True, blank=True)
     activity = QuillField(verbose_name=_("Faoliyati"), null=True, blank=True)
     slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True, help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
@@ -372,7 +372,7 @@ class LearningWay(models.Model):
     study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
     fields_edu = models.ForeignKey(FieldOfEducation, on_delete=models.SET_NULL, null=True, verbose_name=_("Ta'lim sohasi"))
     image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
-    post = QuillField(verbose_name=_("Xaqida"), null=True, blank=True)
+    post = QuillField(verbose_name=_("Haqida"), null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
@@ -402,7 +402,7 @@ class EducationalAreas(models.Model):
     you_may_become_image = models.ImageField(verbose_name=_("Rasm"), null=True, blank=True, upload_to="image/you_may_become_image")
     you_may_become = QuillField(_("Siz bo'lishingiz mumkun"), null=True)
     full_time_fee = models.IntegerField(default=0, verbose_name=_("Kantrakt miqdori"))
-    dept_fee = models.IntegerField(default=0, verbose_name=_("Kridit miqdori"))
+    dept_fee = models.IntegerField(default=0, verbose_name=_("Kredit miqdori"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
     added_at = models.DateTimeField(auto_now_add=True)

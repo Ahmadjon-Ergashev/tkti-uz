@@ -273,9 +273,9 @@ class LearningWayDetailView(DetailView):
         data["title"] = obj.name
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
-        data["desc"] = _("Ta'lim dasturi xaqida")
+        data["desc"] = _("Ta'lim dasturi haqida")
         data["requirements"] = _("Kirish talablari")
-        data["dept_fee_title"] = _("Kridit miqdori")
+        data["dept_fee_title"] = _("Kredit miqdori")
         data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
@@ -325,7 +325,7 @@ class EducationalAreaView(ListView):
 
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
-        data["desc"] = _("Ta'lim dasturi xaqida")
+        data["desc"] = _("Ta'lim dasturi haqida")
         data["title"] = data["object_list"][0].name
         data["requirements"] = _("Kirish talablari")
         data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
@@ -369,9 +369,9 @@ class EducationalAreaDetailView(DetailView):
         data["title"] = obj.name
         data["view"] = _("Ko'rish")
         data["parent"] = obj.study_way
-        data["desc"] = _("Ta'lim dasturi xaqida")
+        data["desc"] = _("Ta'lim dasturi haqida")
         data["requirements"] = _("Kirish talablari")
-        data["dept_fee_title"] = _("Kridit miqdori")
+        data["dept_fee_title"] = _("Kredit miqdori")
         data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")

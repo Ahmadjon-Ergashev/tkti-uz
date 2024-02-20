@@ -42,11 +42,11 @@ $(document).ready(() => {
                 let cards = `
                     <li>
                         <div class="header_tabs_section">
-                            <span><a href="/ads/detail/${ news.slug }">${ news.added_at }</a></span>
+                            <span><a href="/news/detail/${ news.slug }">${ news.added_at }</a></span>
                             <span><i class="fas fa-eye"></i> ${ news.post_viewed_count }</span>
                         </div>
                         <div class="body_tabs_section">
-                            <a href="/ads/detail/${ news.slug }">
+                            <a href="/news/detail/${ news.slug }">
                                 ${ news.title.slice(0, 55) }
                             </a>
                         </div>
