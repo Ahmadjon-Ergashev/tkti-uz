@@ -361,6 +361,7 @@ class FinancialBenefit(models.Model):
 class Digitization(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True, blank=True)
     icon = models.CharField(max_length=255, verbose_name=_("Icon"), null=True, blank=True)
+    url = models.URLField(verbose_name=_("URL"), max_length=400, null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

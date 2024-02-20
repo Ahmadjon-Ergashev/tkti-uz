@@ -449,7 +449,7 @@ class DigitizationAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "icon",
+                "icon", "url"
             ),
         }),
         (_("O'zbek tilida"), {
