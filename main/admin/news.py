@@ -52,7 +52,8 @@ class NewsAdmin(admin.ModelAdmin):
             "classes": ("collapse", ),
             "fields": (
                 ("image", "get_image_file"),
-                ("pdf_file", "video_file")                
+                ("video_file", ),
+                ("pdf_file", "pdf_file_en", "pdf_file_ru")
             ),
         }),
         (_("O'zbek tilida"), {
@@ -143,7 +144,8 @@ class AdsAdmin(admin.ModelAdmin):
         (_("Media fayllar"), {
             "fields": (
                 ("image", "get_image_file"),
-                ("pdf_file", "video_file")                
+                ("video_file", ),
+                ("pdf_file", "pdf_file_en", "pdf_file_ru")
             ),
         }),
         (_("O'zbek tilida"), {
@@ -206,7 +208,7 @@ class EventsAdmin(admin.ModelAdmin):
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
-            "classes": ("extrapretty"),
+            "classes": ("extrapretty", ),
             "fields": (
                 "status", "event_type", "phone", 
                 "added_at", "author_post", "extra_phone"
@@ -215,7 +217,8 @@ class EventsAdmin(admin.ModelAdmin):
         (_("Media fayllar"), {
             "fields": (
                 ("image", "get_image_file"),
-                ("pdf_file", "video_file")                
+                ("video_file",),
+                ("pdf_file", "pdf_file_en", "pdf_file_ru")
             ),
         }),
         (_("O'zbek tilida"), {

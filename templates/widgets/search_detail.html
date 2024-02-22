@@ -26,19 +26,7 @@
                             </video>
                         </div>
                     {% endif %}
-                    {% if object.pdf_file %}
-                        <div class="post_pdf mt-3">
-                            <iframe 
-                                src="{{ object.pdf_file.url }}"
-                                width="100%" 
-                                height="700" 
-                                style="border:0;" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                    {% endif %}
+                    {% include "widgets/pdf_file.html" %}
                     {% if object.post %}
                         <div class="post_text mt-3" id="object_post">
                             {{ object.post.html | safe }}

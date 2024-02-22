@@ -48,6 +48,14 @@ class News(widgets.AbstractTemplate):
         verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
+    pdf_file_en = models.FileField(
+        verbose_name=_("EN PDF fayl"), upload_to="pdf/en/news/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_ru = models.FileField(
+        verbose_name=_("RU PDF fayl"), upload_to="pdf/ru/news/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
     video_file = models.FileField(
         verbose_name=_("Video fayl"), upload_to="videos/news/%Y-%m-%d/",
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
@@ -86,6 +94,14 @@ class Ads(widgets.AbstractTemplate):
     hashtag = models.ManyToManyField(widgets.Hashtag, related_name="ads_hashtags")
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/ads/%Y-%m-%d/", 
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_en = models.FileField(
+        verbose_name=_("EN PDF fayl"), upload_to="pdf/en/ads/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_ru = models.FileField(
+        verbose_name=_("RU PDF fayl"), upload_to="pdf/ru/ads/%Y-%m-%d/",
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     video_file = models.FileField(
@@ -151,6 +167,14 @@ class Events(widgets.AbstractTemplate):
     extra_phone = models.CharField(max_length=20, verbose_name=_("Qo'shimcha telefon raqam"), null=True, blank=True)
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_en = models.FileField(
+        verbose_name=_("EN PDF fayl"), upload_to="pdf/en/news/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_ru = models.FileField(
+        verbose_name=_("RU PDF fayl"), upload_to="pdf/ru/news/%Y-%m-%d/",
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     video_file = models.FileField(

@@ -16,7 +16,7 @@ from main.models import widgets
 class Navbar(MPTTModel):
     """ Navigation bar model """
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, 
+        User, on_delete=models.SET_NULL, null=True,
         verbose_name=_("object_make_user"), related_name="navbar_author"
     )
     name = models.CharField(verbose_name=_("Nomi"), max_length=100)
@@ -27,13 +27,14 @@ class Navbar(MPTTModel):
     inside_order_num = models.IntegerField(default=0, verbose_name=_("Ichki tartib raqam"))
     slug = models.SlugField(max_length=120, unique=True)
     added_at = models.DateTimeField(auto_now_add=True)
+    url = models.URLField(max_length=255, null=True, blank=True, help_text="Tegish shart emas")
     update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_navbar_user")
     updated_at = models.DateTimeField(auto_now=True)
 
     class MPTTMeta:
         order_insertion_by = ("inside_order_num", )
         added_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         db_table = "navbar"
         managed = True
@@ -47,12 +48,20 @@ class Navbar(MPTTModel):
 class Posts(widgets.AbstractTemplate):
     """ Posts """
     author = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, 
+        User, on_delete=models.SET_NULL, null=True,
         verbose_name=_("object_make_user"), related_name="post_author"
     )
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
     pdf_file = models.FileField(
-        verbose_name=_("PDF fayl"), upload_to="pdf/posts/%Y-%m-%d/", 
+        verbose_name=_("PDF fayl"), upload_to="pdf/posts/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_en = models.FileField(
+        verbose_name=_("EN PDF file"), upload_to="pdf/en/posts/%Y-%m-%d/",
+        null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
+    )
+    pdf_file_ru = models.FileField(
+        verbose_name=_("RU PDF file"), upload_to="pdf/ru/posts/%Y-%m-%d/",
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     video_file = models.FileField(
@@ -61,7 +70,7 @@ class Posts(widgets.AbstractTemplate):
     )
     faculty = models.BooleanField(default=False, verbose_name=_("Fakultet"), help_text=_("Agar shu post fakultet modeliga tegishli bo'lsa belgilang"))
     update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_post_user")
-    
+
     class Meta:
         db_table = "posts"
         managed = True
@@ -70,7 +79,7 @@ class Posts(widgets.AbstractTemplate):
 
     def __str__(self):
         return f"{self.navbar.name} | {self.title[:30]}"
-    
+
     def save(self, *args, **kwargs):
         if self._state.adding:
             im = Image.open(self.image)
@@ -87,7 +96,7 @@ class Posts(widgets.AbstractTemplate):
             super().save(*args, **kwargs)
 
 
-class FacultyAdministration(models.Model): 
+class FacultyAdministration(models.Model):
     """ model for faculty admistrations """
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
     image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/facultyadministration/", default="default/adminstrations.png")
@@ -115,7 +124,15 @@ class Departments(models.Model):
     """ model for departments of faculty (kafedra)"""
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
-    pdf_file = models.FileField(verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"), null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
+    pdf_file = models.FileField(
+        verbose_name=_("PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"),
+        null=True, blank=True, upload_to="pdf/departments/%Y-%m-%d/")
+    pdf_file_en = models.FileField(
+        verbose_name=_("EN PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"),
+        null=True, blank=True, upload_to="pdf/en/departments/%Y-%m-%d/")
+    pdf_file_ru = models.FileField(
+        verbose_name=_("RU PDF fayl"), help_text=_("Faqat PDF formatidagi faylni joylang"),
+        null=True, blank=True, upload_to="pdf/ru/departments/%Y-%m-%d/")
     about = QuillField(verbose_name=_("Haqida"), null=True, blank=True)
     target = QuillField(verbose_name=_("Maqsad"), null=True, blank=True)
     activity = QuillField(verbose_name=_("Faoliyati"), null=True, blank=True)
@@ -135,7 +152,7 @@ class Departments(models.Model):
 
 
 class DepartmentsAdmistrations(models.Model):
-    """ adminstrations of departments """
+    """ administrations of departments """
     department = models.ForeignKey(Departments, verbose_name=_("Kafedrani tanglang"), on_delete=models.SET_NULL, null=True)
     image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/departmentsadminstations/", default="default/adminstrations.png")
     f_name = models.CharField(verbose_name=_("To'liq ismi"), max_length=120, null=True)
@@ -149,7 +166,7 @@ class DepartmentsAdmistrations(models.Model):
 
     def __str__(self):
         return self.f_name
-    
+
     class Meta:
         db_table = 'dept_adminstrations'
         managed = True
@@ -158,14 +175,18 @@ class DepartmentsAdmistrations(models.Model):
         verbose_name_plural = _("Kafedra ma'muryati")
 
 
-
 class StudyProgram(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Yonalish nomi"), null=True)
     year = models.ForeignKey(widgets.Year, on_delete=models.SET_NULL, verbose_name=_("Yilni tanlang"), null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultetni tanlang"))
     department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))
     study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"), choices=widgets.StudyWayType.choices, default=widgets.StudyWayType.high)
-    pdf_file = models.FileField(verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/")
+    pdf_file = models.FileField(
+        verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/", null=True, blank=True)
+    pdf_file_en = models.FileField(
+        verbose_name=_("EN PDF fayl"), upload_to="pdf/en/study_program/%Y-%m-%d/", null=True, blank=True)
+    pdf_file_ru = models.FileField(
+        verbose_name=_("RU PDF fayl"), upload_to="pdf/ru/study_program/%Y-%m-%d/", null=True, blank=True)
     study_time = models.CharField(max_length=123, verbose_name=_("O'qish vaqtlari"), choices=widgets.StudyTimes.choices, default=widgets.StudyTimes.daytime)
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -174,10 +195,10 @@ class StudyProgram(models.Model):
         managed = True
         verbose_name = _("Ta'lim dasturi katalogi")
         verbose_name_plural = _("Ta'lim dasturi katalogi")
-    
+
     def __str__(self):
         return f"{self.year}|{self.faculty.title}|{self.department.name}|{self.study_way}"
-    
+
 
 class ContactSection(models.Model):
     """ contact model """
@@ -234,7 +255,7 @@ class Workers(models.Model):
         db_table = 'workers_for_sections'
         managed = True
         verbose_name = _("Bo'lim va Markazlar xodimlari")
-        verbose_name_plural = _("Bo'lim va Markazlar xodimlari") 
+        verbose_name_plural = _("Bo'lim va Markazlar xodimlari")
 
 
 class SectionsAndCenters(models.Model):
@@ -256,7 +277,7 @@ class SectionsAndCenters(models.Model):
         verbose_name = _("Bo'lim va Markazlar")
         verbose_name_plural = _("Bo'lim va Markazlar")
 
-    
+
 class UniversityAdmistrations(models.Model):
     """ university admistrations model """
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
@@ -279,7 +300,7 @@ class UniversityAdmistrations(models.Model):
 
     def __str__(self):
         return self.f_name
-    
+
     class Meta:
         db_table = 'university_admistration'
         managed = True
@@ -317,14 +338,14 @@ class TalentedStudents(models.Model):
         db_table = 'talanted_students'
         managed = True
         verbose_name = _("Iqtidorli talabalar")
-        verbose_name_plural = _("Iqtidorli talabalar")    
+        verbose_name_plural = _("Iqtidorli talabalar")
 
 
 class BossSection(models.Model):
     post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, null=True)
     image = models.ImageField(_("Rasmi"), upload_to="image/boss_section/%Y-%m-%d/", null=True)
     position = models.CharField(
-        max_length=255, verbose_name=_("Lavozimi"), 
+        max_length=255, verbose_name=_("Lavozimi"),
         choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head)
     f_name = models.CharField(_("To'liq ismi"), max_length=150)
     email = models.CharField(_("Email"), max_length=250)
@@ -374,7 +395,7 @@ class LearningWay(models.Model):
     image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
     post = QuillField(verbose_name=_("Haqida"), null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return f"{self.study_degree}|{self.fields_edu}|{self.name}"
 
@@ -391,8 +412,14 @@ class EducationalAreas(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     desc = QuillField(verbose_name=_("Yo'nalish xaqida"), null=True)
     pdf_file = models.FileField(
-        _("PDF fayl"), upload_to="pdf/educational_areas/%Y-%m-%d/", 
+        _("PDF fayl"), upload_to="pdf/educational_areas/%Y-%m-%d/",
         help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255)
+    pdf_file_en = models.FileField(
+        _("EN PDF fayl"), upload_to="pdf/en/educational_areas/%Y-%m-%d/",
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255, null=True, blank=True)
+    pdf_file_ru = models.FileField(
+        _("RU PDF fayl"), upload_to="pdf/ru/educational_areas/%Y-%m-%d/",
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255, null=True, blank=True)
     application_procedure = QuillField(_("Ariza berish tartibi"), null=True)
     tuition_fee = QuillField(_("O'qish to'lovi xaqida"), null=True)
     phone = models.CharField(_("Telefon raqam"), max_length=20, null=True)
@@ -439,7 +466,12 @@ class ModuleOfStudyPrograme(models.Model):
     semester = models.ForeignKey(widgets.Semesters, verbose_name=_("Semesterni tanlang"),
                                  on_delete=models.SET_NULL, null=True)
     name = models.CharField(_("Modul nomi"), max_length=250, null=True)
-    pdf_file = models.FileField(_("PDF fayl"), upload_to="pdf/modules_of_study_programe/%Y-%m-%d/", max_length=255)
+    pdf_file = models.FileField(_("PDF fayl"),
+                                upload_to="pdf/modules_of_study_programe/%Y-%m-%d/", max_length=255)
+    pdf_file_en = models.FileField(
+        _("EN PDF fayl"), upload_to="pdf/en/modules_of_study_programe/%Y-%m-%d/", max_length=255, null=True, blank=True)
+    pdf_file_ru = models.FileField(
+        _("RU PDF fayl"), upload_to="pdf/ru/modules_of_study_programe/%Y-%m-%d/", max_length=255, null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -456,7 +488,7 @@ class ModuleOfStudyPrograme(models.Model):
 
 
 
-    
 
-    
+
+
 

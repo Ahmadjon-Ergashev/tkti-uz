@@ -1,3 +1,5 @@
+{% load i18n %}
+
 <table class="table table-hover table-bordered">
     <thead>
         <tr>
@@ -9,7 +11,21 @@
         {% for i in extra_pdf_list %}
             <tr>
                 <td>{{ i.name }}</td>
-                <td><a href="{{ i.pdf_file.url }}" download target="_blank">{{ download }}</a></td>
+                {% if LANGUAGE_CODE == 'uz' %}
+                    <td>
+                        <a href="{{ i.pdf_file.url }}" download target="_blank">{{ download }}</a>
+                    </td>
+                {% endif %}
+                {% if LANGUAGE_CODE == 'ru' %}
+                    <td>
+                        <a href="{{ i.pdf_file_ru.url }}" download target="_blank">{{ download }}</a>
+                    </td>
+                {% endif %}
+                {% if LANGUAGE_CODE == 'en' %}
+                    <td>
+                        <a href="{{ i.pdf_file_en.url }}" download target="_blank">{{ download }}</a>
+                    </td>
+                {% endif %}
             </tr>
         {% endfor %}
     </tbody>

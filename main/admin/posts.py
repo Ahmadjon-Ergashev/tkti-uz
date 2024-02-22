@@ -47,17 +47,17 @@ class NavbarAdmin(MPTTModelAdmin):
 
     fieldsets = (
         (_("Umumiy o'zgaruvchilar"), {
-            "classes": ("extrapretty"),
+            "classes": ("extrapretty", ),
             "fields": (
                 "parent",
                 "status", 
                 "order_num", 
                 "inside_order_num", 
-                "visible"        
+                "visible", "url"
             ),
         }),
         (_("Nomi"), {
-            "classes": ("extrapretty"),
+            "classes": ("extrapretty", ),
             "fields": (
                 "name_uz",             
                 "name_ru",             
@@ -95,24 +95,20 @@ class ExtraFilesTabularInline(admin.TabularInline):
         (_("O'zbek tilida"), {
             'classes': ('collapse',),
             "fields": (
-                "name_uz",
+                "name_uz", "pdf_file"
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse',),
             "fields": (
-                "name_ru",
+                "name_ru", "pdf_file_en"
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse',),
             "fields": (
-                "name_en",
+                "name_en", "pdf_file_ru"
             ),
-        }),
-        (None, {
-            'classes': ('collapse',),
-            "fields": ("pdf_file", )
         })
     )
 
@@ -144,25 +140,25 @@ class PostsAdmin(admin.ModelAdmin):
         (_("Media fayllar"), {
             "fields": (
                 ("image", "get_image_file"),
-                ("pdf_file", "video_file")                
+                ("pdf_file", "video_file",)
             ),
         }),
         (_("O'zbek tilida"), {
             "classes": ("collapse", ),
             "fields": (
-                "title_uz", "subtitle_uz", "post_uz"                
+                "title_uz", "subtitle_uz", "post_uz",
             ),
         }),
         (_("Rus tilida"), {
             "classes": ("collapse", ),
             "fields": (
-                "title_ru", "subtitle_ru", "post_ru"                
+                "title_ru", "subtitle_ru", "post_ru", "pdf_file_ru"
             ),
         }),
         (_("Ingiliz tilida"), {
             "classes": ("collapse", ),
             "fields": (
-                "title_en", "subtitle_en", "post_en"                
+                "title_en", "subtitle_en", "post_en", "pdf_file_en"
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -270,7 +266,8 @@ class DepartmentsAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "faculty", "pdf_file"
+                "faculty",
+                ("pdf_file", "pdf_file_en", "pdf_file_ru")
             ),
         }),
         (_("O'zbek tilida ma'lumotlar"), {
@@ -717,7 +714,7 @@ class LearningWayAdmin(admin.ModelAdmin):
 
 
 @admin.register(posts.ModuleOfStudyPrograme)
-class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
+class ModuleOfStudyProgramAdmin(admin.ModelAdmin):
     model = posts.ModuleOfStudyPrograme
     list_per_page = 10
     actions = [simple_clone]
@@ -729,25 +726,25 @@ class ModuleOfStudyProgrameAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-               "semester", "educational_area", "pdf_file",
+               "semester", "educational_area",
             ),
         }),
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz",
+                "name_uz", "pdf_file",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru",
+                "name_ru", "pdf_file_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en",
+                "name_en", "pdf_file_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -777,8 +774,9 @@ class EducationalAreasAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "study_way", "pdf_file", "author_post", "phone", "extra_phone", "email",
-                "full_time_fee", "dept_fee"
+                "study_way", "author_post", "phone", "extra_phone", "email",
+                "full_time_fee", "dept_fee",
+                ("pdf_file", "pdf_file_en", "pdf_file_ru")
             ),
         }),
         (_("O'zbek tilida"), {

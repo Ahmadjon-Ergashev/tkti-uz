@@ -1,0 +1,21 @@
+{% load i18n %}
+
+{% if object.pdf_file %}
+    {% if LANGUAGE_CODE == 'uz' %}
+        {% with object.pdf_file as pdf %}
+            {% include './pdf_template.html' with pdf=pdf %}
+        {% endwith %}
+    {% endif %}
+
+    {% if LANGUAGE_CODE == 'en' %}
+        {% with object.pdf_file_en as pdf %}
+            {% include './pdf_template.html' with pdf=pdf %}
+        {% endwith %}
+    {% endif %}
+
+    {% if LANGUAGE_CODE == 'ru' %}
+        {% with object.pdf_file_ru as pdf %}
+            {% include './pdf_template.html' with pdf=pdf %}
+        {% endwith %}
+    {% endif %}
+{% endif %}

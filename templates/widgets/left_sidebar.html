@@ -13,11 +13,24 @@
             {% for cl in category_list %}
                 {% if cl.name == title %}
                     <li class="list-group-item">
-                        <i class="fas fa-angle-right"></i><a href="{% url 'posts_nav' navbar_slug=cl.slug %}">{{ cl.name }}</a>
+                        <i class="fas fa-angle-right"></i>
+                        {% if cl.url %}
+                            <a class="left_side_child"
+                               href="{{ cl.url }}">{{ cl.name }}</a>
+                        {% else %}
+                            <a class="left_side_child"
+                                   href="/posts/navbar/{{ cl.slug }}">{{ cl.name }}</a>
+                        {% endif %}
                     </li>
                 {% else %}
                     <li class="list-group-item">
-                        <a href="{% url 'posts_nav' navbar_slug=cl.slug %}">{{ cl.name }}</a>
+                        {% if cl.url %}
+                            <a class="left_side_child"
+                               href="{{ cl.url }}">{{ cl.name }}</a>
+                        {% else %}
+                            <a class="left_side_child"
+                                   href="/posts/navbar/{{ cl.slug }}">{{ cl.name }}</a>
+                        {% endif %}
                     </li>
                 {% endif %}
             {% endfor %}

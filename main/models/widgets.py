@@ -306,6 +306,7 @@ class BRMItems(models.Model):
     desc = QuillField(null=True, blank=True, verbose_name=_("Xaqida"))
     number = models.IntegerField(default=0, verbose_name="Raqami")
     color = ColorField(null=True, verbose_name="Rangi", default="#FF0000")
+
     image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/brm/%Y-%m-%d/", null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -323,7 +324,12 @@ class ExtraFile(models.Model):
     from main.models import posts
     post = models.ForeignKey(posts.Posts, on_delete=models.SET_NULL, null=True, blank=True, related_name="extra_file")
     name = models.CharField(max_length=255, verbose_name="File nomi", null=True, blank=True)
-    pdf_file = models.FileField(upload_to="pdf/extra_files/%Y/%m/%d", null=True, blank=True)
+    pdf_file = models.FileField(
+        upload_to="pdf/extra_files/%Y/%m/%d", null=True, blank=True)
+    pdf_file_en = models.FileField(
+        upload_to="pdf/en/extra_files/%Y/%m/%d", null=True, blank=True)
+    pdf_file_ru = models.FileField(
+        upload_to="pdf/ru/extra_files/%Y/%m/%d", null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

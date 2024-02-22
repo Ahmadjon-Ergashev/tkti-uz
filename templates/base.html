@@ -270,8 +270,13 @@
                                     {% for child in nav.children.all %}
                                         <li class="nav-item dropdown" style="width: 300px;">
                                             <li class="nav-item">
-                                                <a href="/posts/navbar/{{child.slug}}"
-                                                   class="nav-link mx-2 active children_nav">{{ child.name }}</a>
+                                                {% if child.url %}
+                                                    <a href="{{ child.url }}"
+                                                       class="nav-link mx-2 active children_nav">{{ child.name }}</a>
+                                                {% else %}
+                                                    <a href="/posts/navbar/{{child.slug}}"
+                                                       class="nav-link mx-2 active children_nav">{{ child.name }}</a>
+                                                {% endif %}
                                             </li>
                                         </li>
                                     {% endfor %}

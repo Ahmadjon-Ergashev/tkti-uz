@@ -13,7 +13,7 @@ class NavbarTranslation(TranslationOptions):
 
 @register(posts.Posts)
 class PostsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post")
+    fields = ("title", "subtitle", "post", )
 
 
 @register(posts.FacultyAdministration)
@@ -23,7 +23,7 @@ class FacultyAdministrationTranslation(TranslationOptions):
 
 @register(posts.Departments)
 class DepartmentsTranslation(TranslationOptions):
-    fields = ("name", "about", "target", "activity")
+    fields = ("name", "about", "target", "activity", )
 
 
 @register(posts.DepartmentsAdmistrations)
@@ -79,11 +79,11 @@ class StudyDegreesTranslation(TranslationOptions):
 
 @register(posts.EducationalAreas)
 class EducationalAreasTranslation(TranslationOptions):
-    fields = ("name", "desc", "application_procedure", "tuition_fee", "address", "you_may_become")
+    fields = ("name", "desc", "application_procedure", "tuition_fee", "address", "you_may_become", )
 
 
 @register(posts.ModuleOfStudyPrograme)
-class ModuleOfStudyProgrameTranslation(TranslationOptions):
+class ModuleOfStudyProgramTranslation(TranslationOptions):
     fields = ("name", )
 
 
@@ -102,17 +102,17 @@ class CategoryTranslation(TranslationOptions):
 
 @register(news.News)
 class NewsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post")
+    fields = ("title", "subtitle", "post", )
 
 
 @register(news.Ads)
 class AdsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post")
+    fields = ("title", "subtitle", "post", )
 
 
 @register(news.Events)
 class EventsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post", "location")
+    fields = ("title", "subtitle", "post", "location", )
 
 
 @register(news.VideoGallery)
@@ -121,6 +121,7 @@ class VideoGalleryTranslation(TranslationOptions):
 
 
 """ widgets models translations file """
+
 
 @register(widgets.Digitization)
 class DigitizationTranslation(TranslationOptions):
