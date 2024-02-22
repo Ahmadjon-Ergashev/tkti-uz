@@ -17,14 +17,18 @@
                     </td>
                 {% endif %}
                 {% if LANGUAGE_CODE == 'ru' %}
-                    <td>
-                        <a href="{{ i.pdf_file_ru.url }}" download target="_blank">{{ download }}</a>
-                    </td>
+                    {% if i.pdf_file_ru %}
+                        <td>
+                            <a href="{{ i.pdf_file_ru.url }}" download target="_blank">{{ download }}</a>
+                        </td>
+                    {% endif %}
                 {% endif %}
                 {% if LANGUAGE_CODE == 'en' %}
-                    <td>
-                        <a href="{{ i.pdf_file_en.url }}" download target="_blank">{{ download }}</a>
-                    </td>
+                    {% if i.pdf_file_en %}
+                        <td>
+                            <a href="{{ i.pdf_file_en.url }}" download target="_blank">{{ download }}</a>
+                        </td>
+                    {% endif %}
                 {% endif %}
             </tr>
         {% endfor %}
