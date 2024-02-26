@@ -244,11 +244,25 @@
                 <a class="navbar-brand" href="/">
                     <img src="{% static 'images/brand.png' %}" width="90" alt="logo">
                 </a>
-                <a href="/" class="text-decoration-none text-dark">
-                    TOSHKENT <br>
-                    KIMYO-TEXNOLOGIYA <br>
-                    INSTITUTI
-                </a>
+                {% if LANGUAGE_CODE == 'uz' %}
+                    <a href="/" class="text-decoration-none text-dark">
+                        TOSHKENT <br>
+                        KIMYO-TEXNOLOGIYA <br>
+                        INSTITUTI
+                    </a>
+                {% endif %}
+                {% if LANGUAGE_CODE == 'ru' %}
+                    <a href="/" class="text-decoration-none text-dark">
+                        ТАШКЕНТСКИЙ <br>
+                        ХИМИКО-ТЕХНОЛОГИЧЕСКИЙ <br>
+                        ИНСТИТУТ
+                    </a>
+                {% endif %}
+                {% if LANGUAGE_CODE == 'en' %}
+                    <a href="/" class="text-decoration-none text-dark">
+                        THE TASHKENT <br> INSTITUTE <br> OF CHEMICAL TECHNOLOGY
+                    </a>
+                {% endif %}
                 <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>

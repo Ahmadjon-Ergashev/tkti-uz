@@ -32,11 +32,18 @@
             </div>
             <div class="col-12 col-md-7">
                 <div class="post">
-
+                {% if object.video_file %}
+                    <div class="post_video">
+                        <video width="100%" controls>
+                            <source src="{{ object.video_file.url }}" type="video/mp4">
+                        </video>
+                    </div>
+                {% endif %}
                 </div>
             </div>
         </div>
         <div class="my-5"></div>
+        {% include "widgets/pdf_file.html" %}
         <h2 class="fw-bolder mb-4">{{ connected_news_title }}</h2>
         <div class="row" id="brm_connected_news">
             {% for i in connected_news %}

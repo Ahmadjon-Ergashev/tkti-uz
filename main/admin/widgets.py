@@ -489,25 +489,25 @@ class BRMItemsAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "image", "color", "number"
+                "image", "color", "number", "video_file"
             ),
         }),
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", "desc_uz"
+                "name_uz", "desc_uz", "pdf_file"
             )
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", "desc_ru"
+                "name_ru", "desc_ru", "pdf_file_ru"
             )
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse',),
             "fields": (
-                "name_en", "desc_en"
+                "name_en", "desc_en", "pdf_file_en"
             )
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {

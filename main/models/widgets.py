@@ -306,7 +306,16 @@ class BRMItems(models.Model):
     desc = QuillField(null=True, blank=True, verbose_name=_("Xaqida"))
     number = models.IntegerField(default=0, verbose_name="Raqami")
     color = ColorField(null=True, verbose_name="Rangi", default="#FF0000")
-
+    pdf_file = models.FileField(
+        upload_to="pdf/brm_items/%d", null=True, blank=True)
+    pdf_file_en = models.FileField(
+        upload_to="pdf/en/brm_items/%d", null=True, blank=True)
+    pdf_file_ru = models.FileField(
+        upload_to="pdf/ru/brm_items/%d", null=True, blank=True)
+    video_file = models.FileField(
+        verbose_name=_("Video fayl"), upload_to="videos/brm_items/%d/",
+        null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
+    )
     image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/brm/%Y-%m-%d/", null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
