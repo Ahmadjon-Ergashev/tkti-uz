@@ -72,36 +72,59 @@ class FaqView(ListView):
 
 # searching multiple model
 from itertools import chain
-from django.shortcuts import redirect, render
+from django.shortcuts import render
 
+
+# class SearchAroundProgram(View):
+#     template_name = "widgets/search.html"
+#
+#     def post(self, request, *args, **kwargs):
+#         search_query = request.POST.get("search_query", "")
+#         vector = s.SearchVector("title", "subtitle", config="english")
+#         query = s.SearchQuery(search_query)
+#         posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query).only(
+#             "title", "image", "slug"
+#         )
+#         news_results = news.News.objects.annotate(search=vector).filter(search=query).only(
+#             "title", "image", "slug"
+#         )
+#         ads_results = news.Ads.objects.annotate(search=vector).filter(search=query).only(
+#             "title", "image", "slug"
+#         )
+#         events_results = news.Events.objects.annotate(search=vector).filter(search=query).only(
+#             "title", "image", "slug"
+#         )
+#         combined_results = list(chain(posts_results, news_results, ads_results, events_results))
+#         context = {
+#             "search_results": combined_results,
+#             "title": _("Qidituv natijalari"),
+#             "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :(")
+#         }
+#         return render(request, self.template_name, context)
+#
 
 class SearchAroundProgram(View):
     template_name = "widgets/search.html"
-    
+
     def post(self, request, *args, **kwargs):
         search_query = request.POST.get("search_query", "")
-        vector = s.SearchVector("title", "subtitle")
+        vector = s.SearchVector("title", "subtitle", config='english')
         query = s.SearchQuery(search_query)
-        posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query).only(
-            "title", "image", "slug"
-        )
-        news_results = news.News.objects.annotate(search=vector).filter(search=query).only(
-            "title", "image", "slug"
-        )
-        ads_results = news.Ads.objects.annotate(search=vector).filter(search=query).only(
-            "title", "image", "slug"
-        )
-        events_results = news.Events.objects.annotate(search=vector).filter(search=query).only(
-            "title", "image", "slug"
-        )
+
+        posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query)
+        news_results = news.News.objects.annotate(search=vector).filter(search=query)
+        ads_results = news.Ads.objects.annotate(search=vector).filter(search=query)
+        events_results = news.Events.objects.annotate(search=vector).filter(search=query)
+
         combined_results = list(chain(posts_results, news_results, ads_results, events_results))
+
         context = {
             "search_results": combined_results,
             "title": _("Qidituv natijalari"),
             "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :(")
         }
         return render(request, self.template_name, context)
-    
+
 
 class SearchDetail(DetailView):
     template_name = "widgets/search_detail.html"
