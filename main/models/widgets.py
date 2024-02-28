@@ -276,6 +276,7 @@ class Semesters(models.Model):
     class Meta:
         db_table = 'semesters'
         managed = True
+        ordering = ("name", )
         verbose_name = _("Semesterlar")
         verbose_name_plural = _("Semesterlar")
 

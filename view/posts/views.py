@@ -303,25 +303,41 @@ class EducationalAreaView(ListView):
         if len(self.get_queryset()) == 1:
             education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
 
-        cache_key = f"modules_by_semester_id_{education_areas[0].id}"
+        # cache_key = f"modules_by_semester_id_{education_areas[0].id}"
 
-        cached_data = cache.get(cache_key)
-        if cached_data is not None:
-            data["modules_by_semester"] = cached_data
-        else:
-            grouped_data = {}
-            for edu_area in education_areas:
-                for module in edu_area.moduleofstudyprograme_set.select_related(
-                        "semester", "educational_area"
-                ):
-                    if module.semester in grouped_data:
-                        grouped_data[module.semester].append(module)
-                    else:
-                        grouped_data[module.semester] = [module]
+        # cached_data = cache.get(cache_key)
+        # if cached_data is not None:
+        #     data["modules_by_semester"] = cached_data
+        # else:
+            # grouped_data = {}
+            # for edu_area in education_areas:
+            #     for module in edu_area.moduleofstudyprograme_set.select_related(
+            #             "semester", "educational_area"
+            #     ):
+            #         if module.semester in grouped_data:
+            #             grouped_data[module.semester].append(module)
+            #         else:
+            #             grouped_data[module.semester] = [module]
 
-            cache.set(cache_key, grouped_data, 60 * 30)
+            # cache.set(cache_key, grouped_data, 60 * 30)
 
-            data["modules_by_semester"] = grouped_data
+            # data["modules_by_semester"] = grouped_data
+
+        grouped_data = {}
+        for edu_area in education_areas:
+            for module in edu_area.moduleofstudyprograme_set.select_related(
+                    "semester", "educational_area"
+            ):
+                if module.semester in grouped_data:
+                    grouped_data[module.semester].append(module)
+                else:
+                    grouped_data[module.semester] = [module]
+
+        sorted_semesters = sorted(grouped_data.keys(), key=lambda x: x.name)
+
+        sorted_grouped_data = {semester: grouped_data[semester] for semester in sorted_semesters}
+
+        data["modules_by_semester"] = sorted_grouped_data
 
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
