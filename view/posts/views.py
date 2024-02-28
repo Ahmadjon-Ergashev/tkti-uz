@@ -280,12 +280,12 @@ class LearningWayDetailView(DetailView):
                     else:
                         grouped_data[module.semester] = [module]
 
-            print(grouped_data.keys(), "*" * 150)
+            # print(grouped_data.keys(), "*" * 150)
             # sorted_semesters = sorted(grouped_data.keys(), key=lambda x: x.name)
             #
             sorted_semesters = sorted((key for key in grouped_data.keys() if key is not None), key=lambda x: x.name)
             sorted_grouped_data = {semester: grouped_data[semester] for semester in sorted_semesters}
-            print(sorted_semesters)
+            # print(sorted_semesters)
             data["modules_by_semester"] = sorted_grouped_data
 
         data["title"] = obj.name
