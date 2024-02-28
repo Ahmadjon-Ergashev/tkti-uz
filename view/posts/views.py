@@ -250,25 +250,43 @@ class LearningWayDetailView(DetailView):
         if len(education_areas) == 1:
             education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
 
-            cache_key = f"modules_by_semester_{education_areas[0].id}"
-            cached_data = cache.get(cache_key)
-            if cached_data is not None:
-                data["modules_by_semester"] = cached_data
-            else:
-                grouped_data = {}
-                for edu_area in education_areas:
-                    for module in edu_area.moduleofstudyprograme_set.select_related(
-                            "semester", "educational_area"
-                    ):
-                        if module.semester in grouped_data:
-                            grouped_data[module.semester].append(module)
-                        else:
-                            grouped_data[module.semester] = [module]
+            # cache_key = f"modules_by_semester_{education_areas[0].id}"
+            # cached_data = cache.get(cache_key)
+            # if cached_data is not None:
+            #     data["modules_by_semester"] = cached_data
+            # else:
+            #     grouped_data = {}
+            #     for edu_area in education_areas:
+            #         for module in edu_area.moduleofstudyprograme_set.select_related(
+            #                 "semester", "educational_area"
+            #         ):
+            #             if module.semester in grouped_data:
+            #                 grouped_data[module.semester].append(module)
+            #             else:
+            #                 grouped_data[module.semester] = [module]
+            #
+            #     # Cache the data with a specific timeout (e.g., 1 hour)
+            #     cache.set(cache_key, grouped_data, 60 * 30)
+            #
+            #     data["modules_by_semester"] = grouped_data
 
-                # Cache the data with a specific timeout (e.g., 1 hour)
-                cache.set(cache_key, grouped_data, 60 * 30)
+            grouped_data = {}
+            for edu_area in education_areas:
+                for module in edu_area.moduleofstudyprograme_set.select_related(
+                        "semester", "educational_area"
+                ):
+                    if module.semester in grouped_data:
+                        grouped_data[module.semester].append(module)
+                    else:
+                        grouped_data[module.semester] = [module]
 
-                data["modules_by_semester"] = grouped_data
+            print(grouped_data.keys(), "*" * 150)
+            # sorted_semesters = sorted(grouped_data.keys(), key=lambda x: x.name)
+            #
+            sorted_semesters = sorted((key for key in grouped_data.keys() if key is not None), key=lambda x: x.name)
+            sorted_grouped_data = {semester: grouped_data[semester] for semester in sorted_semesters}
+            print(sorted_semesters)
+            data["modules_by_semester"] = sorted_grouped_data
 
         data["title"] = obj.name
         data["name"] = _("Nomi")
@@ -334,6 +352,7 @@ class EducationalAreaView(ListView):
                     grouped_data[module.semester] = [module]
 
         sorted_semesters = sorted(grouped_data.keys(), key=lambda x: x.name)
+        print(sorted_semesters, "*" * 150)
 
         sorted_grouped_data = {semester: grouped_data[semester] for semester in sorted_semesters}
 
