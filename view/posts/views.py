@@ -32,7 +32,7 @@ class Home(View):
                     "image", "f_name", "desc"
                 ),
             }
-            cache.set('object_list_cache', objects_list, 60*30)
+            cache.set('object_list_cache', objects_list, 600)
             if object_list_cache is None:
                 object_list_cache = {}
         context = object_list_cache
