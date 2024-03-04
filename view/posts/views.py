@@ -25,9 +25,9 @@ class Home(View):
                 "statistika": widgets.Statistika.objects.order_by("order_num").only(
                     "name", "icon", "url", "quantity"
                 ),
-                "usefull_links": widgets.UsefullLinks.objects.order_by("-add_time").only(
-                    "name", "logo", "link"
-                ),
+                # "usefull_links": widgets.UsefullLinks.objects.order_by("-add_time").only(
+                #     "name", "logo", "link"
+                # ),
                 "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
                     "image", "f_name", "desc"
                 ),
