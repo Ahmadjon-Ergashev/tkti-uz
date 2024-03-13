@@ -5,7 +5,7 @@ $(document).ready(() => {
         type: "GET",
         url: `${$base_url}/api/ads/`,
         data: {
-            "get_type": "most_read",
+            "get_type": "latest",
             "start": 0,
             "end": 4
         },
@@ -33,7 +33,7 @@ $(document).ready(() => {
         type: "GET",
         url: `${$base_url}/api/news/`,
         data: {
-            "get_type": "most_read",
+            "get_type": "latest",
             "start": 0,
             "end": 4
         },

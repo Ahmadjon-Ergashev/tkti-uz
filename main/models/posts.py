@@ -121,7 +121,7 @@ class FacultyAdministration(models.Model):
 
 
 class Departments(models.Model):
-    """ model for departments of faculty (kafedra)"""
+    """ model for departments of faculty (kafedra) """
     name = models.CharField(_("Kafedra nomi"), max_length=150, null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
     pdf_file = models.FileField(
@@ -241,6 +241,8 @@ class Workers(models.Model):
     """ xodimlar """
     image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/workers/%Y-%m-%d/", default="default/adminstrations.png")
     position = models.CharField(_("Lavozimi"), choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head, max_length=150, null=True)
+    self_position = models.ForeignKey(widgets.Positions, on_delete=models.SET_NULL,
+                                      verbose_name=_("Lavozimi"), null=True, blank=True)
     f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
     email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, null=True, help_text="example@domain.com")
     phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True, help_text="+998332300701")
@@ -260,6 +262,7 @@ class Workers(models.Model):
 
 class SectionsAndCenters(models.Model):
     """ bo'lim va markazlar """
+    image = models.ImageField(upload_to="image/sections_and_centers/", null=True, blank=True)
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
     title = models.CharField(max_length=255, verbose_name=_("Sarlavha"), null=True)
     about = QuillField(verbose_name=_("Xaqida"), null=True)
@@ -347,6 +350,8 @@ class BossSection(models.Model):
     position = models.CharField(
         max_length=255, verbose_name=_("Lavozimi"),
         choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head)
+    self_position = models.ForeignKey(widgets.Positions, on_delete=models.SET_NULL,
+                                      verbose_name=_("Lavozimi"), null=True, blank=True)
     f_name = models.CharField(_("To'liq ismi"), max_length=150)
     email = models.CharField(_("Email"), max_length=250)
     phone = models.CharField(_("Telefon raqami"), max_length=250)
@@ -390,9 +395,12 @@ class FieldOfEducation(models.Model):
 class LearningWay(models.Model):
     """ study ways """
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
-    study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
-    fields_edu = models.ForeignKey(FieldOfEducation, on_delete=models.SET_NULL, null=True, verbose_name=_("Ta'lim sohasi"))
-    image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
+    study_degree = models.ForeignKey(
+        StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
+    fields_edu = models.ForeignKey(
+        FieldOfEducation, on_delete=models.SET_NULL, null=True, verbose_name=_("Ta'lim sohasi"))
+    image = models.ImageField(
+        verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
     post = QuillField(verbose_name=_("Haqida"), null=True, blank=True)
     added_at = models.DateTimeField(auto_now_add=True)
 

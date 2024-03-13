@@ -13,7 +13,7 @@ def simple_clone(modeladmin, request, queryset):
 
 
 @admin.register(widgets.SocialNetworks)
-class SocialNetworkingAdmin(admin.ModelAdmin):     
+class SocialNetworkingAdmin(admin.ModelAdmin):
     list_per_page = 10
     actions = [simple_clone]
     ordering = ("-added_at", )
@@ -32,19 +32,19 @@ class SocialNetworkingAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -61,7 +61,7 @@ class SocialNetworkingAdmin(admin.ModelAdmin):
         else:
             obj.author = request.user
         return super().save_model(request, obj, form, change)
-    
+
 
 @admin.register(widgets.HeaderIMG)
 class HeaderIMGAdmin(admin.ModelAdmin):
@@ -94,31 +94,31 @@ class LinksAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "add_time", 
+                "add_time",
             ),
         }),
     )
-    
+
     def get_logo(self, obj):
         return mark_safe(f"<img src='{obj.logo.url}' width=100 />")
-    
+
 
 @admin.register(widgets.QuickLinks)
 class QuickLinksAdmin(admin.ModelAdmin):
@@ -139,28 +139,28 @@ class QuickLinksAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "added_at", 
+                "added_at",
             ),
         }),
     )
-    
+
 
 @admin.register(widgets.EventTypes)
 class EventTypesAdmin(admin.ModelAdmin):
@@ -175,28 +175,28 @@ class EventTypesAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "added_at", 
+                "added_at",
             ),
         }),
     )
-    
+
 
 @admin.register(widgets.Statistika)
 class StatistikaAdmin(admin.ModelAdmin):
@@ -217,24 +217,24 @@ class StatistikaAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "added_at", 
+                "added_at",
             ),
         }),
     )
@@ -271,7 +271,7 @@ class FlagAdmin(admin.ModelAdmin):
             ),
         }),
     )
-    
+
 
 
 @admin.register(widgets.CoatofArms)
@@ -343,19 +343,19 @@ class FaqCategoryAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
     )
@@ -374,7 +374,7 @@ class FaqAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                ("category", "is_active"), 
+                ("category", "is_active"),
             ),
         }),
         (_("O'zbek tilida"), {
@@ -386,18 +386,18 @@ class FaqAdmin(admin.ModelAdmin):
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "title_ru", "answer_ru" 
+                "title_ru", "answer_ru"
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "title_en", "answer_en" 
+                "title_en", "answer_en"
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "added_at", 
+                "added_at",
             ),
         }),
     )
@@ -415,24 +415,24 @@ class SemestersAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_uz", 
+                "name_uz",
             ),
         }),
         (_("Rus tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_ru", 
+                "name_ru",
             ),
         }),
         (_("Ingiliz tilida"), {
             'classes': ('collapse', ),
             "fields": (
-                "name_en", 
+                "name_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
             'fields': (
-                "added_at", 
+                "added_at",
             ),
         }),
     )
@@ -482,6 +482,8 @@ class DigitizationAdmin(admin.ModelAdmin):
 class BRMItemsAdmin(admin.ModelAdmin):
     list_per_page = 10
     actions = [simple_clone]
+    from .posts import ExtraFilesTabularInline
+    inlines = [ExtraFilesTabularInline]
     list_display = ("id", "name")
     readonly_fields = ("added_at", )
     list_display_links = ("id", "name")
@@ -557,3 +559,22 @@ class FinancialBenefitAdmin(admin.ModelAdmin):
             ),
         }),
     )
+
+
+@admin.register(widgets.BaseVariables)
+class BaseVariablesAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name", )
+
+
+@admin.register(widgets.TopNavbar)
+class TopNavbarAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name", )
+
+
+@admin.register(widgets.Positions)
+class PositionsAdmin(admin.ModelAdmin):
+    search_fields = ("name", )
+    list_display = ("id", "name")
+    list_display_links = ("id", "name")

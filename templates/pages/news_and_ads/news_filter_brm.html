@@ -26,7 +26,9 @@
                         </div>
                     </div>
                     <div class="bottom">
-                        <img src="{{ object.image.url }}" alt="tkti.uz">
+                        {% if object.image %}
+                            <img src="{{ object.image.url }}" alt="tkti.uz">
+                        {% endif %}
                     </div>
                 </div>                
             </div>
@@ -44,14 +46,19 @@
         </div>
         <div class="my-5"></div>
         {% include "widgets/pdf_file.html" %}
+        <br><br>
+        {% if extra_pdf_list %}
+            {% include '../posts/posts_sections/extra_pdf.html' %}
+        {% endif %}
+        <br><br>
         <h2 class="fw-bolder mb-4">{{ connected_news_title }}</h2>
         <div class="row" id="brm_connected_news">
             {% for i in connected_news %}
                 <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card" style="height: 250px;">
+                    <div class="card" style="height: 270px;">
                         <h5 class="card-header">
                             {% for b in i.brm.all %}
-                                <a href="/brm_detail/{{ b.id }}"><button class="brm_color" data-brm-color="{{ b.color }}">{{ b.number }}</button></a>
+                                <a href="/brm_detail/{{ b.id }}"><button class="brm_color mb-1" data-brm-color="{{ b.color }}">{{ b.number }}</button></a>
                             {% endfor %}
                         </h5>
                         <div class="card-body">

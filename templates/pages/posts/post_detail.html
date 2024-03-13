@@ -16,10 +16,9 @@
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
-                    <!-- <div class="post_img mb-3" id="object_base_img">
-                        <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="tkti.uz">
-                    </div> -->
-                    <div class="post_img_bg"  id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
+                    {% if object.image %}
+                        <div class="post_img_bg" id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
+                    {% endif %}
                     <h2>{{ object.title }}</h2>
                     {% if object.video_file %}
                         <div class="post_video">
@@ -69,7 +68,9 @@
                                                     <div class="card mb-3">
                                                         <div class="row g-0">
                                                             <div class="col-md-3">
-                                                                <img src="{{ worker.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
+                                                                {% if worker.image %}
+                                                                    <img src="{{ worker.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
+                                                                {% endif %}
                                                             </div>
                                                             <div class="col-md-9">
                                                                 <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>

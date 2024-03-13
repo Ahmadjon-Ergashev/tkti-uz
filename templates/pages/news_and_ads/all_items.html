@@ -17,7 +17,7 @@
                             {% if obj.poster %}
                                 <img src="{{ obj.poster.url }}"
                                      class="card-img-top" style="height: 170px" alt="{{ obj.title }} | tkti.uz">
-                            {% else %}  
+                            {% elif obj.image %}
                                 <img src="{{ obj.image.url }}"
                                      class="card-img-top" style="height: 170px" alt="{{ obj.title }} | tkti.uz">
                             {% endif %}

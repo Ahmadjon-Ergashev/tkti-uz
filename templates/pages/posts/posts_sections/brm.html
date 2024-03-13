@@ -25,7 +25,9 @@
                         </div>
                     </div>
                     <div class="bottom">
-                        <a href="/brm_detail/{{ b.id }}"><img src="{{ b.image.url }}" alt="tkti"></a>
+                        {% if b.image %}
+                            <a href="/brm_detail/{{ b.id }}"><img src="{{ b.image.url }}" alt="tkti"></a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

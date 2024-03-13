@@ -106,7 +106,9 @@
                                         <div class="col-9">
                                             <span class="d-block">
                                                 <a href="/brm_detail/{{ b.id }}">
-                                                    <img src="{{ b.image.url }}" height="30" alt="tkti.uz">
+                                                    {% if b.image %}
+                                                        <img src="{{ b.image.url }}" height="30" alt="tkti.uz">
+                                                    {% endif %}
                                                 </a>
                                             </span>
                                         </div>

@@ -409,7 +409,8 @@ class WorkersAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "position", "section", "phone", "extra_phone", "email",
+                "position", "self_position", "section",
+                "phone", "extra_phone", "email",
                 ("image", "get_image")
             ),
         }),
@@ -450,7 +451,7 @@ class SectionsAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-                "navbar", 
+                "navbar", "image"
             ),
         }),
         (_("O'zbek tilida"), {
@@ -584,7 +585,7 @@ class BossSection(admin.ModelAdmin):
         (None, {
             "fields": (
                 "post",
-                "position", "email", "phone",
+                "position", "self_position", "email", "phone",
                 ("f_name_uz", "f_name_ru", "f_name_en"),
                 ("image", "get_image")
             ),

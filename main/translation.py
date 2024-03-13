@@ -202,3 +202,18 @@ class BRMItemsTranslation(TranslationOptions):
 class FinancialBenefitsTranslation(TranslationOptions):
     fields = ("name", "about", "responsible_organization",
               "for_who", "deadline", "main_lower", "contact")
+
+
+@register(widgets.BaseVariables)
+class BaseVariablesTranslation(TranslationOptions):
+    fields = ("name", "description", "address", "buses")
+
+
+@register(widgets.TopNavbar)
+class TopNavbarTranslation(TranslationOptions):
+    fields = ("name", )
+
+
+@register(widgets.Positions)
+class PositionsTranslation(TranslationOptions):
+    fields = ("name", )

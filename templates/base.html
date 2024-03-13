@@ -119,35 +119,24 @@
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav">
                         <ul>
                             <li class="me-3">
-                                <a class="text-decoration-none text-dark" href="/"><strong>info@tkti.uz</strong></a>
+                                <a class="text-decoration-none text-dark" href="/"><strong>{{ base_variables.email }}</strong></a>
                             </li>
                             <li>
-                                <a class="text-decoration-none text-dark" href="/"><i class="fas fa-phone-alt pe-2"></i>+998 71 244-79-17 </a>
+                                <a class="text-decoration-none text-dark" href="/">
+                                    <i class="fas fa-phone-alt pe-2"></i>
+                                    {{ base_variables.phone_number }}</a>
                             </li>
                         </ul>
                     </div>
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-6 top_nav text-lg-center">
                         <ul>
-                            <li class="me-2">
-                                <a href="https://student.tcti.uz/dashboard/login" target="_blank">
-                                    {% blocktrans %}Hemis talaba{% endblocktrans %}
-                                </a>
-                            </li>
-                            <li class="me-2">
-                                <a href="https://hemis.tcti.uz/dashboard/login" target="_blank">
-                                    {% blocktrans %}Hemis o‘qituvchi{% endblocktrans %}
-                                </a>
-                            </li>
-                            <li class="me-2">
-                                <a href="https://tkti-2023.edupage.org/timetable/view.php" target="_blank">
-                                    {% blocktrans %}Dars jadvali{% endblocktrans %}
-                                </a>
-                            </li>
-                            <li class="me-2">
-                                <a href="https://new.akbt.uz/uz" target="_blank">
-                                    {% blocktrans %}TKTI Kutubxona{% endblocktrans %}
-                                </a>
-                            </li>
+                            {% for nav in top_navbar %}
+                                <li class="me-2">
+                                    <a href="{{ nav.url }}" target="_blank">
+                                        {{ nav.name }}
+                                    </a>
+                                </li>
+                            {% endfor %}
                             <li class="me-2">
                                 <a href="https://www.topuniversities.com/universities/tashkent-institute-chemical-technology" target="_blank">
                                     <img src="{% static 'images/qs.png' %}" width="20" alt="tkti.uz">
@@ -163,18 +152,6 @@
                                     <img src="{% static 'images/study.jpg' %}" width="20" alt="tkti.uz">
                                 </a>
                             </li>
-                            <!-- <li>
-                                <a href="" class="p-0 again btn btn-sm dropdown-toggle dropdown-toggle-split" id="again_dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {% blocktrans %}Yana{% endblocktrans %}
-                                </a>
-                                <ul class="dropdown-menu again_dr" aria-labelledby="again_dropdown">
-                                    <li>
-                                        <a href="">
-                                            {% blocktrans %}Kutubxona{% endblocktrans %}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> -->
                         </ul>
                     </div>
                     <!-- Button trigger modal -->
@@ -228,7 +205,7 @@
                                         {% get_language_info_list for LANGUAGES as languages %}
                                         {% for language in languages %}
                                             <option class="" value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
-                                                {{ language.name }}
+                                                {{ language.code }}
                                             </option>
                                         {% endfor %}
                                     </select> 
@@ -242,27 +219,15 @@
         <nav class="navbar navbar-expand-lg sticky-top p-3 shadow-sm bg-white navbar-light " id="base_navbar">
             <div class="container">
                 <a class="navbar-brand" href="/">
-                    <img src="{% static 'images/brand.png' %}" width="90" alt="logo">
+                    {% if base_variables.logo %}
+                        <img src="{{ base_variables.logo.url }}" width="90" alt="logo">
+                    {% else %}
+                        <img src="../static/images/brand.png" width="90" alt="logo">
+                    {% endif %}
                 </a>
-                {% if LANGUAGE_CODE == 'uz' %}
-                    <a href="/" class="text-decoration-none text-dark">
-                        TOSHKENT <br>
-                        KIMYO-TEXNOLOGIYA <br>
-                        INSTITUTI
-                    </a>
-                {% endif %}
-                {% if LANGUAGE_CODE == 'ru' %}
-                    <a href="/" class="text-decoration-none text-dark">
-                        ТАШКЕНТСКИЙ <br>
-                        ХИМИКО-ТЕХНОЛОГИЧЕСКИЙ <br>
-                        ИНСТИТУТ
-                    </a>
-                {% endif %}
-                {% if LANGUAGE_CODE == 'en' %}
-                    <a href="/" class="text-decoration-none text-dark">
-                        THE TASHKENT <br> INSTITUTE <br> OF CHEMICAL TECHNOLOGY
-                    </a>
-                {% endif %}
+                <a href="/" class="text-decoration-none text-dark">
+                    {{ base_variables.name }}
+                </a>
                 <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -315,18 +280,17 @@
             <div class="row">
                 <div class="col-lg-5 col-xs-12 about-company">
                     <h4>
-                        TOSHKENT 
-                        KIMYO-TEXNOLOGIYA 
-                        INSTITUTI
+                        {{ base_variables.name }}
                     </h4>
                     <p class="pr-5 text-white-50">
-                        {% blocktrans %}Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat texnologiya,
-                            neft va gazni qayta ishkash texnologiyasi, ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy kadrlarni tayyorlash, 
-                            qayta tayyorlash va ularning malakasini oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.
-                            Institutda O‘zbekiston ishlab chiqarish soha va korxonalarining dolzarb muammolarini hal etishga qaratilgan yashil kimyo, 
-                            energetika va oziq-ovqat mahsulotlari ishlab chiqarish uchun ekologik toza, import o‘rnini bosuvchi va eksportbop, energiya tejovchi texnologiyalarni ishlab chiqish, 
-                            mahalliy mineral xomashyo bazasini kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali 
-                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari olib borilmoqda.{% endblocktrans %}
+                        {{ base_variables.description }}
+<!--                        {% blocktrans %}Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat texnologiya,-->
+<!--                            neft va gazni qayta ishkash texnologiyasi, ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy kadrlarni tayyorlash, -->
+<!--                            qayta tayyorlash va ularning malakasini oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.-->
+<!--                            Institutda O‘zbekiston ishlab chiqarish soha va korxonalarining dolzarb muammolarini hal etishga qaratilgan yashil kimyo, -->
+<!--                            energetika va oziq-ovqat mahsulotlari ishlab chiqarish uchun ekologik toza, import o‘rnini bosuvchi va eksportbop, energiya tejovchi texnologiyalarni ishlab chiqish, -->
+<!--                            mahalliy mineral xomashyo bazasini kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali -->
+<!--                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari olib borilmoqda.{% endblocktrans %}-->
                     </p>
                     <p>
                         {% for nets in social_networks %}                            
@@ -355,21 +319,22 @@
                     <p class="contact-footer">
                         <ul class="list-group list-unstyled">
                             <li class=""><i class="fas fa-map-marker-alt me-2"></i>
-                                {% blocktrans %}Navoiy ko’chasi, 32-uy, Toshkent, O'zbekiston, 100011{% endblocktrans %}
+                                {{ base_variables.address }}
                             </li>
                             <li><i class="fas fa-bus me-2"></i>
-                                {% blocktrans %}Jamoat transporti:{% endblocktrans %} 
-                                <ul class="">
-                                    <li style="list-style-type: symbols('-');">
-                                        65, 25, 148, 55, 14, 147
-                                    </li>
-                                </ul>
+<!--                                {% blocktrans %}Jamoat transporti:{% endblocktrans %} -->
+<!--                                <ul class="">-->
+<!--                                    <li style="list-style-type: symbols('-');">-->
+<!--                                        65, 25, 148, 55, 14, 147-->
+<!--                                    </li>-->
+<!--                                </ul>-->
+                                {{ base_variables.buses }}
                             </li>
                             <li><i class="fas fa-phone-alt me-2"></i>
-                                +998 71 244-79-17
+                                {{ base_variables.phone_number }}
                             </li>
                             <li><i class="fas fa-envelope me-2"></i>
-                                info@tkti.uz
+                                {{ base_variables.email }}
                             </li>
                             <li class="mt-2"></li>
                         </ul>

@@ -36,9 +36,55 @@ class WorkerPositions(models.TextChoices):
     leading_specialist: str = _("Yetakchi mutaxasis"), _("Yetakchi mutaxasis")
 
 
+class Positions(models.Model):
+    name = models.CharField(unique=True, blank=True, null=True, max_length=255)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "positions"
+        ordering = ("name", )
+        verbose_name = _("Lavozimlar")
+        verbose_name_plural = _("Lavozimlar")
+
+
+class BaseVariables(models.Model):
+    logo = models.ImageField(upload_to="image/logos/", blank=True, null=True)
+    name = models.CharField(_("Nomi"), max_length=125, blank=True, null=True)
+    email = models.EmailField(max_length=255, blank=True, null=True)
+    phone_number = models.CharField(max_length=125, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    address = models.TextField(blank=True, null=True)
+    buses = models.CharField(max_length=125, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "base_variables"
+        verbose_name = _("Asosiy o'zgaruvchilar")
+        verbose_name_plural = _("Asosiy o'zgaruvchilar")
+
+
+class TopNavbar(models.Model):
+    name = models.CharField(_("Nomi"), max_length=255, blank=True, null=True)
+    url = models.URLField(max_length=500, blank=True, null=True)
+    order_num = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = "top_navbar"
+        ordering = ("order_num", )
+        verbose_name = _("Top Navbar")
+        verbose_name_plural = _("Top Navbar")
+
+
 class AbstractTemplate(models.Model):
-    """ abstract tamplate for news posts and ads """
-    image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", default="default/default.png", null=True)
+    """ abstract template for news posts and ads """
+    image = models.ImageField(verbose_name=_("Asosiy rasm"), upload_to="image/%Y-%m-%d/", blank=True, null=True)
     title = models.CharField(verbose_name=_("Sarlavha"), max_length=500, null=True)
     subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=255, null=True)
     post = QuillField(verbose_name=_("To'liq mazmuni"), null=True, blank=True)
@@ -332,7 +378,10 @@ class BRMItems(models.Model):
 
 class ExtraFile(models.Model):
     from main.models import posts
-    post = models.ForeignKey(posts.Posts, on_delete=models.SET_NULL, null=True, blank=True, related_name="extra_file")
+    post = models.ForeignKey(posts.Posts, on_delete=models.SET_NULL,
+                             null=True, blank=True, related_name="extra_file")
+    brm_item = models.ForeignKey(BRMItems, on_delete=models.SET_NULL,
+                                 related_name="brm_extra_file", null=True, blank=True)
     name = models.CharField(max_length=255, verbose_name="File nomi", null=True, blank=True)
     pdf_file = models.FileField(
         upload_to="pdf/extra_files/%Y/%m/%d", null=True, blank=True)

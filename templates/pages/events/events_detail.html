@@ -19,9 +19,11 @@
         <div class="row d-flex justify-content-between py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 posts">
                 <div class="post_detail">
-                    <div class="post_img">
-                        <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="">
-                    </div>
+                    {% if object.image %}
+                        <div class="post_img">
+                            <img src="{{ object.image.url }}" class="img-fluid" height="500" alt="">
+                        </div>
+                    {% endif %}
                     <h3>{{ object.title }}</h3>
                     <h5><a href=""><code>{{ object.event_type.name }}</code></a></h5>
                     {% if object.video_file %}

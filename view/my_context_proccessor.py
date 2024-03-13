@@ -30,7 +30,8 @@ def global_variables(request):
             "url", "name"
         ),
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
-
+        "base_variables": widgets.BaseVariables.objects.last(),
+        "top_navbar": widgets.TopNavbar.objects.only("name", "url").order_by("order_num"),
         # text variables
         "next": _("oldinga"),
         "about": _("Haqida"),
