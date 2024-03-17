@@ -2,47 +2,189 @@
     <h3>{{ object.name }}</h3>
     <div class="object_body">
         <p>{{ object.desc.html|safe }}</p>
-        <!-- <a href="{{ object.pdf_file.url }}" class="btn btn-sm btn-dark" target="_blank">{{ desc }}</a> -->
-        <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area" aria-controls="offcanvasScrolling">
-            {{ desc }}
-        </a>
-        <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="main_pdf_edu_area" aria-labelledby="offcanvasScrollingLabel">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasScrollingLabel">{{ object.name }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        {% for pdf in object.educational_area.all %}
+            <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                {% if pdf.type == 'day' %}
+                    {{ desc_day }}
+                {% elif pdf.type == 'evening' %}
+                    {{ desc_evening }}
+                {% elif pdf.type == 'externally' %}
+                    {{ desc }}
+                {% endif %}
+            </a>
+
+            <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="main_pdf_edu_area_{{ pdf.id }}" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="about_study_program_{{ pdf.id }}">{{ object.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    {% if LANGUAGE_CODE == 'uz' %}
+                        {% if pdf.pdf_file %}
+                            <iframe
+                                src="{{ pdf.pdf_file.url }}"
+                                width="100%" height="100%">
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                    {% if LANGUAGE_CODE == 'ru' %}
+                        {% if pdf.pdf_file_ru %}
+                            <iframe
+                                src="{{ pdf.pdf_file_ru.url }}"
+                                width="100%" height="100%">
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if pdf.pdf_file_en %}
+                            <iframe
+                                src="{{ pdf.pdf_file_en.url }}"
+                                width="100%" height="100%">
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                </div>
             </div>
-            <div class="offcanvas-body">
-                <iframe src="{{ object.pdf_file.url }}" width="100%" height="100%" frameborder="0"></iframe>
-            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% if object.education_areas_themes.all %}
+    <table class="table">
+        <thead class="table-head-fixed">
+            <tr>
+                <th scope="col">{{ theme_name }}</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+                <th scope="col">{{ theme_teacher }}</th>
+                <th scope="col">{{ theme_finance }}</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for i in object.education_areas_themes.all %}
+                <tr>
+                    <td colspan="3">
+                        <div class="accordion accordion-flush w-100" id="accordionFlushExample_{{ i.id }}">
+                            <div class="accordion-item">
+                                <span class="accordion-header">
+                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse_{{ i.id }}" aria-expanded="false" aria-controls="flush-collapse_{{ i.id }}">
+                                        {{ i.name }}
+                                    </button>
+                                </span>
+                                <div id="flush-collapse_{{ i.id }}" class="accordion-collapse collapse w-75" data-bs-parent="#accordionFlushExample_{{ i.id }}">
+                                    <div class="accordion-body w-75">
+                                        <p class="w-75">
+                                            {{ i.desc.html|safe }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td colspan="1">{{ i.teacher }}</td>
+                    <td colspan="1">{{ i.finance }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a type="button" class="btn btn-sm btn-primary text-white my-3 w-25"
+       data-bs-toggle="offcanvas" data-bs-target="#themes_list" aria-controls="themes_list">
+        {{ theme_download }}
+    </a>
+    <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l"
+         data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="themes_list" aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="">{{ theme_download }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            {% if LANGUAGE_CODE == 'uz' %}
+                {% if object.pdf_file %}
+                    <iframe
+                        src="{{ object.pdf_file.url }}"
+                        width="100%" height="100%">
+                    </iframe>
+                {% endif %}
+            {% endif %}
+            {% if LANGUAGE_CODE == 'ru' %}
+                {% if object.pdf_file_ru %}
+                    <iframe
+                        src="{{ object.pdf_file_ru.url }}"
+                        width="100%" height="100%">
+                    </iframe>
+                {% endif %}
+            {% endif %}
+            {% if LANGUAGE_CODE == 'en' %}
+                {% if object.pdf_file_en %}
+                    <iframe
+                        src="{{ object.pdf_file_en.url }}"
+                        width="100%" height="100%">
+                    </iframe>
+                {% endif %}
+            {% endif %}
         </div>
     </div>
-</div>
+{% endif %}
 
-<div class="section_title py-2">
-    <div class="container">
-        <h1>{{ requirements }}</h1>
-    </div>
-</div>
 
-<div class="container my-3">
-    <div class="object_body">
-        <p>{{ object.application_procedure.html|safe }}</p>
+{% for req in object.educational_area_requirements.all %}
+    <div class="section_title py-2">
+        <div class="container">
+            {% if req.type == 'day' %}
+                <h1>{{ requirements_day }}</h1>
+            {% elif req.type == 'evening' %}
+                <h1>{{ requirements_evening }}</h1>
+            {% else %}
+                <h1>{{ requirements }}</h1>
+            {% endif %}
+        </div>
     </div>
-</div>
+
+    <div class="container my-3">
+        <div class="object_body">
+            <p>{{ req.requirement.html|safe }}</p>
+        </div>
+    </div>
+{% endfor %}
+
 <div class="container my-3">
     <div class="object_body">
         <div class="row">
             <div class="col-12 col-lg-8">
                 <p>{{ object.tuition_fee.html|safe }}</p>
                 <ul class="list-group list-group-flush w-50 w-50-l">
-                    <li class="list-group-item d-flex justify-content-between px-0">
-                        <span>{{ full_time_fee_title }}</span>
-                        <span>{{ object.full_time_fee }} so'm</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between px-0">
-                        <span>{{ dept_fee_title }}</span>
-                        <span>{{ object.dept_fee }} so'm</span>
-                    </li>
+                    {% for fee in object.educational_area_requirements.all %}
+                        {% if fee.type == "day" %}
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>{{ full_time_fee_title_day }}</span>
+                                <span>{{ fee.full_time_fee }} so'm</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>{{ dept_fee_title_day }}</span>
+                                <span>{{ fee.dept_fee }} so'm</span>
+                            </li>
+                        {% elif fee.type == "evening" %}
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>{{ full_time_fee_title_evening }}</span>
+                                <span>{{ fee.full_time_fee }} so'm</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>{{ dept_fee_title_evening }}</span>
+                                <span>{{ fee.dept_fee }} so'm</span>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>{{ full_time_fee_title }}</span>
+                                <span>{{ fee.full_time_fee }} so'm</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between px-0">
+                                <span>{{ dept_fee_title }}</span>
+                                <span>{{ fee.dept_fee }} so'm</span>
+                            </li>
+                        {% endif %}
+                        <br>
+                    {% endfor %}
                 </ul>
                 <a href="/supports" class="btn btn-sm btn-primary mt-2" target="_blank">{{ money_priz }}</a>
             </div>

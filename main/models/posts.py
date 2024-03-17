@@ -248,14 +248,16 @@ class Workers(models.Model):
     phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True, help_text="+998332300701")
     extra_phone = models.CharField(verbose_name=_("Qo'shimcha Telefon raqami"), max_length=20, null=True, blank=True, help_text="+998332300703")
     section = models.ForeignKey("SectionsAndCenters", verbose_name=_("Bo'lim va markaz nomi"), on_delete=models.SET_NULL, null=True, blank=True)
+    order_num = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqam"))
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.f_name} | {self.position} | {self.phone}"
 
     class Meta:
-        db_table = 'workers_for_sections'
         managed = True
+        ordering = ('order_num', )
+        db_table = 'workers_for_sections'
         verbose_name = _("Bo'lim va Markazlar xodimlari")
         verbose_name_plural = _("Bo'lim va Markazlar xodimlari")
 
@@ -363,14 +365,16 @@ class BossSection(models.Model):
 class StudyDegrees(models.Model):
     """ students degree bachelor, phd """
     name = models.CharField(max_length=123, blank=True, null=True, verbose_name=_("Nomi"))
+    order_num = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqam"))
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.name}"
 
     class Meta:
-        db_table = 'study_degrees'
         managed = True
+        ordering = ("order_num", )
+        db_table = 'study_degrees'
         verbose_name = _("Ta'lim darajalari")
         verbose_name_plural = _("Ta'lim darajalari")
 
@@ -397,6 +401,10 @@ class LearningWay(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     study_degree = models.ForeignKey(
         StudyDegrees, verbose_name=_("Ta'lim darajasi"), on_delete=models.SET_NULL, null=True)
+    faculty = models.ForeignKey(
+        Posts, on_delete=models.SET_NULL, related_name="education_area_faculty",
+        null=True, blank=True, verbose_name=_("Fakultet")
+    )
     fields_edu = models.ForeignKey(
         FieldOfEducation, on_delete=models.SET_NULL, null=True, verbose_name=_("Ta'lim sohasi"))
     image = models.ImageField(
@@ -420,14 +428,16 @@ class EducationalAreas(models.Model):
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     desc = QuillField(verbose_name=_("Yo'nalish xaqida"), null=True)
     pdf_file = models.FileField(
-        _("PDF fayl"), upload_to="pdf/educational_areas/%Y-%m-%d/",
+        _("PDF fayl"), upload_to="pdf/educational_areas/%Y-%m-%d/", null=True, blank=True,
         help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255)
     pdf_file_en = models.FileField(
         _("EN PDF fayl"), upload_to="pdf/en/educational_areas/%Y-%m-%d/",
-        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255, null=True, blank=True)
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"),
+        max_length=255, null=True, blank=True)
     pdf_file_ru = models.FileField(
         _("RU PDF fayl"), upload_to="pdf/ru/educational_areas/%Y-%m-%d/",
-        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"), max_length=255, null=True, blank=True)
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"),
+        max_length=255, null=True, blank=True)
     application_procedure = QuillField(_("Ariza berish tartibi"), null=True)
     tuition_fee = QuillField(_("O'qish to'lovi xaqida"), null=True)
     phone = models.CharField(_("Telefon raqam"), max_length=20, null=True)
@@ -465,6 +475,86 @@ class EducationalAreas(models.Model):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
+
+
+class TypeStudyProgram(models.TextChoices):
+    DAY = "day", _("Kundizgi")
+    EVENING = "evening", _("Kechki")
+    EXTERNALLY = "externally", _("Sirtqi")
+
+
+class AboutStudyProgramPDF(models.Model):
+    type = models.CharField(
+        max_length=100, choices=TypeStudyProgram.choices,
+        null=True, blank=True)
+    education_area = models.ForeignKey(
+        EducationalAreas, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name="educational_area")
+    pdf_file = models.FileField(
+        _("PDF fayl"), upload_to="pdf/about_study_program_pdf/%Y/%m/%d/",
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"),
+        max_length=255, null=True, blank=True)
+    pdf_file_en = models.FileField(
+        _("EN PDF fayl"), upload_to="pdf/en/about_study_program_pdf/%Y/%m/%d/",
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"),
+        max_length=255, null=True, blank=True)
+    pdf_file_ru = models.FileField(
+        _("RU PDF fayl"), upload_to="pdf/ru/about_study_program_pdf/%Y/%m/%d/",
+        help_text=_("Faqat *.pdf formatdagi faylarni yuklang"),
+        max_length=255, null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.type} -> {self.education_area.name}"
+
+    class Meta:
+        ordering = ("education_area", )
+        db_table = "about_study_program_pdf"
+        verbose_name = _("Ta'lim yo'nalishlari xaqidagi pdf")
+        verbose_name_plural = _("Ta'lim yo'nalishlari xaqidagi pdf")
+
+
+class EntryRequirements(models.Model):
+    type = models.CharField(
+        max_length=100, choices=TypeStudyProgram.choices,
+        null=True, blank=True)
+    education_area = models.ForeignKey(
+        EducationalAreas, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name="educational_area_requirements")
+    requirement = QuillField(null=True, blank=True, verbose_name=_("Kirish talablari"))
+    full_time_fee = models.IntegerField(default=0, verbose_name=_("Kantrakt miqdori"))
+    dept_fee = models.IntegerField(default=0, verbose_name=_("Kredit miqdori"))
+
+    def __str__(self):
+        return f"{self.type} - {self.education_area.name}"
+
+    class Meta:
+        ordering = ("education_area", )
+        db_table = "entry_requirements"
+        verbose_name = _("Kirish talablari")
+        verbose_name_plural = _("Kirish talablari")
+
+
+class ThemesForEducation(models.Model):
+    education_area = models.ForeignKey(
+        EducationalAreas, on_delete=models.SET_NULL,
+        null=True, blank=True, related_name="education_areas_themes")
+    name = models.CharField(max_length=255, verbose_name=_("Mavzu nomi"),
+                            null=True, blank=True)
+    desc = QuillField(null=True, blank=True, verbose_name=_("Haqida"))
+    teacher = models.CharField(max_length=255, verbose_name=_("Ilmiy raxbar"),
+                               null=True, blank=True)
+    finance = models.CharField(max_length=255, verbose_name=_("Moliyalashtiruvi"),
+                               null=True, blank=True)
+    added_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.name}"
+
+    class Meta:
+        ordering = ("added_at", )
+        db_table = "themes_for_education"
+        verbose_name = _("DSc va PHD Mavzulari")
+        verbose_name_plural = _("DSc va PHD Mavzulari")
 
 
 class ModuleOfStudyPrograme(models.Model):

@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.utils import timezone
 from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
 
@@ -22,6 +23,17 @@ def global_variables(request):
             cache.set("navbar", navbar_list, 60*30)
     except Exception as e:
         print(e)
+    event = news.Events.objects.filter(
+            status="pub", added_at__gte=timezone.now()
+        ).order_by("-added_at").first()
+    if event:
+        coming_time_delta = event.added_at - timezone.now()
+        day = coming_time_delta.days
+        day_hours = day * 24
+        hours = coming_time_delta.seconds // 3600
+        minutes = (coming_time_delta.seconds // 60) % 60
+
+    start_time = f"{hours + day_hours}:{minutes}"
     context = {
         "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
             "name", "slug", "id"
@@ -32,6 +44,11 @@ def global_variables(request):
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
         "base_variables": widgets.BaseVariables.objects.last(),
         "top_navbar": widgets.TopNavbar.objects.only("name", "url").order_by("order_num"),
+        "upcoming_event_first": news.Events.objects.filter(
+            status="pub", added_at__gte=timezone.now()
+        ).order_by("-added_at")[:1],
+        "start_time": start_time,
+        "start_time_title": _("Boshlanish vaqtigacha "),
         # text variables
         "next": _("oldinga"),
         "about": _("Haqida"),

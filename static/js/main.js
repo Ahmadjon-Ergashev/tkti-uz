@@ -33,5 +33,4 @@ $(document).ready(function() {
         }
     );
     $(".ql-align-center").addClass("text-center")
-
 });

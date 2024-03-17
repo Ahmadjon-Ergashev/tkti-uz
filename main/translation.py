@@ -217,3 +217,13 @@ class TopNavbarTranslation(TranslationOptions):
 @register(widgets.Positions)
 class PositionsTranslation(TranslationOptions):
     fields = ("name", )
+
+
+@register(posts.EntryRequirements)
+class EntryRequirementsTranslation(TranslationOptions):
+    fields = ("requirement", )
+
+
+@register(posts.ThemesForEducation)
+class ThemesForEducationTranslation(TranslationOptions):
+    fields = ("name", "desc", "teacher", "finance")

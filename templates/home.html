@@ -24,7 +24,75 @@
     .a_able{
         background:#15446f;
     }
+    .upcoming_event_modal{
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        position: fixed;
+        background-color: rgba(50, 50, 50, .2);
+    }
+    .modal_content{
+        top: 50%;
+        left: 50%;
+        width: 80%;
+        height: 700px;
+        margin: auto;
+        position: absolute;
+        /*border: 1px solid black;*/
+        transform: translate(-50%, -50%);
+
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .modal_body{
+        position: relative;
+    }
+    .text_caption{
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        padding: 20px;
+        position: fixed;
+        background-color: rgba(50, 50, 50, 0.4);
+    }
+    #close_widow{
+        top: 5%;
+        right: 5%;
+        position: absolute;
+    }
 </style>
+
+<!-- upcoming event modal -->
+{% for up in upcoming_event_first %}
+    <div class="upcoming_event_modal" id="upcoming_event_modal">
+        <button type="button" class="btn-close" id="close_widow"></button>
+        <a href="/events/detail/{{ up.slug }}" class="text-white">
+            <div class="modal_content" style="background-image: url({{ up.image.url }})">
+                <div class="modal_body">
+                    <div class="text_caption">
+                        <span class="bg-primary text-white p-1">{{ up.event_type.name }}</span>
+                        <span class="bg-danger text-white p-1">{{ start_time_title }} {{ start_time }}</span>
+                        <br>
+                        <h2 class="text-white">
+                                {{ up.title }}
+                        </h2>
+                        <br>
+                        <span class="text-white">
+                            <i class="fas fa-calendar-alt pe-2"></i>{{ up.added_at|date:'d-M-Y H:i' }}
+                        </span>
+                        <br>
+                        <span class="text-white"><i class="fas fa-map-marker-alt pe-2"></i></i>{{ up.location }}</span>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+{% endfor %}
+
+<!-- upcoming event modal -->
 
 <!-- headers img -->
 <div class="header">
@@ -515,4 +583,12 @@
 <script src="{% static 'js/scripts/home/news.js' %}"></script>
 <script src="{% static 'js/scripts/home/videos.js' %}"></script>
 <script src="{% static 'js/scripts/home/events.js' %}"></script>
+
+<script>
+    $(document).ready(function (){
+        $("#close_widow").click(() => {
+            $("#upcoming_event_modal").hide()
+        })
+    })
+</script>
 {% endblock content %}

@@ -50,6 +50,34 @@
                             {% endfor %}
                         </div>
                     {% endif %}
+                    {% if bachelor_departments_way %}
+                        <br>
+                        <hr>
+                        <h5 class="fw-bold">{{ bachelor_departments_way_title }}</h5>
+                        <div class="row px-3">
+                            <ul class="list-group list-group-flush">
+                                {% for obj in bachelor_departments_way %}
+                                    <li class="list-group-item">
+                                        <a class="text-dark" href="/posts/learing_way/detail/{{ obj.pk }}">{{ obj.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if master_departments_way %}
+                        <br>
+                        <hr>
+                        <h5 class="fw-bold">{{ master_departments_way_title }}</h5>
+                        <div class="row px-3">
+                            <ul class="list-group list-group-flush">
+                                {% for obj in master_departments_way %}
+                                    <li class="list-group-item">
+                                        <a class="text-dark" href="/posts/learing_way/detail/{{ obj.pk }}">{{ obj.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     {% if object.facultyadministration_set.all %}
                         <br>
                         <hr>
@@ -57,7 +85,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <span class="fw-bold">{{ faculty_title }}</span>
+                                        <h3 class="fw-bold">{{ faculty_title }}</h3>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">

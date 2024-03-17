@@ -150,7 +150,13 @@ class PostDetailView(DetailView):
         navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
         context["title"] = navbar.name
         context["depended_news"] = _("Mavzuga aloqador yangiliklar")
-        # error bor
+        context["bachelor_departments_way"] = posts.LearningWay.objects.filter(
+            faculty=post, study_degree=1)
+        context["master_departments_way"] = posts.LearningWay.objects.filter(
+            faculty=post, study_degree=2
+        )
+        context["bachelor_departments_way_title"] = _("FAKULTETNING BAKALAVRIATURA YO‘NALISHLARI")
+        context["master_departments_way_title"] = _("FAKULTETNING MAGISTRATURA YO‘NALISHLARI")
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
         context["parent"] = navbar.parent.name
@@ -221,6 +227,7 @@ class SectionsDetailView(DetailView):
         data["title"] = obj.title
         data["title"] = navbar.name
         data["parent"] = navbar.parent.name
+        data["about_section"] = _("Haqida")
         data["depended_news"] = _("Mavzuga aloqador yangiliklar")
         try:
             data["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
@@ -291,10 +298,27 @@ class LearningWayDetailView(DetailView):
         data["title"] = obj.name
         data["name"] = _("Nomi")
         data["view"] = _("Ko'rish")
-        data["desc"] = _("Ta'lim dasturi haqida")
-        data["requirements"] = _("Kirish talablari")
-        data["dept_fee_title"] = _("Kredit miqdori")
-        data["full_time_fee_title"] = _("Kantrakt miqdori")
+
+        data["desc"] = _("Sirtqi ta'lim dasturi haqida")
+        data["desc_day"] = _("Kunduzgi ta'lim dasturi haqida")
+        data["desc_evening"] = _("Kechgi ta'lim dasturi haqida")
+
+        data["requirements"] = _("Sirtqi ta'limga kirish talablari")
+        data["requirements_day"] = _("Kundizgi ta'limga kirish talablari")
+        data["requirements_evening"] = _("Kechgi ta'limga kirish talablari")
+
+        data["dept_fee_title_day"] = _("Kundizgi ta'lim uchun kredit miqdori")
+        data["full_time_fee_title_day"] = _("Kundizgi ta'lim uchun kantrakt miqdori")
+        data["dept_fee_title_evening"] = _("Kechgi ta'lim uchun kredit miqdori")
+        data["full_time_fee_title_evening"] = _("Kechgi ta'lim uchun kantrakt miqdori")
+        data["dept_fee_title"] = _("Sirtqi ta'lim uchun kredit miqdori")
+        data["full_time_fee_title"] = _("Sirtqi ta'lim uchun kantrakt miqdori")
+
+        data["theme_name"] = _("Mavzu Nomi")
+        data["theme_teacher"] = _("Ilmiy raxbar")
+        data["theme_finance"] = _("Moliyalashtirish")
+        data["theme_download"] = _("Mavzular ro'yhatinni yuklab olish")
+
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         data["educational_areas"] = education_areas

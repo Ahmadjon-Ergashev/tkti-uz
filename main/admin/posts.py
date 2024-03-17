@@ -125,7 +125,7 @@ class PostsAdmin(admin.ModelAdmin):
     list_display_links = ("title", )
     empty_value_display = "Tanlanmagan"
     search_fields = ("title", "navbar__name")
-    list_filter = ("navbar", "status", "author", "added_at")
+    list_filter = ("faculty", "navbar", "status", "author", "added_at")
     readonly_fields = ("author", "update_user", "updated_at", "get_image_file")
     list_display = ("id", "title", "navbar", "status", "post_viewed_count", "added_at")
 
@@ -401,16 +401,18 @@ class ContactSectionAdmin(admin.ModelAdmin):
 class WorkersAdmin(admin.ModelAdmin):
     actions = [clone]
     list_per_page = 10
+    list_filter = ("section", )
+    list_editable = ("order_num", )
     readonly_fields = ["get_image"]
     list_display_links = ("f_name_uz", )
     search_fields = ("f_name_uz", "f_name_ru", "f_name_en")
-    list_display = ("id", "f_name_uz", "section", "position", "phone", "email", "added_at")
+    list_display = ("id", "f_name_uz", "section", "order_num", "self_position", "added_at")
 
     fieldsets = (
         (None, {
             "fields": (
                 "position", "self_position", "section",
-                "phone", "extra_phone", "email",
+                "phone", "extra_phone", "email", "order_num",
                 ("image", "get_image")
             ),
         }),
@@ -602,11 +604,17 @@ class StudyDegreesAdmin(admin.ModelAdmin):
     actions = [simple_clone]
     list_per_page = 10
     search_fields = ("name_uz", )
-    readonly_fields = ("added_at", )  
+    list_editable = ("order_num", )
+    readonly_fields = ("added_at", )
     list_display_links = ("id", "name_uz")
-    list_display = ("id", "name_uz", "added_at")
+    list_display = ("id", "name_uz", "order_num", "added_at")
 
     fieldsets = (
+        (None, {
+            "fields": (
+                "order_num",
+            )
+        }),
         (_("O'zbek tilida"), {
             'classes': ('collapse', ),
             "fields": (
@@ -685,7 +693,7 @@ class LearningWayAdmin(admin.ModelAdmin):
     fieldsets = (
         (None, {
             "fields": (
-               "study_degree", "fields_edu", "image"
+               "study_degree", "fields_edu", "faculty", "image"
             ),
         }),
         (_("O'zbek tilida"), {
@@ -712,6 +720,14 @@ class LearningWayAdmin(admin.ModelAdmin):
             ),
         })
     )
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "faculty":
+            try:
+                kwargs["queryset"] = posts.Posts.objects.filter(faculty=True)
+            except Exception as e:
+                kwargs["queryset"] = posts.Posts.objects.none()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 @admin.register(posts.ModuleOfStudyPrograme)
@@ -762,15 +778,43 @@ class ModuleOfStudyProgrameTabularInline(admin.TabularInline):
     exclude = ["name"]
 
 
+class AboutStudyProgramPDFTabularInline(admin.TabularInline):
+    model = posts.AboutStudyProgramPDF
+    extra = 1
+
+
+class EntryRequirementsTabularInline(admin.TabularInline):
+    model = posts.EntryRequirements
+    extra = 1
+    exclude = ["requirement"]
+
+
+# class ThemeEducationTabularInline(admin.TabularInline):
+#     model = posts.ThemesForEducation
+#     extra = 1
+#     exclude = ["name", "desc"]
+
+@admin.register(posts.ThemesForEducation)
+class ThemesForEducationAdmin(admin.ModelAdmin):
+    actions = [simple_clone]
+    search_fields = ("name", )
+    list_display = ("id", "name")
+    exclude = ("name", "desc", "teacher", "finance")
+
+
 @admin.register(posts.EducationalAreas)
 class EducationalAreasAdmin(admin.ModelAdmin):
-    actions = [simple_clone]
     list_per_page = 10
+    actions = [simple_clone]
     search_fields = ("name_uz", )
     list_display_links = ("id", "name_uz")
     list_display = ("id", "name_uz", "added_at")
-    inlines = [ModuleOfStudyProgrameTabularInline]
     readonly_fields = ("added_at", "post_viewed_count")
+    inlines = [
+        ModuleOfStudyProgrameTabularInline,
+        AboutStudyProgramPDFTabularInline,
+        EntryRequirementsTabularInline
+    ]
 
     fieldsets = (
         (None, {
@@ -807,4 +851,8 @@ class EducationalAreasAdmin(admin.ModelAdmin):
             ),
         })
     )
+
+
+
+
 

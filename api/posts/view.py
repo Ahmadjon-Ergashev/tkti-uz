@@ -4,7 +4,6 @@ from drf_yasg.utils import swagger_auto_schema
 from main.models import posts, widgets
 from api.posts import query_params, serializers
 
-    
 
 class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
     """ get all faculties list """
@@ -15,7 +14,6 @@ class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
         queryset = super().get_queryset().filter(status=widgets.Status.published, faculty=True)
         return queryset
     
-
 
 class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.Departments.objects.all()
@@ -46,7 +44,7 @@ class TalentedStudentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 
 class StudyDegreeView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
-    queryset = posts.StudyDegrees.objects.all().order_by("name")
+    queryset = posts.StudyDegrees.objects.all()
     serializer_class = serializers.StudyDegreesSerialziers
 
 
