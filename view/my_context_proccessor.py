@@ -26,6 +26,9 @@ def global_variables(request):
     event = news.Events.objects.filter(
             status="pub", added_at__gte=timezone.now()
         ).order_by("-added_at").first()
+    hours = 0
+    day_hours = 0
+    minutes = 0
     if event:
         coming_time_delta = event.added_at - timezone.now()
         day = coming_time_delta.days
