@@ -135,6 +135,12 @@
                 <h1>{{ requirements_day }}</h1>
             {% elif req.type == 'evening' %}
                 <h1>{{ requirements_evening }}</h1>
+            {% elif req.type == 'master' %}
+                <h1>{{ requirements_master }}</h1>
+            {% elif req.type == 'phd' %}
+                <h1>{{ requirements_phd }}</h1>
+            {% elif req.type == 'dsc' %}
+                <h1>{{ requirements_dsc }}</h1>
             {% else %}
                 <h1>{{ requirements }}</h1>
             {% endif %}
@@ -151,43 +157,62 @@
 <div class="container my-3">
     <div class="object_body">
         <div class="row">
-            <div class="col-12 col-lg-8">
-                <p>{{ object.tuition_fee.html|safe }}</p>
-                <ul class="list-group list-group-flush w-50 w-50-l">
+            {% if object.educational_area_requirements.all %}
+                <div class="col-12 col-lg-8">
+                    <p>{{ object.tuition_fee.html|safe }}</p>
+                    <ul class="list-group list-group-flush w-50 w-50-l">
+                        {% for fee in object.educational_area_requirements.all %}
+                            {% if fee.full_time_fee != 0 %}
+                                {% if fee.type == "day" %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title_day }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title_day }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% elif fee.type == "evening" %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title_evening }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title_evening }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% elif fee.type == "master" %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title_master }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title_master }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                            <br>
+                        {% endfor %}
+                    </ul>
                     {% for fee in object.educational_area_requirements.all %}
-                        {% if fee.type == "day" %}
-                            <li class="list-group-item d-flex justify-content-between px-0">
-                                <span>{{ full_time_fee_title_day }}</span>
-                                <span>{{ fee.full_time_fee }} so'm</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between px-0">
-                                <span>{{ dept_fee_title_day }}</span>
-                                <span>{{ fee.dept_fee }} so'm</span>
-                            </li>
-                        {% elif fee.type == "evening" %}
-                            <li class="list-group-item d-flex justify-content-between px-0">
-                                <span>{{ full_time_fee_title_evening }}</span>
-                                <span>{{ fee.full_time_fee }} so'm</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between px-0">
-                                <span>{{ dept_fee_title_evening }}</span>
-                                <span>{{ fee.dept_fee }} so'm</span>
-                            </li>
-                        {% else %}
-                            <li class="list-group-item d-flex justify-content-between px-0">
-                                <span>{{ full_time_fee_title }}</span>
-                                <span>{{ fee.full_time_fee }} so'm</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between px-0">
-                                <span>{{ dept_fee_title }}</span>
-                                <span>{{ fee.dept_fee }} so'm</span>
-                            </li>
+                        {% if forloop.counter == 1 %}
+                            {% if fee.full_time_fee != 0 %}
+                                <a href="/supports" class="btn btn-sm btn-primary mt-2" target="_blank">{{ money_priz }}</a>
+                            {% endif %}
                         {% endif %}
-                        <br>
                     {% endfor %}
-                </ul>
-                <a href="/supports" class="btn btn-sm btn-primary mt-2" target="_blank">{{ money_priz }}</a>
-            </div>
+                </div>
+            {% endif %}
             <div class="col-12 col-lg-4">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item fw-bold ps-0">{{ contact_edu_area }}</li>
@@ -213,71 +238,74 @@
     </div>
 </div>
 
-<div class="section_title py-2">
-    <div class="container">
-        <h1>{{ modul_title }}</h1>
+{% if modules_by_semester %}
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ modul_title }}</h1>
+        </div>
     </div>
-</div>
 
-<div class="container">
-    <div id="module_by_semesters">
-        <div class="_container">
-            <div class="tap_title">
-                <div class="tab_box container" style="padding: 0;">
-                    <div class="tab_btns">
-                        {% for semester in modules_by_semester %}
-                            <button class="tab_btn {% if forloop.first %}active_tap{% endif %}">{{ semester }}</button>
-                        {% endfor %}
-                    </div>  
+    <div class="container">
+        <div id="module_by_semesters">
+            <div class="_container">
+                <div class="tap_title">
+                    <div class="tab_box container" style="padding: 0;">
+                        <div class="tab_btns">
+                            {% for semester in modules_by_semester %}
+                                <button class="tab_btn {% if forloop.first %}active_tap{% endif %}">{{ semester }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="content_box my-5 container">
+                    {% for semester, modules in modules_by_semester.items %}
+                        <div class="content {% if forloop.first %}d-block{% endif %}">
+                            <ul class="list-group list-group-flush w-50-l w-50">
+                                {% for module in modules %}
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>{{ module.name }}</span>
+                                        <a type="button" class="text-primary" data-bs-toggle="offcanvas" data-bs-target="#StudyWay{{module.id}}" aria-controls="offcanvasScrolling">
+                                            {{ view }}
+                                        </a>
+                                    </li>
+                                    <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay{{module.id}}" aria-labelledby="offcanvasScrollingLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">{{ module.name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body">
+                                            {% include "./pdfs.html" %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-            <div class="content_box my-5 container">
-                {% for semester, modules in modules_by_semester.items %}
-                    <div class="content {% if forloop.first %}d-block{% endif %}">
-                        <ul class="list-group list-group-flush w-50-l w-50">
-                            {% for module in modules %}
-                                <li class="list-group-item d-flex justify-content-between">
-                                    <span>{{ module.name }}</span>
-                                    <a type="button" class="text-primary" data-bs-toggle="offcanvas" data-bs-target="#StudyWay{{module.id}}" aria-controls="offcanvasScrolling">
-                                        {{ view }}
-                                    </a>
-                                </li>
-                                <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="StudyWay{{module.id}}" aria-labelledby="offcanvasScrollingLabel">
-                                    <div class="offcanvas-header">
-                                        <h5 class="offcanvas-title" id="offcanvasScrollingLabel">{{ module.name }}</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                                    </div>
-                                    <div class="offcanvas-body">
-                                        {% include "./pdfs.html" %}
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                {% endfor %}
+        </div>
+    </div>
+{% endif %}
+{% if object.you_may_become %}
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ you_may_become }}</h1>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="object_body">
+            <div class="row">
+                <div class="col-12 col-md-4 p-1">
+                    <div class="you_become_img" style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
+                </div>
+                <div class="col-12 col-md-8 p-1">
+                    <p>{{ object.you_may_become.html|safe }}</p>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
-<div class="section_title py-2">
-    <div class="container">
-        <h1>{{ you_may_become }}</h1>
-    </div>
-</div>
-
-<div class="container mb-5">
-    <div class="object_body">
-        <div class="row">
-            <div class="col-12 col-md-4 p-1">
-                <div class="you_become_img" style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
-            </div>
-            <div class="col-12 col-md-8 p-1">
-                <p>{{ object.you_may_become.html|safe }}</p>
-            </div>
-        </div>
-    </div>
-</div>
+{% endif %}
 
 <div class="container">
     <div class="post_footer">

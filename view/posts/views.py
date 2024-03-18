@@ -301,21 +301,27 @@ class LearningWayDetailView(DetailView):
 
         data["desc"] = _("Sirtqi ta'lim dasturi haqida")
         data["desc_day"] = _("Kunduzgi ta'lim dasturi haqida")
-        data["desc_evening"] = _("Kechgi ta'lim dasturi haqida")
+        data["desc_evening"] = _("Kechki ta'lim dasturi haqida")
 
         data["requirements"] = _("Sirtqi ta'limga kirish talablari")
         data["requirements_day"] = _("Kundizgi ta'limga kirish talablari")
-        data["requirements_evening"] = _("Kechgi ta'limga kirish talablari")
+        data["requirements_evening"] = _("Kechki ta'limga kirish talablari")
+        data["requirements_master"] = _("Magistraturaga kirish talablari")
+        data["requirements_phd"] = _("PHD ga kirish talablari")
+        data["requirements_dsc"] = _("DSC ga kirish talablari")
 
-        data["dept_fee_title_day"] = _("Kundizgi ta'lim uchun kredit miqdori")
-        data["full_time_fee_title_day"] = _("Kundizgi ta'lim uchun kantrakt miqdori")
-        data["dept_fee_title_evening"] = _("Kechgi ta'lim uchun kredit miqdori")
-        data["full_time_fee_title_evening"] = _("Kechgi ta'lim uchun kantrakt miqdori")
-        data["dept_fee_title"] = _("Sirtqi ta'lim uchun kredit miqdori")
-        data["full_time_fee_title"] = _("Sirtqi ta'lim uchun kantrakt miqdori")
+        data["dept_fee_title"] = _("Sirtqi ta'lim uchun 1 kredit miqdori")
+        data["dept_fee_title_day"] = _("Kunduzgi ta'lim uchun 1 kredit miqdori")
+        data["dept_fee_title_evening"] = _("Kechki ta'lim uchun 1 kredit miqdori")
+        data["dept_fee_title_master"] = _("Magistratura yo'nalishi uchun 1 kredit miqdori")
+
+        data["full_time_fee_title"] = _("Sirtqi ta'lim uchun 1 yillik kontrakt miqdori")
+        data["full_time_fee_title_day"] = _("Kunduzgi ta'lim uchun 1 yillik kontrakt miqdori")
+        data["full_time_fee_title_evening"] = _("Kechki ta'lim uchun 1 yillik kontrakt miqdori")
+        data["full_time_fee_title_master"] = _("Magistratura yo'nalishi uchun 1 yillik kontrakt miqdori")
 
         data["theme_name"] = _("Mavzu Nomi")
-        data["theme_teacher"] = _("Ilmiy raxbar")
+        data["theme_teacher"] = _("Ilmiy rahbar")
         data["theme_finance"] = _("Moliyalashtirish")
         data["theme_download"] = _("Mavzular ro'yhatinni yuklab olish")
 

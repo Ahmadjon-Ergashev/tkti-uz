@@ -481,6 +481,9 @@ class TypeStudyProgram(models.TextChoices):
     DAY = "day", _("Kundizgi")
     EVENING = "evening", _("Kechki")
     EXTERNALLY = "externally", _("Sirtqi")
+    MASTER = "master", _("Magistratura")
+    PHD = "phd", _("PHD")
+    DSc = "dsc", _("DSc")
 
 
 class AboutStudyProgramPDF(models.Model):
@@ -541,7 +544,7 @@ class ThemesForEducation(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Mavzu nomi"),
                             null=True, blank=True)
     desc = QuillField(null=True, blank=True, verbose_name=_("Haqida"))
-    teacher = models.CharField(max_length=255, verbose_name=_("Ilmiy raxbar"),
+    teacher = models.CharField(max_length=255, verbose_name=_("Ilmiy rahbar"),
                                null=True, blank=True)
     finance = models.CharField(max_length=255, verbose_name=_("Moliyalashtiruvi"),
                                null=True, blank=True)

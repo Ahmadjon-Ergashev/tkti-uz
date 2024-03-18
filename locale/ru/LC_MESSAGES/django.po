@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-18 06:15+0500\n"
+"POT-Creation-Date: 2024-03-18 08:16+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -162,8 +162,8 @@ msgstr "Выбранный файл изображения для объявле
 #: main/models/widgets.py:212 main/models/widgets.py:293
 #: main/models/widgets.py:301 main/models/widgets.py:316
 #: main/models/widgets.py:352 main/models/widgets.py:406
-#: main/models/widgets.py:427 view/posts/views.py:299 view/posts/views.py:385
-#: view/posts/views.py:427
+#: main/models/widgets.py:427 view/posts/views.py:299 view/posts/views.py:391
+#: view/posts/views.py:433
 msgid "Nomi"
 msgstr "Имя"
 
@@ -224,7 +224,7 @@ msgstr "Отделы и центры, связанные с новостями"
 
 #: main/models/news.py:48 main/models/news.py:96 main/models/news.py:169
 #: main/models/posts.py:56 main/models/posts.py:128 main/models/posts.py:185
-#: main/models/posts.py:431 main/models/posts.py:494 main/models/posts.py:567
+#: main/models/posts.py:431 main/models/posts.py:497 main/models/posts.py:570
 msgid "PDF fayl"
 msgstr "PDF-файл"
 
@@ -233,19 +233,19 @@ msgstr "PDF-файл"
 #: main/models/news.py:170 main/models/news.py:174 main/models/news.py:178
 #: main/models/posts.py:57 main/models/posts.py:61 main/models/posts.py:65
 #: main/models/posts.py:432 main/models/posts.py:435 main/models/posts.py:439
-#: main/models/posts.py:495 main/models/posts.py:499 main/models/posts.py:503
+#: main/models/posts.py:498 main/models/posts.py:502 main/models/posts.py:506
 msgid "Faqat *.pdf formatdagi faylarni yuklang"
 msgstr "Загружайте файлы только в формате *.pdf"
 
 #: main/models/news.py:52 main/models/news.py:100 main/models/news.py:173
 #: main/models/posts.py:131 main/models/posts.py:187 main/models/posts.py:434
-#: main/models/posts.py:498 main/models/posts.py:570
+#: main/models/posts.py:501 main/models/posts.py:573
 msgid "EN PDF fayl"
 msgstr "PDF-файл"
 
 #: main/models/news.py:56 main/models/news.py:104 main/models/news.py:177
 #: main/models/posts.py:134 main/models/posts.py:189 main/models/posts.py:438
-#: main/models/posts.py:502 main/models/posts.py:572
+#: main/models/posts.py:505 main/models/posts.py:575
 msgid "RU PDF fayl"
 msgstr "PDF-файл"
 
@@ -439,7 +439,7 @@ msgstr "название отдела"
 msgid "Faqat PDF formatidagi faylni joylang"
 msgstr "Часто задаваемые вопросы по форматированию файлов PDF"
 
-#: main/models/posts.py:136 main/models/posts.py:412 main/models/posts.py:543
+#: main/models/posts.py:136 main/models/posts.py:412 main/models/posts.py:546
 #: view/my_context_proccessor.py:57 view/posts/views.py:230
 msgid "Haqida"
 msgstr "О"
@@ -644,11 +644,11 @@ msgstr "Дополнительный номер телефона"
 msgid "Siz bo'lishingiz mumkun"
 msgstr "Вы можете быть"
 
-#: main/models/posts.py:449 main/models/posts.py:524 view/posts/views.py:434
+#: main/models/posts.py:449 main/models/posts.py:527 view/posts/views.py:440
 msgid "Kantrakt miqdori"
 msgstr "Сумма контракта"
 
-#: main/models/posts.py:450 main/models/posts.py:525 view/posts/views.py:433
+#: main/models/posts.py:450 main/models/posts.py:528 view/posts/views.py:439
 msgid "Kredit miqdori"
 msgstr "Сумма кредита"
 
@@ -665,7 +665,6 @@ msgid "Kundizgi"
 msgstr "Дневное время"
 
 #: main/models/posts.py:482
-
 msgid "Kechki"
 msgstr "Вечер"
 
@@ -673,44 +672,56 @@ msgstr "Вечер"
 msgid "Sirtqi"
 msgstr "Внешне"
 
-#: main/models/posts.py:512 main/models/posts.py:513
+#: main/models/posts.py:484
+msgid "Magistratura"
+msgstr "Магистратура"
+
+#: main/models/posts.py:485
+msgid "PHD"
+msgstr ""
+
+#: main/models/posts.py:486
+msgid "DSc"
+msgstr ""
+
+#: main/models/posts.py:515 main/models/posts.py:516
 msgid "Ta'lim yo'nalishlari xaqidagi pdf"
 msgstr "Направления обучения pdf"
 
-#: main/models/posts.py:523 main/models/posts.py:533 main/models/posts.py:534
-#: view/posts/views.py:389 view/posts/views.py:432
+#: main/models/posts.py:526 main/models/posts.py:536 main/models/posts.py:537
+#: view/posts/views.py:395 view/posts/views.py:438
 msgid "Kirish talablari"
 msgstr "Требования для поступления"
 
-#: main/models/posts.py:541
+#: main/models/posts.py:544
 msgid "Mavzu nomi"
 msgstr "Имя субъекта"
 
-#: main/models/posts.py:544 view/posts/views.py:318
+#: main/models/posts.py:547 view/posts/views.py:324
 msgid "Ilmiy raxbar"
 msgstr "Научный руководитель"
 
-#: main/models/posts.py:546
+#: main/models/posts.py:549
 msgid "Moliyalashtiruvi"
 msgstr "Финансирование"
 
-#: main/models/posts.py:556 main/models/posts.py:557
+#: main/models/posts.py:559 main/models/posts.py:560
 msgid "DSc va PHD Mavzulari"
 msgstr ""
 
-#: main/models/posts.py:562
+#: main/models/posts.py:565
 msgid "Ta'lim yo'nalishi"
 msgstr "Курс обучения"
 
-#: main/models/posts.py:564
+#: main/models/posts.py:567
 msgid "Semesterni tanlang"
 msgstr "Выберите семестр"
 
-#: main/models/posts.py:566
+#: main/models/posts.py:569
 msgid "Modul nomi"
 msgstr "Название модуля"
 
-#: main/models/posts.py:581 main/models/posts.py:582
+#: main/models/posts.py:584 main/models/posts.py:585
 msgid "Dars jadvallari"
 msgstr "Расписание занятий"
 
@@ -968,25 +979,6 @@ msgstr ""
 "(Янгиерский филиал)"
 
 #: templates/base.html:287
-#| msgid ""
-#| "Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat "
-#| "texnologiya,\n"
-#| "                            neft va gazni qayta ishkash texnologiyasi, "
-#| "ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy "
-#| "kadrlarni tayyorlash, \n"
-#| "                            qayta tayyorlash va ularning malakasini "
-#| "oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.\n"
-#| "                            Institutda O‘zbekiston ishlab chiqarish soha "
-#| "va korxonalarining dolzarb muammolarini hal etishga qaratilgan yashil "
-#| "kimyo, \n"
-#| "                            energetika va oziq-ovqat mahsulotlari ishlab "
-#| "chiqarish uchun ekologik toza, import o‘rnini bosuvchi va eksportbop, "
-#| "energiya tejovchi texnologiyalarni ishlab chiqish, \n"
-#| "                            mahalliy mineral xomashyo bazasini "
-#| "kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini "
-#| "ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali \n"
-#| "                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari "
-#| "olib borilmoqda."
 msgid ""
 "Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat "
 "texnologiya,-->\n"
@@ -1202,7 +1194,7 @@ msgstr "МАГИСТЕРСКИЕ ПРОГРАММЫ ФАКУЛЬТЕТА"
 msgid "Fakultet kafedralari"
 msgstr "Кафедры факультета"
 
-#: view/posts/views.py:300 view/posts/views.py:386 view/posts/views.py:429
+#: view/posts/views.py:300 view/posts/views.py:392 view/posts/views.py:435
 msgid "Ko'rish"
 msgstr "Вид"
 
@@ -1215,7 +1207,8 @@ msgid "Kunduzgi ta'lim dasturi haqida"
 msgstr "О программе очного обучения"
 
 #: view/posts/views.py:304
-msgid "Kechgi ta'lim dasturi haqida"
+
+msgid "Kechki ta'lim dasturi haqida"
 msgstr "О вечерней образовательной программе"
 
 #: view/posts/views.py:306
@@ -1227,66 +1220,86 @@ msgid "Kundizgi ta'limga kirish talablari"
 msgstr "Требования к поступающим на очную форму обучения"
 
 #: view/posts/views.py:308
-msgid "Kechgi ta'limga kirish talablari"
+msgid "Kechki ta'limga kirish talablari"
 msgstr "Требования к поступающим на вечернее обучение"
 
+#: view/posts/views.py:309
+msgid "Magistraturaga kirish talablari"
+msgstr "Требования к поступающим в аспирантуру"
+
 #: view/posts/views.py:310
-msgid "Kundizgi ta'lim uchun kredit miqdori"
-msgstr "Сумма кредита на очное обучение"
+msgid "PHD ga kirish talablari"
+msgstr "Требования к поступлению в докторантуру"
 
 #: view/posts/views.py:311
-msgid "Kundizgi ta'lim uchun kantrakt miqdori"
-msgstr "Сумма контракта на очную форму обучения"
-
-#: view/posts/views.py:312
-msgid "Kechgi ta'lim uchun kredit miqdori"
-msgstr "Сумма кредита за позднее образование"
+msgid "DSC ga kirish talablari"
+msgstr "Требования к поступающим в DSC"
 
 #: view/posts/views.py:313
-msgid "Kechgi ta'lim uchun kantrakt miqdori"
-msgstr "Сумма контракта на вечернее обучение"
+msgid "Sirtqi ta'lim uchun 1 kredit miqdori"
+msgstr "Сумма 1 кредита на заочное обучение"
 
 #: view/posts/views.py:314
-msgid "Sirtqi ta'lim uchun kredit miqdori"
-msgstr "Сумма кредита на заочное обучение"
+msgid "Kunduzgi ta'lim uchun 1 kredit miqdori"
+msgstr "Сумма 1 кредита на очное обучение"
 
 #: view/posts/views.py:315
-msgid "Sirtqi ta'lim uchun kantrakt miqdori"
-msgstr "Сумма договора на заочное обучение"
+msgid "Kechki ta'lim uchun 1 kredit miqdori"
+msgstr "Сумма 1 кредита за позднее образование"
 
-#: view/posts/views.py:317
+#: view/posts/views.py:316
+msgid "Magistratura yo'nalishi uchun 1 kredit miqdori"
+msgstr "Сумма 1 кредита за позднее образование"
+
+#: view/posts/views.py:318
+msgid "Sirtqi ta'lim uchun 1 yillik kontrakt miqdori"
+msgstr "Сумма 1-летнего контракта на заочное обучение"
+
+#: view/posts/views.py:319
+msgid "Kunduzgi ta'lim uchun 1 yillik kontrakt miqdori"
+msgstr "Сумма 1-летнего контракта на очную форму обучения"
+
+#: view/posts/views.py:320
+msgid "Kechki ta'lim uchun 1 yillik kontrakt miqdori"
+msgstr "Сумма 1-летнего контракта на вечернее обучение"
+
+#: view/posts/views.py:321
+msgid "Magistratura yo'nalishi uchun 1 yillik kontrakt miqdori"
+msgstr "Сумма 1-летнего контракта на вечернее обучение"
+
+#: view/posts/views.py:323
 msgid "Mavzu Nomi"
 msgstr "Имя субъекта"
 
-#: view/posts/views.py:319
+#: view/posts/views.py:325
 msgid "Moliyalashtirish"
 msgstr "Финансирование"
 
-#: view/posts/views.py:320
+#: view/posts/views.py:326
 msgid "Mavzular ro'yhatinni yuklab olish"
 msgstr "Скачать список тем"
 
-#: view/posts/views.py:322 view/posts/views.py:392 view/posts/views.py:435
+#: view/posts/views.py:328 view/posts/views.py:398 view/posts/views.py:441
 msgid "Qachonki o'qishni bitirganingizda"
 msgstr "Когда ты закончишь обучение"
 
-#: view/posts/views.py:323 view/posts/views.py:394 view/posts/views.py:436
+#: view/posts/views.py:329 view/posts/views.py:400 view/posts/views.py:442
 msgid "Semestrlar bo'yicha o'quv dasturi moduli"
 msgstr "Модуль учебной программы по семестрам"
 
-#: view/posts/views.py:387 view/posts/views.py:431
+#: view/posts/views.py:393 view/posts/views.py:437
 msgid "Ta'lim dasturi haqida"
 msgstr "Об образовательной программе"
 
-#: view/posts/views.py:390
+#: view/posts/views.py:396
 msgid "Kundizgi ta'lim uchun"
 msgstr "Для очного обучения"
 
-#: view/posts/views.py:391
+#: view/posts/views.py:397
 msgid "Kechgi ta'lim uchun"
 msgstr "Для вечернего обучения"
 
-#: view/posts/views.py:393
+#: view/posts/views.py:399
 msgid "Sirtqi ta'lim uchun"
 msgstr "Для внешнего образования"
 

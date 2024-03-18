@@ -175,13 +175,14 @@
             </div>
         </div>
     </div>
-    D
+
+{% if modules_by_semester %}
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ modul_title }}</h1>
         </div>
     </div>
-    
+
     <div class="container">
         <div id="module_by_semesters">
             <div class="_container">
@@ -191,7 +192,7 @@
                             {% for semester in modules_by_semester %}
                                 <button class="tab_btn {% if forloop.first %}active_tap{% endif %}">{{ semester }}</button>
                             {% endfor %}
-                        </div>  
+                        </div>
                     </div>
                 </div>
                 <div class="content_box my-5 container">
@@ -222,13 +223,14 @@
             </div>
         </div>
     </div>
-    
+{% endif %}
+{% if you_may_become %}
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ you_may_become }}</h1>
         </div>
     </div>
-    
+
     <div class="container mb-5">
         <div class="object_body">
             <div class="row">
@@ -241,7 +243,7 @@
             </div>
         </div>
     </div>
-    
+{% endif %}
     <div class="container">
         <div class="post_footer">
             <p class="text-end fw-bold">{{ object.author_post }}</p>
