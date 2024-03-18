@@ -300,8 +300,11 @@ class LearningWayDetailView(DetailView):
         data["view"] = _("Ko'rish")
 
         data["desc"] = _("Sirtqi ta'lim dasturi haqida")
+        data["desc_phd"] = _("PHD ta'lim dasturi haqida")
+        data["desc_dsc"] = _("DSc ta'lim dasturi haqida")
         data["desc_day"] = _("Kunduzgi ta'lim dasturi haqida")
         data["desc_evening"] = _("Kechki ta'lim dasturi haqida")
+        data["desc_master"] = _("Magistratura ta'lim dasturi haqida")
 
         data["requirements"] = _("Sirtqi ta'limga kirish talablari")
         data["requirements_day"] = _("Kundizgi ta'limga kirish talablari")
@@ -323,7 +326,7 @@ class LearningWayDetailView(DetailView):
         data["theme_name"] = _("Mavzu Nomi")
         data["theme_teacher"] = _("Ilmiy rahbar")
         data["theme_finance"] = _("Moliyalashtirish")
-        data["theme_download"] = _("Mavzular ro'yhatinni yuklab olish")
+        data["theme_download"] = _("Mavzular ro'yxatini yuklab olish")
 
         data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")

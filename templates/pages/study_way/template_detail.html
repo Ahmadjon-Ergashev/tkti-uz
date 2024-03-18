@@ -8,6 +8,12 @@
                     {{ desc_day }}
                 {% elif pdf.type == 'evening' %}
                     {{ desc_evening }}
+                {% elif pdf.type == 'master' %}
+                    {{ desc_master }}
+                {% elif pdf.type == 'phd' %}
+                    {{ desc_phd }}
+                {% elif pdf.type == 'dsc' %}
+                    {{ desc_dsc }}
                 {% elif pdf.type == 'externally' %}
                     {{ desc }}
                 {% endif %}

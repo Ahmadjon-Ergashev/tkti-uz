@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-18 08:27+0500\n"
+"POT-Creation-Date: 2024-03-18 10:15+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -160,8 +160,8 @@ msgstr "Selected image file for event"
 #: main/models/widgets.py:212 main/models/widgets.py:293
 #: main/models/widgets.py:301 main/models/widgets.py:316
 #: main/models/widgets.py:352 main/models/widgets.py:406
-#: main/models/widgets.py:427 view/posts/views.py:299 view/posts/views.py:391
-#: view/posts/views.py:433
+#: main/models/widgets.py:427 view/posts/views.py:299 view/posts/views.py:394
+#: view/posts/views.py:436
 msgid "Nomi"
 msgstr "Name"
 
@@ -642,11 +642,11 @@ msgstr "Extra phone"
 msgid "Siz bo'lishingiz mumkun"
 msgstr "You can be"
 
-#: main/models/posts.py:449 main/models/posts.py:527 view/posts/views.py:440
+#: main/models/posts.py:449 main/models/posts.py:527 view/posts/views.py:443
 msgid "Kantrakt miqdori"
 msgstr "Contract amount"
 
-#: main/models/posts.py:450 main/models/posts.py:528 view/posts/views.py:439
+#: main/models/posts.py:450 main/models/posts.py:528 view/posts/views.py:442
 msgid "Kredit miqdori"
 msgstr "Credit amount"
 
@@ -687,7 +687,7 @@ msgid "Ta'lim yo'nalishlari xaqidagi pdf"
 msgstr "Scientific directions"
 
 #: main/models/posts.py:526 main/models/posts.py:536 main/models/posts.py:537
-#: view/posts/views.py:395 view/posts/views.py:438
+#: view/posts/views.py:398 view/posts/views.py:441
 msgid "Kirish talablari"
 msgstr "Entry requirements"
 
@@ -695,7 +695,7 @@ msgstr "Entry requirements"
 msgid "Mavzu nomi"
 msgstr "Section name"
 
-#: main/models/posts.py:547 view/posts/views.py:324
+#: main/models/posts.py:547 view/posts/views.py:327
 msgid "Ilmiy rahbar"
 msgstr "Research advisor"
 
@@ -1191,7 +1191,7 @@ msgstr "MASTER'S PROGRAMS OF THE FACULTY"
 msgid "Fakultet kafedralari"
 msgstr "Departments of faculty"
 
-#: view/posts/views.py:300 view/posts/views.py:392 view/posts/views.py:435
+#: view/posts/views.py:300 view/posts/views.py:395 view/posts/views.py:438
 msgid "Ko'rish"
 msgstr "view"
 
@@ -1200,102 +1200,116 @@ msgid "Sirtqi ta'lim dasturi haqida"
 msgstr "About the external education program"
 
 #: view/posts/views.py:303
+msgid "PHD ta'lim dasturi haqida"
+msgstr "About PHD education program"
+
+#: view/posts/views.py:304
+msgid "DSc ta'lim dasturi haqida"
+msgstr "About DSc education program"
+
+#: view/posts/views.py:305
 msgid "Kunduzgi ta'lim dasturi haqida"
 msgstr "About the day education program"
 
-#: view/posts/views.py:304
+#: view/posts/views.py:306
 msgid "Kechki ta'lim dasturi haqida"
 msgstr "About the evening education program"
 
-#: view/posts/views.py:306
+#: view/posts/views.py:307
+msgid "Magistratura ta'lim dasturi haqida"
+msgstr "About the master's education program"
+
+#: view/posts/views.py:309
 msgid "Sirtqi ta'limga kirish talablari"
 msgstr "Admission Requirements for External Education"
 
-#: view/posts/views.py:307
+#: view/posts/views.py:310
 msgid "Kundizgi ta'limga kirish talablari"
 msgstr "Admission Requirements for day Education"
 
-#: view/posts/views.py:308
+#: view/posts/views.py:311
 msgid "Kechki ta'limga kirish talablari"
 msgstr "Admission Requirements for Evening Education"
 
-#: view/posts/views.py:309
+#: view/posts/views.py:312
 msgid "Magistraturaga kirish talablari"
 msgstr "Admission Requirements for Master's Education"
 
-#: view/posts/views.py:310
+#: view/posts/views.py:313
 msgid "PHD ga kirish talablari"
 msgstr "Admission Requirements for PHD Education"
 
-#: view/posts/views.py:311
+#: view/posts/views.py:314
 msgid "DSC ga kirish talablari"
 msgstr "Admission Requirements for DSc Education"
 
-#: view/posts/views.py:313
+#: view/posts/views.py:316
 msgid "Sirtqi ta'lim uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for part-time education"
 
-#: view/posts/views.py:314
+#: view/posts/views.py:317
 msgid "Kunduzgi ta'lim uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for full-time education"
 
-#: view/posts/views.py:315
+#: view/posts/views.py:318
 msgid "Kechki ta'lim uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for evening education"
 
-#: view/posts/views.py:316
+#: view/posts/views.py:319
 msgid "Magistratura yo'nalishi uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for master's education"
 
-#: view/posts/views.py:318
+#: view/posts/views.py:321
 msgid "Sirtqi ta'lim uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for extramural education"
 
-#: view/posts/views.py:319
+#: view/posts/views.py:322
 msgid "Kunduzgi ta'lim uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for full-time education"
 
-#: view/posts/views.py:320
+#: view/posts/views.py:323
 msgid "Kechki ta'lim uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for evening education"
 
-#: view/posts/views.py:321
+#: view/posts/views.py:324
 msgid "Magistratura yo'nalishi uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for master's education"
 
-#: view/posts/views.py:323
+#: view/posts/views.py:326
 msgid "Mavzu Nomi"
 msgstr "Name"
 
-#: view/posts/views.py:325
+#: view/posts/views.py:328
 msgid "Moliyalashtirish"
 msgstr "Financing"
 
-#: view/posts/views.py:326
-msgid "Mavzular ro'yhatinni yuklab olish"
+#: view/posts/views.py:329
+#, fuzzy
+#| msgid "Mavzular ro'yhatinni yuklab olish"
+msgid "Mavzular ro'yxatini yuklab olish"
 msgstr "Download the list of subjects"
 
-#: view/posts/views.py:328 view/posts/views.py:398 view/posts/views.py:441
+#: view/posts/views.py:331 view/posts/views.py:401 view/posts/views.py:444
 msgid "Qachonki o'qishni bitirganingizda"
 msgstr "When you graduate"
 
-#: view/posts/views.py:329 view/posts/views.py:400 view/posts/views.py:442
+#: view/posts/views.py:332 view/posts/views.py:403 view/posts/views.py:445
 msgid "Semestrlar bo'yicha o'quv dasturi moduli"
 msgstr "Syllabus Module by Semesters"
 
-#: view/posts/views.py:393 view/posts/views.py:437
+#: view/posts/views.py:396 view/posts/views.py:440
 msgid "Ta'lim dasturi haqida"
 msgstr "About educational programme"
 
-#: view/posts/views.py:396
+#: view/posts/views.py:399
 msgid "Kundizgi ta'lim uchun"
 msgstr "For full-time education"
 
-#: view/posts/views.py:397
+#: view/posts/views.py:400
 msgid "Kechgi ta'lim uchun"
 msgstr "For evening education"
 
-#: view/posts/views.py:399
+#: view/posts/views.py:402
 msgid "Sirtqi ta'lim uchun"
 msgstr "For external education"
 
