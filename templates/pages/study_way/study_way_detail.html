@@ -99,16 +99,16 @@
     {% for req in object.educational_area_requirements.all %}
         <div class="section_title py-2">
             <div class="container">
+
                 {% if req.type == 'day' %}
                     <h1>{{ requirements_day }}</h1>
                 {% elif req.type == 'evening' %}
                     <h1>{{ requirements_evening }}</h1>
-                {% else %}
+                {% elif req.type == 'externally' %}
                     <h1>{{ requirements }}</h1>
                 {% endif %}
             </div>
         </div>
-
         <div class="container my-3">
             <div class="object_body">
                 <p>{{ req.requirement.html|safe }}</p>

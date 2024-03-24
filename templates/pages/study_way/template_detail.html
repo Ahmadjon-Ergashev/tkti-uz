@@ -3,21 +3,31 @@
     <div class="object_body">
         <p>{{ object.desc.html|safe }}</p>
         {% for pdf in object.educational_area.all %}
-            <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
                 {% if pdf.type == 'day' %}
-                    {{ desc_day }}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc_day }}
+                    </a>
                 {% elif pdf.type == 'evening' %}
-                    {{ desc_evening }}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc_evening }}
+                    </a>
                 {% elif pdf.type == 'master' %}
-                    {{ desc_master }}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc_master }}
+                    </a>
                 {% elif pdf.type == 'phd' %}
-                    {{ desc_phd }}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc_phd }}
+                    </a>
                 {% elif pdf.type == 'dsc' %}
-                    {{ desc_dsc }}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc_dsc }}
+                    </a>
                 {% elif pdf.type == 'externally' %}
-                    {{ desc }}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc_externally }}
+                    </a>
                 {% endif %}
-            </a>
 
             <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="main_pdf_edu_area_{{ pdf.id }}" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
@@ -135,38 +145,58 @@
 
 
 {% for req in object.educational_area_requirements.all %}
-    <div class="section_title py-2">
-        <div class="container">
-            {% if req.type == 'day' %}
+    {% if req.type == 'day' %}
+        <div class="section_title py-2">
+            <div class="container">
                 <h1>{{ requirements_day }}</h1>
-            {% elif req.type == 'evening' %}
-                <h1>{{ requirements_evening }}</h1>
-            {% elif req.type == 'master' %}
-                <h1>{{ requirements_master }}</h1>
-            {% elif req.type == 'phd' %}
-                <h1>{{ requirements_phd }}</h1>
-            {% elif req.type == 'dsc' %}
-                <h1>{{ requirements_dsc }}</h1>
-            {% else %}
-                <h1>{{ requirements }}</h1>
-            {% endif %}
+            </div>
         </div>
-    </div>
+    {% elif req.type == 'evening' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ requirements_evening }}</h1>
+            </div>
+        </div>
+    {% elif req.type == 'master' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ requirements_master }}</h1>
+            </div>
+        </div>
+    {% elif req.type == 'phd' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ requirements_phd }}</h1>
+            </div>
+        </div>
+    {% elif req.type == 'dsc' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ requirements_dsc }}</h1>
+            </div>
+        </div>
+    {% elif req.type == 'externally' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ requirements }}</h1>
+            </div>
+        </div>
+    {% endif %}
 
-    <div class="container my-3">
+    <div class="container my-1">
         <div class="object_body">
             <p>{{ req.requirement.html|safe }}</p>
         </div>
     </div>
 {% endfor %}
 
-<div class="container my-3">
+<div class="container my-2">
     <div class="object_body">
         <div class="row">
             {% if object.educational_area_requirements.all %}
                 <div class="col-12 col-lg-8">
                     <p>{{ object.tuition_fee.html|safe }}</p>
-                    <ul class="list-group list-group-flush w-50 w-50-l">
+                    <ul class="list-group list-group-flush w-75 w-75-l">
                         {% for fee in object.educational_area_requirements.all %}
                             {% if fee.full_time_fee != 0 %}
                                 {% if fee.type == "day" %}
@@ -243,7 +273,7 @@
         </div>
     </div>
 </div>
-
+<br>
 {% if modules_by_semester %}
     <div class="section_title py-2">
         <div class="container">
@@ -292,10 +322,10 @@
         </div>
     </div>
 {% endif %}
-{% if object.you_may_become %}
+{% if object.you_may_become.html|safe == " "  %}
     <div class="section_title py-2">
         <div class="container">
-            <h1>{{ you_may_become }}</h1>
+            <h1>{{ you_may_become_title }}</h1>
         </div>
     </div>
 
@@ -303,7 +333,9 @@
         <div class="object_body">
             <div class="row">
                 <div class="col-12 col-md-4 p-1">
-                    <div class="you_become_img" style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
+                    {% if object.you_may_become_image %}
+                        <div class="you_become_img" style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
+                    {% endif %}
                 </div>
                 <div class="col-12 col-md-8 p-1">
                     <p>{{ object.you_may_become.html|safe }}</p>

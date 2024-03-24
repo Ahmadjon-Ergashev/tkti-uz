@@ -25,9 +25,6 @@ class Home(View):
                 "statistika": widgets.Statistika.objects.order_by("order_num").only(
                     "name", "icon", "url", "quantity"
                 ),
-                # "usefull_links": widgets.UsefullLinks.objects.order_by("-add_time").only(
-                #     "name", "logo", "link"
-                # ),
                 "talented_students": posts.TalentedStudents.objects.order_by("-added_at").only(
                     "image", "f_name", "desc"
                 ),
@@ -35,7 +32,12 @@ class Home(View):
             cache.set('object_list_cache', objects_list, 600)
             if object_list_cache is None:
                 object_list_cache = {}
-        context = object_list_cache
+        usefully_test = {
+            "usefully_links": widgets.UsefullLinks.objects.order_by("-add_time").only(
+                "name", "logo", "link"
+            )
+        }
+        context = object_list_cache | usefully_test
         return render(request, self.template_name, context)
 
 
@@ -328,7 +330,7 @@ class LearningWayDetailView(DetailView):
         data["theme_finance"] = _("Moliyalashtirish")
         data["theme_download"] = _("Mavzular ro'yxatini yuklab olish")
 
-        data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
+        data["you_may_become_title"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         data["educational_areas"] = education_areas
         return data
@@ -398,7 +400,7 @@ class EducationalAreaView(ListView):
         data["requirements"] = _("Kirish talablari")
         data["full_time_fee_title"] = _("Kundizgi ta'lim uchun")
         data["full_time_night_fee_title"] = _("Kechgi ta'lim uchun")
-        data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
+        data["you_may_become_title"] = _("Qachonki o'qishni bitirganingizda")
         data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         return data
@@ -441,6 +443,6 @@ class EducationalAreaDetailView(DetailView):
         data["requirements"] = _("Kirish talablari")
         data["dept_fee_title"] = _("Kredit miqdori")
         data["full_time_fee_title"] = _("Kantrakt miqdori")
-        data["you_may_become"] = _("Qachonki o'qishni bitirganingizda")
+        data["you_may_become_title"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         return data

@@ -8,11 +8,11 @@ $(document).ready(() => {
             "start": 0,
             "end": 8
         },
-        success: function (data) {
+        success: function (data)  {
             data.map((upc) => {
                 let cards = `
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-                        <div class="card">
+                        <div class="card"  style="min-height: 190px;">
                             <div class="card-body">
                                 <div class="card_header">
                                     <h5 class="card-title_h5">
@@ -58,7 +58,7 @@ $(document).ready(() => {
             data.map((upc) => {
                 let cards = `
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-                        <div class="card">
+                        <div class="card" style="min-height: 190px;">
                             <div class="card-body">
                                 <div class="card_header">
                                     <h5 class="card-title_h5">
@@ -104,7 +104,7 @@ $(document).ready(() => {
             data.map((upc) => {
                 let cards = `
                     <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-3">
-                        <div class="card">
+                        <div class="card" style="min-height: 190px;">
                             <div class="card-body">
                                 <div class="card_header">
                                     <h5 class="card-title_h5">

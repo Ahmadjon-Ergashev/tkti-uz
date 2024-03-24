@@ -39,7 +39,10 @@ $(document).ready(function(){
         infinite: true,
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 4000,
+        speed: 700,
+        fade: true,
+        autoplaySpeed: 3000,
+        cssEase: 'linear'
     });
 
     $("#news_gallary").slick({

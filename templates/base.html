@@ -35,7 +35,7 @@
 <body>
     <!-- social media -->
 <!--    <marquee behavior="" direction=""><b>{% blocktrans %}Sayt test rejimida ishlamoqda{% endblocktrans %}</b></marquee>-->
-    <div class="socials">    
+    <div class="socials">
         <ul id="social_media_btn">
             {% for nets in social_networks %}    
                 <li class="social_networks_links" data-social-color="{{ nets.color }}">
@@ -226,7 +226,10 @@
                     {% endif %}
                 </a>
                 <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name">
-                    {{ base_variables.name }}
+<!--                    {{ base_variables.name|linebreaksbr|safe }}-->
+                    {% for i in web_name %}
+                        {{ i }}<br>
+                    {% endfor %}
                 </a>
                 <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>

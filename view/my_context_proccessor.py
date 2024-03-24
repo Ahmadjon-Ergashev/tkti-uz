@@ -2,6 +2,7 @@ from datetime import datetime
 from django.utils import timezone
 from django.core.cache import cache
 from django.utils.translation import gettext_lazy as _
+from django.db.models import ExpressionWrapper, F, DateTimeField
 
 # local
 from main.models import (
@@ -23,20 +24,26 @@ def global_variables(request):
             cache.set("navbar", navbar_list, 60*30)
     except Exception as e:
         print(e)
+    current_time = timezone.now()
     event = news.Events.objects.filter(
-            status="pub", added_at__gte=timezone.now()
-        ).order_by("-added_at").first()
-    hours = 0
-    day_hours = 0
-    minutes = 0
+            status="pub", added_at__gte=current_time
+        ).annotate(
+            time_diff=ExpressionWrapper(
+                F('added_at') - current_time,
+                output_field=DateTimeField()
+            )
+        ).order_by('time_diff').first()
     if event:
         coming_time_delta = event.added_at - timezone.now()
-        day = coming_time_delta.days
-        day_hours = day * 24
-        hours = coming_time_delta.seconds // 3600
-        minutes = (coming_time_delta.seconds // 60) % 60
-
-    start_time = f"{hours + day_hours}:{minutes}"
+        days_until_event_starts = coming_time_delta.days
+        if days_until_event_starts == 0:
+            # Event starts today
+            start_time = _("Bugun")
+        else:
+            word = _("kun qoldi")
+            start_time = f"{days_until_event_starts} {word}"
+    else:
+        start_time = "No upcoming event"
     context = {
         "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
             "name", "slug", "id"
@@ -48,8 +55,13 @@ def global_variables(request):
         "base_variables": widgets.BaseVariables.objects.last(),
         "top_navbar": widgets.TopNavbar.objects.only("name", "url").order_by("order_num"),
         "upcoming_event_first": news.Events.objects.filter(
-            status="pub", added_at__gte=timezone.now()
-        ).order_by("-added_at")[:1],
+            status="pub", added_at__gte=current_time
+        ).annotate(
+            time_diff=ExpressionWrapper(
+                F('added_at') - current_time,
+                output_field=DateTimeField()
+            )
+        ).order_by('time_diff').first(),
         "start_time": start_time,
         "start_time_title": _("Boshlanish vaqtigacha "),
         # text variables
@@ -98,6 +110,11 @@ def global_variables(request):
         "talented_student_title": _("Iqtidorli talabalar"),
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
+    try:
+        name = str(widgets.BaseVariables.objects.last().name).split(" ")
+        context["web_name"] = name
+    except Exception as e:
+        print(e)
     if navbar is None:
         navbar = {}
     return context | translate_words | navbar
