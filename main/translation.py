@@ -2,6 +2,7 @@ from modeltranslation.translator import register, TranslationOptions
 
 
 from main.models import posts, news, widgets
+import main.models as models
 
 """ posts models translations file """
 
@@ -227,3 +228,15 @@ class EntryRequirementsTranslation(TranslationOptions):
 @register(posts.ThemesForEducation)
 class ThemesForEducationTranslation(TranslationOptions):
     fields = ("name", "desc", "teacher", "finance")
+
+
+# partners
+@register(models.Country)
+class CountryTranslation(TranslationOptions):
+    fields = ("name", )
+
+
+@register(models.Partner)
+class PartnerTranslation(TranslationOptions):
+    fields = ("name", )
+

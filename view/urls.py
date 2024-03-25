@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 
 # local vars
 from view.news import views as news
@@ -43,4 +43,6 @@ widgets = [
     path("supports/<int:pk>/", widgets.FinancialBenefitDetailView.as_view(), name="opports_detail_view"),
 ]
 
-urlpatterns = [] + posts + news + widgets
+urlpatterns = [
+    path("partners/", include("view.partners.urls"))
+] + posts + news + widgets

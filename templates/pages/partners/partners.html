@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles/left_category/left_sidebar.css' %}">
+    <div class="container">
+        <div class="row py-3">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
+                {% include "../../widgets/left_sidebar.html" %}
+            </div>
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 posts">
+                <img src="https://sawwwcomprodnortheu001.blob.core.windows.net/cache/6/6/c/6/d/5/66c6d59b4f9def0e0d542205e23695627feba2e8.webp" width="100%" alt="">
+                <br><br>
+                <h1 class="text-center">{{ title }}</h1>
+                <br>
+                {% for object in country %}
+                    <hr>
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <span class="fs-3">{{ object.name }}</span>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <ul class="list-group list-group-flush">
+                                        {% for obj in object.partners_country.all %}
+                                            <li class="list-group-item">
+                                                <img src="{{ obj.image.url }}" width="50" class="me-3" alt="tkti.uz">
+                                                <a href="{{ obj.url }}" target="_blank" class="text-dark">{{ obj.name }}</a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
