@@ -4,6 +4,7 @@ from django.urls import path, include
 from view.news import views as news
 from view.posts import views as posts
 from view.widgets import views as widgets
+import view
 
 
 posts = [
@@ -43,6 +44,10 @@ widgets = [
     path("supports/<int:pk>/", widgets.FinancialBenefitDetailView.as_view(), name="opports_detail_view"),
 ]
 
+shop = [
+    path("tkti/shop/", view.ShopListView.as_view())
+]
+
 urlpatterns = [
     path("partners/", include("view.partners.urls"))
-] + posts + news + widgets
+] + posts + news + widgets + shop

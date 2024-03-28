@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}
+    SHOP
+{% endblock %}
+{% block content %}
+
+    <div class="container mt-5">
+        <div class="shop_header d-flex justify-content-between">
+            <h1 class="my-3">TKTI SHOP</h1>
+            <div class="filter">
+                <form method="post">
+                    <label for="shop_category"></label>
+                    <select name="category" class="form-select" id="shop_category">
+                        <option value="" selected>Barchasi</option>
+                    </select>
+                </form>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <div class="row" id="tkti_shop_cards">
+
+        </div>
+    </div>
+
+{% endblock %}

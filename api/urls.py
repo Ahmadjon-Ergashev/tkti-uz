@@ -1,3 +1,4 @@
+from django.urls import path, include
 from rest_framework.routers import SimpleRouter
 
 from api.news import views as news
@@ -21,5 +22,6 @@ router.register("posts/departments_list", posts.DepartmentsView)
 router.register("posts/talented_students", posts.TalentedStudentsView)
 
 
-
-urlpatterns = [] + router.urls
+urlpatterns = [
+	path("shop/", include("api.shop.urls"))
+] + router.urls

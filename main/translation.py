@@ -240,3 +240,13 @@ class CountryTranslation(TranslationOptions):
 class PartnerTranslation(TranslationOptions):
     fields = ("name", )
 
+
+@register(models.ShopCategory)
+class ShopCategoryTranslation(TranslationOptions):
+    fields = ("name", )
+
+
+@register(models.Shop)
+class ShopTranslator(TranslationOptions):
+    fields = ("name", )
+
