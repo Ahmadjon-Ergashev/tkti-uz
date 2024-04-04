@@ -283,6 +283,21 @@ class SectionsAndCenters(models.Model):
         verbose_name_plural = _("Bo'lim va Markazlar")
 
 
+class SocialNetworksBoss(models.Model):
+    from colorfield.fields import ColorField
+    name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True, blank=True)
+    icon = models.CharField(max_length=255, verbose_name=_("Icon"), null=True, blank=True)
+    color = ColorField(verbose_name=_("rangi"), null=True, blank=True, default="#123456")
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'social_networks_boss'
+        verbose_name = _("Ijtimoiy tarmoqlar Xodimlar")
+        verbose_name_plural = _("Ijtimoiy tarmoqlar Xodimlar")
+
+
 class UniversityAdmistrations(models.Model):
     """ university admistrations model """
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
@@ -327,6 +342,18 @@ class UniversityAdmistrations(models.Model):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
+
+
+class NetworksBoss(models.Model):
+    boss = models.ForeignKey(UniversityAdmistrations,
+                             on_delete=models.SET_NULL, related_name="boss_network", null=True, blank=True)
+    social_networks = models.ForeignKey(SocialNetworksBoss, models.SET_NULL, null=True, blank=True)
+    url = models.CharField(max_length=255, verbose_name=_("URL"), null=True, blank=True)
+
+    class Meta:
+        db_table = 'networks_boss'
+        verbose_name = _("Rahbariat ijtimoiy tarmoqlar")
+        verbose_name_plural = _("Rahbariat ijtimoiy tarmoqlar")
 
 
 class TalentedStudents(models.Model):

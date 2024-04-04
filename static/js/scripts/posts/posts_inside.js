@@ -1,11 +1,12 @@
 $(document).ready(function(){
-    $base_url = window.location.origin
+    let $base_url = window.location.origin
     $.ajax({
         type:"GET",
         url: `${$base_url}/api/posts/adminstrations/`,
         data: {},
         success: function (data) {
             data.map((item) => {
+
                 let card_item = `
                     <div class="col-12 col-md-4 col-lg-4">
                         <div class="card" style="height: 560px">
@@ -19,10 +20,11 @@ $(document).ready(function(){
                                     <li class="list-group-item"><i class="fas fa-envelope me-1"></i> ${item.email}</li>
                                     <li class="list-group-item"><i class="fas fa-phone me-1"></i> ${item.phone}</li>
                                     <li class="list-group-item"><i class="fas fa-calendar me-1"></i> ${item.admission_days}</li>
-                                    <li class="list-group-item">
-                                        <a href="${item.facebook}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>
-                                        <a href="${item.instagram}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>
-                                        <a href="${item.linkedin}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>
+                                    <li class="list-group-item social-networks">
+                                        <div class=""></div>
+<!--                                        <a href="${item.facebook}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>-->
+<!--                                        <a href="${item.instagram}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>-->
+<!--                                        <a href="${item.linkedin}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>-->
                                     </li>
                                 </ul>
                             </div>
@@ -97,6 +99,15 @@ $(document).ready(function(){
                     </div>
                 `
                 $("#adminstations").append(card_item)
+
+                if (item.boss) {
+                    item.boss.forEach((instance) => {
+                        let network = `
+                            <a href="${instance.url}" target="_blank" style="color: ${instance.social_networks.color};"><i class="${instance.social_networks.icon} me-1 fs-3"></i></a>
+                        `;
+                        $(".social-networks").last().append(network); // Append to the last social-networks element
+                    });
+                }
             })
         }
     })

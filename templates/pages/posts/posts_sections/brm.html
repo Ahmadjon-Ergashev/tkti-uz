@@ -1,3 +1,10 @@
+<style>
+    @media screen and (max-width: 389px) {
+        .post_text iframe{
+            width: 340px;
+        }
+    }
+</style>
 <div class="container my-5">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -7,7 +14,7 @@
         </ol>
     </nav>
 </div>
-<div class="container my-5">
+<div class="container my-5 px-3 px-md-0">
     {% for object in object_list %}
         <h1 class="text-center fw-bold" style="color: #26597E;">{{ object.title }}</h1>
         <div class="post_text mt-3" id="object_post">

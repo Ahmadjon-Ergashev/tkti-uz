@@ -11,7 +11,7 @@
           
         {% endblock title %}
     </title>
-    <!-- favilcon icon -->
+    <!-- favicon icon -->
     <link rel="shortcut icon" href="{% static 'images/brand.png' %}" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{% static 'css/modules/font-awesome/css/all.min.css' %}">
@@ -29,6 +29,9 @@
         .modal_text:hover {
             color: #111;
             background-color: #ddd;
+        }
+        .row{
+            padding: 0;
         }
     </style>
 </head>
@@ -78,7 +81,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="search_btn" data-bs-dismiss="modal">
-                        {% blocktrans %}Bekor qilish{% endblocktrans %}
+                        {% blocktrans %} Bekor qilish {% endblocktrans %}
                     </button>
                 </div>
             </div>
@@ -113,9 +116,9 @@
 
     <!-- start header -->
     <header id="header">
-        <div class="superNav border-bottom py-2 bg-light">
+        <div class="superNav border-bottom py-2 bg-light text-center">
             <div class="container">
-                <div class="row">
+                <div class="row p-0">
                     <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav">
                         <ul>
                             <li class="me-3">
@@ -231,6 +234,7 @@
                         {{ i }}<br>
                     {% endfor %}
                 </a>
+                <br><br>
                 <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -242,7 +246,8 @@
 <!--                                    {{ nav.name }}-->
 <!--                                </a>-->
 
-                                <button class="p-1 btn" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="p-1 btn" id="navbarDropdown{{ nav.id }}"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ nav.name }}
                                 </button>
                                 <button class="p-1 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -280,22 +285,15 @@
     <!-- start footer -->
     <div class="mt-5 pt-5 footer">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-5 col-xs-12 about-company">
-                    <h4>
+            <div class="row p-0">
+                <div class="col-10 m-auto col-lg-5 col-xs-12 mb-3 about-company">
+                    <h4 class="text-center text-md-start">
                         {{ base_variables.name }}
                     </h4>
                     <p class="pr-5 text-white-50">
                         {{ base_variables.description }}
-<!--                        {% blocktrans %}Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat texnologiya,-->
-<!--                            neft va gazni qayta ishkash texnologiyasi, ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy kadrlarni tayyorlash, -->
-<!--                            qayta tayyorlash va ularning malakasini oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.-->
-<!--                            Institutda O‘zbekiston ishlab chiqarish soha va korxonalarining dolzarb muammolarini hal etishga qaratilgan yashil kimyo, -->
-<!--                            energetika va oziq-ovqat mahsulotlari ishlab chiqarish uchun ekologik toza, import o‘rnini bosuvchi va eksportbop, energiya tejovchi texnologiyalarni ishlab chiqish, -->
-<!--                            mahalliy mineral xomashyo bazasini kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali -->
-<!--                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari olib borilmoqda.{% endblocktrans %}-->
                     </p>
-                    <p>
+                    <p class="text-center text-md-start">
                         {% for nets in social_networks %}                            
                             <a href="{{ nets.url }}" target="_blank">
                                 <i class="{{ nets.icon }} me-2"></i>
@@ -303,7 +301,7 @@
                         {% endfor %}     
                     </p>
                 </div>
-                <div class="col-lg-3 col-xs-12 links">
+                <div class="col-10 m-auto col-lg-3 mb-3 col-xs-12 links">
                     <h4 class="mt-lg-0 mt-sm-3">
                         {% blocktrans %}Havolalar{% endblocktrans %}
                     </h4>
@@ -315,7 +313,7 @@
                         {% endfor %}
                     </ul>
                 </div>
-                <div class="col-lg-4 col-xs-12 location">
+                <div class="col-10 m-auto col-lg-4  mb-3 col-xs-12 location">
                     <h4 class="mt-lg-0 mt-sm-5">
                         {% blocktrans %}Bog'lanish{% endblocktrans %}
                     </h4>
@@ -325,12 +323,6 @@
                                 {{ base_variables.address }}
                             </li>
                             <li><i class="fas fa-bus me-2"></i>
-<!--                                {% blocktrans %}Jamoat transporti:{% endblocktrans %} -->
-<!--                                <ul class="">-->
-<!--                                    <li style="list-style-type: symbols('-');">-->
-<!--                                        65, 25, 148, 55, 14, 147-->
-<!--                                    </li>-->
-<!--                                </ul>-->
                                 {{ base_variables.buses }}
                             </li>
                             <li><i class="fas fa-phone-alt me-2"></i>
@@ -346,7 +338,7 @@
             </div>
             <div class="row mt-5">
                 <div class="col copyright">
-                    <p class="web_name">
+                    <p class="web_name text-center text-md-start">
                         <small class="text-white-50">© 2024 Toshkent kimyo-texnologiya instituti.</small>
                     </p>
                 </div>

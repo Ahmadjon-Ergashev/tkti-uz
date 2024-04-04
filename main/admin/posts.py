@@ -146,19 +146,19 @@ class PostsAdmin(admin.ModelAdmin):
         (_("O'zbek tilida"), {
             "classes": ("collapse", ),
             "fields": (
-                "title_uz", "subtitle_uz", "post_uz",
+                "title_uz", "subtitle_uz", "post_uz", "author_post_uz"
             ),
         }),
         (_("Rus tilida"), {
             "classes": ("collapse", ),
             "fields": (
-                "title_ru", "subtitle_ru", "post_ru", "pdf_file_ru"
+                "title_ru", "subtitle_ru", "post_ru", "pdf_file_ru", "author_post_ru"
             ),
         }),
         (_("Ingiliz tilida"), {
             "classes": ("collapse", ),
             "fields": (
-                "title_en", "subtitle_en", "post_en", "pdf_file_en"
+                "title_en", "subtitle_en", "post_en", "pdf_file_en", "author_post_en"
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
@@ -197,7 +197,7 @@ class PostsAdmin(admin.ModelAdmin):
 
 
 @admin.register(posts.FacultyAdministration)
-class FacultyAdmistrationAdmin(admin.ModelAdmin):
+class FacultyAdministrationAdmin(admin.ModelAdmin):
     actions = [clone]
     list_per_page = 10
     ordering = ("order_num", )
@@ -483,10 +483,24 @@ class SectionsAdmin(admin.ModelAdmin):
     )
 
 
+@admin.register(posts.SocialNetworksBoss)
+class SocialNetworksBossAdmin(admin.ModelAdmin):
+    search_fields = ("name", )
+    list_display_links = ("id", )
+    list_editable = ("name", "icon", "color")
+    list_display = ("id", "name", "icon", "color")
+
+
+class NetworksBossAdmin(admin.TabularInline):
+    model = posts.NetworksBoss
+    extra = 1
+
+
 @admin.register(posts.UniversityAdmistrations)
 class UniversityAdminsAdmin(admin.ModelAdmin):
     actions = [duplicate]
     list_per_page = 10
+    inlines = [NetworksBossAdmin]
     list_editable = ("order_num", )
     readonly_fields = ("get_image", "added_at")
     prepopulated_fields = ({"slug": ("f_name_uz", )})   

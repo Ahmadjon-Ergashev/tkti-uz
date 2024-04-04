@@ -14,13 +14,13 @@ $(document).ready(function (){
                 $("#tkti_shop_cards").empty(); // Clear previous cards
                 data.map((item) => {
                     let card = `
-                        <div class="col-12 col-sm-12 col-md-6 col-lg-3">
+                        <div class="col-10 m-auto col-sm-12 col-md-6 col-lg-3">
                             <div class="card">
                                 <img src="${item.image}" class="card-img-top" alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title text-capitalize">${item.name}</h5>
-                                    <p class="card-text">USZ ${item.price}</p>
-                                    <a href="" class="btn-sm btn btn-primary" 
+                                    <p class="card-text">UZS ${item.price}</p>
+                                    <a href="" class="btn-sm btn btn-primary rounded-5 px-2" 
                                         data-bs-toggle="modal" data-bs-target="#staticBackdrop${item.id}">
                                         Buyurtma berish
                                     </a>

@@ -32,15 +32,31 @@ class DepartmentsSerializers(serializers.ModelSerializer):
         data = super().to_representation(instance)
         data["faculty"] = FacultySerializers(instance=instance.faculty).data
         return data
-    
 
-class AdmistationSerializer(serializers.ModelSerializer):
+
+class SocialNetworksBossSerializers(serializers.ModelSerializer):
+    class Meta:
+        model = posts.SocialNetworksBoss
+        fields = ("name", "icon", "color")
+
+
+class NetworksBossSerializers(serializers.ModelSerializer):
+    social_networks = SocialNetworksBossSerializers()
+
+    class Meta:
+        model = posts.NetworksBoss
+        fields = ("social_networks", "url")
+
+
+class AdministrationSerializer(serializers.ModelSerializer):
+    boss = NetworksBossSerializers(many=True, source="boss_network")
+
     class Meta:
         model = posts.UniversityAdmistrations
         fields = [
             "id", "image", "f_name", "position", "email", "phone",
             "admission_days", "short_info", "scientific_direction",
-            "main_tasks_in_position", "scientific_activity", "facebook", "instagram", "linkedin"
+            "main_tasks_in_position", "scientific_activity", "facebook", "instagram", "linkedin", "boss"
         ]
 
     def to_representation(self, instance):

@@ -35,7 +35,7 @@ class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 class AdmistrationsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.UniversityAdmistrations.objects.all().order_by("order_num")
-    serializer_class = serializers.AdmistationSerializer
+    serializer_class = serializers.AdministrationSerializer
 
 
 class TalentedStudentsView(mixins.ListModelMixin, viewsets.GenericViewSet):

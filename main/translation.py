@@ -14,7 +14,7 @@ class NavbarTranslation(TranslationOptions):
 
 @register(posts.Posts)
 class PostsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post", )
+    fields = ("title", "subtitle", "post", "author_post")
 
 
 @register(posts.FacultyAdministration)
@@ -103,7 +103,7 @@ class CategoryTranslation(TranslationOptions):
 
 @register(news.News)
 class NewsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post", )
+    fields = ("title", "subtitle", "post", "author_post")
 
 
 @register(news.Ads)

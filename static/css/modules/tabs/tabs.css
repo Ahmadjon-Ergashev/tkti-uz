@@ -155,6 +155,13 @@
   }
 }
 @media only screen and (max-width: 496px) {
+  ._container .tap_title .tab_box {
+    border: 1px solid;
+    width: 100%;
+    text-align: center;
+    padding: 10px;
+    display: block;
+  }
   .tab_box .tab_btns .active_tap {
     color: #111;
     background: none;

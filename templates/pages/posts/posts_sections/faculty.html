@@ -12,10 +12,10 @@
 <div class="faculty_card_box">
     <div class="row">
         {% for object in object_list %}  
-            <div class="col-12 col-md-6">
-                <div class="card mb-3 p-3" style="min-height: 250px; max-height: 250px;">
+            <div class="col-11 m-auto col-md-6">
+                <div class="card mb-3 p-3" style="min-height: 270px;">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-11 m-auto col-md-4">
                             {% if object.image %}
                                 <a href="/posts/navbar/post/{{ object.slug }}">
                                     <img src="{{ object.image.url }}" class="img-fluid rounded-start" alt="TkTI Axborot xizmati">

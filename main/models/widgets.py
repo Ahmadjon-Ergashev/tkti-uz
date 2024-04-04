@@ -91,7 +91,7 @@ class AbstractTemplate(models.Model):
     status = models.CharField(verbose_name=_("status"), max_length=50, choices=Status.choices, default=Status.pendding)
     slug = models.SlugField(max_length=50, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
-    author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
+    author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default=_("TKTI axborot xizmati"))
     added_at = models.DateTimeField(verbose_name=_("Vaqt & sana"))
     updated_at = models.DateTimeField(auto_now=True)
 
