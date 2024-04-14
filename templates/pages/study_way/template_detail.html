@@ -3,29 +3,29 @@
     <div class="object_body">
         <p>{{ object.desc.html|safe }}</p>
         {% for pdf in object.educational_area.all %}
-                {% if pdf.type == 'day' %}
+                {% if pdf.type == "day" %}
                     <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
                         {{ desc_day }}
                     </a>
-                {% elif pdf.type == 'evening' %}
+                {% elif pdf.type == "evening" %}
                     <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
                         {{ desc_evening }}
                     </a>
-                {% elif pdf.type == 'master' %}
+                {% elif pdf.type == "externally" %}
+                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
+                        {{ desc }}
+                    </a>
+                {% elif pdf.type == "master" %}
                     <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
                         {{ desc_master }}
                     </a>
-                {% elif pdf.type == 'phd' %}
+                {% elif pdf.type == "phd" %}
                     <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
                         {{ desc_phd }}
                     </a>
-                {% elif pdf.type == 'dsc' %}
+                {% elif pdf.type == "dsc" %}
                     <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
                         {{ desc_dsc }}
-                    </a>
-                {% elif pdf.type == 'externally' %}
-                    <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas" data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                        {{ desc_externally }}
                     </a>
                 {% endif %}
 
@@ -157,6 +157,12 @@
                 <h1>{{ requirements_evening }}</h1>
             </div>
         </div>
+    {% elif req.type == 'externally' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ requirements }}</h1>
+            </div>
+        </div>
     {% elif req.type == 'master' %}
         <div class="section_title py-2">
             <div class="container">
@@ -173,12 +179,6 @@
         <div class="section_title py-2">
             <div class="container">
                 <h1>{{ requirements_dsc }}</h1>
-            </div>
-        </div>
-    {% elif req.type == 'externally' %}
-        <div class="section_title py-2">
-            <div class="container">
-                <h1>{{ requirements }}</h1>
             </div>
         </div>
     {% endif %}
@@ -322,7 +322,7 @@
         </div>
     </div>
 {% endif %}
-{% if object.you_may_become.html|safe == " "  %}
+{% if object.you_may_become.html|safe != " "  %}
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ you_may_become_title }}</h1>

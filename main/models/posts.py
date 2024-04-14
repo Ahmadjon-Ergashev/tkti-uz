@@ -558,7 +558,7 @@ class EntryRequirements(models.Model):
         return f"{self.type} - {self.education_area.name}"
 
     class Meta:
-        ordering = ("education_area", )
+        ordering = ("-id", )
         db_table = "entry_requirements"
         verbose_name = _("Kirish talablari")
         verbose_name_plural = _("Kirish talablari")
