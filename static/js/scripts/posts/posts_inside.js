@@ -9,22 +9,19 @@ $(document).ready(function(){
 
                 let card_item = `
                     <div class="col-12 col-md-4 col-lg-4">
-                        <div class="card" style="height: 560px">
+                        <div class="card" style="height: 580px">
                             <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
                             <div class="card-header">
-                                <b>${item.position}</b>
+                                <span class="font-weight-bold">${item.position}</span>
                             </div>
                             <div class="card-body p-0">
                                 <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><b>${item.f_name}</b></li>
+                                    <li class="list-group-item"><span>${item.f_name}</span></li>
                                     <li class="list-group-item"><i class="fas fa-envelope me-1"></i> ${item.email}</li>
                                     <li class="list-group-item"><i class="fas fa-phone me-1"></i> ${item.phone}</li>
                                     <li class="list-group-item"><i class="fas fa-calendar me-1"></i> ${item.admission_days}</li>
                                     <li class="list-group-item social-networks">
                                         <div class=""></div>
-<!--                                        <a href="${item.facebook}" style="color: #3b5998;"><i class="fab fa-facebook-square me-1 fs-3"></i></a>-->
-<!--                                        <a href="${item.instagram}" style="color: #AC2BAC;"><i class="fab fa-instagram-square me-1 fs-3"></i></a>-->
-<!--                                        <a href="${item.linkedin}" style="color: #0E76A8;"><i class="fab fa-linkedin fs-3"></i></a>-->
                                     </li>
                                 </ul>
                             </div>
@@ -105,7 +102,7 @@ $(document).ready(function(){
                         let network = `
                             <a href="${instance.url}" target="_blank" style="color: ${instance.social_networks.color};"><i class="${instance.social_networks.icon} me-1 fs-3"></i></a>
                         `;
-                        $(".social-networks").last().append(network); // Append to the last social-networks element
+                        $(".social-networks").last().append(network);
                     });
                 }
             })

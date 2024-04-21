@@ -6,8 +6,9 @@ import main.models as models
 @admin.register(models.Country)
 class CountryAdmin(admin.ModelAdmin):
 	exclude = ("name", )
-	list_display = ('id', 'name')
+	list_editable = ("order_num", )
 	list_display_links = ("id", "name")
+	list_display = ('id', 'name', "order_num")
 
 
 @admin.register(models.Partner)

@@ -71,7 +71,7 @@ def global_variables(request):
         "target": _("Maqsadi"),
         "home": _("Bosh sahifa"),
         "ads_tab": _("E'lonlar"),
-        "workers": _("Xodimlar"),
+        "workers": _("Ma'muriyat"),
         "activity": _("Faoliyati"),
         "latest": _("Eng so'ngi"),
         "read_more": _("Batafsil"),
@@ -111,7 +111,7 @@ def global_variables(request):
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
     try:
-        name = str(widgets.BaseVariables.objects.last().name).split(" ")
+        name = str(widgets.BaseVariables.objects.last().name).split(maxsplit=2)
         context["web_name"] = name
     except Exception as e:
         print(e)

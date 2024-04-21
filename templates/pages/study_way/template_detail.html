@@ -322,7 +322,9 @@
         </div>
     </div>
 {% endif %}
-{% if object.you_may_become.html|safe != " "  %}
+{% if object.education_areas_themes.all  %}
+    
+{% else %}
     <div class="section_title py-2">
         <div class="container">
             <h1>{{ you_may_become_title }}</h1>

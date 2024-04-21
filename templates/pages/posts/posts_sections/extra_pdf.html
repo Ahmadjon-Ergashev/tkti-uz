@@ -11,26 +11,64 @@
         {% for i in extra_pdf_list %}
             <tr>
                 <td>{{ i.name }}</td>
-                {% if LANGUAGE_CODE == 'uz' %}
-                    <td>
-                        <a href="{{ i.pdf_file.url }}" download target="_blank">{{ download }}</a>
-                    </td>
-                {% endif %}
-                {% if LANGUAGE_CODE == 'ru' %}
-                    {% if i.pdf_file_ru %}
-                        <td>
-                            <a href="{{ i.pdf_file_ru.url }}" download target="_blank">{{ download }}</a>
-                        </td>
-                    {% endif %}
-                {% endif %}
-                {% if LANGUAGE_CODE == 'en' %}
-                    {% if i.pdf_file_en %}
-                        <td>
-                            <a href="{{ i.pdf_file_en.url }}" download target="_blank">{{ download }}</a>
-                        </td>
-                    {% endif %}
-                {% endif %}
+                <td>
+                    <a type="button" class=""
+                        data-bs-toggle="offcanvas" data-bs-target="#extra_pdf{{ i.id }}"
+                        aria-controls="about_study_program_{{ i.id }}">{{ download }}
+                    </a>
+                </td>
+{#                {% if LANGUAGE_CODE == 'uz' %}#}
+{#                    <td>#}
+{#                        <a href="{{ i.i_file.url }}" download target="_blank">{{ download }}</a>#}
+{#                    </td>#}
+{#                {% endif %}#}
+{#                {% if LANGUAGE_CODE == 'ru' %}#}
+{#                    {% if i.i_file_ru %}#}
+{#                        <td>#}
+{#                            <a href="{{ i.i_file_ru.url }}" download target="_blank">{{ download }}</a>#}
+{#                        </td>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
+{#                {% if LANGUAGE_CODE == 'en' %}#}
+{#                    {% if i.i_file_en %}#}
+{#                        <td>#}
+{#                            <a href="{{ i.i_file_en.url }}" download target="_blank">{{ download }}</a>#}
+{#                        </td>#}
+{#                    {% endif %}#}
+{#                {% endif %}#}
             </tr>
+            <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="extra_pdf{{ i.id }}" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="about_study_program_{{ i.id }}">{{ i.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    {% if LANGUAGE_CODE == 'uz' %}
+                        {% if i.pdf_file %}
+                            <iframe
+                                src="{{ i.pdf_file.url }}"
+                                width="100%" height="100%">
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                    {% if LANGUAGE_CODE == 'ru' %}
+                        {% if i.pdf_file_ru %}
+                            <iframe
+                                src="{{ i.pdf_file_ru.url }}"
+                                width="100%" height="100%">
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                    {% if LANGUAGE_CODE == 'en' %}
+                        {% if i.pdf_file_en %}
+                            <iframe
+                                src="{{ i.pdf_file_en.url }}"
+                                width="100%" height="100%">
+                            </iframe>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
         {% endfor %}
     </tbody>
 </table>

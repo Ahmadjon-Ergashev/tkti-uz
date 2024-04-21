@@ -93,7 +93,7 @@
 
         body {
             margin: 0;
-            padding: 48px 0;
+            {#padding: 48px 0;#}
             font-family: "Figtree", sans-serif;
             font-size: 1.2rem;
             line-height: 1.6rem;
@@ -165,7 +165,7 @@
                     {% include "../../widgets/left_sidebar.html" %}
                 </div>
 {#                <br><br><br><br>#}
-                <div class="col-11 m-auto col-sm-12 col-md-4 col-lg-8 col-xl-8 col-xxl-9 posts">
+                <div class="col-11 mx-auto col-sm-12 col-md-4 col-lg-8 col-xl-8 col-xxl-9 posts">
                     {% if object_list|length == 1 %}
                         {% for object in object_list %}
                             <div class="post_detail">

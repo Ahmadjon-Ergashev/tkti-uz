@@ -8,19 +8,25 @@
         <div id="flush-collapseFAQ" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
             <div class="accordion-body px-0 py-2">
                 {% for obj in connected_faqs %}
-                    <div class="card">
-                            <div class="card-body">
-                                <h3>
-                                    <p class="">
-                                        {{ obj.title }}
-                                    </p>
-                                </h3>
-                                <p class="">
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button
+                                        class="accordion-button collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapse{{ obj.id }}"
+                                        aria-expanded="false" aria-controls="flush-collapse{{ obj.id }}">
+                                    <span class="font-monospace">{{ obj.title }}</span>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse{{ obj.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
                                     {{ obj.answer.html|safe }}
-                                </p>
+                                </div>
                             </div>
                         </div>
-                {% endfor %}
+                    </div>
+            {% endfor %}
             </div>
         </div>
     </div>

@@ -4,13 +4,14 @@ from django.utils.translation import gettext_lazy as _
 
 class Country(models.Model):
 	name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True, blank=True)
+	order_num = models.PositiveSmallIntegerField(default=0)
 
 	def __str__(self):
 		return self.name
 
 	class Meta:
 		db_table = 'country'
-		ordering = ("name", )
+		ordering = ("order_num", )
 		verbose_name = _("Davlatlar")
 		verbose_name_plural = _("Davlatlar")
 

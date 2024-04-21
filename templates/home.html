@@ -51,14 +51,14 @@
         background-color: rgba(50, 50, 50, 0.4);
     }
     #close_widow{
-        top: 10%;
-        right: 10%;
+        top: 20%;
+        right: 20%;
         position: absolute;
     }
 </style>
 
 <!-- upcoming event modal -->
-    <div class="upcoming_event_modal d-none" id="upcoming_event_modal">
+    <div class="upcoming_event_modal d-none d-md-block" id="upcoming_event_modal">
         <button type="button" class="btn-close" id="close_widow"></button>
         <a href="/events/detail/{{ upcoming_event_first.slug }}" class="text-white">
             <div class="modal_content" style="background-image: url('{{ upcoming_event_first.image.url }}')">
@@ -342,7 +342,7 @@
 <script>
     $(document).ready(function (){
         $("#close_widow").click(() => {
-            $("#upcoming_event_modal").hide()
+            $("#upcoming_event_modal").removeClass("d-md-block")
         })
     })
 </script>

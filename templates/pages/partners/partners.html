@@ -21,16 +21,16 @@
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse{{ object.id }}" aria-expanded="false" aria-controls="flush-collapse{{ object.id }}">
                                     <span class="fs-3">{{ object.name }}</span>
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapse{{ object.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <ul class="list-group list-group-flush">
                                         {% for obj in object.partners_country.all %}
                                             <li class="list-group-item">
-                                                <img src="{{ obj.image.url }}" width="50" class="me-3" alt="tkti.uz">
+                                                <img src="{{ obj.image.url }}" width="70" class="me-3" alt="tkti.uz">
                                                 <a href="{{ obj.url }}" target="_blank" class="text-dark">{{ obj.name }}</a>
                                             </li>
                                         {% endfor %}

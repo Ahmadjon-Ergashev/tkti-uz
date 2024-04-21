@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-04-02 22:28+0500\n"
+"POT-Creation-Date: 2024-04-21 15:59+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,9 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
-"%100>=11 && n%100<=14)? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: api/news/serizliers.py:56 api/posts/serializers.py:68
 #: view/my_context_proccessor.py:77 view/news/views.py:211
@@ -155,7 +155,7 @@ msgid "Tadbir uchun tanlangan rasmli fayl"
 msgstr "Выбранный файл изображения для объявлений"
 
 #: main/admin/posts.py:59 main/models/news.py:18 main/models/partners.py:6
-#: main/models/partners.py:19 main/models/posts.py:22 main/models/posts.py:288
+#: main/models/partners.py:20 main/models/posts.py:22 main/models/posts.py:288
 #: main/models/posts.py:394 main/models/posts.py:412 main/models/posts.py:428
 #: main/models/posts.py:455 main/models/tkti_shop.py:6
 #: main/models/tkti_shop.py:20 main/models/widgets.py:54
@@ -355,23 +355,23 @@ msgstr "Картина"
 msgid "Rasmlar"
 msgstr "Картинки"
 
-#: main/models/partners.py:14 main/models/partners.py:15
+#: main/models/partners.py:15 main/models/partners.py:16
 #, fuzzy
 #| msgid "Fakultetlar"
 msgid "Davlatlar"
 msgstr "Факультеты"
 
-#: main/models/partners.py:21
+#: main/models/partners.py:22
 #, fuzzy
 #| msgid "url manzil"
 msgid "URL manzil"
 msgstr "URL-адрес"
 
-#: main/models/partners.py:24
+#: main/models/partners.py:25
 msgid "Davlat"
 msgstr "Государство"
 
-#: main/models/partners.py:32 main/models/partners.py:33
+#: main/models/partners.py:33 main/models/partners.py:34
 msgid "Hamkorlar"
 msgstr "Партнеры"
 
@@ -544,7 +544,7 @@ msgstr "Адрес"
 msgid "E-Manzil"
 msgstr "Электронный адрес"
 
-#: main/models/posts.py:221 main/models/posts.py:222 templates/base.html:320
+#: main/models/posts.py:221 main/models/posts.py:222 templates/base.html:318
 #: view/my_context_proccessor.py:85
 msgid "Bog'lanish"
 msgstr "Связь"
@@ -1021,75 +1021,39 @@ msgstr "Финансовые выгоды"
 msgid "Raqamlashtirish"
 msgstr "Оцифровка"
 
-#: templates/base.html:37
+#: templates/base.html:40
 msgid "Sayt test rejimida ishlamoqda"
 msgstr "Сайт работает в тестовом режиме"
 
-#: templates/base.html:63
+#: templates/base.html:66
 msgid "Sayt bo'ylab qidiruv"
 msgstr "Поиск по всему сайту"
 
-#: templates/base.html:81
-msgid "Bekor qilish"
+#: templates/base.html:84
+#, fuzzy
+#| msgid "Bekor qilish"
+msgid " Bekor qilish "
 msgstr "Отмена"
 
-#: templates/base.html:164
+#: templates/base.html:167
 msgid " 2023/2024 o‘quv yili "
 msgstr "2023/2024 учебный год"
 
-#: templates/base.html:171 view/posts/views.py:118
+#: templates/base.html:174 view/posts/views.py:118
 msgid "Toshkent kimyo-texnologiya instituti qo'shma talim dasturi"
 msgstr ""
 "Совместная программа обучения Ташкентского химико-технологического института"
 
-#: templates/base.html:175 view/posts/views.py:119
+#: templates/base.html:178 view/posts/views.py:119
 msgid ""
 "Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer filiali)"
 msgstr ""
 "Совместная программа обучения Ташкентского химико-технологического института "
 "(Янгиерский филиал)"
 
-#: templates/base.html:290
-msgid ""
-"Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat "
-"texnologiya,-->\n"
-"<!--                            neft va gazni qayta ishkash texnologiyasi, "
-"ekologiya va boshqa sohalar uchun oliy maʼlumotli mutaxassislar va ilmiy "
-"kadrlarni tayyorlash, -->\n"
-"<!--                            qayta tayyorlash va ularning malakasini "
-"oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.-->\n"
-"<!--                            Institutda O‘zbekiston ishlab chiqarish soha "
-"va korxonalarining dolzarb muammolarini hal etishga qaratilgan yashil kimyo, "
-"-->\n"
-"<!--                            energetika va oziq-ovqat mahsulotlari ishlab "
-"chiqarish uchun ekologik toza, import o‘rnini bosuvchi va eksportbop, "
-"energiya tejovchi texnologiyalarni ishlab chiqish, -->\n"
-"<!--                            mahalliy mineral xomashyo bazasini "
-"kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini "
-"ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali -->\n"
-"<!--                            foydalanish bo‘yicha ilmiy-tadqiqot ishlari "
-"olib borilmoqda."
-msgstr ""
-"Ташкентский химико-технологический институт является базовым высшим учебным "
-"заведением по подготовке, переподготовке и повышению квалификации "
-"высококвалифицированных специалистов и научных кадров для химической "
-"технологии, пищевой технологии, технологии переработки нефти и газа, "
-"экологии и других областей. Разработка экологически чистых, "
-"импортозамещающих и экспортных, энергосберегающих технологий производства "
-"зеленой химии, энергетики и пищевых продуктов, направленных на решение "
-"текущих проблем производственных отраслей и предприятий Узбекистана, "
-"расширение местной минерально-сырьевой базы, нефти. проводятся научно-"
-"исследовательские и опытно-конструкторские работы по увеличению видов "
-"газовой продукции, эффективному использованию вторичного сырья и "
-"промышленных отходов."
-
-#: templates/base.html:308
+#: templates/base.html:306
 msgid "Havolalar"
 msgstr "Быстрые ссылки"
-
-#: templates/base.html:328
-msgid "Jamoat transporti:"
-msgstr "Общественный транспорт:"
 
 #: view/my_context_proccessor.py:41
 msgid "Bugun"
@@ -1121,8 +1085,8 @@ msgid "Bosh sahifa"
 msgstr "Главная страница"
 
 #: view/my_context_proccessor.py:74
-msgid "Xodimlar"
-msgstr "Сотрудники"
+msgid "Ma'muriyat"
+msgstr "Администрация"
 
 #: view/my_context_proccessor.py:76
 msgid "Eng so'ngi"
@@ -1218,7 +1182,7 @@ msgstr "Посмотреть больше фотографий"
 
 #: view/news/views.py:106
 msgid "E'lon"
-msgstr "Анонс"
+msgstr "Объявления"
 
 #: view/news/views.py:177 view/news/views.py:195
 msgid "Video lavhalar"
@@ -1267,11 +1231,11 @@ msgstr "Подайте онлайн-заявку на студенческое �
 
 #: view/posts/views.py:160
 msgid "FAKULTETNING BAKALAVRIATURA YO‘NALISHLARI"
-msgstr "ДОКУМЕНТАЛЬНЫЕ НАПРАВЛЕНИЯ ФАКУЛЬТЕТА"
+msgstr "Специализации бакалавра факультета"
 
 #: view/posts/views.py:161
 msgid "FAKULTETNING MAGISTRATURA YO‘NALISHLARI"
-msgstr "МАГИСТЕРСКИЕ ПРОГРАММЫ ФАКУЛЬТЕТА"
+msgstr "Специализации магистратуры факультета"
 
 #: view/posts/views.py:163
 msgid "Fakultet kafedralari"
@@ -1432,3 +1396,42 @@ msgstr "Новости по теме."
 #: view/widgets/views.py:237
 msgid "Mas’ul tashkilot"
 msgstr "Ответственная организация"
+
+#~ msgid ""
+#~ "Toshkent kimyo-texnologiya instituti kimyoviy texnologiya, oziq-ovqat "
+#~ "texnologiya,-->\n"
+#~ "<!--                            neft va gazni qayta ishkash "
+#~ "texnologiyasi, ekologiya va boshqa sohalar uchun oliy maʼlumotli "
+#~ "mutaxassislar va ilmiy kadrlarni tayyorlash, -->\n"
+#~ "<!--                            qayta tayyorlash va ularning malakasini "
+#~ "oshirish boʼyicha tayanch oliy taʼlim muassasasi hisoblanadi.-->\n"
+#~ "<!--                            Institutda O‘zbekiston ishlab chiqarish "
+#~ "soha va korxonalarining dolzarb muammolarini hal etishga qaratilgan "
+#~ "yashil kimyo, -->\n"
+#~ "<!--                            energetika va oziq-ovqat mahsulotlari "
+#~ "ishlab chiqarish uchun ekologik toza, import o‘rnini bosuvchi va "
+#~ "eksportbop, energiya tejovchi texnologiyalarni ishlab chiqish, -->\n"
+#~ "<!--                            mahalliy mineral xomashyo bazasini "
+#~ "kengaytirish, neft va gaz asosida olinadigan mahsulotlar turlarini "
+#~ "ko‘paytirish, ikkilamchi xomashyo va sanoat chiqindilaridan samarali -->\n"
+#~ "<!--                            foydalanish bo‘yicha ilmiy-tadqiqot "
+#~ "ishlari olib borilmoqda."
+#~ msgstr ""
+#~ "Ташкентский химико-технологический институт является базовым высшим "
+#~ "учебным заведением по подготовке, переподготовке и повышению квалификации "
+#~ "высококвалифицированных специалистов и научных кадров для химической "
+#~ "технологии, пищевой технологии, технологии переработки нефти и газа, "
+#~ "экологии и других областей. Разработка экологически чистых, "
+#~ "импортозамещающих и экспортных, энергосберегающих технологий производства "
+#~ "зеленой химии, энергетики и пищевых продуктов, направленных на решение "
+#~ "текущих проблем производственных отраслей и предприятий Узбекистана, "
+#~ "расширение местной минерально-сырьевой базы, нефти. проводятся научно-"
+#~ "исследовательские и опытно-конструкторские работы по увеличению видов "
+#~ "газовой продукции, эффективному использованию вторичного сырья и "
+#~ "промышленных отходов."
+
+#~ msgid "Jamoat transporti:"
+#~ msgstr "Общественный транспорт:"
+
+#~ msgid "Xodimlar"
+#~ msgstr "Сотрудники"
