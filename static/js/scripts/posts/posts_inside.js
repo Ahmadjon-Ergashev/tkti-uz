@@ -6,7 +6,6 @@ $(document).ready(function(){
         data: {},
         success: function (data) {
             data.map((item) => {
-
                 let card_item = `
                     <div class="col-12 col-md-4 col-lg-4">
                         <div class="card" style="height: 600px">
