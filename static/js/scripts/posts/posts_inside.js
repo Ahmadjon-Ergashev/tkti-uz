@@ -9,7 +9,7 @@ $(document).ready(function(){
 
                 let card_item = `
                     <div class="col-12 col-md-4 col-lg-4">
-                        <div class="card" style="height: 580px">
+                        <div class="card" style="height: 600px">
                             <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
                             <div class="card-header">
                                 <span class="font-weight-bold">${item.position}</span>
