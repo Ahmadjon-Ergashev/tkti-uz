@@ -51,3 +51,4 @@ shop = [
 urlpatterns = [
     path("partners/", include("view.partners.urls"))
 ] + posts + news + widgets + shop
+
