@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from mptt.models import TreeForeignKey, MPTTModel
 from django.utils.translation import gettext_lazy as _
 
-
 # local
 from main.models import widgets
 
@@ -22,17 +21,19 @@ class Navbar(MPTTModel):
     name = models.CharField(verbose_name=_("Nomi"), max_length=100)
     parent = TreeForeignKey("self", related_name="children", on_delete=models.SET_NULL, null=True, blank=True)
     visible = models.BooleanField(default=True, verbose_name=_("Ko'rinish"))
-    status = models.CharField(verbose_name=_("status"), max_length=30, choices=widgets.NavbarStatus.choices, default=widgets.NavbarStatus.inside)
+    status = models.CharField(verbose_name=_("status"), max_length=30, choices=widgets.NavbarStatus.choices,
+                              default=widgets.NavbarStatus.inside)
     order_num = models.IntegerField(verbose_name=_("Tartib raqami"), default=0)
     inside_order_num = models.IntegerField(default=0, verbose_name=_("Ichki tartib raqam"))
     slug = models.SlugField(max_length=120, unique=True)
     added_at = models.DateTimeField(auto_now_add=True)
     url = models.URLField(max_length=255, null=True, blank=True, help_text="Tegish shart emas")
-    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_navbar_user")
+    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name="update_navbar_user")
     updated_at = models.DateTimeField(auto_now=True)
 
     class MPTTMeta:
-        order_insertion_by = ("inside_order_num", )
+        order_insertion_by = ("inside_order_num",)
         added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -68,8 +69,10 @@ class Posts(widgets.AbstractTemplate):
         verbose_name=_("Video fayl"), upload_to="videos/posts/%Y-%m-%d/",
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
-    faculty = models.BooleanField(default=False, verbose_name=_("Fakultet"), help_text=_("Agar shu post fakultet modeliga tegishli bo'lsa belgilang"))
-    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_post_user")
+    faculty = models.BooleanField(default=False, verbose_name=_("Fakultet"),
+                                  help_text=_("Agar shu post fakultet modeliga tegishli bo'lsa belgilang"))
+    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name="update_post_user")
 
     class Meta:
         db_table = "posts"
@@ -78,7 +81,7 @@ class Posts(widgets.AbstractTemplate):
         verbose_name_plural = _("Postlar")
 
     def __str__(self):
-        return f"{self.navbar.name} | {self.title[:30]}"
+        return f"{self.navbar} | {self.title[:30]}"
 
     def save(self, *args, **kwargs):
         if self._state.adding:
@@ -99,7 +102,8 @@ class Posts(widgets.AbstractTemplate):
 class FacultyAdministration(models.Model):
     """ model for faculty admistrations """
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultet nomi"))
-    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/facultyadministration/", default="default/adminstrations.png")
+    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/facultyadministration/",
+                              default="default/adminstrations.png")
     f_name = models.CharField(verbose_name=_("To'liq ismi"), max_length=120, null=True)
     job_name = models.CharField(verbose_name=_("Mutaxasisligi"), max_length=120, null=True)
     admission_day = models.CharField(verbose_name=_("Qabul kunlari"), max_length=150, null=True)
@@ -136,7 +140,8 @@ class Departments(models.Model):
     about = QuillField(verbose_name=_("Haqida"), null=True, blank=True)
     target = QuillField(verbose_name=_("Maqsad"), null=True, blank=True)
     activity = QuillField(verbose_name=_("Faoliyati"), null=True, blank=True)
-    slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True, help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
+    slug = models.SlugField(max_length=255, verbose_name=_("Slug"), null=True,
+                            help_text=_("Zarurat tug'ulmasa tegilmasin"), unique=True)
     post_viewed_count = models.IntegerField(_("Ko'rilganlik soni"), default=0)
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -153,8 +158,10 @@ class Departments(models.Model):
 
 class DepartmentsAdmistrations(models.Model):
     """ administrations of departments """
-    department = models.ForeignKey(Departments, verbose_name=_("Kafedrani tanglang"), on_delete=models.SET_NULL, null=True)
-    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/departmentsadminstations/", default="default/adminstrations.png")
+    department = models.ForeignKey(Departments, verbose_name=_("Kafedrani tanglang"), on_delete=models.SET_NULL,
+                                   null=True)
+    image = models.ImageField(verbose_name=_("Hodim rasmi"), upload_to="image/departmentsadminstations/",
+                              default="default/adminstrations.png")
     f_name = models.CharField(verbose_name=_("To'liq ismi"), max_length=120, null=True)
     job_name = models.CharField(verbose_name=_("Mutaxasisligi"), max_length=120, null=True)
     admission_day = models.CharField(verbose_name=_("Qabul kunlari"), max_length=150, null=True)
@@ -179,15 +186,18 @@ class StudyProgram(models.Model):
     title = models.CharField(max_length=255, verbose_name=_("Yonalish nomi"), null=True)
     year = models.ForeignKey(widgets.Year, on_delete=models.SET_NULL, verbose_name=_("Yilni tanlang"), null=True)
     faculty = models.ForeignKey(Posts, on_delete=models.SET_NULL, null=True, verbose_name=_("Fakultetni tanlang"))
-    department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True, verbose_name=_("Kafedrani tanlang"))
-    study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"), choices=widgets.StudyWayType.choices, default=widgets.StudyWayType.high)
+    department = models.ForeignKey(Departments, on_delete=models.SET_NULL, null=True,
+                                   verbose_name=_("Kafedrani tanlang"))
+    study_way = models.CharField(max_length=123, verbose_name=_("Ta'lim darajasini tanlang"),
+                                 choices=widgets.StudyWayType.choices, default=widgets.StudyWayType.high)
     pdf_file = models.FileField(
         verbose_name=_("PDF fayl"), upload_to="pdf/study_program/%Y-%m-%d/", null=True, blank=True)
     pdf_file_en = models.FileField(
         verbose_name=_("EN PDF fayl"), upload_to="pdf/en/study_program/%Y-%m-%d/", null=True, blank=True)
     pdf_file_ru = models.FileField(
         verbose_name=_("RU PDF fayl"), upload_to="pdf/ru/study_program/%Y-%m-%d/", null=True, blank=True)
-    study_time = models.CharField(max_length=123, verbose_name=_("O'qish vaqtlari"), choices=widgets.StudyTimes.choices, default=widgets.StudyTimes.daytime)
+    study_time = models.CharField(max_length=123, verbose_name=_("O'qish vaqtlari"), choices=widgets.StudyTimes.choices,
+                                  default=widgets.StudyTimes.daytime)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -204,7 +214,8 @@ class ContactSection(models.Model):
     """ contact model """
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
     title = models.CharField(_("Sarlavha"), max_length=250, null=True)
-    image = models.ImageField(verbose_name=_("Rasm"), default="default/default.png", upload_to="image/contact/%Y-%m-%d/", null=True)
+    image = models.ImageField(verbose_name=_("Rasm"), default="default/default.png",
+                              upload_to="image/contact/%Y-%m-%d/", null=True)
     email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, default="info@tkti.uz")
     phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=17, null=True, help_text="+998332300701")
     address = models.CharField(verbose_name=_("Manzil"), max_length=250, null=True)
@@ -239,15 +250,19 @@ class ContactSection(models.Model):
 
 class Workers(models.Model):
     """ xodimlar """
-    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/workers/%Y-%m-%d/", default="default/adminstrations.png")
-    position = models.CharField(_("Lavozimi"), choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head, max_length=150, null=True)
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/workers/%Y-%m-%d/",
+                              default="default/adminstrations.png")
+    position = models.CharField(_("Lavozimi"), choices=widgets.WorkerPositions.choices,
+                                default=widgets.WorkerPositions.department_head, max_length=150, null=True)
     self_position = models.ForeignKey(widgets.Positions, on_delete=models.SET_NULL,
                                       verbose_name=_("Lavozimi"), null=True, blank=True)
     f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
     email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, null=True, help_text="example@domain.com")
     phone = models.CharField(verbose_name=_("Telefon raqami"), max_length=20, null=True, help_text="+998332300701")
-    extra_phone = models.CharField(verbose_name=_("Qo'shimcha Telefon raqami"), max_length=20, null=True, blank=True, help_text="+998332300703")
-    section = models.ForeignKey("SectionsAndCenters", verbose_name=_("Bo'lim va markaz nomi"), on_delete=models.SET_NULL, null=True, blank=True)
+    extra_phone = models.CharField(verbose_name=_("Qo'shimcha Telefon raqami"), max_length=20, null=True, blank=True,
+                                   help_text="+998332300703")
+    section = models.ForeignKey("SectionsAndCenters", verbose_name=_("Bo'lim va markaz nomi"),
+                                on_delete=models.SET_NULL, null=True, blank=True)
     order_num = models.PositiveIntegerField(default=0, verbose_name=_("Tartib raqam"))
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -256,7 +271,7 @@ class Workers(models.Model):
 
     class Meta:
         managed = True
-        ordering = ('order_num', )
+        ordering = ('order_num',)
         db_table = 'workers_for_sections'
         verbose_name = _("Bo'lim va Markazlar xodimlari")
         verbose_name_plural = _("Bo'lim va Markazlar xodimlari")
@@ -301,7 +316,8 @@ class SocialNetworksBoss(models.Model):
 class UniversityAdmistrations(models.Model):
     """ university admistrations model """
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/adminstrations/%Y-%m-%d/", default="default/adminstrations.png")
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/adminstrations/%Y-%m-%d/",
+                              default="default/adminstrations.png")
     f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
     position = models.CharField(_("Lavozimi"), max_length=255, null=True)
     email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, null=True, help_text="example@domain.com")
@@ -373,13 +389,10 @@ class TalentedStudents(models.Model):
         verbose_name_plural = _("Iqtidorli talabalar")
 
 
-class BossSection(models.Model):
-    post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, null=True)
+class SectionsBoss(models.Model):
+    post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, related_name="sections_boss", null=True)
     image = models.ImageField(_("Rasmi"), upload_to="image/boss_section/%Y-%m-%d/", null=True)
-    position = models.CharField(
-        max_length=255, verbose_name=_("Lavozimi"),
-        choices=widgets.WorkerPositions.choices, default=widgets.WorkerPositions.department_head)
-    self_position = models.ForeignKey(widgets.Positions, on_delete=models.SET_NULL,
+    position = models.ForeignKey(widgets.Positions, on_delete=models.SET_NULL,
                                       verbose_name=_("Lavozimi"), null=True, blank=True)
     f_name = models.CharField(_("To'liq ismi"), max_length=150)
     email = models.CharField(_("Email"), max_length=250)
@@ -387,6 +400,11 @@ class BossSection(models.Model):
 
     def __str__(self):
         return self.f_name
+
+    class Meta:
+        db_table = 'sections_bosses'
+        ordering = ["position"]
+        verbose_name = _("Bo'lim raxbarlari")
 
 
 class StudyDegrees(models.Model):
@@ -400,7 +418,7 @@ class StudyDegrees(models.Model):
 
     class Meta:
         managed = True
-        ordering = ("order_num", )
+        ordering = ("order_num",)
         db_table = 'study_degrees'
         verbose_name = _("Ta'lim darajalari")
         verbose_name_plural = _("Ta'lim darajalari")
@@ -408,7 +426,8 @@ class StudyDegrees(models.Model):
 
 class FieldOfEducation(models.Model):
     """ ta'lim sohasi """
-    study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasini tanlang"), on_delete=models.SET_NULL, null=True)
+    study_degree = models.ForeignKey(StudyDegrees, verbose_name=_("Ta'lim darajasini tanlang"),
+                                     on_delete=models.SET_NULL, null=True)
     name = models.CharField(verbose_name=_("Nomi"), max_length=250, null=True)
     code = models.CharField(_("Ta'lim sohasi kodi"), max_length=150, null=True)
     added_at = models.DateTimeField(auto_now_add=True)
@@ -451,7 +470,8 @@ class LearningWay(models.Model):
 
 class EducationalAreas(models.Model):
     """ ta'lim yo'nalishlari """
-    study_way = models.ForeignKey(LearningWay, on_delete=models.SET_NULL, null=True, verbose_name=_("Yo'nashish bo'limi"))
+    study_way = models.ForeignKey(LearningWay, on_delete=models.SET_NULL, null=True,
+                                  verbose_name=_("Yo'nashish bo'limi"))
     name = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Nomi"))
     desc = QuillField(verbose_name=_("Yo'nalish xaqida"), null=True)
     pdf_file = models.FileField(
@@ -471,7 +491,8 @@ class EducationalAreas(models.Model):
     extra_phone = models.CharField(_("Qo'shimcha Telefon raqam"), max_length=20, null=True)
     email = models.EmailField(_("E-Pochta"), max_length=100, null=True)
     address = models.CharField(_("Manzil"), max_length=150, null=True)
-    you_may_become_image = models.ImageField(verbose_name=_("Rasm"), null=True, blank=True, upload_to="image/you_may_become_image")
+    you_may_become_image = models.ImageField(verbose_name=_("Rasm"), null=True, blank=True,
+                                             upload_to="image/you_may_become_image")
     you_may_become = QuillField(_("Siz bo'lishingiz mumkun"), null=True)
     full_time_fee = models.IntegerField(default=0, verbose_name=_("Kantrakt miqdori"))
     dept_fee = models.IntegerField(default=0, verbose_name=_("Kredit miqdori"))
@@ -537,7 +558,7 @@ class AboutStudyProgramPDF(models.Model):
         return f"{self.type} -> {self.education_area.name}"
 
     class Meta:
-        ordering = ("education_area", )
+        ordering = ("education_area",)
         db_table = "about_study_program_pdf"
         verbose_name = _("Ta'lim yo'nalishlari xaqidagi pdf")
         verbose_name_plural = _("Ta'lim yo'nalishlari xaqidagi pdf")
@@ -558,7 +579,7 @@ class EntryRequirements(models.Model):
         return f"{self.type} - {self.education_area.name}"
 
     class Meta:
-        ordering = ("-id", )
+        ordering = ("-id",)
         db_table = "entry_requirements"
         verbose_name = _("Kirish talablari")
         verbose_name_plural = _("Kirish talablari")
@@ -581,7 +602,7 @@ class ThemesForEducation(models.Model):
         return f"{self.name}"
 
     class Meta:
-        ordering = ("added_at", )
+        ordering = ("added_at",)
         db_table = "themes_for_education"
         verbose_name = _("DSc va PHD Mavzulari")
         verbose_name_plural = _("DSc va PHD Mavzulari")
@@ -610,13 +631,3 @@ class ModuleOfStudyPrograme(models.Model):
         managed = True
         verbose_name = _("Dars jadvallari")
         verbose_name_plural = _("Dars jadvallari")
-
-
-
-
-
-
-
-
-
-

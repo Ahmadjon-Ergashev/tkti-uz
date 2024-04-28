@@ -63,7 +63,7 @@ class TalentedStudentsTranslation(TranslationOptions):
     fields = ("f_name", "desc")
 
 
-@register(posts.BossSection)
+@register(posts.SectionsBoss)
 class BossSectionTranslation(TranslationOptions):
     fields = ("f_name", )
 

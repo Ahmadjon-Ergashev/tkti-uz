@@ -151,6 +151,28 @@
                             </div>
                         </div>  
                     {% endif %}
+                    <br><br>
+                    <div class="row">
+                        {% for obj in object.sections_boss.all %}
+                            <div class="col-12 col-md-4 col-xl-4">
+                                <div class="card">
+                                    {% if obj.image %}
+                                        <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
+                                    {% endif %}
+                                    <div class="card-header">
+                                        <b>{{ obj.position }}</b>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
+                                            <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
+                                            <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <div class="post_footer">
                         <p class="text-end fw-bold">{{ object.author_post }}</p>
                         <div class="time_and_view">

@@ -281,8 +281,9 @@
     <div class="container">
         <div id="students_list">
             {% for item in talented_students %}
-                <div class="card" style="height: 390px; min-height: 390px;">
+                <div class="card" style="min-height: 440px;">
                     <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.f_name }} | tkti.uz">
+{#                    <img src="https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg" class="card-img-top" alt="${item.f_name} | tkti.uz">#}
                     <div class="card-header">
                         <b>
                             {{ item.f_name }}

@@ -29,10 +29,9 @@
             content: "";
         }
 
-        article h2 {
+        article h5 {
+            font-weight: unset;
             margin: 0 0 18px 0;
-            font-family: "Bebas Neue", cursive;
-            font-size: 1.9rem;
             letter-spacing: 0.06em;
             color: var(--title-color);
             transition: color 0.3s ease-out;
@@ -89,15 +88,6 @@
         *::before,
         *::after {
             box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            {#padding: 48px 0;#}
-            font-family: "Figtree", sans-serif;
-            font-size: 1.2rem;
-            line-height: 1.6rem;
-            min-height: 100vh;
         }
 
         .articles {
@@ -189,8 +179,9 @@
                                 {% if extra_pdf_list %}
                                     {% include './posts_sections/extra_pdf.html' %}
                                 {% endif %}
+                                <br><br>
                                 <div class="row">
-                                    {% for obj in object.bosssection_set.all %}
+                                    {% for obj in object.sections_boss.all %}
                                         <div class="col-12 col-md-4 col-xl-4">
                                             <div class="card">
                                                 {% if obj.image %}
@@ -276,7 +267,7 @@
                                                         {% endif %}
                                                     </figure>
                                                     <div class="article-body">
-                                                        <h2>{{ obj.title|truncatechars:100 }}</h2>
+                                                        <h5>{{ obj.title|truncatechars:100 }}</h5>
                                                         {% if obj.subtitle %}
                                                             <p>
                                                                 {{ obj.subtitle }}

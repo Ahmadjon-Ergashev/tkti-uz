@@ -589,7 +589,7 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
     get_image.short_description = _("Tanlangan rasm")
 
 
-@admin.register(posts.BossSection)
+@admin.register(posts.SectionsBoss)
 class BossSection(admin.ModelAdmin):
     actions = [clone]
     list_per_page = 10
@@ -601,7 +601,7 @@ class BossSection(admin.ModelAdmin):
         (None, {
             "fields": (
                 "post",
-                "position", "self_position", "email", "phone",
+                "position", "email", "phone",
                 ("f_name_uz", "f_name_ru", "f_name_en"),
                 ("image", "get_image")
             ),
