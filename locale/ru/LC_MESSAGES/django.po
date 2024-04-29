@@ -23,7 +23,7 @@ msgstr ""
 #: api/news/serizliers.py:56 api/posts/serializers.py:68
 #: view/my_context_proccessor.py:77 view/news/views.py:211
 msgid "Batafsil"
-msgstr "Более"
+msgstr "Подробнее"
 
 #: api/posts/serializers.py:69 main/models/posts.py:310
 msgid "Qisqacha ma'lumot"
