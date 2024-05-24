@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Security-Policy" content="frame-ancestors 'self'">
     <title>
         {% block title %}
-          
+
         {% endblock title %}
     </title>
     <!-- favicon icon -->
@@ -21,343 +21,368 @@
     <link rel="stylesheet" href="{% static 'css/styles/footer/footer.css' %}">
     <!-- bootstrap -->
     <link rel="stylesheet" href="{% static 'css/modules/bootstrap/bootstrap.min.css' %}">
+    <script src="//code.jivosite.com/widget/SCd0Zh5jgO" async></script>
+
     <style>
         .modal_text {
             color: #222;
             transition: 0.5s;
         }
+
         .modal_text:hover {
             color: #111;
             background-color: #ddd;
         }
-        .row{
+
+        .row {
             padding: 0;
         }
     </style>
 </head>
 <body>
-    <!-- social media -->
-<!--    <marquee behavior="" direction=""><b>{% blocktrans %}Sayt test rejimida ishlamoqda{% endblocktrans %}</b></marquee>-->
-    <div class="socials">
-        <ul id="social_media_btn">
-            {% for nets in social_networks %}    
-                <li class="social_networks_links" data-social-color="{{ nets.color }}">
-                    <a href="{{ nets.url }}" target="_blank" data-bs-toggle="tooltip"
-                        data-bs-placement="right" title="{{ nets.name }}">
-                        <i class="{{ nets.icon }}"></i>
-                    </a>
-                </li>
-            {% endfor %}
-            <li>
-                <a href="{% url 'site_map' %}" class="link" title="sayt haritasi">
-                    <i class="fas fa-link fa-rotate-90"></i>
+<!-- social media -->
+<!--    <marquee behavior="" direction=""><b>{% blocktrans %}
+    Sayt test rejimida ishlamoqda{% endblocktrans %}</b></marquee>-->
+<div class="socials">
+    <ul id="social_media_btn">
+        {% for nets in social_networks %}
+            <li class="social_networks_links" data-social-color="{{ nets.color }}">
+                <a href="{{ nets.url }}" target="_blank" data-bs-toggle="tooltip"
+                   data-bs-placement="right" title="{{ nets.name }}">
+                    <i class="{{ nets.icon }}"></i>
                 </a>
             </li>
-        </ul>
-    </div>
-    <!-- social media --> 
+        {% endfor %}
+        <li>
+            <a href="{% url 'site_map' %}" class="link" title="sayt haritasi">
+                <i class="fas fa-link fa-rotate-90"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- social media -->
 
-    <!-- seaching model window -->
-    <div class="modal fade " id="search_window" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        {% blocktrans %}Sayt bo'ylab qidiruv{% endblocktrans %}
-                    </h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form action="{% url 'search' %}" method="post"> {% csrf_token %}
-                        <div class="input-group">
-                            <input type="search" name="search_query" class="form-control" placeholder="">
-                            <div class="input-group-append">
-                                <button class="search_btn" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
+<!-- seaching model window -->
+<div class="modal fade " id="search_window" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+     aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                    {% blocktrans %}Sayt bo'ylab qidiruv{% endblocktrans %}
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'search' %}" method="POST" id="search-form"> {% csrf_token %}
+                    <div class="input-group">
+                        <label for="search_query"></label>
+                        <input type="search" name="search_query" id="search_query" class="form-control" placeholder="">
+                        <div class="input-group-append">
+                            <button class="search_btn" type="submit">
+                                <i class="fa fa-search"></i>
+                            </button>
                         </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="search_btn" data-bs-dismiss="modal">
-                        {% blocktrans %} Bekor qilish {% endblocktrans %}
-                    </button>
-                </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="search_btn" data-bs-dismiss="modal">
+                    {% blocktrans %} Bekor qilish {% endblocktrans %}
+                </button>
             </div>
         </div>
     </div>
-    <!-- seaching model window -->
+</div>
+<!-- seaching model window -->
 
-    <!-- bottom right buttons -->
-    <div class="bottom_right_btns">
-        <ul>
-            <li>
-                <!-- open search window button -->
-                <button type="button" id="open_search_window" class="open_search_window" title="Qidirish" data-bs-toggle="modal" data-bs-target="#search_window">
-                    <i class="fas fa-search"></i>
-                </button>
-            </li>
-            <li>
-                <!-- show social media buttons -->
-                <button type="button" id="show_social_media_btn" class="show_social_media" data-bs-toggle="tooltip" data-bs-placement="left" title="Ijtimoiy tarmoqlar">
-                    <i class="fas fa-plus-circle"></i>
-                </button>
-            </li>
-            <li>
-                <!-- to top navigation button -->
-                <a href="#header" class="to_top_btn">
-                    <i class="fas fa-arrow-circle-up"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
-    <!-- bottom right buttons -->
+<!-- bottom right buttons -->
+<div class="bottom_right_btns">
+    <ul>
+        <li>
+            <!-- open search window button -->
+            <button type="button" id="open_search_window" class="open_search_window" title="Qidirish"
+                    data-bs-toggle="modal" data-bs-target="#search_window">
+                <i class="fas fa-search"></i>
+            </button>
+        </li>
+        <li>
+            <!-- show social media buttons -->
+            <button type="button" id="show_social_media_btn" class="show_social_media" data-bs-toggle="tooltip"
+                    data-bs-placement="left" title="Ijtimoiy tarmoqlar">
+                <i class="fas fa-plus-circle"></i>
+            </button>
+        </li>
+        <li>
+            <!-- to top navigation button -->
+            <a href="#header" class="to_top_btn">
+                <i class="fas fa-arrow-circle-up"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- bottom right buttons -->
 
-    <!-- start header -->
-    <header id="header">
-        <div class="superNav border-bottom py-2 bg-light text-center">
-            <div class="container">
-                <div class="row p-0">
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav">
-                        <ul>
-                            <li class="me-3">
-                                <a class="text-decoration-none text-dark" href="/"><strong>{{ base_variables.email }}</strong></a>
-                            </li>
-                            <li>
-                                <a class="text-decoration-none text-dark" href="/">
-                                    <i class="fas fa-phone-alt pe-2"></i>
-                                    {{ base_variables.phone_number }}</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-6 top_nav text-lg-center">
-                        <ul>
-                            {% for nav in top_navbar %}
-                                <li class="me-2">
-                                    <a href="{{ nav.url }}" target="_blank">
-                                        {{ nav.name }}
-                                    </a>
-                                </li>
-                            {% endfor %}
-                            <li class="me-2">
-                                <a href="https://www.topuniversities.com/universities/tashkent-institute-chemical-technology" target="_blank">
-                                    <img src="{% static 'images/qs.png' %}" width="20" alt="tkti.uz">
-                                </a>
-                            </li>
-                            <li class="">
-                                <a href="https://www.timeshighereducation.com/world-university-rankings/tashkent-institute-chemical-technology" target="_blank">
-                                    <img src="{% static 'images/the.jpg' %}" width="20" alt="tkti.uz">
-                                </a>
-                            </li>
-                            <li class="ms-2">
-                                <a href="" type="button" data-bs-toggle="modal" data-bs-target="#entering_study_window" title="Qo'shma ta'lim qabul">
-                                    <img src="{% static 'images/study.jpg' %}" width="20" alt="tkti.uz">
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Button trigger modal -->
-
-                    <div class="modal fade" id="entering_study_window" tabindex="-1" aria-labelledby="entering_study" aria-hidden="true">
-                        <div class="modal-dialog modal-lg modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
-                                        {% blocktrans %} 2023/2024 o‘quv yili {% endblocktrans %}
-                                    </h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <a href="https://qabul.tkti.uz/uz/application"
-                                       target="_blank" class="d-block p-3 border mb-2 modal_text">
-                                        {% blocktrans %}Toshkent kimyo-texnologiya instituti qo'shma talim dasturi{% endblocktrans %}
-                                    </a>
-                                    <a href="https://tkti-yangiyer.vercel.app/uz/application" target="_blank"
-                                       class="d-block p-3 border modal_text">
-                                        {% blocktrans %}Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer filiali){% endblocktrans %}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav text-xxl-end">
-                        <ul>
-<!--                            <li class="me-2">-->
-<!--                                <span id="specialButton" style="cursor: pointer;"><i class="fas fa-eye"></i></span>-->
-<!--                            </li>-->
-                            <li class="me-2">
-                                <a href="{% url 'site_map' %}" class="text-dark"><i class="fas fa-network-wired"></i></a>
-                            </li>
-                            <li class="me-2">
-                                <a href="{% url 'anthem' %}"><i class="fas fa-play text-dark"></i></a>
-                            </li>
-                            <li class="me-2">
-                                <a href="{% url 'coat_of_arms' %}"><img src="{% static 'images/gerb.png' %}" width="20" alt=""></a>
-                            </li>
-                            <li class="me-2">
-                                <a href="{% url 'flag' %}"><img src="{% static 'images/flag.jpg' %}" width="20" alt=""></a>
-                            </li>
-                            <li>
-                                <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang" method="post" id="lang">
-                                    {% csrf_token %}
-                                    <input name="next" type="hidden" value="{{ redirect_to }}">
-                                    <select name="language" class="language_code border-0 bg-light fw-bold">
-                                        {% get_current_language as LANGUAGE_CODE %}
-                                        {% get_available_languages as LANGUAGES %}
-                                        {% get_language_info_list for LANGUAGES as languages %}
-                                        {% for language in languages %}
-                                            <option class="" value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected {% endif %}>
-                                                {{ language.code }}
-                                            </option>
-                                        {% endfor %}
-                                    </select> 
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <nav class="navbar navbar-expand-lg sticky-top p-3 shadow-sm bg-white navbar-light " id="base_navbar">
-            <div class="container">
-                <a class="navbar-brand" href="/">
-                    {% if base_variables.logo %}
-                        <img src="{{ base_variables.logo.url }}" width="90" alt="logo">
-                    {% else %}
-                        <img src="../static/images/brand.png" width="90" alt="logo">
-                    {% endif %}
-                </a>
-                <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name">
-<!--                    {{ base_variables.name|linebreaksbr|safe }}-->
-                    {% for i in web_name %}
-                        {{ i }}<br>
-                    {% endfor %}
-                </a>
-                <br><br>
-                <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto">
-                        {% for nav in navbar %}
-                            <li class="nav-item dropdown btn-group main_nav_item">
-<!--                                <a href="/posts/navbar/{{nav.slug}}" class="nav-link nav_name active">-->
-<!--                                    {{ nav.name }}-->
-<!--                                </a>-->
-
-                                <button class="p-1 btn" id="navbarDropdown{{ nav.id }}"
-                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    {{ nav.name }}
-                                </button>
-                                <button class="p-1 btn btn-sm dropdown-toggle dropdown-toggle-split" id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ nav.id }}">
-                                    {% for child in nav.children.all %}
-                                        <li class="nav-item dropdown" style="width: 300px;">
-                                            <li class="nav-item">
-                                                {% if child.url %}
-                                                    <a href="{{ child.url }}"
-                                                       class="nav-link mx-2 active children_nav">{{ child.name }}</a>
-                                                {% else %}
-                                                    <a href="/posts/navbar/{{child.slug}}"
-                                                       class="nav-link mx-2 active children_nav">{{ child.name }}</a>
-                                                {% endif %}
-                                            </li>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </li>
-                        {% endfor %}
-                    </ul>                    
-                </div>
-            </div>
-        </nav>
-    </header>
-    
-    <!-- end header -->
-    {% block content %}
-
-
-    {% endblock content %}
-    
-    <!-- start footer -->
-    <div class="mt-5 pt-5 footer">
+<!-- start header -->
+<header id="header">
+    <div class="superNav border-bottom py-2 bg-light text-center">
         <div class="container">
             <div class="row p-0">
-                <div class="col-10 m-auto col-lg-5 col-xs-12 mb-3 about-company">
-                    <h4 class="text-center text-md-start">
-                        {{ base_variables.name }}
-                    </h4>
-                    <p class="pr-5 text-white-50">
-                        {{ base_variables.description }}
-                    </p>
-                    <p class="text-center text-md-start">
-                        {% for nets in social_networks %}                            
-                            <a href="{{ nets.url }}" target="_blank">
-                                <i class="{{ nets.icon }} me-2"></i>
-                            </a>
-                        {% endfor %}     
-                    </p>
-                </div>
-                <div class="col-10 mx-auto col-lg-3 mb-3 col-xs-12 links">
-                    <h4 class="mt-lg-0 mt-sm-3">
-                        {% blocktrans %}Havolalar{% endblocktrans %}
-                    </h4>
-                    <ul class="m-0 p-0">
-                        {% for ql in quick_links %}
-                            <li class="">
-                                - <a href="{{ ql.url }}">{{ ql.name }}</a>
-                            </li>
-                        {% endfor %}
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav">
+                    <ul>
+                        <li class="me-3">
+                            <a class="text-decoration-none text-dark"
+                               href="/"><strong>{{ base_variables.email }}</strong></a>
+                        </li>
+                        <li>
+                            <a class="text-decoration-none text-dark" href="/">
+                                <i class="fas fa-phone-alt pe-2"></i>
+                                {{ base_variables.phone_number }}</a>
+                        </li>
                     </ul>
                 </div>
-                <div class="col-10 mx-auto col-lg-4 mb-4 col-xs-12 location">
-                    <h4 class="mt-lg-0 mt-sm-5">
-                        {% blocktrans %}Bog'lanish{% endblocktrans %}
-                    </h4>
-                    <p class="contact-footer">
-                        <ul class="list-group list-unstyled">
-                            <li class=""><i class="fas fa-map-marker-alt me-2"></i>
-                                {{ base_variables.address }}
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-6 top_nav text-lg-center">
+                    <ul>
+                        {% for nav in top_navbar %}
+                            <li class="me-2">
+                                <a href="{{ nav.url }}" target="_blank">
+                                    {{ nav.name }}
+                                </a>
                             </li>
-                            <li><i class="fas fa-bus me-2"></i>
-                                {{ base_variables.buses }}
-                            </li>
-                            <li><i class="fas fa-phone-alt me-2"></i>
-                                {{ base_variables.phone_number }}
-                            </li>
-                            <li><i class="fas fa-envelope me-2"></i>
-                                {{ base_variables.email }}
-                            </li>
-                            <li class="mt-2"></li>
-                        </ul>
-                    </p>
+                        {% endfor %}
+                        <li class="me-2">
+                            <a href="https://www.topuniversities.com/universities/tashkent-institute-chemical-technology"
+                               target="_blank">
+                                <img src="{% static 'images/qs.png' %}" width="20" alt="tkti.uz">
+                            </a>
+                        </li>
+                        <li class="">
+                            <a href="https://www.timeshighereducation.com/world-university-rankings/tashkent-institute-chemical-technology"
+                               target="_blank">
+                                <img src="{% static 'images/the.jpg' %}" width="20" alt="tkti.uz">
+                            </a>
+                        </li>
+                        <li class="ms-2">
+                            <a href="" type="button" data-bs-toggle="modal" data-bs-target="#entering_study_window"
+                               title="Qo'shma ta'lim qabul">
+                                <img src="{% static 'images/study.jpg' %}" width="20" alt="tkti.uz">
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div class="row mt-5">
-                <div class="col copyright">
-                    <p class="web_name text-center text-md-start">
-                        <small class="text-white-50">© 2024 Toshkent kimyo-texnologiya instituti.</small>
-                    </p>
+                <!-- Button trigger modal -->
+
+                <div class="modal fade" id="entering_study_window" tabindex="-1" aria-labelledby="entering_study"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">
+                                    {% blocktrans %} 2023/2024 o‘quv yili {% endblocktrans %}
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <a href="https://qabul.tkti.uz/uz/application"
+                                   target="_blank" class="d-block p-3 border mb-2 modal_text">
+                                    {% blocktrans %}Toshkent kimyo-texnologiya instituti qo'shma talim
+                                        dasturi{% endblocktrans %}
+                                </a>
+                                <a href="https://tkti-yangiyer.vercel.app/uz/application" target="_blank"
+                                   class="d-block p-3 border modal_text">
+                                    {% blocktrans %}Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer
+                                        filiali){% endblocktrans %}
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav text-xxl-end">
+                    <ul>
+                        <!--                            <li class="me-2">-->
+                        <!--                                <span id="specialButton" style="cursor: pointer;"><i class="fas fa-eye"></i></span>-->
+                        <!--                            </li>-->
+                        <li class="me-2">
+                            <a href="{% url 'site_map' %}" class="text-dark"><i class="fas fa-network-wired"></i></a>
+                        </li>
+                        <li class="me-2">
+                            <a href="{% url 'anthem' %}"><i class="fas fa-play text-dark"></i></a>
+                        </li>
+                        <li class="me-2">
+                            <a href="{% url 'coat_of_arms' %}"><img src="{% static 'images/gerb.png' %}" width="20"
+                                                                    alt=""></a>
+                        </li>
+                        <li class="me-2">
+                            <a href="{% url 'flag' %}"><img src="{% static 'images/flag.jpg' %}" width="20" alt=""></a>
+                        </li>
+                        <li>
+                            <form action="{% url 'set_language' %}" onchange="submitForm()" class="d-inline lang"
+                                  method="post" id="lang">
+                                {% csrf_token %}
+                                <input name="next" type="hidden" value="{{ redirect_to }}">
+                                <select name="language" class="language_code border-0 bg-light fw-bold">
+                                    {% get_current_language as LANGUAGE_CODE %}
+                                    {% get_available_languages as LANGUAGES %}
+                                    {% get_language_info_list for LANGUAGES as languages %}
+                                    {% for language in languages %}
+                                        <option class="" value="{{ language.code }}"
+                                                {% if language.code == LANGUAGE_CODE %} selected {% endif %}>
+                                            {{ language.code }}
+                                        </option>
+                                    {% endfor %}
+                                </select>
+                            </form>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end footer -->
+    <nav class="navbar navbar-expand-lg sticky-top p-3 shadow-sm bg-white navbar-light " id="base_navbar">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                {% if base_variables.logo %}
+                    <img src="{{ base_variables.logo.url }}" width="90" alt="logo">
+                {% else %}
+                    <img src="../static/images/brand.png" width="90" alt="logo">
+                {% endif %}
+            </a>
+            <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name">
+                <!--                    {{ base_variables.name|linebreaksbr|safe }}-->
+                {% for i in web_name %}
+                    {{ i }}<br>
+                {% endfor %}
+            </a>
+            <br><br>
+            <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav ms-auto">
+                    {% for nav in navbar %}
+                        <li class="nav-item dropdown btn-group main_nav_item">
+                            <!--                                <a href="/posts/navbar/{{nav.slug}}" class="nav-link nav_name active">-->
+                            <!--                                    {{ nav.name }}-->
+                            <!--                                </a>-->
 
-    <!-- jQuery -->
-    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+                            <button class="p-1 btn" id="navbarDropdown{{ nav.id }}"
+                                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                {{ nav.name }}
+                            </button>
+                            <button class="p-1 btn btn-sm dropdown-toggle dropdown-toggle-split"
+                                    id="navbarDropdown{{ nav.id }}" role="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown{{ nav.id }}">
+                                {% for child in nav.children.all %}
+                                    <li class="nav-item dropdown" style="width: 300px;">
+                                    <li class="nav-item">
+                                        {% if child.url %}
+                                            <a href="{{ child.url }}"
+                                               class="nav-link mx-2 active children_nav">{{ child.name }}</a>
+                                        {% else %}
+                                            <a href="/posts/navbar/{{ child.slug }}"
+                                               class="nav-link mx-2 active children_nav">{{ child.name }}</a>
+                                        {% endif %}
+                                    </li>
+                                    </li>
+                                {% endfor %}
+                        </ul>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- end header -->
+{% block content %}
+
+
+{% endblock content %}
+
+<!-- start footer -->
+<div class="mt-5 pt-5 footer">
+    <div class="container">
+        <div class="row p-0">
+            <div class="col-10 m-auto col-lg-5 col-xs-12 mb-3 about-company">
+                <h4 class="text-center text-md-start">
+                    {{ base_variables.name }}
+                </h4>
+                <p class="pr-5 text-white-50">
+                    {{ base_variables.description }}
+                </p>
+                <p class="text-center text-md-start">
+                    {% for nets in social_networks %}
+                        <a href="{{ nets.url }}" target="_blank">
+                            <i class="{{ nets.icon }} me-2"></i>
+                        </a>
+                    {% endfor %}
+                </p>
+            </div>
+            <div class="col-10 mx-auto col-lg-3 mb-3 col-xs-12 links">
+                <h4 class="mt-lg-0 mt-sm-3">
+                    {% blocktrans %}Havolalar{% endblocktrans %}
+                </h4>
+                <ul class="m-0 p-0">
+                    {% for ql in quick_links %}
+                        <li class="">
+                            - <a href="{{ ql.url }}">{{ ql.name }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col-10 mx-auto col-lg-4 mb-4 col-xs-12 location">
+                <h4 class="mt-lg-0 mt-sm-5">
+                    {% blocktrans %}Bog'lanish{% endblocktrans %}
+                </h4>
+                <p class="contact-footer">
+                <ul class="list-group list-unstyled">
+                    <li class=""><i class="fas fa-map-marker-alt me-2"></i>
+                        {{ base_variables.address }}
+                    </li>
+                    <li><i class="fas fa-bus me-2"></i>
+                        {{ base_variables.buses }}
+                    </li>
+                    <li><i class="fas fa-phone-alt me-2"></i>
+                        {{ base_variables.phone_number }}
+                    </li>
+                    <li><i class="fas fa-envelope me-2"></i>
+                        {{ base_variables.email }}
+                    </li>
+                    <li class="mt-2"></li>
+                </ul>
+                </p>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <div class="col copyright">
+                <p class="web_name text-center text-md-start">
+                    <small class="text-white-50">© 2024 Toshkent kimyo-texnologiya instituti.</small>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end footer -->
+
+<!-- jQuery -->
+<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
 <!--     <script src="{% static 'js/modules/visually_impaired/uhpv_full.min.js' %}"></script>-->
 
-    <script src="{% static 'js/modules/slickjs/slick.min.js' %}"></script>
-    <script src="{% static 'js/modules/bootstrap/bootstrap.bundle.min.js' %}"></script>
-    
-    <!-- local scripts -->
-    <script src="{% static 'js/main.js' %}"></script>
-    <script src="{% static 'js/scripts/carusels.js' %}"></script>
-    <script src="{% static 'js/scripts/shop/list.js' %}"></script>
+<script src="{% static 'js/modules/slickjs/slick.min.js' %}"></script>
+<script src="{% static 'js/modules/bootstrap/bootstrap.bundle.min.js' %}"></script>
+
+<!-- local scripts -->
+<script src="{% static 'js/main.js' %}"></script>
+<script src="{% static 'js/scripts/carusels.js' %}"></script>
+<script src="{% static 'js/scripts/shop/list.js' %}"></script>
+<script src="{% static 'js/scripts/search/news.js' %}"></script>
 
 </body>
 </html>

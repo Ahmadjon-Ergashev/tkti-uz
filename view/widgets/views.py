@@ -1,19 +1,19 @@
 from django.views import View
+from django.db.models import Q, F
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
-from django.contrib.postgres import search as s
 from django.views.generic.detail import DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
 
-
 # local
-from main.models import posts, widgets, news
+import main.models as models
+from main.models import (posts, widgets, news)
 
 
 class SiteMapView(ListView):
     model = posts.Navbar
-    template_name = "widgets/site_map.html"    
+    template_name = "widgets/site_map.html"
     ordering = "name"
 
     def get_queryset(self):
@@ -24,7 +24,7 @@ class SiteMapView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Sayt haritasi")
         return context
-    
+
 
 class FlagView(ListView):
     model = widgets.Flag
@@ -38,7 +38,7 @@ class FlagView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = _("O`zbekiston Respublikasining davlat bayrog`i")
         return context
-    
+
 
 class CoatofArmsView(ListView):
     model = widgets.CoatofArms
@@ -48,7 +48,7 @@ class CoatofArmsView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = _("O`zbekiston Respublikasining davlat gerbi")
         return context
-    
+
 
 class AnthemView(ListView):
     model = widgets.Anthem
@@ -58,7 +58,7 @@ class AnthemView(ListView):
         context = super().get_context_data(**kwargs)
         context["title"] = _("O`zbekiston Respublikasining davlat madhiyasi")
         return context
-    
+
 
 class FaqView(ListView):
     model = widgets.FaqCategory
@@ -68,61 +68,54 @@ class FaqView(ListView):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Ko'p beriladigan savollar")
         return data
-    
 
-# searching multiple model
-from itertools import chain
-from django.shortcuts import render
-
-
-# class SearchAroundProgram(View):
-#     template_name = "widgets/search.html"
-#
-#     def post(self, request, *args, **kwargs):
-#         search_query = request.POST.get("search_query", "")
-#         vector = s.SearchVector("title", "subtitle", config="english")
-#         query = s.SearchQuery(search_query)
-#         posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query).only(
-#             "title", "image", "slug"
-#         )
-#         news_results = news.News.objects.annotate(search=vector).filter(search=query).only(
-#             "title", "image", "slug"
-#         )
-#         ads_results = news.Ads.objects.annotate(search=vector).filter(search=query).only(
-#             "title", "image", "slug"
-#         )
-#         events_results = news.Events.objects.annotate(search=vector).filter(search=query).only(
-#             "title", "image", "slug"
-#         )
-#         combined_results = list(chain(posts_results, news_results, ads_results, events_results))
-#         context = {
-#             "search_results": combined_results,
-#             "title": _("Qidituv natijalari"),
-#             "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :(")
-#         }
-#         return render(request, self.template_name, context)
-#
 
 class SearchAroundProgram(View):
     template_name = "widgets/search.html"
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         search_query = request.POST.get("search_query", "")
-        vector = s.SearchVector("title", "subtitle", config='english')
-        query = s.SearchQuery(search_query)
+        news_objects = news.News.objects.filter(
+            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
+        events_objects = models.Events.objects.filter(
+            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
+        posts_objects = posts.Posts.objects.filter(
+            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
+        ads_objects = news.Ads.objects.filter(
+            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
+        shop_objects = models.Shop.objects.filter(name__icontains=search_query)
+        sections_objects = models.SectionsAndCenters.objects.filter(title__icontains=search_query)
+        departments_objects = models.Departments.objects.filter(name__icontains=search_query)
 
-        posts_results = posts.Posts.objects.annotate(search=vector).filter(search=query)
-        news_results = news.News.objects.annotate(search=vector).filter(search=query)
-        ads_results = news.Ads.objects.annotate(search=vector).filter(search=query)
-        events_results = news.Events.objects.annotate(search=vector).filter(search=query)
+        total = sum([news_objects.count(), events_objects.count(), posts_objects.count(), ads_objects.count(),
+                     shop_objects.count(), sections_objects.count(), departments_objects.count()])
 
-        combined_results = list(chain(posts_results, news_results, ads_results, events_results))
-
-        context = {
-            "search_results": combined_results,
-            "title": _("Qidituv natijalari"),
-            "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :(")
+        titles = {
+            "query": search_query,
+            "ads_title": _("E'lonlar"),
+            "posts_title": _("Postlar"),
+            "shop_title": _("TKTI shop"),
+            "events_title": _("Voqealar"),
+            "news_title": _("Yangiliklar"),
+            "title": _("Qidiruv natijalari"),
+            "departments_title": _("Kafedralar"),
+            "sections_title": _("Bo'lim va markazlar"),
+            "not_found": _("Afsuski sizning so'rovingizga mos tushadigan ma'lumot topilmadi")
         }
+
+        object_lists = {
+            "total": total,
+            "shop_objects": shop_objects,
+            "ads_objects": ads_objects[:8],
+            "news_objects": news_objects[:8],
+            "posts_objects": posts_objects[:8],
+            "events_objects": events_objects[:8],
+            "sections_objects": sections_objects,
+            "departments_objects": departments_objects,
+        }
+
+        context = titles | object_lists
+
         return render(request, self.template_name, context)
 
 
@@ -130,40 +123,61 @@ class SearchDetail(DetailView):
     template_name = "widgets/search_detail.html"
 
     def get_object(self, queryset=None):
-        slug = self.kwargs["slug"]
-        print(slug)
-        if len(posts.Posts.objects.filter(slug=slug)) != 0:
-            return posts.Posts.objects.filter(slug=slug).first()
-        
-        elif len(news.News.objects.filter(slug=slug)) != 0:
-            return news.News.objects.filter(slug=slug).first()
-        
-        elif len(news.Ads.objects.filter(slug=slug)) != 0:
-            return news.Ads.objects.filter(slug=slug).first()
-        
-        elif len(news.Events.objects.filter(slug=slug)) != 0:
-            return news.Events.objects.filter(slug=slug).first()
-        
-        return None
-    
+        post_slug = self.kwargs["post_slug"]
+        posts.Posts.objects.filter(slug=post_slug).update(post_viewed_count=F("post_viewed_count") + 1)
+        obj = get_object_or_404(
+            posts.Posts.objects.select_related("author", "update_user", "navbar"),
+            slug=post_slug
+        )
+        return obj
+
     def get_context_data(self, **kwargs):
-        data = super().get_context_data(**kwargs)
-        obj = data["object"]
+        context = super().get_context_data(**kwargs)
+        post = context["object"]
         try:
-            data["conn_section_and_centers"] = news.News.objects.filter(
-                section_and_centers=obj.id, status="pub").order_by("-added_at")[:12].only(
-                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
-                        "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+            extra_pdf_list = widgets.ExtraFile.objects.filter(
+                post=post).only("name", "pdf_file")
+            connected_faculty_dact = news.News.objects.filter(
+                faculty_dact=post, status="pub").order_by("-added_at")[:12].only(
+                "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+            context["extra_pdf_list"] = extra_pdf_list
+            context["connected_faculty_dact"] = connected_faculty_dact
         except Exception as e:
-            print(e, 141)     
+            print(e, 141)
+        if post.navbar:
+            navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
+            context["title"] = navbar.name
+            context["parent"] = navbar.parent.name
+        else:
+            context["title"] = post.title
+            context["parent"] = ""
+
+        context["depended_news"] = _("Mavzuga aloqador yangiliklar")
+        context["bachelor_departments_way"] = posts.LearningWay.objects.filter(
+            faculty=post, study_degree=1)
+        context["master_departments_way"] = posts.LearningWay.objects.filter(
+            faculty=post, study_degree=2
+        )
+        context["bachelor_departments_way_title"] = _("FAKULTETNING BAKALAVRIATURA YO‘NALISHLARI")
+        context["master_departments_way_title"] = _("FAKULTETNING MAGISTRATURA YO‘NALISHLARI")
+        context["faculty_title"] = _("Fakultet ma'muryati")
+        context["departments_title"] = _("Fakultet kafedralari")
         try:
-            navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
-            data["parent"] = navbar.parent.name
+            context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
+                post=post).only("name", "pdf_file")
         except Exception as e:
-            ...
-        data["depended_news"] = _("Mavzuga aloqador yangiliklar") 
-        data["certificate_title"] = _("Malaka oshirish sertifikatlari")
-        return data
+            print(e)
+        try:
+            if post.navbar:
+                context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
+            context["pdf_file"] = post.pdf_file.url
+        except AttributeError:
+            if post.navbar:
+                context["category_list"] = navbar.get_children()
+        except ValueError:
+            context["pdf_file"] = ""
+        return context
 
 
 class OpportunitiesView(TemplateView):
@@ -193,7 +207,7 @@ class CreditOpportView(TemplateView):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Talabalar uchun soliq imtiyozlari")
         return data
-    
+
 
 class BRMItemsDetailView(DetailView):
     """ brm detail and filter by BRM """
@@ -204,7 +218,7 @@ class BRMItemsDetailView(DetailView):
         pk = self.kwargs["pk"]
         obj = get_object_or_404(widgets.BRMItems, pk=pk)
         return obj
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object = context["object"]

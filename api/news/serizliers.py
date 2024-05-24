@@ -14,6 +14,7 @@ class NewsSerializers(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
+        data["read_more"] = _("Batafsil")
         data["added_at"] = instance.added_at.strftime("%Y-%m-%d %H:%M")
         return data
     

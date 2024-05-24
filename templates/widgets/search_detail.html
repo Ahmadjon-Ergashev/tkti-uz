@@ -5,19 +5,20 @@
 {% endblock title %}
 
 {% block content %}
+    <!-- local css -->
+    <link rel="stylesheet" href="{% static 'css/styles/left_category/left_sidebar.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles/posts/detail/post.css' %}">
     <div class="container mt-4">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{ object.title }}</li>
-            </ol>
-        </nav>
-        <div class="row d-flex justify-content-between">
-            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-10 m-auto border posts">
+        <div class="row d-flex justify-content-between py-3">
+            <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
+                {% include "widgets/left_sidebar.html" %}
+            </div>
+            <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
                 <!-- Start Blog detail -->
                 <div class="post_detail">
-                    <div class="post_img_bg"  id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
+                    {% if object.image %}
+                        <div class="post_img_bg" id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
+                    {% endif %}
                     <h2>{{ object.title }}</h2>
                     {% if object.video_file %}
                         <div class="post_video">
@@ -31,6 +32,16 @@
                         <div class="post_text mt-3" id="object_post">
                             {{ object.post.html | safe }}
                         </div>
+                    {% endif %}
+                    {% if extra_pdf_list %}
+                        {% include 'pages/posts/posts_sections/extra_pdf.html' %}
+                    {% endif %}
+                    {% if object.zip_file %}
+                        <p class="py-3 px-2">
+                            <a href="{{ object.zip_file.url }}" download="{{ object.zip_file.url }}">
+                                {{ zip_file_title }}
+                            </a>
+                        </p>
                     {% endif %}
                     {% if object.departments_set.all %}
                         <br>
@@ -46,6 +57,34 @@
                             {% endfor %}
                         </div>
                     {% endif %}
+                    {% if bachelor_departments_way %}
+                        <br>
+                        <hr>
+                        <h5 class="fw-bold">{{ bachelor_departments_way_title }}</h5>
+                        <div class="row px-3">
+                            <ul class="list-group list-group-flush">
+                                {% for obj in bachelor_departments_way %}
+                                    <li class="list-group-item">
+                                        <a class="text-dark" href="/posts/learing_way/detail/{{ obj.pk }}">{{ obj.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
+                    {% if master_departments_way %}
+                        <br>
+                        <hr>
+                        <h5 class="fw-bold">{{ master_departments_way_title }}</h5>
+                        <div class="row px-3">
+                            <ul class="list-group list-group-flush">
+                                {% for obj in master_departments_way %}
+                                    <li class="list-group-item">
+                                        <a class="text-dark" href="/posts/learing_way/detail/{{ obj.pk }}">{{ obj.name }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                     {% if object.facultyadministration_set.all %}
                         <br>
                         <hr>
@@ -53,7 +92,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                        <span class="fw-bold">{{ faculty_title }}</span>
+                                        <h3 class="fw-bold">{{ faculty_title }}</h3>
                                     </button>
                                 </h2>
                                 <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
@@ -63,11 +102,11 @@
                                                 <div class="col-12 col-md-12 mb-2 p-1">
                                                     <div class="card mb-3">
                                                         <div class="row g-0">
-                                                            {% if worker.image %}
-                                                                <div class="col-md-3">
+                                                            <div class="col-md-3">
+                                                                {% if worker.image %}
                                                                     <img src="{{ worker.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
-                                                                </div>
-                                                            {% endif %}
+                                                                {% endif %}
+                                                            </div>
                                                             <div class="col-md-9">
                                                                 <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>
                                                                 <ul class="list-group list-group-flush">
@@ -88,22 +127,22 @@
                         </div>
                     {% endif %}
                     {% if connected_faculty_dact %}
-                        <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion accordion-flush" id="accordionFlushExample_news">
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne_news" aria-expanded="false" aria-controls="flush-collapseOne_news">
                                         <h3 class="fw-bold p-0 m-0">{{ depended_news }}</h3>
                                     </button>
                                 </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div id="flush-collapseOne_news" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample_news">
                                     <div class="accordion-body px-0 py-2">
                                         <div class="row">
                                             {% for obj in connected_faculty_dact %}
                                                 <div class="col-12 col-md-4">
-                                                    <div class="card" style="height: 110px; ">
-                                                        <div class="card-body">
+                                                    <div class="card" style="height: 140px;">
+                                                        <div class="card-body p-3">
                                                             <p class="">
-                                                                <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:80 }}</a>
+                                                                <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:100 }}</a>
                                                             </p>  
                                                             <div class="d-flex justify-content-between">
                                                                 <span><i class="fas fa-calendar-alt me-2"></i> {{ obj.added_at|date:'d-M-Y' }}</span>
@@ -119,6 +158,28 @@
                             </div>
                         </div>  
                     {% endif %}
+                    <br><br>
+                    <div class="row">
+                        {% for obj in object.sections_boss.all %}
+                            <div class="col-12 col-md-4 col-xl-4">
+                                <div class="card">
+                                    {% if obj.image %}
+                                        <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
+                                    {% endif %}
+                                    <div class="card-header">
+                                        <b>{{ obj.position }}</b>
+                                    </div>
+                                    <div class="card-body">
+                                        <ul class="list-group list-group-flush">
+                                            <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
+                                            <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
+                                            <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
                     <div class="post_footer">
                         <p class="text-end fw-bold">{{ object.author_post }}</p>
                         <div class="time_and_view">
@@ -131,7 +192,4 @@
         </div>
     </div>
 {% endblock content %}
-    
-
-
     

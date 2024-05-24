@@ -58,30 +58,32 @@
 </style>
 
 <!-- upcoming event modal -->
-    <div class="upcoming_event_modal d-none d-md-block" id="upcoming_event_modal">
-        <button type="button" class="btn-close" id="close_widow"></button>
-        <a href="/events/detail/{{ upcoming_event_first.slug }}" class="text-white">
-            <div class="modal_content" style="background-image: url('{{ upcoming_event_first.image.url }}')">
-                <div class="modal_body">
-                    <div class="text_caption">
-                        <span class="bg-primary text-white p-1">{{ upcoming_event_first.event_type.name }}</span>
-                        <span class="bg-danger text-white p-1">{{ start_time_title }} {{ start_time }}</span>
-                        <br>
-                        <h4 class="text-white mt-2">
+    {% if upcoming_event_first %}
+        <div class="upcoming_event_modal d-none d-md-block" id="upcoming_event_modal">
+            <button type="button" class="btn-close" id="close_widow"></button>
+            <a href="/events/detail/{{ upcoming_event_first.slug }}" class="text-white">
+                <div class="modal_content" style="background-image: url('{{ upcoming_event_first.image.url }}')">
+                    <div class="modal_body">
+                        <div class="text_caption">
+                            <span class="bg-primary text-white p-1">{{ upcoming_event_first.event_type.name }}</span>
+                            <span class="bg-danger text-white p-1">{{ start_time_title }} {{ start_time }}</span>
+                            <br>
+                            <h4 class="text-white mt-2">
                                 {{ upcoming_event_first.title }}
-                        </h4>
-                        <br>
-                        <span class="text-white">
+                            </h4>
+                            <br>
+                            <span class="text-white">
                             <i class="fas fa-calendar-alt pe-2"></i>{{ upcoming_event_first.added_at|date:'d-M-Y H:i' }}
                         </span>
-                        <br>
-                        <span class="text-white">
+                            <br>
+                            <span class="text-white">
                             <i class="fas fa-map-marker-alt pe-2"></i></i>{{ upcoming_event_first.location }}</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </a>
-    </div>
+            </a>
+        </div>
+    {% endif %} 
 
 <!-- upcoming event modal -->
 

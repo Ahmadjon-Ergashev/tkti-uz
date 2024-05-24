@@ -6,7 +6,7 @@
 
 {% block content %}
     <style>
-        .card_bg{
+        .card_bg {
             height: 200px;
             background-size: contain;
             background-repeat: no-repeat;
@@ -14,32 +14,228 @@
         }
     </style>
     <div class="container mt-4">
-        <div class="row">
-            {% for o in search_results %}
+        <div class="main_title my-5 text-center">
+            <h2>{{ title }} <b class="text-dark ms-2">{{ total }}</b>-ta</h2>
+        </div>
+        <div class="row" id="search_result_news">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ news_title }}</span>
+                    <span class="d-block" style="line-height: 3">
+                    <a href="/searching/news/list/{{ query }}">{{ all }}</a>
+                </span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in news_objects %}
                 <div class="col-12 col-md-4 col-lg-3 p-2">
-                    <div class="card" style="height: 300px">
-                        {% if o.image %}
-                            <div class="card_bg" style="background-image: url('{{ o.image.url }}')"></div>
-<!--                        <img src="{{ o.image.url }}" class="card-img-top" alt="...">-->
-                        {% endif %}
+                    <div class="card" style="height: 320px">
+                        <div class="card_bg" style="background-image: url('{{ object.image.url }}')"></div>
                         <div class="card-body">
-                            <p class="card-text">
-                                {{ o.title|truncatechars:100 }}<br>
-                                <a href="detail/{{ o.slug }}">
-                                    {{ read_more }}
+                            <p class="card-text text-lowercase">
+                                {{ object.title|truncatechars:100 }}
+                                <br><br>
+                                <a class="text-capitalize" href="/news/detail/{{ object.slug }}">
+                                    {{ read_more }} <i class="fas fa-arrow-right"></i>
                                 </a>
                             </p>
                         </div>
                     </div>
-
                 </div>
-            {% empty %}
-                <p class="text-center p-5">{{ not_found_404 }}</p>
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
             {% endfor %}
         </div>
+
+        <div class="row" id="search_result_ads">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ ads_title }}</span>
+                    <span class="d-block" style="line-height: 3">
+                    <a href="/searching/ads/list/{{ query }}">{{ all }}</a>
+                </span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in ads_objects %}
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="height: 320px">
+                        <div class="card_bg" style="background-image: url('{{ object.image.url }}')"></div>
+                        <div class="card-body">
+                            <p class="card-text text-lowercase">
+                                {{ object.title|truncatechars:100 }}
+                                <br><br>
+                                <a class="text-capitalize" href="/ads/detail/{{ object.slug }}">
+                                    {{ read_more }} <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="row" id="search_result_events">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ events_title }}</span>
+                    <span class="d-block" style="line-height: 3">
+                    <a href="/searching/events/list/{{ query }}">{{ all }}</a>
+                </span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in events_objects %}
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="height: 320px">
+                        <div class="card_bg" style="background-image: url('{{ object.image.url }}')"></div>
+                        <div class="card-body">
+                            <p class="card-text text-lowercase">
+                                {{ object.title|truncatechars:100 }}
+                                <br><br>
+                                <a class="text-capitalize" href="/events/detail/{{ object.slug }}">
+                                    {{ read_more }} <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="row" id="search_result_posts">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ posts_title }}</span>
+                    <span class="d-block" style="line-height: 3">
+                    <a href="/searching/posts/list/{{ query }}">{{ all }}</a>
+                </span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in posts_objects %}
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="height: 320px">
+                        {% if object.image %}
+                            <div class="card_bg" style="background-image: url('{{ object.image.url }}')"></div>
+                        {% else %}
+                            <div class="card_bg"
+                                 style="background-image: url('{% static 'images/default.png' %}')"></div>
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text text-lowercase">
+                                {{ object.title|truncatechars:100 }}
+                                <br><br>
+                                <a class="text-capitalize" href="detail/{{ object.slug }}">
+                                    {{ read_more }} <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="row" id="search_result_departments">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ departments_title }}</span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in departments_objects %}
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="min-height: 150px">
+                        <div class="card-body d-flex align-items-center">
+                            <a href="/posts/departments/{{ object.slug }}" class="w-100 text-center text-dark d-block">
+                                <p class="d-inline card-text">
+                                    {{ object.name }}
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
+            {% endfor %}
+        </div>
+
+
+        <div class="row" id="search_result_sections">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ sections_title }}</span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in sections_objects %}
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="height: 320px">
+                        {% if object.image %}
+                            <div class="card_bg" style="background-image: url('{{ object.image.url }}')"></div>
+                        {% else %}
+                            <div class="card_bg"
+                                 style="background-image: url('{% static 'images/default.png' %}')"></div>
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text text-lowercase">
+                                {{ object.title|truncatechars:100 }}
+                                <br><br>
+                                <a class="text-capitalize" href="/posts/sections/{{ object.slug }}">
+                                    {{ read_more }} <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="row" id="search_result_shop">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ shop_title }}</span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in shop_objects %}
+                <div class="col-10 m-auto m-lg-0 col-sm-12 col-md-6 col-lg-3">
+                    <div class="card">
+                        <img src="{{ object.image.url }}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-capitalize">{{ object.name }}</h5>
+                            <p class="card-text">UZS {{ object.price }}</p>
+                            <hr>
+                            <p class="card-text"><i class="fas fa-user me-2"></i> {{ object.contact }}</p>
+                            <p class="card-text"><i class="fas fa-phone me-2"></i> {{ object.phone_number }}</p>
+                            <p class="card-text">
+                                <a href="{{ object.instagram }}">
+                                    <i style="color: #AC2BAC" class="fab fa-instagram-square fs-3"></i>
+                                </a>
+                                <a class="ms-2" href="{{ object.telegram }}">
+                                    <i style="color: #3288B0" class="fab fa-telegram fs-3"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {% empty %}
+                <p class="text-center py-2">{{ not_found }}</p>
+            {% endfor %}
+        </div>
+
     </div>
 {% endblock content %}
-    
+
 
 
     

@@ -37,7 +37,7 @@ widgets = [
     path("anthem", widgets.AnthemView.as_view(), name="anthem"),
     path("sitemap", widgets.SiteMapView.as_view(), name="site_map"),
     path("coat_of_arms", widgets.CoatofArmsView.as_view(), name="coat_of_arms"),
-    path("searching/results/detail/<slug:slug>", widgets.SearchDetail.as_view()),
+    path("searching/results/detail/<slug:post_slug>", widgets.SearchDetail.as_view()),
     path("supports/", widgets.FinancialBenefitView.as_view(), name="opports_view"),
     path("searching/results/", widgets.SearchAroundProgram.as_view(), name="search"),
     path("brm_detail/<int:pk>/", widgets.BRMItemsDetailView.as_view(), name="brm_detail"),
@@ -50,6 +50,7 @@ shop = [
 
 urlpatterns = [
     path("partners/", include("view.partners.urls")),
+    path("searching/", include("view.searching.urls")),
     path("certificates/", include("view.certificates.urls")),
 ] + posts + news + widgets + shop
 
