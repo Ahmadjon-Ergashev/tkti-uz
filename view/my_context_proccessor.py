@@ -44,6 +44,27 @@ def global_variables(request):
             start_time = f"{days_until_event_starts} {word}"
     else:
         start_time = "No upcoming event"
+    translate_words = {
+        "arxiv": _("Arxiv"),
+        "all": _("Barchasi"),
+        "search": _("Qidirish"),
+        "events": _("Voqealar"),
+        "title": _("Bosh sahifa"),
+        "faculty_title": _("Fakultetlar"),
+        "sp_faculty": _("Sohani tanlang"),
+        "ads_section_title": _("E'lonlar"),
+        "sp_way": _("Yo'nalishni tanlang"),
+        "sp_type": _("Ta'lim turini tanlang"),
+        "videos_section_title": _("Videolar"),
+        "the_most_read": _("Top yangiliklar"),
+        "upcoming": _("Yaqinlashib kelayotganlar"),
+        "nth_faculty": _("tarkibidagi kafedralar"),
+        "usuful_links_title": _("Foydali havolalar"),
+        "the_last_news": _("Eng so'ngi yangiliklar"),
+        "study_way_title": _("Ta'lim dasturi katalogi"),
+        "talented_student_title": _("Iqtidorli talabalar"),
+        "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
+    }
     context = {
         "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
             "name", "slug", "id"
@@ -75,7 +96,7 @@ def global_variables(request):
         "activity": _("Faoliyati"),
         "latest": _("Eng so'ngi"),
         "read_more": _("Batafsil"),
-        "download": _("Yuklab olish"),
+        "download": _("Ko'rish"),
         "news_tab": _("Yangiliklar"),
         "email_title": _("E-Pochta"),
         "address_title": _("Manzil"),
@@ -88,27 +109,11 @@ def global_variables(request):
         "quick_link_title": _("Tezkor havolalar"),
         "social_networks_title": _("Ijtimoiy tarmoqlar"),
         "extra_phone_title": _("Qo'shimcha Telefon raqam"),
-    }
-    translate_words = {
-        "arxiv": _("Arxiv"),
-        "all": _("Barchasi"),
-        "search": _("Qidirish"),
-        "events": _("Voqealar"),
-        "title": _("Bosh sahifa"),
-        "faculty_title": _("Fakultetlar"),
-        "sp_faculty": _("Sohani tanlang"),
-        "ads_section_title": _("E'lonlar"),
-        "sp_way": _("Yo'nalishni tanlang"),
-        "sp_type": _("Ta'lim turini tanlang"),
-        "videos_section_title": _("Videolar"),
-        "the_most_read": _("Top yangiliklar"),
-        "upcoming": _("Yaqinlashib kelayotganlar"),
-        "nth_faculty": _("tarkibidagi kafedralar"),
-        "usuful_links_title": _("Foydali havolalar"),
-        "the_last_news": _("Eng so'ngi yangiliklar"),
-        "study_way_title": _("Ta'lim dasturi katalogi"),
-        "talented_student_title": _("Iqtidorli talabalar"),
-        "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
+        "zip_file_title": _("Mavzuga aloqador qo'shimcha faylarni yuklab olish"),
+        "zip_file_title_2": _("Mavzuga aloqador qo'shimcha faylar"),
+        "download_2": _("Yuklab olish"),
+        "activity_docs": _("Faoliyat hujjatlari")
+
     }
     try:
         name = str(widgets.BaseVariables.objects.last().name).split(maxsplit=2)

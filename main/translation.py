@@ -42,12 +42,12 @@ class ContactSectionTranslation(TranslationOptions):
     fields = ("title", "address")
 
 
-@register(posts.Workers)
+@register(models.Workers)
 class WorkersTranslation(TranslationOptions):
     fields = ("f_name", )
 
 
-@register(posts.SectionsAndCenters)
+@register(models.SectionsAndCenters)
 class SectionsAndCentersTranslation(TranslationOptions):
     fields = ("title", "about", "target", "activity")
 

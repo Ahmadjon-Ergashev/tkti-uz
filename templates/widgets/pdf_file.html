@@ -4,7 +4,7 @@
     {% if LANGUAGE_CODE == 'uz' %}
         {% if object.pdf_file %}
             {% with object.pdf_file as pdf %}
-                {% include './pdf_template.html' with pdf=pdf %}
+                {% include 'widgets/pdf_template.html' with pdf=pdf %}
             {% endwith %}
         {% endif %}
     {% endif %}
@@ -12,7 +12,7 @@
     {% if LANGUAGE_CODE == 'en' %}
         {% if object.pdf_file_en %}
             {% with object.pdf_file_en as pdf %}
-                {% include './pdf_template.html' with pdf=pdf %}
+                {% include 'widgets/pdf_template.html' with pdf=pdf %}
             {% endwith %}
         {% endif %}
     {% endif %}
@@ -20,7 +20,7 @@
     {% if LANGUAGE_CODE == 'ru' %}
         {% if object.pdf_file_ru %}
             {% with object.pdf_file_ru as pdf %}
-                {% include './pdf_template.html' with pdf=pdf %}
+                {% include 'widgets/pdf_template.html' with pdf=pdf %}
             {% endwith %}
         {% endif %}
     {% endif %}

@@ -162,6 +162,7 @@ class SearchDetail(DetailView):
         except Exception as e:
             ...
         data["depended_news"] = _("Mavzuga aloqador yangiliklar") 
+        data["certificate_title"] = _("Malaka oshirish sertifikatlari")
         return data
 
 

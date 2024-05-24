@@ -12,6 +12,7 @@ from django.shortcuts import render, get_object_or_404
 from main.models import (
     posts, news, widgets
 )
+import main.models as models
 
 
 class Home(View):
@@ -53,7 +54,7 @@ class PostsListView(ListView):
         if navbar_slug == "boglanish":
             qs = posts.ContactSection.objects.order_by("order_num").select_related("navbar")
         elif navbar_slug == "bolim-va-markazlar":
-            qs = posts.SectionsAndCenters.objects.order_by("-added_at").select_related("navbar")
+            qs = models.SectionsAndCenters.objects.order_by("-added_at").select_related("navbar")
         elif navbar_slug == "institut-rahbariyati":
             qs = posts.UniversityAdmistrations.objects.order_by("order_num").select_related("navbar")
         elif navbar_slug == "iqtidorli-talabalar":
@@ -149,8 +150,14 @@ class PostDetailView(DetailView):
             context["connected_faculty_dact"] = connected_faculty_dact
         except Exception as e:
             print(e, 141)
-        navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
-        context["title"] = navbar.name
+        if post.navbar:
+            navbar = posts.Navbar.objects.get(slug=post.navbar.slug)
+            context["title"] = navbar.name
+            context["parent"] = navbar.parent.name
+        else:
+            context["title"] = post.title
+            context["parent"] = ""
+
         context["depended_news"] = _("Mavzuga aloqador yangiliklar")
         context["bachelor_departments_way"] = posts.LearningWay.objects.filter(
             faculty=post, study_degree=1)
@@ -161,17 +168,18 @@ class PostDetailView(DetailView):
         context["master_departments_way_title"] = _("FAKULTETNING MAGISTRATURA YO‘NALISHLARI")
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
-        context["parent"] = navbar.parent.name
         try:
             context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
                 post=post).only("name", "pdf_file")
         except Exception as e:
             print(e)
         try:
-            context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
+            if post.navbar:
+                context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
             context["pdf_file"] = post.pdf_file.url
         except AttributeError:
-            context["category_list"] = navbar.get_children()
+            if post.navbar:
+                context["category_list"] = navbar.get_children()
         except ValueError:
             context["pdf_file"] = ""
         return context
@@ -207,12 +215,12 @@ class DepartmentsDetailView(DetailView):
 
 class SectionsDetailView(DetailView):
     """ bo'lim va markazlar """
-    model = posts.SectionsAndCenters
+    model = models.SectionsAndCenters
     template_name = "pages/posts/sections_detail.html"
 
     def get_object(self, queryset=None):
         post_slug = self.kwargs["post_slug"]
-        obj = get_object_or_404(posts.SectionsAndCenters, slug=post_slug)
+        obj = get_object_or_404(models.SectionsAndCenters, slug=post_slug)
         return obj
 
     def get_context_data(self, **kwargs):
@@ -231,6 +239,10 @@ class SectionsDetailView(DetailView):
         data["parent"] = navbar.parent.name
         data["about_section"] = _("Haqida")
         data["depended_news"] = _("Mavzuga aloqador yangiliklar")
+        years_ids = models.Certificates.objects.values_list("year", flat=True).distinct()
+        data["years"] = widgets.Year.objects.filter(id__in=years_ids).order_by("year")
+        data["years_title"] = _("Yilni tanlang")
+        data["certificate_title"] = _("Malaka oshirish sertifikatlari")
         try:
             data["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
         except AttributeError:

@@ -49,6 +49,7 @@ shop = [
 ]
 
 urlpatterns = [
-    path("partners/", include("view.partners.urls"))
+    path("partners/", include("view.partners.urls")),
+    path("certificates/", include("view.certificates.urls")),
 ] + posts + news + widgets + shop
 

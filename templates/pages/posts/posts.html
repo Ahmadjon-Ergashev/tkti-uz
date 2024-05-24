@@ -103,6 +103,7 @@
             article {
                 container: card/inline-size;
             }
+
             .article-body p {
                 display: none;
             }
@@ -114,14 +115,17 @@
                 grid-template-columns: 100px 1fr;
                 gap: 16px;
             }
+
             .article-body {
                 padding-left: 0;
             }
+
             figure {
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
             }
+
             figure img {
                 height: 100%;
                 aspect-ratio: 1;
@@ -151,150 +155,172 @@
             {% include "./posts_sections/digitization.html" %}
         {% else %}
             <div class="row">
-                <div class="col-11 col-sm-12 m-auto m-md-0 col-md-4 col-lg-4 col-xl-4 col-xxl-3">
-                    {% include "../../widgets/left_sidebar.html" %}
-                </div>
-{#                <br><br><br><br>#}
-                <div class="col-11 mx-auto col-sm-12 col-md-4 col-lg-8 col-xl-8 col-xxl-9 posts">
-                    {% if object_list|length == 1 %}
-                        {% for object in object_list %}
-                            <div class="post_detail">
-                                {% if object.image %}
-                                    <div class="post_img_bg" id="object_base_img" style="background-image: url('{{ object.image.url }}');"></div>
-                                {% endif %}
-                                <h3>{{ object.title }}</h3>
-                                {% if object.video_file %}
-                                    <div class="post_video">
-                                        <video width="100%" controls>
-                                            <source src="{{ object.video_file.url }}" type="video/mp4">
-                                        </video>
-                                    </div>
-                                {% endif %}
-                                {% include "widgets/pdf_file.html" %}
-                                {% if object.post %}
-                                    <div class="post_text mt-3" id="object_post">
-                                        {{ object.post.html | safe }}
-                                    </div>
-                                {% endif %}
-                                {% if extra_pdf_list %}
-                                    {% include './posts_sections/extra_pdf.html' %}
-                                {% endif %}
-                                <br><br>
-                                <div class="row">
-                                    {% for obj in object.sections_boss.all %}
-                                        <div class="col-12 col-md-4 col-xl-4">
-                                            <div class="card">
-                                                {% if obj.image %}
-                                                    <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.f_name }} | tkti.uz">
-                                                {% endif %}
-                                                <div class="card-header">
-                                                    <b>{{ obj.position }}</b>
-                                                </div>
-                                                <div class="card-body">
-                                                    <ul class="list-group list-group-flush">
-                                                        <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
-                                                        <li class="list-group-item"><i class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
-                                                        <li class="list-group-item"><i class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>    
-                                    {% endfor %}
+            <div class="col-11 col-sm-12 m-auto m-md-0 col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                {% include "../../widgets/left_sidebar.html" %}
+            </div>
+            {#                <br><br><br><br>#}
+            <div class="col-11 mx-auto col-sm-12 col-md-4 col-lg-8 col-xl-8 col-xxl-9 posts">
+                {% if object_list|length == 1 %}
+                    {% for object in object_list %}
+                        <div class="post_detail">
+                            {% if object.image %}
+                                <div class="post_img_bg" id="object_base_img"
+                                     style="background-image: url('{{ object.image.url }}');"></div>
+                            {% endif %}
+                            <h3>{{ object.title }}</h3>
+                            {% if object.video_file %}
+                                <div class="post_video">
+                                    <video width="100%" controls>
+                                        <source src="{{ object.video_file.url }}" type="video/mp4">
+                                    </video>
                                 </div>
-                                {% if connected_faculty_dact %}
-                                    <div class="accordion accordion-flush" id="accordionFlushExample">
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header">
-                                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                    <h5 class="fw-bold p-0 m-0">{{ depended_news }}</h5>
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                                                <div class="accordion-body px-0 py-2">
-                                                    <div class="row">
-                                                        {% for obj in connected_faculty_dact %}
-                                                            <div class="col-12 col-md-4">
-                                                                <div class="card" style="height: 110px; ">
-                                                                    <div class="card-body">
-                                                                        <p class="">
-                                                                            <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:80 }}</a>
-                                                                        </p>  
-                                                                        <div class="d-flex justify-content-between">
-                                                                            <span><i class="fas fa-calendar-alt me-2"></i> {{ obj.added_at|date:'d-M-Y' }}</span>
-                                                                            <span><i class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
-                                                                        </div>  
+                            {% endif %}
+                            {% include "widgets/pdf_file.html" %}
+                            {% if object.post %}
+                                <div class="post_text mt-3" id="object_post">
+                                    {{ object.post.html | safe }}
+                                </div>
+                            {% endif %}
+                            {% if extra_pdf_list %}
+                                {% include 'pages/posts/posts_sections/extra_pdf.html' %}
+                            {% endif %}
+                            {% if object.zip_file %}
+                                <p class="py-3 px-2">
+                                    <a href="{{ object.zip_file.url }}" download="{{ object.zip_file.url }}">
+                                        {{ zip_file_title }}
+                                    </a>
+                                </p>
+                            {% endif %}
+                            <br><br>
+                            <div class="row">
+                                {% for obj in object.sections_boss.all %}
+                                    <div class="col-12 col-md-4 col-xl-4">
+                                        <div class="card">
+                                            {% if obj.image %}
+                                                <img src="{{ obj.image.url }}" class="card-img-top"
+                                                     alt="{{ obj.f_name }} | tkti.uz">
+                                            {% endif %}
+                                            <div class="card-header">
+                                                <b>{{ obj.position }}</b>
+                                            </div>
+                                            <div class="card-body">
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
+                                                    <li class="list-group-item"><i
+                                                            class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
+                                                    <li class="list-group-item"><i
+                                                            class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {% if connected_faculty_dact %}
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed px-0" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                    aria-expanded="false" aria-controls="flush-collapseOne">
+                                                <h5 class="fw-bold p-0 m-0">{{ depended_news }}</h5>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                             data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body px-0 py-2">
+                                                <div class="row">
+                                                    {% for obj in connected_faculty_dact %}
+                                                        <div class="col-12 col-md-4">
+                                                            <div class="card" style="height: 110px; ">
+                                                                <div class="card-body">
+                                                                    <p class="">
+                                                                        <a target="_blank" class="text-dark"
+                                                                           href="{% url 'news_detail' obj_slug=obj.slug %}">
+                                                                            {{ obj.title|truncatechars:80 }}</a>
+                                                                    </p>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <span><i class="fas fa-calendar-alt me-2"></i>
+                                                                            {{ obj.added_at|date:'d-M-Y' }}</span>
+                                                                        <span><i
+                                                                                class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
                                                                     </div>
                                                                 </div>
-                                                            </div> 
-                                                        {% endfor %}
-                                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>  
-                                {% endif %}
-
-                                <div class="post_footer">
-                                    <p class="text-end fw-bold">{{ object.author_post }}</p>
-                                    <div class="time_and_view">
-                                        <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
-                                        <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
                                     </div>
                                 </div>
-                            </div>  
-                        {% endfor %}
+                            {% endif %}
+
+                            <div class="post_footer">
+                                <p class="text-end fw-bold">{{ object.author_post }}</p>
+                                <div class="time_and_view">
+                                    <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
+                                    <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% if title_slug == 'boglanish' %}
+                        {% include "./posts_sections/contact.html" %}
+                    {% elif title_slug == 'bolim-va-markazlar' %}
+                        {% include "./posts_sections/sections_and_centers.html" %}
+                        {% include "../../widgets/pagination.html" %}
+                    {% elif title_slug == 'institut-rahbariyati' %}
+                        {% include "./posts_sections/admistrations.html" %}
+                    {% elif title_slug == 'iqtidorli-talabalar' %}
+                        {% include "./posts_sections/talented_students.html" %}
                     {% else %}
-                        {% if title_slug == 'boglanish' %}
-                            {% include "./posts_sections/contact.html" %}
-                        {% elif title_slug == 'bolim-va-markazlar' %}
-                            {% include "./posts_sections/sections_and_centers.html" %}
-                            {% include "../../widgets/pagination.html" %}
-                        {% elif title_slug == 'institut-rahbariyati' %}
-                            {% include "./posts_sections/admistrations.html" %}
-                        {% elif title_slug == 'iqtidorli-talabalar' %}
-                            {% include "./posts_sections/talented_students.html" %}
-                        {% else %}
-                            <!-- Start Blog Layout -->
-                                <section class="articles">
-                                    {% for obj in object_list %}
-                                            <article>
-                                                <div class="article-wrapper">
-                                                    <figure>
-                                                        {% if obj.image %}
-                                                            <img src="{{ obj.image.url }}" alt="" />
-                                                        {% else %}
-                                                            <img src="/static/images/default.png" alt="" />
-                                                        {% endif %}
-                                                    </figure>
-                                                    <div class="article-body">
-                                                        <h5>{{ obj.title|truncatechars:100 }}</h5>
-                                                        {% if obj.subtitle %}
-                                                            <p>
-                                                                {{ obj.subtitle }}
-                                                            </p>
-                                                        {% endif %}
-                                                        <a href="/posts/navbar/post/{{ obj.slug }}" class="read-more">{{ read_more }}<span class="sr-only"></span>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20" fill="currentColor">
-                                                                <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                                            </svg>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                    {% empty %}
-                                        <p class="text-center">
-                                            {{ empty }}
-                                        </p>
-                                    {% endfor %}
-                                </section>
-                                {% include "../../widgets/pagination.html" %}
-                        {% endif %}
+                        <!-- Start Blog Layout -->
+                        <section class="articles">
+                            {% for obj in object_list %}
+                                <article>
+                                    <div class="article-wrapper">
+                                        <figure>
+                                            {% if obj.image %}
+                                                <img src="{{ obj.image.url }}" alt=""/>
+                                            {% else %}
+                                                <img src="/static/images/default.png" alt=""/>
+                                            {% endif %}
+                                        </figure>
+                                        <div class="article-body">
+                                            <h5>{{ obj.title|truncatechars:100 }}</h5>
+                                            {% if obj.subtitle %}
+                                                <p>
+                                                    {{ obj.subtitle }}
+                                                </p>
+                                            {% endif %}
+                                            <a href="/posts/navbar/post/{{ obj.slug }}"
+                                               class="read-more">{{ read_more }}<span class="sr-only"></span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                                          clip-rule="evenodd"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                                {% empty %}
+                                <p class="text-center">
+                                    {{ empty }}
+                                </p>
+                            {% endfor %}
+                        </section>
+                        {% include "../../widgets/pagination.html" %}
                     {% endif %}
-                    {% if connected_faqs %}
-                        {% include "./posts_sections/faqs.html" %}
-                    {% endif %}
-                </div>
-            {% endif %}
+                {% endif %}
+                {% if connected_faqs %}
+                    {% include "./posts_sections/faqs.html" %}
+                {% endif %}
+            </div>
+        {% endif %}
         </div>
     </div>
     <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>

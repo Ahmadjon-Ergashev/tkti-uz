@@ -140,7 +140,7 @@ class PostsAdmin(admin.ModelAdmin):
         (_("Media fayllar"), {
             "fields": (
                 ("image", "get_image_file"),
-                ("pdf_file", "video_file",)
+                ("pdf_file", "video_file", "zip_file")
             ),
         }),
         (_("O'zbek tilida"), {
@@ -179,8 +179,9 @@ class PostsAdmin(admin.ModelAdmin):
     get_image_file.short_description = _("Post uchun tanlangan rasmli fayl")
 
     def save_model(self, request, obj, form, change):
-        if obj.navbar.slug == "fakultet":
-            obj.faculty = True
+        if obj.navbar:
+            if obj.navbar.slug == "fakultet":
+                obj.faculty = True
         if obj.author:
             obj.update_user = request.user
         else:
@@ -267,7 +268,7 @@ class DepartmentsAdmin(admin.ModelAdmin):
         (None, {
             "fields": (
                 "faculty",
-                ("pdf_file", "pdf_file_en", "pdf_file_ru")
+                ("pdf_file", "pdf_file_en", "pdf_file_ru", "zip_file")
             ),
         }),
         (_("O'zbek tilida ma'lumotlar"), {
@@ -395,92 +396,6 @@ class ContactSectionAdmin(admin.ModelAdmin):
     def get_image(self, obj):
         return mark_safe(f"<img src='{obj.image.url}' width='250' />")
     get_image.short_description = _("Tanlangan rasm")
-
-
-@admin.register(posts.Workers)
-class WorkersAdmin(admin.ModelAdmin):
-    actions = [clone]
-    list_per_page = 10
-    list_filter = ("section", )
-    list_editable = ("order_num", )
-    readonly_fields = ["get_image"]
-    list_display_links = ("f_name_uz", )
-    search_fields = ("f_name_uz", "f_name_ru", "f_name_en")
-    list_display = ("id", "f_name_uz", "section", "order_num", "self_position", "added_at")
-
-    fieldsets = (
-        (None, {
-            "fields": (
-                "position", "self_position", "section",
-                "phone", "extra_phone", "email", "order_num",
-                ("image", "get_image")
-            ),
-        }),
-        (_("O'zbek tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "f_name_uz", 
-            ),
-        }),
-        (_("Rus tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "f_name_ru", 
-            ),
-        }),
-        (_("Ingiliz tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "f_name_en", 
-            ),
-        }),
-    )
-
-    def get_image(self, obj):
-        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
-    get_image.short_description = _("Tanlangan rasm")
-
-
-@admin.register(posts.SectionsAndCenters)
-class SectionsAdmin(admin.ModelAdmin):
-    actions = [duplicate]
-    list_per_page = 10
-    list_display_links = ("title_uz", )
-    list_display = ("id", "title_uz", "added_at")
-    prepopulated_fields = ({"slug": ("title_uz", )})
-    search_fields = ("title_uz", "title_ru", "title_en")
-
-    fieldsets = (
-        (None, {
-            "fields": (
-                "navbar", "image"
-            ),
-        }),
-        (_("O'zbek tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "title_uz", "about_uz", "target_uz", "activity_uz" 
-            ),
-        }),
-        (_("Rus tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "title_ru", "about_ru", "target_ru", "activity_ru" 
-            ),
-        }),
-        (_("Ingiliz tilida"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "title_en", "about_en", "target_en", "activity_en" 
-            ),
-        }),
-        (_("Automatik to'ldiriladigan fieldlar"), {
-            'classes': ('collapse', ),
-            "fields": (
-                "slug",
-            ),
-        }),
-    )
 
 
 @admin.register(posts.SocialNetworksBoss)

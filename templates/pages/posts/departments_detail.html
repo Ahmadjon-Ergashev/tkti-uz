@@ -12,61 +12,62 @@
         <div class="row d-flex justify-content-between py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
                 <!-- inside navbar -->
-                    <div class="quick_links border">
-                        <div class="title bg-light">
-                            <h4 class="text-center">{{ title_bar }}</h4>
-                        </div>
-                        <div class="body">
-                            <ul class="list-group">
-                                {% for cl in departments_list %}
-                                    {% if cl.name == title %}
-                                        <li class="list-group-item">
-                                            <i class="fas fa-angle-right"></i> <a href="{% url 'dept_detail' dept_slug=cl.slug %}">{{ cl.name }}</a>
-                                        </li>
-                                    {% else %}
-                                        <li class="list-group-item">
-                                            <a href="{% url 'dept_detail' dept_slug=cl.slug %}">{{ cl.name }}</a>
-                                        </li>
-                                    {% endif %}
-                                {% endfor %}
-                            </ul>
-                        </div>
+                <div class="quick_links border">
+                    <div class="title bg-light">
+                        <h4 class="text-center">{{ title_bar }}</h4>
                     </div>
+                    <div class="body">
+                        <ul class="list-group">
+                            {% for cl in departments_list %}
+                                {% if cl.name == title %}
+                                    <li class="list-group-item">
+                                        <i class="fas fa-angle-right"></i> <a
+                                            href="{% url 'dept_detail' dept_slug=cl.slug %}">{{ cl.name }}</a>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item">
+                                        <a href="{% url 'dept_detail' dept_slug=cl.slug %}">{{ cl.name }}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
                 <!-- inside navbar -->
 
                 <!-- social networks -->
-                    <div class="mt-3 socials_networks border">
-                        <div class="title">
-                            <h4 class="text-center">{{ social_networks_title }}</h4>
-                        </div>
-                        <div class="body">
-                            <ul class="">
-                                {% for sn in social_networks %}    
-                                    <li class="social_networks_links" data-social-color="{{ sn.color }}">
-                                        <a href="{{ sn.url }}" target="_blank"><i class="{{ sn.icon }}"></i></a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                <div class="mt-3 socials_networks border">
+                    <div class="title">
+                        <h4 class="text-center">{{ social_networks_title }}</h4>
                     </div>
+                    <div class="body">
+                        <ul class="">
+                            {% for sn in social_networks %}
+                                <li class="social_networks_links" data-social-color="{{ sn.color }}">
+                                    <a href="{{ sn.url }}" target="_blank"><i class="{{ sn.icon }}"></i></a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
                 <!-- social networks -->
 
                 <!-- quick links -->
 
-                    <div class="mt-3 quick_links border">
-                        <div class="title bg-light">
-                            <h4 class="text-center">{{ quick_link_title }}</h4>
-                        </div>
-                        <div class="body">
-                            <ul class="list-group">
-                                {% for ql in quick_links %}    
-                                    <li class="list-group-item">
-                                        <a href="{{ ql.url }}">{{ ql.name }}</a>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
+                <div class="mt-3 quick_links border">
+                    <div class="title bg-light">
+                        <h4 class="text-center">{{ quick_link_title }}</h4>
                     </div>
+                    <div class="body">
+                        <ul class="list-group">
+                            {% for ql in quick_links %}
+                                <li class="list-group-item">
+                                    <a href="{{ ql.url }}">{{ ql.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
 
                 <!-- quick links -->
 
@@ -75,29 +76,36 @@
                 <!-- Start Blog detail -->
                 <div class="post_detail">
                     <h1 class="text-center fw-bold">{{ object.name }}</h1>
-                    {% include "widgets/pdf_file.html" %}
-                    <br><hr>
+{#                    {% include "widgets/pdf_file.html" %}#}
+                    <br>
+                    <hr>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
                                     <span class=" fw-bold">{{ about }}</span>
                                 </button>
                             </h2>
-                            <div id="flush-collapseOne" class="accordion-collapse show" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseOne" class="accordion-collapse show"
+                                 data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     {{ object.about.html | safe }}
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
                                     <span class=" fw-bold">{{ target }}</span>
                                 </button>
                             </h2>
-                            <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     {{ object.target.html | safe }}
                                 </div>
@@ -105,23 +113,60 @@
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseThree" aria-expanded="false"
+                                        aria-controls="flush-collapseThree">
                                     <span class="fw-bold">{{ activity }}</span>
                                 </button>
                             </h2>
-                            <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseThree" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     {{ object.activity.html | safe }}
+                                    <table class="table m-3">
+                                        <tbody>
+                                            <tr>
+                                                {% if object.zip_file %}
+                                                    <td>
+                                                        {{ zip_file_title_2 }}
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ object.zip_file.url }}"
+                                                           download="{{ object.zip_file.url }}">
+                                                            {{ download_2 }}
+                                                        </a>
+                                                    </td>
+                                                {% endif %}
+                                            </tr>
+                                            <tr>
+                                                {% if object.pdf_file %}
+                                                    <td>{{ activity_docs }}</td>
+                                                    <td>
+                                                        <a type="button" class="text-primary"
+                                                           data-bs-toggle="offcanvas"
+                                                           data-bs-target="#main_pdf_edu_area_{{ object.id }}"
+                                                           aria-controls="about_study_program_{{ object.id }}">
+                                                            {{ download }}
+                                                        </a>
+                                                    </td>
+                                                {% endif %}
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    {% include "widgets/off_canvas_pdf.html" %}
                                 </div>
                             </div>
                         </div>
                         <div class="accordion-item">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFour" aria-expanded="false" aria-controls="flush-collapseFour">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseFour" aria-expanded="false"
+                                        aria-controls="flush-collapseFour">
                                     <span class=" fw-bold">{{ workers }}</span>
                                 </button>
                             </h2>
-                            <div id="flush-collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                            <div id="flush-collapseFour" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
                                     <div class="row">
                                         {% for worker in object.departmentsadmistrations_set.all %}
@@ -130,16 +175,25 @@
                                                     <div class="row g-0">
                                                         <div class="col-md-3">
                                                             {% if worker.image %}
-                                                                <img src="{{ worker.image.url }}" class="img-fluid rounded-start" alt="tkti.uz">
+                                                                <img src="{{ worker.image.url }}"
+                                                                     class="img-fluid rounded-start" alt="tkti.uz">
                                                             {% endif %}
                                                         </div>
                                                         <div class="col-md-9">
                                                             <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>
                                                             <ul class="list-group list-group-flush">
-                                                                <li class="list-group-item"><i class="fas fa-user-tie me-2"></i> {{ worker.job_name }}</li>
-                                                                <li class="list-group-item"><i class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}</li>
-                                                                <li class="list-group-item"><i class="fas fa-envelope me-2"></i> {{ worker.email }}</li>
-                                                                <li class="list-group-item"><i class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}</li>
+                                                                <li class="list-group-item"><i
+                                                                        class="fas fa-user-tie me-2"></i> {{ worker.job_name }}
+                                                                </li>
+                                                                <li class="list-group-item"><i
+                                                                        class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}
+                                                                </li>
+                                                                <li class="list-group-item"><i
+                                                                        class="fas fa-envelope me-2"></i> {{ worker.email }}
+                                                                </li>
+                                                                <li class="list-group-item"><i
+                                                                        class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}
+                                                                </li>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -153,11 +207,14 @@
                         {% if conn_departments %}
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefinal" aria-expanded="false" aria-controls="flush-collapsefinal">
+                                    <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapsefinal"
+                                            aria-expanded="false" aria-controls="flush-collapsefinal">
                                         <span class="fw-bold">{{ depended_news }}</span>
                                     </button>
                                 </h2>
-                                <div id="flush-collapsefinal" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div id="flush-collapsefinal" class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body px-0 py-2">
                                         <div class="row">
                                             {% for obj in conn_departments %}
@@ -165,15 +222,19 @@
                                                     <div class="card" style="height: 130px; ">
                                                         <div class="card-body">
                                                             <p class="">
-                                                                <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:80 }}</a>
-                                                            </p>  
+                                                                <a target="_blank" class="text-dark"
+                                                                   href="{% url 'news_detail' obj_slug=obj.slug %}">
+                                                                    {{ obj.title|truncatechars:80 }}</a>
+                                                            </p>
                                                             <div class="d-flex justify-content-between">
-                                                                <span><i class="fas fa-calendar-alt me-2"></i> {{ obj.added_at|date:'d-M-Y' }}</span>
-                                                                <span><i class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
-                                                            </div>  
+                                                                <span><i class="fas fa-calendar-alt me-2"></i>
+                                                                    {{ obj.added_at|date:'d-M-Y' }}</span>
+                                                                <span><i
+                                                                        class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             {% endfor %}
                                         </div>
                                     </div>

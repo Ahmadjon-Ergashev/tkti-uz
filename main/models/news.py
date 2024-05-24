@@ -11,12 +11,14 @@ from django.core.files import File
 # local
 from main.models import widgets
 from main.models import posts
+from main.models import sections_and_centers
 
 
 class Category(models.Model):
     """ category model for news and ads  """
     name = models.CharField(verbose_name=_("Nomi"), max_length=123, null=True)
-    slug = models.SlugField(max_length=123, unique=True, verbose_name=_('slug'), help_text=_("Majburyat tug'ulmasa tegmang !"))
+    slug = models.SlugField(max_length=123, unique=True, verbose_name=_('slug'),
+                            help_text=_("Majburyat tug'ulmasa tegmang !"))
     order_num = models.IntegerField(default=0, verbose_name=_("Tartib raqami"))
     added_at = models.DateTimeField(auto_now_add=True)
 
@@ -38,14 +40,14 @@ class News(widgets.AbstractTemplate):
     departments = models.ManyToManyField(posts.Departments,
                                          verbose_name=_("Yangilikka aloqadorlar kafedralar"),
                                          related_name="connected_departments", blank=True)
-    section_and_centers = models.ManyToManyField(posts.SectionsAndCenters,
+    section_and_centers = models.ManyToManyField(sections_and_centers.SectionsAndCenters,
                                                  verbose_name=_("Yangilikka aloqadorlar bo'lim va markazlar"),
                                                  related_name="connected_section_and_centers", blank=True)
     hashtag = models.ManyToManyField(widgets.Hashtag, related_name="news_hashtags", blank=True)
     brm = models.ManyToManyField(widgets.BRMItems, related_name="news_brm_items",
                                  verbose_name="Barqaror rivojlanish maqsadlari", blank=True)
     pdf_file = models.FileField(
-        verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
+        verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/",
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     pdf_file_en = models.FileField(
@@ -87,13 +89,13 @@ class News(widgets.AbstractTemplate):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
-    
+
 
 class Ads(widgets.AbstractTemplate):
     """ model for ads """
     hashtag = models.ManyToManyField(widgets.Hashtag, related_name="ads_hashtags")
     pdf_file = models.FileField(
-        verbose_name=_("PDF fayl"), upload_to="pdf/ads/%Y-%m-%d/", 
+        verbose_name=_("PDF fayl"), upload_to="pdf/ads/%Y-%m-%d/",
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     pdf_file_en = models.FileField(
@@ -109,7 +111,8 @@ class Ads(widgets.AbstractTemplate):
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="author_ads")
-    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_ads_user")
+    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name="update_ads_user")
 
     class Meta:
         db_table = "ads"
@@ -138,12 +141,16 @@ class Ads(widgets.AbstractTemplate):
 
 class VideoGallery(models.Model):
     """ video gallery model """
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Author"), related_name="video_author")
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Author"),
+                               related_name="video_author")
     title = models.CharField(max_length=255, verbose_name=_("Sarlavha"), null=True)
-    status = models.CharField(_("Status"), choices=widgets.Status.choices, default=widgets.Status.pendding, max_length=50)
-    poster = models.ImageField(verbose_name=_("video uchun foster"), default="default/default.png", null=True, upload_to="video/poster/%Y-%m-%d/")
+    status = models.CharField(_("Status"), choices=widgets.Status.choices, default=widgets.Status.pendding,
+                              max_length=50)
+    poster = models.ImageField(verbose_name=_("video uchun foster"), default="default/default.png", null=True,
+                               upload_to="video/poster/%Y-%m-%d/")
     post = QuillField(verbose_name="Video file", null=True, blank=True)
-    slug = models.SlugField(unique=True, verbose_name=_("Slug"), help_text=_("Majburyat tug'ulmasa tegmang"), max_length=50)
+    slug = models.SlugField(unique=True, verbose_name=_("Slug"), help_text=_("Majburyat tug'ulmasa tegmang"),
+                            max_length=50)
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     added_at = models.DateTimeField(_("Vaqt & sana"))
     update_at = models.DateTimeField(auto_now=True)
@@ -160,13 +167,15 @@ class VideoGallery(models.Model):
 
 class Events(widgets.AbstractTemplate):
     """ university events plans """
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Author"), related_name="event_author")
-    event_type = models.ForeignKey(widgets.EventTypes, on_delete=models.SET_NULL, null=True, verbose_name=_("Tadbir turini tanlang."))
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name=_("Author"),
+                               related_name="event_author")
+    event_type = models.ForeignKey(widgets.EventTypes, on_delete=models.SET_NULL, null=True,
+                                   verbose_name=_("Tadbir turini tanlang."))
     location = models.CharField(verbose_name=_("Tadbir manzili"), max_length=255, blank=True, null=True)
     phone = models.CharField(max_length=20, verbose_name=_("Bog'lanish uchun telefon raqam"), null=True, blank=True)
     extra_phone = models.CharField(max_length=20, verbose_name=_("Qo'shimcha telefon raqam"), null=True, blank=True)
     pdf_file = models.FileField(
-        verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/", 
+        verbose_name=_("PDF fayl"), upload_to="pdf/news/%Y-%m-%d/",
         null=True, blank=True, help_text=_("Faqat *.pdf formatdagi faylarni yuklang")
     )
     pdf_file_en = models.FileField(
@@ -181,7 +190,8 @@ class Events(widgets.AbstractTemplate):
         verbose_name=_("Video fayl"), upload_to="videos/news/%Y-%m-%d/",
         null=True, blank=True, help_text=_("agar video fayl mavjud bo'lsa yuklang.")
     )
-    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name="update_events_user")
+    update_user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
+                                    related_name="update_events_user")
     add_time = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -190,9 +200,9 @@ class Events(widgets.AbstractTemplate):
     class Meta:
         db_table = 'events'
         managed = True
-        verbose_name =_("Tadbirlar")
-        verbose_name_plural = _("Tadbirlar")    
-        
+        verbose_name = _("Tadbirlar")
+        verbose_name_plural = _("Tadbirlar")
+
     def save(self, *args, **kwargs):
         if self._state.adding:
             im = Image.open(self.image)
@@ -224,7 +234,7 @@ class PhotoGallary(models.Model):
 
     def __str__(self):
         return f"{self.image}"
-    
+
     def save(self, *args, **kwargs):
         if self._state.adding:
             im = Image.open(self.image)
@@ -239,4 +249,3 @@ class PhotoGallary(models.Model):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
-

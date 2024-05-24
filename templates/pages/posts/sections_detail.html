@@ -9,104 +9,173 @@
     <div class="container">
         <div class="row py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
-                {% include "../../widgets/left_sidebar.html" %}
+                {% include "widgets/left_sidebar.html" %}
             </div>
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 posts">
                 <div class="post_detail">
                     <h2 class="text-center">{{ object.title }}</h2>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                         <div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed"
-										type="button" data-bs-toggle="collapse"
-										data-bs-target="#flush-about"
-										aria-expanded="false" aria-controls="flush-collapseOne">
-									{{ about_section }}
-								</button>
-							</h2>
-							<div id="flush-about" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-								<div class="accordion-body">
-									{{ object.about.html | safe }}
-								</div>
-							</div>
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-about"
+                                        aria-expanded="false" aria-controls="flush-collapseOne">
+                                    {{ about_section }}
+                                </button>
+                            </h2>
+                            <div id="flush-about" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ object.about.html | safe }}
+                                </div>
+                            </div>
                         </div>
                         <div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-target" aria-expanded="false" aria-controls="flush-collapseOne">
-									{{ target }}
-								</button>
-							</h2>
-							<div id="flush-target" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-								<div class="accordion-body">
-									{{ object.target.html | safe }}
-								</div>
-							</div>
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-target" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    {{ target }}
+                                </button>
+                            </h2>
+                            <div id="flush-target" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ object.target.html | safe }}
+                                </div>
+                            </div>
                         </div>
                         <div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-workers" aria-expanded="false" aria-controls="flush-collapseOne">
-									{{ workers }}
-								</button>
-							</h2>
-							<div id="flush-workers" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-								<div class="accordion-body">
-									<div class="row">
-										{% for w in object.workers_set.all %}
-											<div class="col-12 col-lg-8 ps-2">
-												<div class="card mb-3">
-													<div class="row g-0">
-														<div class="col-md-5">
-															{% if w.image %}
-															    <img src="{{ w.image.url }}" height="250"
-																	 class="img-fluid rounded-start"
-																	 alt="{{ w.f_name }} | tkti.uz">
-														    {% endif %}
-														</div>
-														<div class="col-md-7">
-															<div class="card-body">
-																{% if w.self_position %}
-																	<span class=""><b>{{ w.self_position }}</b></span>
-																{% else %}
-																	<span class=""><b>{{ w.position }}</b></span>
-																{% endif %}
-																<ul class="list-group list-group-flush">
-																	<li class="list-group-item">{{ w.f_name }}</li>
-																	<li class="list-group-item">{{ w.email }}</li>
-																	<li class="list-group-item">{{ w.phone }}</li>
-																	{% if w.extra_phone %}
-																		<li class="list-group-item">{{ w.extra_phone }}</li>
-																	{% endif %}
-																</ul>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										{% endfor %}
-									</div>
-								</div>
-							</div>
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-workers" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    {{ workers }}
+                                </button>
+                            </h2>
+                            <div id="flush-workers" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        {% for w in object.workers_set.all %}
+                                            <div class="col-12 col-lg-8 ps-2">
+                                                <div class="card mb-3">
+                                                    <div class="row g-0">
+                                                        <div class="col-md-5">
+                                                            {% if w.image %}
+                                                                <img src="{{ w.image.url }}" height="250"
+                                                                     class="img-fluid rounded-start"
+                                                                     alt="{{ w.f_name }} | tkti.uz">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="col-md-7">
+                                                            <div class="card-body">
+                                                                {% if w.self_position %}
+                                                                    <span class=""><b>{{ w.self_position }}</b></span>
+                                                                {% else %}
+                                                                    <span class=""><b>{{ w.position }}</b></span>
+                                                                {% endif %}
+                                                                <ul class="list-group list-group-flush">
+                                                                    <li class="list-group-item">{{ w.f_name }}</li>
+                                                                    <li class="list-group-item">{{ w.email }}</li>
+                                                                    <li class="list-group-item">{{ w.phone }}</li>
+                                                                    {% if w.extra_phone %}
+                                                                        <li class="list-group-item">{{ w.extra_phone }}</li>
+                                                                    {% endif %}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-						<div class="accordion-item">
-							<h2 class="accordion-header">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-activity" aria-expanded="false" aria-controls="flush-collapseOne">
-									{{ activity }}
-								</button>
-							</h2>
-							<div id="flush-activity" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-								<div class="accordion-body">
-									{{ object.activity.html | safe }}
-								</div>
-							</div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-activity" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    {{ activity }}
+                                </button>
+                            </h2>
+                            <div id="flush-activity" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ object.activity.html | safe }}
+                                </div>
+                                <table class="table m-3">
+                                    <tbody>
+                                        <tr>
+                                            {% if object.zip_file %}
+                                                <td>
+                                                    {{ zip_file_title_2 }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ object.zip_file.url }}"
+                                                       download="{{ object.zip_file.url }}">
+                                                        {{ download_2 }}
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            {% if object.pdf_file %}
+                                                <td>{{ activity_docs }}</td>
+                                                <td>
+                                                    <a type="button" class="text-primary"
+                                                       data-bs-toggle="offcanvas"
+                                                       data-bs-target="#main_pdf_edu_area_{{ object.id }}"
+                                                       aria-controls="about_study_program_{{ object.id }}">
+                                                        {{ download }}
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {% include "widgets/off_canvas_pdf.html" %}
+                            </div>
                         </div>
-						{% if conn_section_and_centers %}
+
+                        {% if 'tkti-huzuridagi-pedagog-kadrlarni-qayta-tayyorlash-va-malakasini-oshirish-tarmoq-markazi' in request.path %}
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
+                                        {{ certificate_title }}
+                                    </button>
+                                </h2>
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionFlushExample">
+                                    <div class="accordion-body px-0 py-2">
+                                        <p class="px-3">{{ years_title }}</p>
+                                        <ul class="list-group list-group-flush">
+                                            {% for obj in years %}
+                                                <li class="list-group-item list-group-item-action">
+                                                    <a href="/certificates/themes/list/{{ obj.id }}">{{ obj.year }}</a>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if conn_section_and_centers %}
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                            data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                            aria-controls="flush-collapseOne">
                                         {{ depended_news }}
                                     </button>
                                 </h2>
-                                <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                     data-bs-parent="#accordionFlushExample">
                                     <div class="accordion-body px-0 py-2">
                                         <div class="row">
                                             {% for obj in conn_section_and_centers %}
@@ -114,15 +183,19 @@
                                                     <div class="card" style="height: 130px;">
                                                         <div class="card-body">
                                                             <p class="">
-                                                                <a target="_blank" class="text-dark" href="{% url 'news_detail' obj_slug=obj.slug %}">{{ obj.title|truncatechars:80 }}</a>
+                                                                <a target="_blank" class="text-dark"
+                                                                   href="{% url 'news_detail' obj_slug=obj.slug %}">
+                                                                    {{ obj.title|truncatechars:80 }}</a>
                                                             </p>
                                                             <div class="d-flex justify-content-between">
-                                                                <span><i class="fas fa-calendar-alt me-2"></i> {{ obj.added_at|date:'d-M-Y' }}</span>
-                                                                <span><i class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
-                                                            </div>  
+                                                                <span><i class="fas fa-calendar-alt me-2"></i>
+                                                                    {{ obj.added_at|date:'d-M-Y' }}</span>
+                                                                <span><i
+                                                                        class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div> 
+                                                </div>
                                             {% endfor %}
                                         </div>
                                     </div>

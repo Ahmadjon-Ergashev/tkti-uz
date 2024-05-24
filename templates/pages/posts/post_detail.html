@@ -11,7 +11,7 @@
     <div class="container mt-4">
         <div class="row d-flex justify-content-between py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
-                {% include "../../widgets/left_sidebar.html" %}
+                {% include "widgets/left_sidebar.html" %}
             </div>
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
                 <!-- Start Blog detail -->
@@ -34,7 +34,14 @@
                         </div>
                     {% endif %}
                     {% if extra_pdf_list %}
-                        {% include './posts_sections/extra_pdf.html' %}sasa
+                        {% include 'pages/posts/posts_sections/extra_pdf.html' %}
+                    {% endif %}
+                    {% if object.zip_file %}
+                        <p class="py-3 px-2">
+                            <a href="{{ object.zip_file.url }}" download="{{ object.zip_file.url }}">
+                                {{ zip_file_title }}
+                            </a>
+                        </p>
                     {% endif %}
                     {% if object.departments_set.all %}
                         <br>

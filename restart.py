@@ -6,6 +6,7 @@ desc = """
 """
 parser = argparse.ArgumentParser(description=desc)
 
+
 def Main():
     parser.add_argument('-r', '--restart', type=str, required=False, help='restart docker project')
     parser.add_argument('-p', '--prune', type=str, required=False, help='prune all containers and images')
