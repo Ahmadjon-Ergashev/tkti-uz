@@ -25,7 +25,7 @@ def global_variables(request):
     except Exception as e:
         print(e)
     current_time = timezone.now()
-    event = news.Events.objects.filter(
+    event = news.Events.objects.select_related("event_type").filter(
             status="pub", added_at__gte=current_time
         ).annotate(
             time_diff=ExpressionWrapper(
@@ -116,7 +116,7 @@ def global_variables(request):
 
     }
     try:
-        name = str(widgets.BaseVariables.objects.last().name).split(maxsplit=2)
+        name = str(context["base_variables"].name).split(maxsplit=2)
         context["web_name"] = name
     except Exception as e:
         print(e)

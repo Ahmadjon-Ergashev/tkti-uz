@@ -75,20 +75,6 @@ class SearchAroundProgram(View):
 
     def post(self, request):
         search_query = request.POST.get("search_query", "")
-        news_objects = news.News.objects.filter(
-            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
-        events_objects = models.Events.objects.filter(
-            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
-        posts_objects = posts.Posts.objects.filter(
-            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
-        ads_objects = news.Ads.objects.filter(
-            Q(status="pub") & Q(title__icontains=search_query) | Q(subtitle__icontains=search_query))
-        shop_objects = models.Shop.objects.filter(name__icontains=search_query)
-        sections_objects = models.SectionsAndCenters.objects.filter(title__icontains=search_query)
-        departments_objects = models.Departments.objects.filter(name__icontains=search_query)
-
-        total = sum([news_objects.count(), events_objects.count(), posts_objects.count(), ads_objects.count(),
-                     shop_objects.count(), sections_objects.count(), departments_objects.count()])
 
         titles = {
             "query": search_query,
@@ -102,6 +88,32 @@ class SearchAroundProgram(View):
             "sections_title": _("Bo'lim va markazlar"),
             "not_found": _("Afsuski sizning so'rovingizga mos tushadigan ma'lumot topilmadi")
         }
+
+        if not search_query:
+            return render(request, self.template_name, titles | {"total": 0})
+
+        query_conditions = Q(title__icontains=search_query) | Q(subtitle__icontains=search_query)
+
+        news_objects = news.News.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
+        events_objects = models.Events.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
+        posts_objects = posts.Posts.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
+        ads_objects = news.Ads.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
+        shop_objects = models.Shop.objects.select_related("category").filter(name__icontains=search_query)
+        sections_objects = models.SectionsAndCenters.objects.filter(
+            title__icontains=search_query).only("title", "image", "slug")
+        departments_objects = models.Departments.objects.filter(name__icontains=search_query).only("name", "slug")
+
+        results = {
+            "news": list(news_objects),
+            "events": list(events_objects),
+            "posts": list(posts_objects),
+            "ads": list(ads_objects),
+            "shop": list(shop_objects),
+            "sections": list(sections_objects),
+            "departments": list(departments_objects),
+        }
+
+        total = sum(len(items) for items in results.values())
 
         object_lists = {
             "total": total,
