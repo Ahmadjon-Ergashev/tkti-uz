@@ -257,7 +257,13 @@
                             {% endif %}
 
                             <div class="post_footer">
-                                <p class="text-end fw-bold">{{ object.author_post }}</p>
+                                {% if LANGUAGE_CODE == 'uz' %}
+                                    <p class="text-end fw-bold">TKTI axborot xizmati</p>
+                                {% elif LANGUAGE_CODE == 'ru' %}
+                                    <p class="text-end fw-bold">Информационная служба ТКТИ</p>
+                                {% elif LANGUAGE_CODE == 'en' %}
+                                    <p class="text-end fw-bold">TKTI information service</p>
+                                {% endif %}
                                 <div class="time_and_view">
                                     <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
                                     <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>

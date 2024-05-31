@@ -21,7 +21,7 @@ $(document).ready(() => {
                                 </div>
                                 <div class="box_footer">
                                     <span class="time">${ upc.added_at }</span> <br>
-                                    <span>${ upc.event_type_name }</span>
+                                    <span>${ upc.event_type.name }</span>
                                 </div>
                             </div>
                             <div class="event_modal">
@@ -30,7 +30,7 @@ $(document).ready(() => {
                                         <div class="col-12 p-4">
                                             <h5>${ upc.title }</h5>
                                             <ul class="list-group list-group-flush">
-                                                <li class="list-group-item ps-0"><span class="font-monospace">${ upc.event_type_name }</span></li>
+                                                <li class="list-group-item ps-0"><span class="font-monospace">${ upc.event_type.name }</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>${ upc.added_at }</span></li>
                                                 <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>${ upc.location }</span></li>
                                                 <li class="list-group-item ps-0"><a href="/events/detail/${ upc.slug }" class="search_btn">${ upc.read_more }</a></li>

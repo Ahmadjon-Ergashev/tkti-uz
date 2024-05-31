@@ -344,10 +344,11 @@ class TalentedStudents(models.Model):
 
 
 class SectionsBoss(models.Model):
-    post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, related_name="sections_boss", null=True)
+    post = models.ForeignKey(Posts, verbose_name=_("post"), on_delete=models.SET_NULL, related_name="sections_boss",
+                             null=True)
     image = models.ImageField(_("Rasmi"), upload_to="image/boss_section/%Y-%m-%d/", null=True)
     position = models.ForeignKey(widgets.Positions, on_delete=models.SET_NULL,
-                                      verbose_name=_("Lavozimi"), null=True, blank=True)
+                                 verbose_name=_("Lavozimi"), null=True, blank=True)
     f_name = models.CharField(_("To'liq ismi"), max_length=150)
     email = models.CharField(_("Email"), max_length=250)
     phone = models.CharField(_("Telefon raqami"), max_length=250)
@@ -452,6 +453,16 @@ class EducationalAreas(models.Model):
     dept_fee = models.IntegerField(default=0, verbose_name=_("Kredit miqdori"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default="TKTI axborot xizmati")
+
+    phd_subject_program = models.FileField(
+        upload_to="pdf/educational_areas/phd_subject_program/%Y/%m/", null=True, blank=True,
+        verbose_name=_("'Ixtisoslik' fanlari bo'yicha imtihon dasturlari")
+    )
+    phd_special_subject_program = models.FileField(
+        upload_to="pdf/educational_areas/phd_special_subject_program/%Y/%m/", null=True, blank=True,
+        verbose_name=_("Mutaxassislik fanlaridan malakaviy va qo'shimcha imtihon dasturlari")
+    )
+
     added_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

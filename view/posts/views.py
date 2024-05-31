@@ -345,6 +345,8 @@ class LearningWayDetailView(DetailView):
         data["you_may_become_title"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         data["educational_areas"] = education_areas
+        data["phd_subject_program"] = _("'Ixtisoslik' fanlari bo'yicha imtihon dasturlari")
+        data["phd_special_subject_program"] = _("Mutaxassislik fanlaridan malakaviy va qo'shimcha imtihon dasturlari")
         return data
 
 
@@ -415,6 +417,7 @@ class EducationalAreaView(ListView):
         data["you_may_become_title"] = _("Qachonki o'qishni bitirganingizda")
         data["full_time_external_fee_title"] = _("Sirtqi ta'lim uchun")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
+        data["phd_subject_program"] = _("'Ixtisoslik' fanlari bo'yicha imtihon dasturlari")
         return data
 
 
@@ -457,4 +460,5 @@ class EducationalAreaDetailView(DetailView):
         data["full_time_fee_title"] = _("Kantrakt miqdori")
         data["you_may_become_title"] = _("Qachonki o'qishni bitirganingizda")
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
+        data["phd_subject_program"] = _("'Ixtisoslik' fanlari bo'yicha imtihon dasturlari")
         return data

@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 from django.utils import timezone
 from django.core.cache import cache
@@ -21,29 +22,33 @@ def global_variables(request):
                     "name", "color", "url", "icon"
                 ),
             }
-            cache.set("navbar", navbar_list, 60*30)
+            cache.set("navbar", navbar_list, 60 * 30)
     except Exception as e:
         print(e)
     current_time = timezone.now()
     event = news.Events.objects.select_related("event_type").filter(
-            status="pub", added_at__gte=current_time
-        ).annotate(
-            time_diff=ExpressionWrapper(
-                F('added_at') - current_time,
-                output_field=DateTimeField()
-            )
-        ).order_by('time_diff').first()
-    if event:
-        coming_time_delta = event.added_at - timezone.now()
-        days_until_event_starts = coming_time_delta.days
-        if days_until_event_starts == 0:
-            # Event starts today
-            start_time = _("Bugun")
+        status="pub", added_at__gte=current_time
+    ).annotate(
+        time_diff=ExpressionWrapper(
+            F('added_at') - current_time,
+            output_field=DateTimeField()
+        )
+    ).order_by('time_diff')
+    if event.exists():
+        random_one = random.choice(event)
+        if random_one:
+            coming_time_delta = random_one.added_at - timezone.now()
+            days_until_event_starts = coming_time_delta.days
+            if days_until_event_starts == 0:
+                start_time = _("Bugun")
+            else:
+                word = _("kun qoldi")
+                start_time = f"{days_until_event_starts} {word}"
         else:
-            word = _("kun qoldi")
-            start_time = f"{days_until_event_starts} {word}"
+            start_time = "No upcoming event"
     else:
-        start_time = "No upcoming event"
+        random_one = None
+
     translate_words = {
         "arxiv": _("Arxiv"),
         "all": _("Barchasi"),
@@ -65,6 +70,7 @@ def global_variables(request):
         "talented_student_title": _("Iqtidorli talabalar"),
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
     }
+
     context = {
         "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
             "name", "slug", "id"
@@ -75,14 +81,7 @@ def global_variables(request):
         "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
         "base_variables": widgets.BaseVariables.objects.last(),
         "top_navbar": widgets.TopNavbar.objects.only("name", "url").order_by("order_num"),
-        "upcoming_event_first": news.Events.objects.filter(
-            status="pub", added_at__gte=current_time
-        ).annotate(
-            time_diff=ExpressionWrapper(
-                F('added_at') - current_time,
-                output_field=DateTimeField()
-            )
-        ).order_by('time_diff').first(),
+        "upcoming_event_first": random_one,
         "start_time": start_time,
         "start_time_title": _("Boshlanish vaqtigacha "),
         # text variables

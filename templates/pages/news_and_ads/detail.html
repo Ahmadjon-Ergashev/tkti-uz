@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load i18n %}
 {% block title %}
     {{ title }}
 {% endblock title %}
@@ -33,7 +34,7 @@
     <div class="container mt-4">
         <div class="row d-flex justify-content-between py-3">
             <div class="col-12 col-sm-12 col-md-10 col-lg-4 col-xl-4 col-xxl-3">
-                {% include "../../widgets/left_sidebar.html" %}
+                {% include "widgets/left_sidebar.html" %}
             </div>
             <div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-8 col-xxl-9 border posts">
                 <!-- Start Blog detail -->
@@ -85,14 +86,21 @@
                             </div>
                         </div>    
                     {% endif %}
+                    <div class="border border-1 my-5"></div>
                     <div class="post_footer">
-                        <p class="text-end fw-bold">{{ object.author_post }}</p>
+                        {% if LANGUAGE_CODE == 'uz' %}
+                            <p class="text-end fw-bold">TKTI axborot xizmati</p>
+                        {% elif LANGUAGE_CODE == 'ru' %}
+                            <p class="text-end fw-bold">Информационная служба ТКТИ</p>
+                        {% elif LANGUAGE_CODE == 'en' %}
+                            <p class="text-end fw-bold">TKTI information service</p>
+                        {% endif %}
                         <div class="time_and_view">
                             <span><i class="fas fa-eye me-2"></i> {{ object.post_viewed_count }}</span>
                             <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
                         </div>
                     </div>
-                    <div class="border border-1 my-5"></div>
+                    <br>
                     <div class="row">
                         {% for b in object.brm.all %}
                             <div class="col-12 col-sm-6 col-md-4 p-1">

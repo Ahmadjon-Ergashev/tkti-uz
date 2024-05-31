@@ -1,3 +1,4 @@
+from django.utils import timezone
 from rest_framework import serializers
 from datetime import datetime, timedelta
 from django.utils.translation import gettext_lazy as _
@@ -15,7 +16,8 @@ class NewsSerializers(serializers.ModelSerializer):
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data["read_more"] = _("Batafsil")
-        data["added_at"] = instance.added_at.strftime("%Y-%m-%d %H:%M")
+        local_time = timezone.localtime(instance.added_at)
+        data["added_at"] = local_time.strftime("%Y-%m-%d %H:%M")
         return data
     
 
@@ -26,7 +28,8 @@ class AdsSerializers(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["added_at"] = instance.added_at.strftime("%Y-%m-%d %H:%M")
+        local_time = timezone.localtime(instance.added_at)
+        data["added_at"] = local_time.strftime("%Y-%m-%d %H:%M")
         return data
     
 
@@ -37,22 +40,21 @@ class VideoSerializers(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["added_at"] = instance.added_at.strftime("%Y-%m-%d %H:%M")
+        local_time = timezone.localtime(instance.added_at)
+        data["added_at"] = local_time.strftime("%Y-%m-%d %H:%M")
         return data
 
 
 class EventsSerializers(serializers.ModelSerializer):
+    event_type = EventTypeSerializers(read_only=True)
+
     class Meta:
         model = news.Events
-        fields = ["id", "title", "location", "slug", "added_at"]
+        fields = ["id", "title", "location", "event_type", "slug", "added_at"]
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        date = instance.added_at.date()
-        time = instance.added_at.time()
-        datetime_val = datetime.combine(date, time)
-        new_date_time = datetime_val + timedelta(hours=5)
-        data["added_at"] = new_date_time.strftime("%Y-%m-%d %H:%M")
-        data["event_type_name"] = instance.event_type_name
+        local_time = timezone.localtime(instance.added_at)
+        data["added_at"] = local_time.strftime("%Y-%m-%d %H:%M")
         data["read_more"] = _("Batafsil")
         return data
