@@ -195,9 +195,9 @@
                             <div class="row">
                                 {% for obj in object.sections_boss.all %}
                                     <div class="col-12 col-md-4 col-xl-4">
-                                        <div class="card">
+                                        <div class="card" style="max-height: 400px; min-height: 400px">
                                             {% if obj.image %}
-                                                <img src="{{ obj.image.url }}" class="card-img-top"
+                                                <img style="max-height: 250px" src="{{ obj.image.url }}" class="card-img-top"
                                                      alt="{{ obj.f_name }} | tkti.uz">
                                             {% endif %}
                                             <div class="card-header">
@@ -273,14 +273,14 @@
                     {% endfor %}
                 {% else %}
                     {% if title_slug == 'boglanish' %}
-                        {% include "./posts_sections/contact.html" %}
+                        {% include "pages/posts/posts_sections/contact.html" %}
                     {% elif title_slug == 'bolim-va-markazlar' %}
-                        {% include "./posts_sections/sections_and_centers.html" %}
-                        {% include "../../widgets/pagination.html" %}
+                        {% include "pages/posts/posts_sections/sections_and_centers.html" %}
+                        {% include "widgets/pagination.html" %}
                     {% elif title_slug == 'institut-rahbariyati' %}
-                        {% include "./posts_sections/admistrations.html" %}
+                        {% include "pages/posts/posts_sections/admistrations.html" %}
                     {% elif title_slug == 'iqtidorli-talabalar' %}
-                        {% include "./posts_sections/talented_students.html" %}
+                        {% include "pages/posts/posts_sections/talented_students.html" %}
                     {% else %}
                         <!-- Start Blog Layout -->
                         <section class="articles">
@@ -307,7 +307,7 @@
                                                      fill="currentColor">
                                                     <path fill-rule="evenodd"
                                                           d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
-                                                          clip-rule="evenodd"/>
+                                                          clip-rule="evenodd"></path>
                                                 </svg>
                                             </a>
                                         </div>
@@ -319,11 +319,11 @@
                                 </p>
                             {% endfor %}
                         </section>
-                        {% include "../../widgets/pagination.html" %}
+                        {% include "widgets/pagination.html" %}
                     {% endif %}
                 {% endif %}
                 {% if connected_faqs %}
-                    {% include "./posts_sections/faqs.html" %}
+                    {% include "pages/posts/posts_sections/faqs.html" %}
                 {% endif %}
             </div>
         {% endif %}

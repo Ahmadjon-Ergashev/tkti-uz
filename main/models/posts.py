@@ -351,6 +351,7 @@ class SectionsBoss(models.Model):
                                  verbose_name=_("Lavozimi"), null=True, blank=True)
     f_name = models.CharField(_("To'liq ismi"), max_length=150)
     email = models.CharField(_("Email"), max_length=250)
+    order_num = models.IntegerField(default=0)
     phone = models.CharField(_("Telefon raqami"), max_length=250)
 
     def __str__(self):
@@ -358,8 +359,9 @@ class SectionsBoss(models.Model):
 
     class Meta:
         db_table = 'sections_bosses'
-        ordering = ["position"]
+        ordering = ("order_num", )
         verbose_name = _("Bo'lim raxbarlari")
+        verbose_name_plural = _("Bo'lim raxbarlari")
 
 
 class StudyDegrees(models.Model):

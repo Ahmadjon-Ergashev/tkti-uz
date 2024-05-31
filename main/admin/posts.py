@@ -513,14 +513,15 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
 class BossSection(admin.ModelAdmin):
     actions = [clone]
     list_per_page = 10
-    list_display = ("id", "f_name")
+    list_editable = ("order_num", )
     readonly_fields = ("get_image",)
     list_display_links = ("id", "f_name")
+    list_display = ("id", "f_name", "post", "order_num")
 
     fieldsets = (
         (None, {
             "fields": (
-                "post",
+                "post", "order_num",
                 "position", "email", "phone",
                 ("f_name_uz", "f_name_ru", "f_name_en"),
                 ("image", "get_image")
