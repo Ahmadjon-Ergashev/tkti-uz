@@ -7,8 +7,8 @@ set -o nounset
 export DJANGO_SETTINGS_MODULE=config.settings.prod_settings
 
 echo "Running migrations..."
-python manage.py makemigrations main --noinput
-python manage.py migrate main --noinput
+#python manage.py makemigrations main --noinput
+#python manage.py migrate main --noinput
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 echo "Running tests..."
