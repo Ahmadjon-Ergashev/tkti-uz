@@ -48,6 +48,7 @@ def global_variables(request):
             start_time = "No upcoming event"
     else:
         random_one = None
+        start_time = "No upcoming event"
 
     translate_words = {
         "arxiv": _("Arxiv"),
