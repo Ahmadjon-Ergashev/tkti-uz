@@ -193,28 +193,7 @@
                             {% endif %}
                             <br><br>
                             <div class="row">
-                                {% for obj in object.sections_boss.all %}
-                                    <div class="col-12 col-md-4 col-xl-4">
-                                        <div class="card" style="max-height: 400px; min-height: 400px">
-                                            {% if obj.image %}
-                                                <img style="max-height: 250px" src="{{ obj.image.url }}" class="card-img-top"
-                                                     alt="{{ obj.f_name }} | tkti.uz">
-                                            {% endif %}
-                                            <div class="card-header">
-                                                <b>{{ obj.position }}</b>
-                                            </div>
-                                            <div class="card-body">
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><b>{{ obj.f_name }}</b></li>
-                                                    <li class="list-group-item"><i
-                                                            class="fas fa-envelope me-1"></i> {{ obj.email }}</li>
-                                                    <li class="list-group-item"><i
-                                                            class="fas fa-phone me-1"></i> {{ obj.phone }}</li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
+                                {% include "pages/posts/posts_sections/section_boss.html" %}
                             </div>
                             {% if connected_faculty_dact %}
                                 <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -258,11 +237,11 @@
 
                             <div class="post_footer">
                                 {% if LANGUAGE_CODE == 'uz' %}
-                                    <p class="text-end fw-bold">TKTI axborot xizmati</p>
+                                    <p class="text-end fw-bold">TKTI Axborot xizmati</p>
                                 {% elif LANGUAGE_CODE == 'ru' %}
-                                    <p class="text-end fw-bold">Информационная служба ТКТИ</p>
+                                    <p class="text-end fw-bold">Пресс служба ТХТИ</p>
                                 {% elif LANGUAGE_CODE == 'en' %}
-                                    <p class="text-end fw-bold">TKTI information service</p>
+                                    <p class="text-end fw-bold">Press service of TICT</p>
                                 {% endif %}
                                 <div class="time_and_view">
                                     <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>

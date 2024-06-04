@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-25 11:37+0500\n"
+"POT-Creation-Date: 2024-06-04 17:08+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: api/news/serizliers.py:17 api/news/serizliers.py:57
+#: api/news/serizliers.py:18 api/news/serizliers.py:59
 #: api/posts/serializers.py:68 view/my_context_proccessor.py:98
 #: view/news/views.py:211
 msgid "Batafsil"
@@ -65,15 +65,15 @@ msgstr "Russion"
 msgid "English"
 msgstr "English"
 
-#: main/admin/certificates.py:8 main/admin/news.py:12 main/admin/posts.py:12
-#: main/admin/posts.py:20 main/admin/posts.py:28
+#: main/admin/certificates.py:8 main/admin/news.py:12 main/admin/posts.py:11
+#: main/admin/posts.py:19 main/admin/posts.py:27
 #: main/admin/sections_and_models.py:9 main/admin/sections_and_models.py:17
 #: main/admin/tkti_shop.py:7 main/admin/widgets.py:8
 msgid "Nusxa ko'chirish"
 msgstr "Copying"
 
 #: main/admin/news.py:35 main/admin/news.py:137 main/admin/news.py:210
-#: main/admin/posts.py:49 main/admin/posts.py:133 main/admin/posts.py:213
+#: main/admin/posts.py:48 main/admin/posts.py:132 main/admin/posts.py:213
 msgid "Umumiy o'zgaruvchilar"
 msgstr "Common variables"
 
@@ -82,14 +82,14 @@ msgid "Aloqadorlar"
 msgstr "Relates"
 
 #: main/admin/news.py:51 main/admin/news.py:144 main/admin/news.py:217
-#: main/admin/posts.py:140
+#: main/admin/posts.py:139
 msgid "Media fayllar"
 msgstr "Media files"
 
 #: main/admin/news.py:59 main/admin/news.py:151 main/admin/news.py:224
-#: main/admin/posts.py:95 main/admin/posts.py:146 main/admin/posts.py:376
-#: main/admin/posts.py:477 main/admin/posts.py:547 main/admin/posts.py:588
-#: main/admin/posts.py:628 main/admin/posts.py:678 main/admin/posts.py:756
+#: main/admin/posts.py:94 main/admin/posts.py:145 main/admin/posts.py:378
+#: main/admin/posts.py:481 main/admin/posts.py:554 main/admin/posts.py:595
+#: main/admin/posts.py:635 main/admin/posts.py:685 main/admin/posts.py:769
 #: main/admin/sections_and_models.py:44 main/admin/sections_and_models.py:85
 #: main/admin/widgets.py:32 main/admin/widgets.py:94 main/admin/widgets.py:139
 #: main/admin/widgets.py:175 main/admin/widgets.py:217
@@ -102,9 +102,9 @@ msgid "O'zbek tilida"
 msgstr "In Uzbek language"
 
 #: main/admin/news.py:64 main/admin/news.py:157 main/admin/news.py:230
-#: main/admin/posts.py:101 main/admin/posts.py:152 main/admin/posts.py:382
-#: main/admin/posts.py:483 main/admin/posts.py:553 main/admin/posts.py:594
-#: main/admin/posts.py:634 main/admin/posts.py:684 main/admin/posts.py:763
+#: main/admin/posts.py:100 main/admin/posts.py:151 main/admin/posts.py:384
+#: main/admin/posts.py:487 main/admin/posts.py:560 main/admin/posts.py:601
+#: main/admin/posts.py:641 main/admin/posts.py:691 main/admin/posts.py:776
 #: main/admin/sections_and_models.py:50 main/admin/sections_and_models.py:91
 #: main/admin/widgets.py:38 main/admin/widgets.py:100 main/admin/widgets.py:145
 #: main/admin/widgets.py:181 main/admin/widgets.py:223
@@ -117,9 +117,9 @@ msgid "Rus tilida"
 msgstr "In Russion language"
 
 #: main/admin/news.py:70 main/admin/news.py:163 main/admin/news.py:236
-#: main/admin/posts.py:107 main/admin/posts.py:158 main/admin/posts.py:388
-#: main/admin/posts.py:489 main/admin/posts.py:559 main/admin/posts.py:600
-#: main/admin/posts.py:640 main/admin/posts.py:690 main/admin/posts.py:770
+#: main/admin/posts.py:106 main/admin/posts.py:157 main/admin/posts.py:390
+#: main/admin/posts.py:493 main/admin/posts.py:566 main/admin/posts.py:607
+#: main/admin/posts.py:647 main/admin/posts.py:697 main/admin/posts.py:783
 #: main/admin/sections_and_models.py:56 main/admin/sections_and_models.py:97
 #: main/admin/widgets.py:44 main/admin/widgets.py:106 main/admin/widgets.py:151
 #: main/admin/widgets.py:187 main/admin/widgets.py:229
@@ -132,10 +132,10 @@ msgid "Ingiliz tilida"
 msgstr "In English"
 
 #: main/admin/news.py:76 main/admin/news.py:169 main/admin/news.py:242
-#: main/admin/news.py:287 main/admin/posts.py:67 main/admin/posts.py:164
-#: main/admin/posts.py:450 main/admin/posts.py:495 main/admin/posts.py:565
-#: main/admin/posts.py:606 main/admin/posts.py:646 main/admin/posts.py:696
-#: main/admin/posts.py:777 main/admin/sections_and_models.py:103
+#: main/admin/news.py:287 main/admin/posts.py:66 main/admin/posts.py:163
+#: main/admin/posts.py:453 main/admin/posts.py:499 main/admin/posts.py:572
+#: main/admin/posts.py:613 main/admin/posts.py:653 main/admin/posts.py:703
+#: main/admin/posts.py:790 main/admin/sections_and_models.py:103
 #: main/admin/widgets.py:50 main/admin/widgets.py:112 main/admin/widgets.py:157
 #: main/admin/widgets.py:193 main/admin/widgets.py:235
 #: main/admin/widgets.py:398 main/admin/widgets.py:433
@@ -156,10 +156,10 @@ msgstr "Selected image file for ads"
 msgid "Tadbir uchun tanlangan rasmli fayl"
 msgstr "Selected image file for event"
 
-#: main/admin/posts.py:59 main/models/news.py:19 main/models/partners.py:6
+#: main/admin/posts.py:58 main/models/news.py:19 main/models/partners.py:6
 #: main/models/partners.py:20 main/models/posts.py:21 main/models/posts.py:257
-#: main/models/posts.py:366 main/models/posts.py:385 main/models/posts.py:401
-#: main/models/posts.py:429 main/models/sertificates.py:8
+#: main/models/posts.py:369 main/models/posts.py:388 main/models/posts.py:404
+#: main/models/posts.py:432 main/models/sertificates.py:8
 #: main/models/tkti_shop.py:6 main/models/tkti_shop.py:20
 #: main/models/widgets.py:54 main/models/widgets.py:71
 #: main/models/widgets.py:105 main/models/widgets.py:120
@@ -167,8 +167,8 @@ msgstr "Selected image file for event"
 #: main/models/widgets.py:212 main/models/widgets.py:293
 #: main/models/widgets.py:301 main/models/widgets.py:316
 #: main/models/widgets.py:352 main/models/widgets.py:406
-#: main/models/widgets.py:427 view/posts/views.py:313 view/posts/views.py:408
-#: view/posts/views.py:450
+#: main/models/widgets.py:427 view/posts/views.py:312 view/posts/views.py:409
+#: view/posts/views.py:452
 msgid "Nomi"
 msgstr "Name"
 
@@ -176,24 +176,24 @@ msgstr "Name"
 msgid "Post uchun tanlangan rasmli fayl"
 msgstr "Selected image file for post"
 
-#: main/admin/posts.py:218 main/admin/posts.py:274 main/admin/posts.py:330
+#: main/admin/posts.py:218 main/admin/posts.py:275 main/admin/posts.py:331
 msgid "O'zbek tilida ma'lumotlar"
 msgstr "Information in Uzbek"
 
-#: main/admin/posts.py:224 main/admin/posts.py:280 main/admin/posts.py:336
+#: main/admin/posts.py:224 main/admin/posts.py:281 main/admin/posts.py:337
 msgid "Rus tilida ma'lumotlar"
 msgstr "Information in Russion"
 
-#: main/admin/posts.py:230 main/admin/posts.py:286 main/admin/posts.py:342
+#: main/admin/posts.py:230 main/admin/posts.py:287 main/admin/posts.py:343
 msgid "Ingiliz tilida ma'lumotlar"
 msgstr "Information in English"
 
-#: main/admin/posts.py:236 main/admin/posts.py:292 main/admin/posts.py:348
+#: main/admin/posts.py:236 main/admin/posts.py:293 main/admin/posts.py:349
 msgid "Automatik to'ldiriladigan bo'limlar"
 msgstr "Autocomplete sections"
 
-#: main/admin/posts.py:246 main/admin/posts.py:358 main/admin/posts.py:398
-#: main/admin/posts.py:459 main/admin/posts.py:504 main/admin/posts.py:528
+#: main/admin/posts.py:247 main/admin/posts.py:360 main/admin/posts.py:401
+#: main/admin/posts.py:463 main/admin/posts.py:509 main/admin/posts.py:535
 #: main/admin/sections_and_models.py:67
 msgid "Tanlangan rasm"
 msgstr "Selected picture"
@@ -233,7 +233,7 @@ msgstr "Sections and Centers related news"
 
 #: main/models/news.py:50 main/models/news.py:98 main/models/news.py:178
 #: main/models/posts.py:57 main/models/posts.py:134 main/models/posts.py:198
-#: main/models/posts.py:432 main/models/posts.py:499 main/models/posts.py:572
+#: main/models/posts.py:435 main/models/posts.py:512 main/models/posts.py:585
 #: main/models/sections_and_centers.py:55
 msgid "PDF fayl"
 msgstr "PDF File"
@@ -242,8 +242,8 @@ msgstr "PDF File"
 #: main/models/news.py:99 main/models/news.py:103 main/models/news.py:107
 #: main/models/news.py:179 main/models/news.py:183 main/models/news.py:187
 #: main/models/posts.py:58 main/models/posts.py:62 main/models/posts.py:66
-#: main/models/posts.py:433 main/models/posts.py:436 main/models/posts.py:440
-#: main/models/posts.py:500 main/models/posts.py:504 main/models/posts.py:508
+#: main/models/posts.py:436 main/models/posts.py:439 main/models/posts.py:443
+#: main/models/posts.py:513 main/models/posts.py:517 main/models/posts.py:521
 #: main/models/sections_and_centers.py:56
 #: main/models/sections_and_centers.py:60
 #: main/models/sections_and_centers.py:64
@@ -251,14 +251,14 @@ msgid "Faqat *.pdf formatdagi faylarni yuklang"
 msgstr "Only upload files in *.pdf format"
 
 #: main/models/news.py:54 main/models/news.py:102 main/models/news.py:182
-#: main/models/posts.py:137 main/models/posts.py:200 main/models/posts.py:435
-#: main/models/posts.py:503 main/models/posts.py:575
+#: main/models/posts.py:137 main/models/posts.py:200 main/models/posts.py:438
+#: main/models/posts.py:516 main/models/posts.py:588
 msgid "EN PDF fayl"
 msgstr "PDF File"
 
 #: main/models/news.py:58 main/models/news.py:106 main/models/news.py:186
-#: main/models/posts.py:140 main/models/posts.py:202 main/models/posts.py:439
-#: main/models/posts.py:507 main/models/posts.py:577
+#: main/models/posts.py:140 main/models/posts.py:202 main/models/posts.py:442
+#: main/models/posts.py:520 main/models/posts.py:590
 msgid "RU PDF fayl"
 msgstr "PDF File"
 
@@ -274,13 +274,13 @@ msgstr "upload video file if available"
 
 #: main/models/news.py:72 main/models/news.py:73
 #: view/my_context_proccessor.py:100 view/news/views.py:27
-#: view/news/views.py:70 view/searching/views.py:31 view/widgets/views.py:99
+#: view/news/views.py:70 view/searching/views.py:31 view/widgets/views.py:85
 msgid "Yangiliklar"
 msgstr "News"
 
 #: main/models/news.py:120 main/models/news.py:121
-#: view/my_context_proccessor.py:55 view/my_context_proccessor.py:94
-#: view/news/views.py:87 view/searching/views.py:57 view/widgets/views.py:95
+#: view/my_context_proccessor.py:61 view/my_context_proccessor.py:94
+#: view/news/views.py:87 view/searching/views.py:57 view/widgets/views.py:81
 msgid "E'lonlar"
 msgstr "Announcements"
 
@@ -312,12 +312,12 @@ msgstr ""
 msgid "Majburyat tug'ulmasa tegmang"
 msgstr "Don't touch unless you have to"
 
-#: main/models/news.py:154 main/models/posts.py:147 main/models/posts.py:453
+#: main/models/news.py:154 main/models/posts.py:147 main/models/posts.py:456
 #: main/models/widgets.py:93
 msgid "Ko'rilganlik soni"
 msgstr "Number of views"
 
-#: main/models/news.py:154 main/models/posts.py:453 main/models/widgets.py:93
+#: main/models/news.py:154 main/models/posts.py:456 main/models/widgets.py:93
 msgid "Tegilmasin !"
 msgstr "Don't touch !"
 
@@ -353,7 +353,7 @@ msgstr "Events"
 msgid "Yangilik"
 msgstr "News"
 
-#: main/models/news.py:225 main/models/posts.py:221 main/models/posts.py:448
+#: main/models/news.py:225 main/models/posts.py:221 main/models/posts.py:451
 msgid "Rasm"
 msgstr "Picture"
 
@@ -411,7 +411,7 @@ msgstr "PDF File"
 msgid "RU PDF file"
 msgstr "PDF File"
 
-#: main/models/posts.py:72 main/models/posts.py:406
+#: main/models/posts.py:72 main/models/posts.py:409
 msgid "Fakultet"
 msgstr "Faculty"
 
@@ -424,7 +424,7 @@ msgid "Faqat *.zip file yuklang"
 msgstr "Only upload files in *.zip format"
 
 #: main/models/posts.py:82 main/models/posts.py:83 view/searching/views.py:109
-#: view/widgets/views.py:96
+#: view/widgets/views.py:82
 msgid "Postlar"
 msgstr "Posts"
 
@@ -437,7 +437,7 @@ msgid "Hodim rasmi"
 msgstr "Image"
 
 #: main/models/posts.py:109 main/models/posts.py:169 main/models/posts.py:275
-#: main/models/posts.py:332 main/models/posts.py:351
+#: main/models/posts.py:332 main/models/posts.py:352
 #: main/models/sections_and_centers.py:19
 msgid "To'liq ismi"
 msgstr "Full name"
@@ -451,7 +451,7 @@ msgid "Qabul kunlari"
 msgstr "Reception days"
 
 #: main/models/posts.py:112 main/models/posts.py:172 main/models/posts.py:224
-#: main/models/posts.py:278 main/models/posts.py:353
+#: main/models/posts.py:278 main/models/posts.py:355
 #: main/models/sections_and_centers.py:21
 msgid "Telefon raqami"
 msgstr "Phone number"
@@ -460,13 +460,13 @@ msgstr "Phone number"
 msgid "E-Pochta manzili"
 msgstr "Email"
 
-#: main/models/posts.py:114 main/models/posts.py:174 main/models/posts.py:367
+#: main/models/posts.py:114 main/models/posts.py:174 main/models/posts.py:370
 #: main/models/sections_and_centers.py:26 main/models/widgets.py:216
 msgid "Tartib raqam"
 msgstr "Sequence number"
 
 #: main/models/posts.py:122 main/models/posts.py:123 view/posts/views.py:169
-#: view/widgets/views.py:164
+#: view/widgets/views.py:176
 msgid "Fakultet ma'muryati"
 msgstr "Faculty administration"
 
@@ -478,8 +478,8 @@ msgstr "Department name"
 msgid "Faqat PDF formatidagi faylni joylang"
 msgstr "Just upload the file in PDF format"
 
-#: main/models/posts.py:142 main/models/posts.py:412 main/models/posts.py:548
-#: view/my_context_proccessor.py:90 view/posts/views.py:240
+#: main/models/posts.py:142 main/models/posts.py:415 main/models/posts.py:561
+#: view/my_context_proccessor.py:90
 msgid "Haqida"
 msgstr "About"
 
@@ -488,7 +488,6 @@ msgid "Maqsad"
 msgstr "Target"
 
 #: main/models/posts.py:144 main/models/sections_and_centers.py:47
-#: view/my_context_proccessor.py:96
 msgid "Faoliyati"
 msgstr "Activity"
 
@@ -504,7 +503,7 @@ msgstr "Only upload files in *.pdf, *.zip and .docx format"
 msgid "Kafedra"
 msgstr "Department"
 
-#: main/models/posts.py:157 view/posts/views.py:212 view/widgets/views.py:101
+#: main/models/posts.py:157 view/posts/views.py:212 view/widgets/views.py:87
 msgid "Kafedralar"
 msgstr "Departments"
 
@@ -521,7 +520,7 @@ msgid "Yonalish nomi"
 msgstr "Route name"
 
 #: main/models/posts.py:191 view/certificates/views.py:20
-#: view/posts/views.py:244
+#: view/posts/views.py:243
 msgid "Yilni tanlang"
 msgstr "Select year"
 
@@ -533,7 +532,7 @@ msgstr "Select faculty"
 msgid "Kafedrani tanlang"
 msgstr "Select department"
 
-#: main/models/posts.py:195 main/models/posts.py:383
+#: main/models/posts.py:195 main/models/posts.py:386
 msgid "Ta'lim darajasini tanlang"
 msgstr "Select the level of education"
 
@@ -542,16 +541,16 @@ msgid "O'qish vaqtlari"
 msgstr "Study times"
 
 #: main/models/posts.py:210 main/models/posts.py:211
-#: view/my_context_proccessor.py:64
+#: view/my_context_proccessor.py:70
 msgid "Ta'lim dasturi katalogi"
 msgstr "Educational program catalog"
 
-#: main/models/posts.py:223 main/models/posts.py:277 main/models/posts.py:446
+#: main/models/posts.py:223 main/models/posts.py:277 main/models/posts.py:449
 #: main/models/sections_and_centers.py:20 view/my_context_proccessor.py:101
 msgid "E-Pochta"
 msgstr "Email"
 
-#: main/models/posts.py:225 main/models/posts.py:447
+#: main/models/posts.py:225 main/models/posts.py:450
 #: view/my_context_proccessor.py:102
 msgid "Manzil"
 msgstr "Address"
@@ -578,12 +577,12 @@ msgstr "color"
 msgid "Ijtimoiy tarmoqlar Xodimlar"
 msgstr "Social networks workers"
 
-#: main/models/posts.py:273 main/models/posts.py:331 main/models/posts.py:348
+#: main/models/posts.py:273 main/models/posts.py:331 main/models/posts.py:349
 #: main/models/sections_and_centers.py:13 main/models/widgets.py:366
 msgid "Rasmi"
 msgstr "Image"
 
-#: main/models/posts.py:276 main/models/posts.py:350
+#: main/models/posts.py:276 main/models/posts.py:351
 #: main/models/sections_and_centers.py:15
 #: main/models/sections_and_centers.py:18
 msgid "Lavozimi"
@@ -622,7 +621,7 @@ msgid "Ta'laba xaqida"
 msgstr "About the student"
 
 #: main/models/posts.py:342 main/models/posts.py:343
-#: view/my_context_proccessor.py:65
+#: view/my_context_proccessor.py:71
 msgid "Iqtidorli talabalar"
 msgstr "Talented students"
 
@@ -630,149 +629,158 @@ msgstr "Talented students"
 msgid "post"
 msgstr ""
 
-#: main/models/posts.py:352
+#: main/models/posts.py:353
 msgid "Email"
 msgstr ""
 
-#: main/models/posts.py:361
+#: main/models/posts.py:363 main/models/posts.py:364
 msgid "Bo'lim raxbarlari"
 msgstr "Department heads"
 
-#: main/models/posts.py:377 main/models/posts.py:378
+#: main/models/posts.py:380 main/models/posts.py:381
 msgid "Ta'lim darajalari"
 msgstr "Select the level of education"
 
-#: main/models/posts.py:386
+#: main/models/posts.py:389
 msgid "Ta'lim sohasi kodi"
 msgstr "Education field code"
 
-#: main/models/posts.py:395 main/models/posts.py:396
+#: main/models/posts.py:398 main/models/posts.py:399
 msgid "Ta'lim sohalari"
 msgstr "Study times"
 
-#: main/models/posts.py:403
+#: main/models/posts.py:406
 msgid "Ta'lim darajasi"
 msgstr "Select the level of education"
 
-#: main/models/posts.py:409
+#: main/models/posts.py:412
 msgid "Ta'lim sohasi"
 msgstr "The field of education"
 
-#: main/models/posts.py:411 main/models/widgets.py:87
+#: main/models/posts.py:414 main/models/widgets.py:87
 msgid "Asosiy rasm"
 msgstr "Main pictre"
 
-#: main/models/posts.py:421 main/models/posts.py:422
+#: main/models/posts.py:424 main/models/posts.py:425
 msgid "Yo'nashish bo'limlari"
 msgstr "Sections of direction"
 
-#: main/models/posts.py:428
+#: main/models/posts.py:431
 msgid "Yo'nashish bo'limi"
 msgstr "Orientation section"
 
-#: main/models/posts.py:430
+#: main/models/posts.py:433
 msgid "Yo'nalish xaqida"
 msgstr "About the direction"
 
-#: main/models/posts.py:442
+#: main/models/posts.py:445
 msgid "Ariza berish tartibi"
 msgstr "Application procedure"
 
-#: main/models/posts.py:443
+#: main/models/posts.py:446
 msgid "O'qish to'lovi xaqida"
 msgstr "Study times"
 
-#: main/models/posts.py:444 main/models/tkti_shop.py:24
+#: main/models/posts.py:447 main/models/tkti_shop.py:24
 #: view/my_context_proccessor.py:105
 msgid "Telefon raqam"
 msgstr "Phone number"
 
-#: main/models/posts.py:445 view/my_context_proccessor.py:111
+#: main/models/posts.py:448 view/my_context_proccessor.py:111
 msgid "Qo'shimcha Telefon raqam"
 msgstr "Extra phone"
 
-#: main/models/posts.py:450
+#: main/models/posts.py:453
 msgid "Siz bo'lishingiz mumkun"
 msgstr "You can be"
 
-#: main/models/posts.py:451 main/models/posts.py:529 view/posts/views.py:457
+#: main/models/posts.py:454 main/models/posts.py:542 view/posts/views.py:459
 msgid "Kantrakt miqdori"
 msgstr "Contract amount"
 
-#: main/models/posts.py:452 main/models/posts.py:530 view/posts/views.py:456
+#: main/models/posts.py:455 main/models/posts.py:543 view/posts/views.py:458
 msgid "Kredit miqdori"
 msgstr "Credit amount"
 
-#: main/models/posts.py:454 main/models/widgets.py:94
+#: main/models/posts.py:457 main/models/widgets.py:94
 msgid "Muallifi"
 msgstr "Author"
 
-#: main/models/posts.py:463 main/models/posts.py:464
+#: main/models/posts.py:461 view/posts/views.py:347 view/posts/views.py:419
+#: view/posts/views.py:462
+msgid "'Ixtisoslik' fanlari bo'yicha imtihon dasturlari"
+msgstr "Exam programs on 'specialty' subjects"
+
+#: main/models/posts.py:465 view/posts/views.py:348
+msgid "Mutaxassislik fanlaridan malakaviy va qo'shimcha imtihon dasturlari"
+msgstr "Qualifying and additional examination programs in specialized subjects"
+
+#: main/models/posts.py:476 main/models/posts.py:477
 msgid "Ta'lim yo'nalishlari"
 msgstr "Scientific directions"
 
-#: main/models/posts.py:483 main/models/widgets.py:23
+#: main/models/posts.py:496 main/models/widgets.py:23
 msgid "Kundizgi"
 msgstr "Daytime"
 
-#: main/models/posts.py:484
+#: main/models/posts.py:497
 msgid "Kechki"
 msgstr "Evening"
 
-#: main/models/posts.py:485 main/models/widgets.py:25
+#: main/models/posts.py:498 main/models/widgets.py:25
 msgid "Sirtqi"
 msgstr "Externally"
 
-#: main/models/posts.py:486
+#: main/models/posts.py:499
 msgid "Magistratura"
 msgstr "Master's degree"
 
-#: main/models/posts.py:487
+#: main/models/posts.py:500
 msgid "PHD"
 msgstr ""
 
-#: main/models/posts.py:488
+#: main/models/posts.py:501
 msgid "DSc"
 msgstr ""
 
-#: main/models/posts.py:517 main/models/posts.py:518
+#: main/models/posts.py:530 main/models/posts.py:531
 msgid "Ta'lim yo'nalishlari xaqidagi pdf"
 msgstr "Scientific directions"
 
-#: main/models/posts.py:528 main/models/posts.py:538 main/models/posts.py:539
-#: view/posts/views.py:412 view/posts/views.py:455
+#: main/models/posts.py:541 main/models/posts.py:551 main/models/posts.py:552
+#: view/posts/views.py:413 view/posts/views.py:457
 msgid "Kirish talablari"
 msgstr "Entry requirements"
 
-#: main/models/posts.py:546
+#: main/models/posts.py:559
 msgid "Mavzu nomi"
 msgstr "Section name"
 
-#: main/models/posts.py:549 view/posts/views.py:341
+#: main/models/posts.py:562 view/posts/views.py:340
 msgid "Ilmiy rahbar"
 msgstr "Research advisor"
 
-#: main/models/posts.py:551
+#: main/models/posts.py:564
 msgid "Moliyalashtiruvi"
 msgstr "Financing"
 
-#: main/models/posts.py:561 main/models/posts.py:562
+#: main/models/posts.py:574 main/models/posts.py:575
 msgid "DSc va PHD Mavzulari"
 msgstr "Themes DSc and PHD"
 
-#: main/models/posts.py:567
+#: main/models/posts.py:580
 msgid "Ta'lim yo'nalishi"
 msgstr "Scientific directions"
 
-#: main/models/posts.py:569
+#: main/models/posts.py:582
 msgid "Semesterni tanlang"
 msgstr "Select department"
 
-#: main/models/posts.py:571
+#: main/models/posts.py:584
 msgid "Modul nomi"
 msgstr "Section name"
 
-#: main/models/posts.py:586 main/models/posts.py:587
+#: main/models/posts.py:599 main/models/posts.py:600
 msgid "Dars jadvallari"
 msgstr "Class schedule"
 
@@ -822,7 +830,7 @@ msgstr "Certificate order"
 msgid "Sertifikat"
 msgstr "Certificate"
 
-#: main/models/sertificates.py:35 view/posts/views.py:245
+#: main/models/sertificates.py:35 view/posts/views.py:244
 msgid "Malaka oshirish sertifikatlari"
 msgstr "Certificates of advanced training"
 
@@ -1033,7 +1041,7 @@ msgstr "SDG"
 msgid "Qo'shimcha PDF fayllar"
 msgstr "Extra pdf files"
 
-#: main/models/widgets.py:408 view/widgets/views.py:251
+#: main/models/widgets.py:408 view/widgets/views.py:263
 msgid "Imtiyoz haqida"
 msgstr "About privilege"
 
@@ -1041,24 +1049,24 @@ msgstr "About privilege"
 msgid "Mas'ul tashkilot"
 msgstr "Responsible organization"
 
-#: main/models/widgets.py:410 view/widgets/views.py:253
+#: main/models/widgets.py:410 view/widgets/views.py:265
 msgid "Kimlar uchun"
 msgstr "For whom"
 
-#: main/models/widgets.py:411 view/widgets/views.py:254
+#: main/models/widgets.py:411 view/widgets/views.py:266
 msgid "Imtiyozni taqdim etish tartibi va muddatlari"
 msgstr "The procedure and terms of providing the benefit"
 
-#: main/models/widgets.py:413 view/widgets/views.py:255
+#: main/models/widgets.py:413 view/widgets/views.py:267
 msgid "Huquqiy asos"
 msgstr "Legal basis"
 
-#: main/models/widgets.py:414 view/widgets/views.py:256
+#: main/models/widgets.py:414 view/widgets/views.py:268
 msgid "Aloqa ma’lumotlari"
 msgstr "Information in Russion"
 
 #: main/models/widgets.py:422 main/models/widgets.py:423
-#: view/widgets/views.py:188 view/widgets/views.py:242
+#: view/widgets/views.py:200 view/widgets/views.py:254
 msgid "Moliyaviy imtiyozlar"
 msgstr "Financial benefits"
 
@@ -1107,80 +1115,80 @@ msgid "Malaka oshirish mavzular"
 msgstr "Traning themes"
 
 #: view/certificates/views.py:39
-msgid "Malaka oshiruvchilar ro'yhati"
-msgstr ""
+msgid "Malaka oshiruvchilar ro'yxati"
+msgstr "List of qualified"
 
-#: view/my_context_proccessor.py:41
+#: view/my_context_proccessor.py:43
 msgid "Bugun"
 msgstr "Today"
 
-#: view/my_context_proccessor.py:43
+#: view/my_context_proccessor.py:45
 msgid "kun qoldi"
 msgstr "day left"
 
-#: view/my_context_proccessor.py:48
+#: view/my_context_proccessor.py:54
 msgid "Arxiv"
 msgstr "Arxiv"
 
-#: view/my_context_proccessor.py:49
+#: view/my_context_proccessor.py:55
 msgid "Barchasi"
 msgstr "All"
 
-#: view/my_context_proccessor.py:50
+#: view/my_context_proccessor.py:56
 msgid "Qidirish"
 msgstr "Search"
 
-#: view/my_context_proccessor.py:51 view/news/views.py:210
-#: view/searching/views.py:83 view/widgets/views.py:98
+#: view/my_context_proccessor.py:57 view/news/views.py:210
+#: view/searching/views.py:83 view/widgets/views.py:84
 msgid "Voqealar"
 msgstr "Events"
 
-#: view/my_context_proccessor.py:52 view/my_context_proccessor.py:93
+#: view/my_context_proccessor.py:58 view/my_context_proccessor.py:93
 #: view/posts/views.py:108
 msgid "Bosh sahifa"
 msgstr "Home"
 
-#: view/my_context_proccessor.py:53
+#: view/my_context_proccessor.py:59
 msgid "Fakultetlar"
 msgstr "Faculties"
 
-#: view/my_context_proccessor.py:54
+#: view/my_context_proccessor.py:60
 msgid "Sohani tanlang"
 msgstr "Select field"
 
-#: view/my_context_proccessor.py:56
+#: view/my_context_proccessor.py:62
 msgid "Yo'nalishni tanlang"
 msgstr "Choose a direction"
 
-#: view/my_context_proccessor.py:57
+#: view/my_context_proccessor.py:63
 msgid "Ta'lim turini tanlang"
 msgstr "Select the type of education"
 
-#: view/my_context_proccessor.py:58
+#: view/my_context_proccessor.py:64
 msgid "Videolar"
 msgstr "Videos"
 
-#: view/my_context_proccessor.py:59
+#: view/my_context_proccessor.py:65
 msgid "Top yangiliklar"
 msgstr "Top news"
 
-#: view/my_context_proccessor.py:60
+#: view/my_context_proccessor.py:66
 msgid "Yaqinlashib kelayotganlar"
 msgstr "Upcoming"
 
-#: view/my_context_proccessor.py:61
+#: view/my_context_proccessor.py:67
 msgid "tarkibidagi kafedralar"
 msgstr "departments within"
 
-#: view/my_context_proccessor.py:62
+#: view/my_context_proccessor.py:68
 msgid "Foydali havolalar"
 msgstr "Useful links"
 
-#: view/my_context_proccessor.py:63
+#: view/my_context_proccessor.py:69
 msgid "Eng so'ngi yangiliklar"
 msgstr "The last news"
 
-#: view/my_context_proccessor.py:66
+#: view/my_context_proccessor.py:72
 msgid "Afsuski hechqanday ma'lumot topilmadi :("
 msgstr "Unfortunately, no information was found :("
 
@@ -1204,12 +1212,16 @@ msgstr "Target"
 msgid "Ma'muriyat"
 msgstr "Administration"
 
+#: view/my_context_proccessor.py:96
+msgid "Faoliyat"
+msgstr "Activity"
+
 #: view/my_context_proccessor.py:97
 msgid "Eng so'ngi"
 msgstr "The latest"
 
-#: view/my_context_proccessor.py:99 view/posts/views.py:314
-#: view/posts/views.py:409 view/posts/views.py:452
+#: view/my_context_proccessor.py:99 view/posts/views.py:313
+#: view/posts/views.py:410 view/posts/views.py:454
 msgid "Ko'rish"
 msgstr "view"
 
@@ -1249,6 +1261,14 @@ msgstr "Download"
 msgid "Faoliyat hujjatlari"
 msgstr "Activity documents"
 
+#: view/my_context_proccessor.py:116
+msgid "Bo'lim haqida"
+msgstr "About section"
+
+#: view/my_context_proccessor.py:117
+msgid "Kafedra haqida"
+msgstr "About department"
+
 #: view/news/views.py:47
 msgid "Ko'proq rasmlarni ko'rish"
 msgstr "See more pictures"
@@ -1270,7 +1290,7 @@ msgid "Hamkor universitet va tashkilotlar"
 msgstr "Partner universities and organizations"
 
 #: view/posts/views.py:109 view/posts/views.py:161 view/posts/views.py:209
-#: view/posts/views.py:241 view/widgets/views.py:156
+#: view/posts/views.py:240 view/widgets/views.py:168
 msgid "Mavzuga aloqador yangiliklar"
 msgstr "News related to the topic"
 
@@ -1314,131 +1334,131 @@ msgstr ""
 "Joint training program of the Tashkent Institute of Chemical Technology "
 "(Yangiyer branch)"
 
-#: view/posts/views.py:167 view/widgets/views.py:162
+#: view/posts/views.py:167 view/widgets/views.py:174
 msgid "FAKULTETNING BAKALAVRIATURA YO‘NALISHLARI"
 msgstr "UNDERGRADUATE DIRECTIONS OF THE FACULTY"
 
-#: view/posts/views.py:168 view/widgets/views.py:163
+#: view/posts/views.py:168 view/widgets/views.py:175
 msgid "FAKULTETNING MAGISTRATURA YO‘NALISHLARI"
 msgstr "MASTER'S PROGRAMS OF THE FACULTY"
 
-#: view/posts/views.py:170 view/widgets/views.py:165
+#: view/posts/views.py:170 view/widgets/views.py:177
 msgid "Fakultet kafedralari"
 msgstr "Departments of faculty"
 
-#: view/posts/views.py:316
+#: view/posts/views.py:315
 msgid "Sirtqi ta'lim dasturi haqida"
 msgstr "About the external education program"
 
-#: view/posts/views.py:317
+#: view/posts/views.py:316
 msgid "PHD ta'lim dasturi haqida"
 msgstr "About PHD education program"
 
-#: view/posts/views.py:318
+#: view/posts/views.py:317
 msgid "DSc ta'lim dasturi haqida"
 msgstr "About DSc education program"
 
-#: view/posts/views.py:319
+#: view/posts/views.py:318
 msgid "Kunduzgi ta'lim dasturi haqida"
 msgstr "About the day education program"
 
-#: view/posts/views.py:320
+#: view/posts/views.py:319
 msgid "Kechki ta'lim dasturi haqida"
 msgstr "About the evening education program"
 
-#: view/posts/views.py:321
+#: view/posts/views.py:320
 msgid "Magistratura ta'lim dasturi haqida"
 msgstr "About the master's education program"
 
-#: view/posts/views.py:323
+#: view/posts/views.py:322
 msgid "Sirtqi ta'limga kirish talablari"
 msgstr "Admission Requirements for External Education"
 
-#: view/posts/views.py:324
+#: view/posts/views.py:323
 msgid "Kundizgi ta'limga kirish talablari"
 msgstr "Admission Requirements for day Education"
 
-#: view/posts/views.py:325
+#: view/posts/views.py:324
 msgid "Kechki ta'limga kirish talablari"
 msgstr "Admission Requirements for Evening Education"
 
-#: view/posts/views.py:326
+#: view/posts/views.py:325
 msgid "Magistraturaga kirish talablari"
 msgstr "Admission Requirements for Master's Education"
 
-#: view/posts/views.py:327
+#: view/posts/views.py:326
 msgid "PHD ga kirish talablari"
 msgstr "Admission Requirements for PHD Education"
 
-#: view/posts/views.py:328
+#: view/posts/views.py:327
 msgid "DSC ga kirish talablari"
 msgstr "Admission Requirements for DSc Education"
 
-#: view/posts/views.py:330
+#: view/posts/views.py:329
 msgid "Sirtqi ta'lim uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for part-time education"
 
-#: view/posts/views.py:331
+#: view/posts/views.py:330
 msgid "Kunduzgi ta'lim uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for full-time education"
 
-#: view/posts/views.py:332
+#: view/posts/views.py:331
 msgid "Kechki ta'lim uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for evening education"
 
-#: view/posts/views.py:333
+#: view/posts/views.py:332
 msgid "Magistratura yo'nalishi uchun 1 kredit miqdori"
 msgstr "Amount of 1 credit for master's education"
 
-#: view/posts/views.py:335
+#: view/posts/views.py:334
 msgid "Sirtqi ta'lim uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for extramural education"
 
-#: view/posts/views.py:336
+#: view/posts/views.py:335
 msgid "Kunduzgi ta'lim uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for full-time education"
 
-#: view/posts/views.py:337
+#: view/posts/views.py:336
 msgid "Kechki ta'lim uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for evening education"
 
-#: view/posts/views.py:338
+#: view/posts/views.py:337
 msgid "Magistratura yo'nalishi uchun 1 yillik kontrakt miqdori"
 msgstr "Amount of 1-year contract for master's education"
 
-#: view/posts/views.py:340
+#: view/posts/views.py:339
 msgid "Mavzu Nomi"
 msgstr "Name"
 
-#: view/posts/views.py:342
+#: view/posts/views.py:341
 msgid "Moliyalashtirish"
 msgstr "Financing"
 
-#: view/posts/views.py:343
+#: view/posts/views.py:342
 msgid "Mavzular ro'yxatini yuklab olish"
 msgstr "Download the list of subjects"
 
-#: view/posts/views.py:345 view/posts/views.py:415 view/posts/views.py:458
+#: view/posts/views.py:344 view/posts/views.py:416 view/posts/views.py:460
 msgid "Qachonki o'qishni bitirganingizda"
 msgstr "When you graduate"
 
-#: view/posts/views.py:346 view/posts/views.py:417 view/posts/views.py:459
+#: view/posts/views.py:345 view/posts/views.py:418 view/posts/views.py:461
 msgid "Semestrlar bo'yicha o'quv dasturi moduli"
 msgstr "Syllabus Module by Semesters"
 
-#: view/posts/views.py:410 view/posts/views.py:454
+#: view/posts/views.py:411 view/posts/views.py:456
 msgid "Ta'lim dasturi haqida"
 msgstr "About educational programme"
 
-#: view/posts/views.py:413
+#: view/posts/views.py:414
 msgid "Kundizgi ta'lim uchun"
 msgstr "For full-time education"
 
-#: view/posts/views.py:414
+#: view/posts/views.py:415
 msgid "Kechgi ta'lim uchun"
 msgstr "For evening education"
 
-#: view/posts/views.py:416
+#: view/posts/views.py:417
 msgid "Sirtqi ta'lim uchun"
 msgstr "For external education"
 
@@ -1458,34 +1478,34 @@ msgstr "State coat of arms of the Republic of Uzbekistan"
 msgid "O`zbekiston Respublikasining davlat madhiyasi"
 msgstr "The national anthem of the Republic of Uzbekistan"
 
-#: view/widgets/views.py:97
+#: view/widgets/views.py:83
 msgid "TKTI shop"
 msgstr ""
 
-#: view/widgets/views.py:100
+#: view/widgets/views.py:86
 msgid "Qidiruv natijalari"
 msgstr "Searching results"
 
-#: view/widgets/views.py:102
+#: view/widgets/views.py:88
 msgid "Bo'lim va markazlar"
 msgstr "Department and Centers"
 
-#: view/widgets/views.py:103
+#: view/widgets/views.py:89
 msgid "Afsuski sizning so'rovingizga mos tushadigan ma'lumot topilmadi"
 msgstr "Unfortunately, no information was found :("
 
-#: view/widgets/views.py:189 view/widgets/views.py:199
+#: view/widgets/views.py:201 view/widgets/views.py:211
 msgid "Ta'lim kriditi"
 msgstr "Education credit"
 
-#: view/widgets/views.py:190 view/widgets/views.py:208
+#: view/widgets/views.py:202 view/widgets/views.py:220
 msgid "Talabalar uchun soliq imtiyozlari"
 msgstr "Tax credits for students"
 
-#: view/widgets/views.py:226
+#: view/widgets/views.py:238
 msgid "Mavzuga aloqador yangiliklar."
 msgstr "News related to the topic."
 
-#: view/widgets/views.py:252
+#: view/widgets/views.py:264
 msgid "Mas’ul tashkilot"
 msgstr "Responsible organization"

@@ -51,9 +51,9 @@
                     <h2 class="text-center pb-3">{{ title }}</h2>
                     <div class="row">
                         {% for theme in themes %}
-                            <div class="col-12 col-md-4 px-1 pb-2">
-                                <a href="/certificates/list/{{ year_id }}/{{ theme.id }}"
-                                   class="d-block text-center m-0 border p-4 text-info-emphasis">
+                            <div class="col-12 col-md-4 p-1">
+                                <a href="/certificates/list/{{ year_id }}/{{ theme.id }}" style="height: 200px;"
+                                   class="d-block text-center m-0 border p-4 text-info-emphasis d-flex align-items-center justify-content-center">
                                     <p class="d-inline">
                                         {{ theme }}
                                     </p>

@@ -93,7 +93,7 @@ def global_variables(request):
         "home": _("Bosh sahifa"),
         "ads_tab": _("E'lonlar"),
         "workers": _("Ma'muriyat"),
-        "activity": _("Faoliyati"),
+        "activity": _("Faoliyat"),
         "latest": _("Eng so'ngi"),
         "read_more": _("Batafsil"),
         "download": _("Ko'rish"),
@@ -112,8 +112,9 @@ def global_variables(request):
         "zip_file_title": _("Mavzuga aloqador qo'shimcha faylarni yuklab olish"),
         "zip_file_title_2": _("Mavzuga aloqador qo'shimcha faylar"),
         "download_2": _("Yuklab olish"),
-        "activity_docs": _("Faoliyat hujjatlari")
-
+        "activity_docs": _("Faoliyat hujjatlari"),
+        "about_section": _("Bo'lim haqida"),
+        "about_department": _("Kafedra haqida"),
     }
     try:
         name = str(context["base_variables"].name).split(maxsplit=2)

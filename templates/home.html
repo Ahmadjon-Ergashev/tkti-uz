@@ -5,60 +5,100 @@
 {% endblock title %}
 
 {% block content %}
-<!-- variables -->
-<span id="not_found_404" data-not-found="{{ not_found_404 }}"></span>
-<!-- custom css -->
-<link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
-<link rel="stylesheet" href="{% static 'css/modules/tabs/tabs.css' %}">
-<link rel="stylesheet" href="{% static 'css/styles/image_grid/home/home_grid.css' %}">
-<!-- Slick js css -->
-<link rel="stylesheet" href="{% static 'css/modules/slickjs/slick.min.css' %}">
-<link rel="stylesheet" href="{% static 'css/modules/slickjs/slick-theme.min.css' %}">
+    <!-- variables -->
+    <span id="not_found_404" data-not-found="{{ not_found_404 }}"></span>
+    <!-- custom css -->
+    <link rel="stylesheet" href="{% static 'css/styles/home/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modules/tabs/tabs.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles/image_grid/home/home_grid.css' %}">
+    <!-- Slick js css -->
+    <link rel="stylesheet" href="{% static 'css/modules/slickjs/slick.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/modules/slickjs/slick-theme.min.css' %}">
 
-<style>
-    .upcoming_event_modal{
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 9999;
-        position: fixed;
-        background-color: rgba(50, 50, 50, .2);
-    }
-    .modal_content{
-        top: 50%;
-        left: 50%;
-        width: 50%;
-        height: 500px;
-        margin: auto;
-        position: absolute;
-        /*border: 1px solid black;*/
-        transform: translate(-50%, -50%);
+    <style>
+        .upcoming_event_modal, .upcoming_event_phone {
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 9999;
+            position: fixed;
+            background-color: rgba(50, 50, 50, .2);
+        }
 
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-    }
-    .modal_body{
-        position: relative;
-    }
-    .text_caption{
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        padding: 20px;
-        position: fixed;
-        background-color: rgba(50, 50, 50, 0.4);
-    }
-    #close_widow{
-        top: 20%;
-        right: 20%;
-        position: absolute;
-    }
-</style>
+        .modal_content, .upcoming_event_phone .card {
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 500px;
+            margin: auto;
+            position: absolute;
+            /*border: 1px solid black;*/
+            transform: translate(-50%, -50%);
 
-<!-- upcoming event modal -->
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .upcoming_event_phone .card {
+            width: 90%;
+            height: auto;
+        }
+
+        .modal_body {
+            position: relative;
+        }
+
+        .text_caption {
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            padding: 20px;
+            position: fixed;
+            background-color: rgba(50, 50, 50, 0.4);
+        }
+
+        #close_widow, #close_widow_phone {
+            top: 20%;
+            right: 20%;
+            position: absolute;
+        }
+        #close_widow_phone{
+            right: 5%;
+        }
+    </style>
+
     {% if upcoming_event_first %}
+        <div class="upcoming_event_phone d-block d-md-none" id="upcoming_event_phone">
+            <button type="button" class="btn btn-close" id="close_widow_phone"></button>
+            <a href="/events/detail/{{ upcoming_event_first.slug }}" class="d-block">
+                <div class="card">
+                    <img src="{{ upcoming_event_first.image.url }}" class="card-img" alt="tkti">
+                    <div class="card-img-overlay1">
+                        <div class="card-header fw-lighter">
+                            <span class="bg-primary text-white p-1 mb-2">{{ upcoming_event_first.event_type.name }}</span>
+                            <span class="bg-danger text-white p-1">{{ start_time_title }} {{ start_time }}</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text fw-lighter">
+                                {{ upcoming_event_first.title }}
+                            </p>
+                        </div>
+                        <div class="card-footer fw-lighter">
+                            <span class="">
+                                <i class="fas fa-calendar-alt pe-2"></i>{{ upcoming_event_first.added_at|date:'d-M-Y H:i' }}
+                            </span>
+                            <br>
+                            <span class="">
+                                <i class="fas fa-map-marker-alt pe-2"></i>{{ upcoming_event_first.location }}
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        </div>
         <div class="upcoming_event_modal d-none d-md-block" id="upcoming_event_modal">
             <button type="button" class="btn-close" id="close_widow"></button>
             <a href="/events/detail/{{ upcoming_event_first.slug }}" class="text-white">
@@ -73,280 +113,284 @@
                             </h4>
                             <br>
                             <span class="text-white">
-                            <i class="fas fa-calendar-alt pe-2"></i>{{ upcoming_event_first.added_at|date:'d-M-Y H:i' }}
-                        </span>
+                                <i class="fas fa-calendar-alt pe-2"></i>{{ upcoming_event_first.added_at|date:'d-M-Y H:i' }}
+                            </span>
                             <br>
                             <span class="text-white">
-                            <i class="fas fa-map-marker-alt pe-2"></i></i>{{ upcoming_event_first.location }}</span>
+                                <i class="fas fa-map-marker-alt pe-2"></i>{{ upcoming_event_first.location }}
+                            </span>
                         </div>
                     </div>
                 </div>
             </a>
         </div>
-    {% endif %} 
+    {% endif %}
 
-<!-- upcoming event modal -->
+    <!-- upcoming event modal -->
 
-<!-- headers img -->
-<div class="header">
-    <div id="headerIMG">
-        {% for img in header_img %}
-            <div class="item" style="background-image: url('{{ img.image.url }}');">
-            </div>
-        {% endfor %}
-    </div>
-    <!-- statistika -->
-    <div class="container">
-        <div id="statistika">
-            {% for obj in statistika %}
-                <div class="card">
-                    <div class="card-body">
-                        <div class="card_icon">
-                            <a href="{{ obj.url }}" target="_blank"><i class="{{ obj.icon }}"></i></a>
-                        </div>
-                        <p>
-                            <a href="{{ obj.url }}" target="_blank">{{ obj.quantity }}</a>
-                        </p>
-                        <h3><a href="{{ obj.url }}" target="_blank">{{ obj.name }}</a></h3>
-                    </div>
+    <!-- headers img -->
+    <div class="header">
+        <div id="headerIMG">
+            {% for img in header_img %}
+                <div class="item" style="background-image: url('{{ img.image.url }}');">
                 </div>
             {% endfor %}
         </div>
-    </div>
-    <!-- statistika -->
-</div>
-<!-- headers img -->
-
-<!-- study way  -->
-<div class="section_title py-2">
-    <div class="container">
-        <h1>{{ study_way_title }}</h1>
-    </div>
-</div>
-<div class="container">
-    <section id="studyway">
-        <form action="" id="filter_study_way" method="post">
-            {% csrf_token %}
-            <div class="row pt-4">
-                <div class="col-10 m-auto m-lg-0 col-lg-10">
-                    <div class="row">
-                        <div class="col-12 col-lg-4 mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" id="id_type" aria-label="faculty select">
-                                    <option selected>--------------------</option>
-                                </select>
-                                <label for="id_type">{{ sp_type }}</label>
+        <!-- statistika -->
+        <div class="container">
+            <div id="statistika">
+                {% for obj in statistika %}
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card_icon">
+                                <a href="{{ obj.url }}" target="_blank"><i class="{{ obj.icon }}"></i></a>
                             </div>
-                        </div>
-                        <div class="col-12 col-lg-4 mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" id="id_faculty" aria-label="faculty select">
-                                    <option selected>--------------------</option>
-                                </select>
-                                <label for="id_faculty">{{ sp_faculty }}</label>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-4 mb-3">
-                            <div class="form-floating">
-                                <select class="form-select" id="id_way" aria-label="department select">
-                                    <option selected>--------------------</option>
-                                </select>
-                                <label for="id_way">{{ sp_way }}</label>
-                            </div>
+                            <p>
+                                <a href="{{ obj.url }}" target="_blank">{{ obj.quantity }}</a>
+                            </p>
+                            <h3><a href="{{ obj.url }}" target="_blank">{{ obj.name }}</a></h3>
                         </div>
                     </div>
-                </div>
-                <div class="col-12 col-lg-2">
-                    <a href="" class="d-block text-center w-100 search_btn p-3" id="id_link">
-                        {{ search }}
-                    </a>
-                </div>
-            </div>
-        </form>
-        <!-- queryset -->
-        <div class="my-3" id="result_data">
-
-        </div>
-    </section>
-</div>
-<!-- study way  -->
-
-<!-- Events section -->
-<div id="events">
-    <div class="_container">
-        <div class="tap_title">
-            <div class="tab_box container" style="padding: 0;">
-                <div class="tab_box_title"><span>{{ events }}</span></div>
-                <div class="tab_btns">
-                    <button class="tab_btn active_tap">{{ upcoming }}</button>
-                    <button class="tab_btn">{{ all }}</button>
-                    <button class="tab_btn">{{ arxiv }}</button>
-                    <div class="line"></div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-        <div class="content_box my-5 container">
-            <div class="content d-block">
-                <div class="row" id="upcoming_events">
-
-                </div>
-                <a href="events/" class="view_all_btn">{{ all }}</a>
-
-            </div>
-            <div class="content">
-                <div class="row" id="all_events">
-
-                </div>
-                <a href="events/" class="view_all_btn">{{ all }}</a>
-
-            </div>
-            <div class="content">
-                <div class="row" id="arxiv_events">
-
-                </div>
-                <a href="events/" class="view_all_btn">{{ all }}</a>
-
-            </div>
-        </div>
+        <!-- statistika -->
     </div>
-</div>
+    <!-- headers img -->
 
-<!-- Events section -->
-
-<!-- news ads videos -->
-
-<div id="news_ads_videos">
-    <div class="_container">
-        <div class="tap_title">
-            <div class="tab_box container px-0">
-                <div class="tab_box_title"><span>{{ news_tab }}</span></div>
-                <div class="tab_btns">
-                    <button class="tab_btn active_tap">{{ the_last_news }}</button>
-                    <button class="tab_btn">{{ the_most_read }}</button>
-                    <button class="tab_btn">{{ ads_section_title }}</button>
-                    <button class="tab_btn">{{ videos_section_title }}</button>
-                    <div class="line"></div>
-                </div>
-            </div>
-        </div>
-        <div class="content_box container">
-            <div class="content d-block">
-                <div class="row big_box" id="the_last_news_4">
-
-                </div>
-                <div class="row small_news mt-2" id="the_last_news_8">
-
-                </div>
-                <a href="news/" class="view_all_btn">{{ all }}</a>
-            </div>
-            <div class="content">
-                <div class="row big_box" id="the_most_read_4">
-
-                </div>
-                <div class="row small_news" id="the_most_read_8">
-
-                </div>
-                <a href="news/" class="view_all_btn">{{ all }}</a>
-            </div>
-            <div class="content">
-                <div class="row big_box" id="the_last_ads_4">
-
-                </div>
-                <!-- <div class="border mx-4"></div> -->
-                <div class="row small_news" id="the_last_ads_8">
-
-                </div>
-                <a href="ads/" class="view_all_btn">{{ all }}</a>
-            </div>
-            <div class="content">
-                <div class="row videos_tab big_box" id="the_videos">
-
-                </div>
-                <a href="videos/" class="view_all_btn">{{ all }}</a>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- news ads videos -->
-
-
-<!-- Talented students -->
-
-<section class="talented_students">
+    <!-- study way  -->
     <div class="section_title py-2">
         <div class="container">
-            <h1>{{ talented_student_title }}</h1>
+            <h1>{{ study_way_title }}</h1>
         </div>
     </div>
     <div class="container">
-        <div id="students_list">
-            {% for item in talented_students %}
-                <div class="card" style="min-height: 440px;">
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.f_name }} | tkti.uz">
-{#                    <img src="https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg" class="card-img-top" alt="${item.f_name} | tkti.uz">#}
-                    <div class="card-header">
-                        <b>
-                            {{ item.f_name }}
-                        </b>
+        <section id="studyway">
+            <form action="" id="filter_study_way" method="post">
+                {% csrf_token %}
+                <div class="row pt-4">
+                    <div class="col-10 m-auto m-lg-0 col-lg-10">
+                        <div class="row">
+                            <div class="col-12 col-lg-4 mb-3">
+                                <div class="form-floating">
+                                    <select class="form-select" id="id_type" aria-label="faculty select">
+                                        <option selected>--------------------</option>
+                                    </select>
+                                    <label for="id_type">{{ sp_type }}</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 mb-3">
+                                <div class="form-floating">
+                                    <select class="form-select" id="id_faculty" aria-label="faculty select">
+                                        <option selected>--------------------</option>
+                                    </select>
+                                    <label for="id_faculty">{{ sp_faculty }}</label>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-4 mb-3">
+                                <div class="form-floating">
+                                    <select class="form-select" id="id_way" aria-label="department select">
+                                        <option selected>--------------------</option>
+                                    </select>
+                                    <label for="id_way">{{ sp_way }}</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            {{ item.desc }}
+                    <div class="col-12 col-lg-2">
+                        <a href="" class="d-block text-center w-100 search_btn p-3" id="id_link">
+                            {{ search }}
+                        </a>
+                    </div>
+                </div>
+            </form>
+            <!-- queryset -->
+            <div class="my-3" id="result_data">
+
+            </div>
+        </section>
+    </div>
+    <!-- study way  -->
+
+    <!-- Events section -->
+    <div id="events">
+        <div class="_container">
+            <div class="tap_title">
+                <div class="tab_box container" style="padding: 0;">
+                    <div class="tab_box_title"><span>{{ events }}</span></div>
+                    <div class="tab_btns">
+                        <button class="tab_btn active_tap">{{ upcoming }}</button>
+                        <button class="tab_btn">{{ all }}</button>
+                        <button class="tab_btn">{{ arxiv }}</button>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_box my-5 container">
+                <div class="content d-block">
+                    <div class="row" id="upcoming_events">
+
+                    </div>
+                    <a href="events/" class="view_all_btn">{{ all }}</a>
+
+                </div>
+                <div class="content">
+                    <div class="row" id="all_events">
+
+                    </div>
+                    <a href="events/" class="view_all_btn">{{ all }}</a>
+
+                </div>
+                <div class="content">
+                    <div class="row" id="arxiv_events">
+
+                    </div>
+                    <a href="events/" class="view_all_btn">{{ all }}</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Events section -->
+
+    <!-- news ads videos -->
+
+    <div id="news_ads_videos">
+        <div class="_container">
+            <div class="tap_title">
+                <div class="tab_box container px-0">
+                    <div class="tab_box_title"><span>{{ news_tab }}</span></div>
+                    <div class="tab_btns">
+                        <button class="tab_btn active_tap">{{ the_last_news }}</button>
+                        <button class="tab_btn">{{ the_most_read }}</button>
+                        <button class="tab_btn">{{ ads_section_title }}</button>
+                        <button class="tab_btn">{{ videos_section_title }}</button>
+                        <div class="line"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="content_box container">
+                <div class="content d-block">
+                    <div class="row big_box" id="the_last_news_4">
+
+                    </div>
+                    <div class="row small_news mt-2" id="the_last_news_8">
+
+                    </div>
+                    <a href="news/" class="view_all_btn">{{ all }}</a>
+                </div>
+                <div class="content">
+                    <div class="row big_box" id="the_most_read_4">
+
+                    </div>
+                    <div class="row small_news" id="the_most_read_8">
+
+                    </div>
+                    <a href="news/" class="view_all_btn">{{ all }}</a>
+                </div>
+                <div class="content">
+                    <div class="row big_box" id="the_last_ads_4">
+
+                    </div>
+                    <!-- <div class="border mx-4"></div> -->
+                    <div class="row small_news" id="the_last_ads_8">
+
+                    </div>
+                    <a href="ads/" class="view_all_btn">{{ all }}</a>
+                </div>
+                <div class="content">
+                    <div class="row videos_tab big_box" id="the_videos">
+
+                    </div>
+                    <a href="videos/" class="view_all_btn">{{ all }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- news ads videos -->
+
+
+    <!-- Talented students -->
+
+    <section class="talented_students">
+        <div class="section_title py-2">
+            <div class="container">
+                <h1>{{ talented_student_title }}</h1>
+            </div>
+        </div>
+        <div class="container">
+            <div id="students_list">
+                {% for item in talented_students %}
+                    <div class="card" style="min-height: 440px;">
+                        <img src="{{ item.image.url }}" class="card-img-top" alt="{{ item.f_name }} | tkti.uz">
+                        {#                    <img src="https://www.viewhotels.jp/ryogoku/wp-content/uploads/sites/9/2020/03/test-img.jpg" class="card-img-top" alt="${item.f_name} | tkti.uz">#}
+                        <div class="card-header">
+                            <b>
+                                {{ item.f_name }}
+                            </b>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{ item.desc }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Talented student s -->
+
+    <section>
+        <div class="section_title py-2">
+            <div class="photo">
+                <h1>{{ usuful_links_title }}</h1>
+            </div>
+        </div>
+        <div id="usefull_links">
+            {% for link in usefully_links %}
+                <div class="item">
+                    <div class="brand">
+                        <a href="{{ link.link }}" target="_blank">
+                            {% if link.logo %}
+                                <img src="{{ link.logo.url }}" alt="tkti.uz">
+                            {% endif %}
+                        </a>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
                         </p>
                     </div>
                 </div>
             {% endfor %}
         </div>
-    </div>
-</section>
+        <!-- useful links -->
+    </section>
 
-<!-- Talented student s -->
-
-<section>
-    <div class="section_title py-2">
-        <div class="photo">
-            <h1>{{ usuful_links_title }}</h1>
-        </div>
-    </div>
-    <div id="usefull_links">
-        {% for link in usefully_links %}
-            <div class="item">
-                <div class="brand">
-                    <a href="{{ link.link }}" target="_blank">
-                        {% if link.logo %}
-                            <img src="{{ link.logo.url }}" alt="tkti.uz">
-                        {% endif %}
-                    </a>
-                </div>
-                <div class="body">
-                    <p>
-                        <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
-                    </p>
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-    <!-- useful links -->
-</section>
-
-<!-- jQuery -->
-<script src="{% static 'js/scripts/custom_tabs.js' %}"></script>
-<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <!-- jQuery -->
+    <script src="{% static 'js/scripts/custom_tabs.js' %}"></script>
+    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
 
 
-<script src="{% static 'js/scripts/api.js' %}"></script>
-<script src="{% static 'js/scripts/home/ads.js' %}"></script>
-<script src="{% static 'js/scripts/home/news.js' %}"></script>
-<script src="{% static 'js/scripts/home/videos.js' %}"></script>
-<script src="{% static 'js/scripts/home/events.js' %}"></script>
+    <script src="{% static 'js/scripts/api.js' %}"></script>
+    <script src="{% static 'js/scripts/home/ads.js' %}"></script>
+    <script src="{% static 'js/scripts/home/news.js' %}"></script>
+    <script src="{% static 'js/scripts/home/videos.js' %}"></script>
+    <script src="{% static 'js/scripts/home/events.js' %}"></script>
 
-<script>
-    $(document).ready(function (){
-        $("#close_widow").click(() => {
-            $("#upcoming_event_modal").removeClass("d-md-block")
+    <script>
+        $(document).ready(function () {
+            $("#close_widow").click(() => {
+                $("#upcoming_event_modal").removeClass("d-md-block")
+            })
+            $("#close_widow_phone").click(() => {
+                $("#upcoming_event_phone").addClass("d-none")
+            })
         })
-    })
-</script>
+    </script>
 {% endblock content %}

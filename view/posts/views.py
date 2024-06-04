@@ -237,7 +237,6 @@ class SectionsDetailView(DetailView):
         data["title"] = obj.title
         data["title"] = navbar.name
         data["parent"] = navbar.parent.name
-        data["about_section"] = _("Haqida")
         data["depended_news"] = _("Mavzuga aloqador yangiliklar")
         years_ids = models.Certificates.objects.values_list("year", flat=True).distinct()
         data["years"] = widgets.Year.objects.filter(id__in=years_ids).order_by("year")

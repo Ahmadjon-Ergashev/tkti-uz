@@ -36,7 +36,7 @@ class CertificatesView(View):
             "theme_id": theme_id,
             "certificates": certificates,
             "certificate_pdf": _("Sertifikat"),
-            "title": _("Malaka oshiruvchilar ro'yhati"),
+            "title": _("Malaka oshiruvchilar ro'yxati"),
             "theme_title": _("Malaka oshirish mavzular"),
             "certificate_order": _("Sertifikat buyrug'i"),
         }
