@@ -384,5 +384,20 @@
 <script src="{% static 'js/scripts/shop/list.js' %}"></script>
 <script src="{% static 'js/scripts/search/news.js' %}"></script>
 
+<script>
+    $(document).ready(function () {
+        $('[class*="ql-align-center"]').each(function () {
+            if (!$(this).hasClass('text-center')) {
+                $(this).addClass('text-center');
+            }
+        });
+        $('h1, h2, h3, h4, h5, h6').each(function () {
+            let header = $(this);
+            let fontSize = header.css('font-size');
+            header.find('a').css('font-size', fontSize);
+        });
+    })
+</script>
+
 </body>
 </html>
