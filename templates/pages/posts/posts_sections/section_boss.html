@@ -1,26 +1,16 @@
 <style>
     .card_img_wrapper {
-        position: relative;
-        padding-bottom: 70.25%; /* 16:9 aspect ratio */
-        height: 0;
+        height: 200px;
+        background-size: cover;
+        background-position: top;
+        background-repeat: no-repeat;
     }
-
-    .card_img_wrapper img {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
-
 </style>
 {% for obj in object.sections_boss.all %}
-    <div class="col-12 col-md-4 col-xl-4">
+    <div class="col-12 col-md-4 col-xl-4 p-1">
         <div class="card">
             {% if obj.image %}
-                <div class="card_img_wrapper">
-                    <img src="{{ obj.image.url }}"
-                         alt="{{ obj.f_name }} | tkti.uz">
+                <div class="card_img_wrapper" style="background-image: url('{{ obj.image.url }}')">
                 </div>
             {% endif %}
             <div class="card-header">
