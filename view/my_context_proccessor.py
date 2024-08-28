@@ -9,6 +9,7 @@ from django.db.models import ExpressionWrapper, F, DateTimeField
 from main.models import (
     posts, widgets, news
 )
+import main.models as models
 
 
 def global_variables(request):
@@ -70,20 +71,7 @@ def global_variables(request):
         "study_way_title": _("Ta'lim dasturi katalogi"),
         "talented_student_title": _("Iqtidorli talabalar"),
         "not_found_404": _("Afsuski hechqanday ma'lumot topilmadi :("),
-    }
-
-    context = {
-        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
-            "name", "slug", "id"
-        ).prefetch_related("children"),
-        "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
-            "url", "name"
-        ),
-        "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
-        "base_variables": widgets.BaseVariables.objects.last(),
-        "top_navbar": widgets.TopNavbar.objects.only("name", "url").order_by("order_num"),
-        "upcoming_event_first": random_one,
-        "start_time": start_time,
+        "department_head_title": _("Kafedra mudiri"),
         "start_time_title": _("Boshlanish vaqtigacha "),
         # text variables
         "next": _("oldinga"),
@@ -115,6 +103,21 @@ def global_variables(request):
         "activity_docs": _("Faoliyat hujjatlari"),
         "about_section": _("Bo'lim haqida"),
         "about_department": _("Kafedra haqida"),
+    }
+
+    context = {
+        "navbar": posts.Navbar.objects.filter(status="base", visible=True).order_by("order_num").only(
+            "name", "slug", "id"
+        ).prefetch_related("children"),
+        "quick_links": widgets.QuickLinks.objects.order_by("order_num").only(
+            "url", "name"
+        ),
+        "last_news": news.News.objects.filter(status="pub").order_by("-added_at")[:20],
+        "base_variables": widgets.BaseVariables.objects.last(),
+        "top_navbar": widgets.TopNavbar.objects.only("name", "url").order_by("order_num"),
+        "upcoming_event_first": random_one,
+        "start_time": start_time,
+        "department_positions": models.DepartmentAdministrationsPositions.objects.all()
     }
     try:
         name = str(context["base_variables"].name).split(maxsplit=2)

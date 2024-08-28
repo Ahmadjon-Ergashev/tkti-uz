@@ -1,0 +1,86 @@
+<style>
+    .item_detail span {
+        display: block;
+    }
+
+    table tr th, table tr td {
+        font-size: 14px;
+        font-weight: normal;
+    }
+
+    .department_administrations_list ul {
+        padding: 0;
+        margin-top: 20px;
+    }
+
+    .department_administrations_list ul li {
+        list-style-type: none;
+        padding: 5px;
+    }
+
+    .department_administrations_list ul li:hover {
+        border-bottom: 1px solid;
+    }
+
+    li button {
+        border: none;
+        outline: none;
+        background: none;
+        font-size: 15px;
+    }
+</style>
+<div class="row">
+    {% for item in object.department_head_administration.all %}
+        <div class="col-12 col-sm-12 col-md-4 ps-0">
+            <img src="{{ item.image.url }}" width="100%" alt="{{ item.f_name }}">
+        </div>
+        <div class="col-12 col-sm-12 col-md-8 item_detail">
+            <span class="fs-2 fw-bold">{{ item.f_name }}</span>
+            <span class="fs-6 font-monospace">{{ department_head_title }}</span>
+            <hr>
+            <span><i class="fas fa-envelope me-1"></i> {{ item.email }}</span>
+            <span><i class="fas fa-phone me-1"></i>{{ item.phone }}</span>
+        </div>
+    {% endfor %}
+</div>
+<br><br>
+
+<div class="department_administrations_list">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-3 ps-0">
+            <ul class="">
+                {% for item in department_positions %}
+                    <li class="">
+                        <button
+                                type="button" data-position="{{ item.id }}" data-department="{{ object.id }}"
+                                class="department-admininstration">
+                            {{ item.name }}
+                        </button>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-12 col-sm-12 col-md-8">
+            <div>
+                <table class="table">
+                    <tr>
+                        <th scope="col">F.I.SH</th>
+                        <th scope="col">Ilmiy darajasi</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">CV</th>
+                    </tr>
+                    <tbody id="administration_item">
+                    
+{#                    <tr>#}
+{#                        <td>Zohidillo Turgunov</td>#}
+{#                        <td>Professor</td>#}
+{#                        <td>turgunovzohidillo77@gmail.com</td>#}
+{#                        <td><a href="" target="_blank">yuklab olish</a></td>#}
+{#                    </tr>#}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

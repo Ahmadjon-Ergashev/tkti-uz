@@ -76,7 +76,7 @@
                 <!-- Start Blog detail -->
                 <div class="post_detail">
                     <h1 class="text-center fw-bold">{{ object.name }}</h1>
-{#                    {% include "widgets/pdf_file.html" %}#}
+                    {#                    {% include "widgets/pdf_file.html" %}#}
                     <br>
                     <hr>
                     <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -125,32 +125,32 @@
                                     {{ object.activity.html | safe }}
                                     <table class="table m-3">
                                         <tbody>
-                                            <tr>
-                                                {% if object.zip_file %}
-                                                    <td>
-                                                        {{ zip_file_title_2 }}
-                                                    </td>
-                                                    <td>
-                                                        <a href="{{ object.zip_file.url }}"
-                                                           download="{{ object.zip_file.url }}">
-                                                            {{ download_2 }}
-                                                        </a>
-                                                    </td>
-                                                {% endif %}
-                                            </tr>
-                                            <tr>
-                                                {% if object.pdf_file %}
-                                                    <td>{{ activity_docs }}</td>
-                                                    <td>
-                                                        <a type="button" class="text-primary"
-                                                           data-bs-toggle="offcanvas"
-                                                           data-bs-target="#main_pdf_edu_area_{{ object.id }}"
-                                                           aria-controls="about_study_program_{{ object.id }}">
-                                                            {{ download }}
-                                                        </a>
-                                                    </td>
-                                                {% endif %}
-                                            </tr>
+                                        <tr>
+                                            {% if object.zip_file %}
+                                                <td>
+                                                    {{ zip_file_title_2 }}
+                                                </td>
+                                                <td>
+                                                    <a href="{{ object.zip_file.url }}"
+                                                       download="{{ object.zip_file.url }}">
+                                                        {{ download_2 }}
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
+                                        <tr>
+                                            {% if object.pdf_file %}
+                                                <td>{{ activity_docs }}</td>
+                                                <td>
+                                                    <a type="button" class="text-primary"
+                                                       data-bs-toggle="offcanvas"
+                                                       data-bs-target="#main_pdf_edu_area_{{ object.id }}"
+                                                       aria-controls="about_study_program_{{ object.id }}">
+                                                        {{ download }}
+                                                    </a>
+                                                </td>
+                                            {% endif %}
+                                        </tr>
                                         </tbody>
                                     </table>
                                     {% include "widgets/off_canvas_pdf.html" %}
@@ -165,42 +165,43 @@
                                     <span class=" fw-bold">{{ workers }}</span>
                                 </button>
                             </h2>
-                            <div id="flush-collapseFour" class="accordion-collapse collapse"
+                            <div id="flush-collapseFour" class="accordion-collapse " {# collapse #}
                                  data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    <div class="row">
-                                        {% for worker in object.departmentsadmistrations_set.all %}
-                                            <div class="col-12 col-md-12 mb-2 p-1">
-                                                <div class="card mb-3">
-                                                    <div class="row g-0">
-                                                        <div class="col-md-3">
-                                                            {% if worker.image %}
-                                                                <img src="{{ worker.image.url }}"
-                                                                     class="img-fluid rounded-start" alt="tkti.uz">
-                                                            {% endif %}
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>
-                                                            <ul class="list-group list-group-flush">
-                                                                <li class="list-group-item"><i
-                                                                        class="fas fa-user-tie me-2"></i> {{ worker.job_name }}
-                                                                </li>
-                                                                <li class="list-group-item"><i
-                                                                        class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}
-                                                                </li>
-                                                                <li class="list-group-item"><i
-                                                                        class="fas fa-envelope me-2"></i> {{ worker.email }}
-                                                                </li>
-                                                                <li class="list-group-item"><i
-                                                                        class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
+                                    {#                                    <div class="row">#}
+                                    {#                                        {% for worker in object.departmentsadmistrations_set.all %}#}
+                                    {#                                            <div class="col-12 col-md-12 mb-2 p-1">#}
+                                    {#                                                <div class="card mb-3">#}
+                                    {#                                                    <div class="row g-0">#}
+                                    {#                                                        <div class="col-md-3">#}
+                                    {#                                                            {% if worker.image %}#}
+                                    {#                                                                <img src="{{ worker.image.url }}"#}
+                                    {#                                                                     class="img-fluid rounded-start" alt="tkti.uz">#}
+                                    {#                                                            {% endif %}#}
+                                    {#                                                        </div>#}
+                                    {#                                                        <div class="col-md-9">#}
+                                    {#                                                            <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>#}
+                                    {#                                                            <ul class="list-group list-group-flush">#}
+                                    {#                                                                <li class="list-group-item"><i#}
+                                    {#                                                                        class="fas fa-user-tie me-2"></i> {{ worker.job_name }}#}
+                                    {#                                                                </li>#}
+                                    {#                                                                <li class="list-group-item"><i#}
+                                    {#                                                                        class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}#}
+                                    {#                                                                </li>#}
+                                    {#                                                                <li class="list-group-item"><i#}
+                                    {#                                                                        class="fas fa-envelope me-2"></i> {{ worker.email }}#}
+                                    {#                                                                </li>#}
+                                    {#                                                                <li class="list-group-item"><i#}
+                                    {#                                                                        class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}#}
+                                    {#                                                                </li>#}
+                                    {#                                                            </ul>#}
+                                    {#                                                        </div>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        {% endfor %}#}
+                                    {#                                    </div>#}
+                                    {% include "pages/posts/department_administrations.html" %}
                                 </div>
                             </div>
                         </div>

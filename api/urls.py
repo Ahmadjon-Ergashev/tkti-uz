@@ -4,7 +4,7 @@ from rest_framework.routers import SimpleRouter
 from api.news import views as news
 from api.posts import view as posts
 from api.widgets import view as widgets
-
+from api.department_administration import view as administration
 
 router = SimpleRouter()
 router.register("ads", news.AdsView)
@@ -20,8 +20,8 @@ router.register("widgets/faq_category", widgets.FaqCategoryView)
 router.register("posts/adminstrations", posts.AdmistrationsView)
 router.register("posts/departments_list", posts.DepartmentsView)
 router.register("posts/talented_students", posts.TalentedStudentsView)
-
+router.register("department/administration", administration.DepartmentAdministrationView)
 
 urlpatterns = [
-	path("shop/", include("api.shop.urls"))
-] + router.urls
+                  path("shop/", include("api.shop.urls"))
+              ] + router.urls
