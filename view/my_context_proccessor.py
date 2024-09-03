@@ -74,6 +74,9 @@ def global_variables(request):
         "department_head_title": _("Kafedra mudiri"),
         "start_time_title": _("Boshlanish vaqtigacha "),
         # text variables
+        "f_i_sh": _("F.I.SH"),
+        "profession": _("Ilmiy darajasi"),
+
         "next": _("oldinga"),
         "about": _("Haqida"),
         "previous": _("ortga"),

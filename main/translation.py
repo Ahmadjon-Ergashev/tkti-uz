@@ -1,6 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
 
-
 from main.models import posts, news, widgets
 import main.models as models
 
@@ -9,7 +8,7 @@ import main.models as models
 
 @register(posts.Navbar)
 class NavbarTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(posts.Posts)
@@ -24,7 +23,7 @@ class FacultyAdministrationTranslation(TranslationOptions):
 
 @register(posts.Departments)
 class DepartmentsTranslation(TranslationOptions):
-    fields = ("name", "about", "target", "activity", )
+    fields = ("name", "about", "target", "activity",)
 
 
 @register(posts.DepartmentsAdmistrations)
@@ -34,7 +33,7 @@ class DepartmentsAdmistrationsTranslation(TranslationOptions):
 
 @register(posts.StudyProgram)
 class StudyProgramTranslation(TranslationOptions):
-    fields = ("title", )
+    fields = ("title",)
 
 
 @register(posts.ContactSection)
@@ -44,7 +43,7 @@ class ContactSectionTranslation(TranslationOptions):
 
 @register(models.Workers)
 class WorkersTranslation(TranslationOptions):
-    fields = ("f_name", )
+    fields = ("f_name",)
 
 
 @register(models.SectionsAndCenters)
@@ -65,27 +64,27 @@ class TalentedStudentsTranslation(TranslationOptions):
 
 @register(posts.SectionsBoss)
 class BossSectionTranslation(TranslationOptions):
-    fields = ("f_name", )
+    fields = ("f_name",)
 
 
 @register(posts.FieldOfEducation)
 class FieldOfEducationTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(posts.StudyDegrees)
 class StudyDegreesTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(posts.EducationalAreas)
 class EducationalAreasTranslation(TranslationOptions):
-    fields = ("name", "desc", "application_procedure", "tuition_fee", "address", "you_may_become", )
+    fields = ("name", "desc", "application_procedure", "tuition_fee", "address", "you_may_become",)
 
 
 @register(posts.ModuleOfStudyPrograme)
 class ModuleOfStudyProgramTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(posts.LearningWay)
@@ -98,7 +97,7 @@ class LearningWayTranslation(TranslationOptions):
 
 @register(news.Category)
 class CategoryTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(news.News)
@@ -108,17 +107,17 @@ class NewsTranslation(TranslationOptions):
 
 @register(news.Ads)
 class AdsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post", )
+    fields = ("title", "subtitle", "post",)
 
 
 @register(news.Events)
 class EventsTranslation(TranslationOptions):
-    fields = ("title", "subtitle", "post", "location", )
+    fields = ("title", "subtitle", "post", "location",)
 
 
 @register(news.VideoGallery)
 class VideoGalleryTranslation(TranslationOptions):
-    fields = ("title", )
+    fields = ("title",)
 
 
 """ widgets models translations file """
@@ -126,42 +125,42 @@ class VideoGalleryTranslation(TranslationOptions):
 
 @register(widgets.Digitization)
 class DigitizationTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.ExtraFile)
 class ExtraFileTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.EventTypes)
 class EventTypesTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.Hashtag)
 class HashtagTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.SocialNetworks)
 class SocialNetworksTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.UsefullLinks)
 class UsefullLinksTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.QuickLinks)
 class QuickLinksTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.Statistika)
 class StatistikaTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.Flag)
@@ -181,7 +180,7 @@ class AnthemTranslation(TranslationOptions):
 
 @register(widgets.FaqCategory)
 class FaqCategoryTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.Faq)
@@ -191,7 +190,7 @@ class FaqTranslation(TranslationOptions):
 
 @register(widgets.Semesters)
 class SemestersTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.BRMItems)
@@ -212,17 +211,17 @@ class BaseVariablesTranslation(TranslationOptions):
 
 @register(widgets.TopNavbar)
 class TopNavbarTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(widgets.Positions)
 class PositionsTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(posts.EntryRequirements)
 class EntryRequirementsTranslation(TranslationOptions):
-    fields = ("requirement", )
+    fields = ("requirement",)
 
 
 @register(posts.ThemesForEducation)
@@ -233,20 +232,34 @@ class ThemesForEducationTranslation(TranslationOptions):
 # partners
 @register(models.Country)
 class CountryTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(models.Partner)
 class PartnerTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(models.ShopCategory)
 class ShopCategoryTranslation(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
 
 @register(models.Shop)
 class ShopTranslator(TranslationOptions):
-    fields = ("name", )
+    fields = ("name",)
 
+
+@register(models.DepartmentAdministrationsPositions)
+class DepartmentAdministrationsPositionsTranslation(TranslationOptions):
+    fields = ("name",)
+
+
+@register(models.DepartmentHeadAdministrations)
+class DepartmentHeadAdministrationsTranslation(TranslationOptions):
+    fields = ("f_name",)
+
+
+@register(models.DepartmentAdministrationsNew)
+class DepartmentAdministrationsNewTranslation(TranslationOptions):
+    fields = ("f_name",)
