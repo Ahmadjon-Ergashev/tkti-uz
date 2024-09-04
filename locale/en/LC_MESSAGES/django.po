@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-03 18:39+0500\n"
+"POT-Creation-Date: 2024-09-04 08:43+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: api/department_administration/serializers.py:22
-#: view/my_context_proccessor.py:90 view/posts/views.py:313
-#: view/posts/views.py:410 view/posts/views.py:454
-msgid "Ko'rish"
-msgstr "view"
+msgid "Ma'lumotnoma"
+msgstr "CV"
 
 #: api/news/serizliers.py:18 api/news/serizliers.py:59
 #: api/posts/serializers.py:68 view/my_context_proccessor.py:89
@@ -235,18 +233,15 @@ msgstr "Phone number"
 
 #: main/models/department_administrations.py:24
 #: main/models/department_administrations.py:25
-
 msgid "Kafedra mudirlari"
 msgstr "Faculty administration"
 
 #: main/models/department_administrations.py:39
 #: main/models/department_administrations.py:40
-
 msgid "Kafedra mamuryati lavozimlari"
 msgstr "Faculty administration"
 
 #: main/models/department_administrations.py:46
-
 msgid "Lavozim"
 msgstr "Position"
 
@@ -260,7 +255,6 @@ msgstr ""
 
 #: main/models/department_administrations.py:61
 #: main/models/department_administrations.py:62
-
 msgid "Kafedra mamuryati (yangi)"
 msgstr "Faculty administration"
 
@@ -1112,7 +1106,11 @@ msgid "Raqamlashtirish"
 msgstr "Digitization"
 
 #: templates/base.html:44
-msgid "Sayt test rejimida ishlamoqda"
+#, fuzzy
+#| msgid "Sayt test rejimida ishlamoqda"
+msgid ""
+"\n"
+"    Sayt test rejimida ishlamoqda"
 msgstr "The site is in test mode"
 
 #: templates/base.html:72
@@ -1221,7 +1219,6 @@ msgid "Afsuski hechqanday ma'lumot topilmadi :("
 msgstr "Unfortunately, no information was found :("
 
 #: view/my_context_proccessor.py:74
-
 msgid "Kafedra mudiri"
 msgstr "Head of the department"
 
@@ -1256,6 +1253,11 @@ msgstr "Activity"
 #: view/my_context_proccessor.py:88
 msgid "Eng so'ngi"
 msgstr "The latest"
+
+#: view/my_context_proccessor.py:90 view/posts/views.py:313
+#: view/posts/views.py:410 view/posts/views.py:454
+msgid "Ko'rish"
+msgstr "view"
 
 #: view/my_context_proccessor.py:94
 msgid "Hujjat nomi"
@@ -1541,4 +1543,3 @@ msgstr "News related to the topic."
 #: view/widgets/views.py:264
 msgid "Mas’ul tashkilot"
 msgstr "Responsible organization"
-

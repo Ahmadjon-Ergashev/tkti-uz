@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-03 18:39+0500\n"
+"POT-Creation-Date: 2024-09-04 08:43+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,10 +21,8 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: api/department_administration/serializers.py:22
-#: view/my_context_proccessor.py:90 view/posts/views.py:313
-#: view/posts/views.py:410 view/posts/views.py:454
-msgid "Ko'rish"
-msgstr "Смотреть"
+msgid "Ma'lumotnoma"
+msgstr "Резюме"
 
 #: api/news/serizliers.py:18 api/news/serizliers.py:59
 #: api/posts/serializers.py:68 view/my_context_proccessor.py:89
@@ -237,7 +235,6 @@ msgstr "Номер телефона"
 
 #: main/models/department_administrations.py:24
 #: main/models/department_administrations.py:25
-
 msgid "Kafedra mudirlari"
 msgstr "Администрация факультета"
 
@@ -1113,7 +1110,11 @@ msgid "Raqamlashtirish"
 msgstr "Оцифровка"
 
 #: templates/base.html:44
-msgid "Sayt test rejimida ishlamoqda"
+#, fuzzy
+#| msgid "Sayt test rejimida ishlamoqda"
+msgid ""
+"\n"
+"    Sayt test rejimida ishlamoqda"
 msgstr "Сайт работает в тестовом режиме"
 
 #: templates/base.html:72
@@ -1222,7 +1223,6 @@ msgid "Afsuski hechqanday ma'lumot topilmadi :("
 msgstr "К сожалению, никакой информации не найдено :("
 
 #: view/my_context_proccessor.py:74
-
 msgid "Kafedra mudiri"
 msgstr "Руководитель отдела"
 
@@ -1231,7 +1231,6 @@ msgid "Boshlanish vaqtigacha "
 msgstr "До времени начала"
 
 #: view/my_context_proccessor.py:78
-
 msgid "Ilmiy darajasi"
 msgstr "Ученая степень"
 
@@ -1258,6 +1257,11 @@ msgstr "Деятельность"
 #: view/my_context_proccessor.py:88
 msgid "Eng so'ngi"
 msgstr "Последний"
+
+#: view/my_context_proccessor.py:90 view/posts/views.py:313
+#: view/posts/views.py:410 view/posts/views.py:454
+msgid "Ko'rish"
+msgstr "Смотреть"
 
 #: view/my_context_proccessor.py:94
 msgid "Hujjat nomi"
@@ -1543,4 +1547,3 @@ msgstr "Новости по теме."
 #: view/widgets/views.py:264
 msgid "Mas’ul tashkilot"
 msgstr "Ответственная организация"
-

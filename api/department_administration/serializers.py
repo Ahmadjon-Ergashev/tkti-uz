@@ -19,5 +19,5 @@ class DepartmentAdmininstrationSerializer(serializers.ModelSerializer):
 
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data["view"] = _("Ko'rish")
+        data["view"] = _("Ma'lumotnoma")
         return data

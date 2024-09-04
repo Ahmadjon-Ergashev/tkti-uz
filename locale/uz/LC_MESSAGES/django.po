@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-03 18:39+0500\n"
+"POT-Creation-Date: 2024-09-04 08:43+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,9 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: api/department_administration/serializers.py:22
-#: view/my_context_proccessor.py:90 view/posts/views.py:313
-#: view/posts/views.py:410 view/posts/views.py:454
-msgid "Ko'rish"
+msgid "Ma'lumotnoma"
 msgstr ""
 
 #: api/news/serizliers.py:18 api/news/serizliers.py:59
@@ -1249,6 +1247,11 @@ msgstr ""
 
 #: view/my_context_proccessor.py:88
 msgid "Eng so'ngi"
+msgstr ""
+
+#: view/my_context_proccessor.py:90 view/posts/views.py:313
+#: view/posts/views.py:410 view/posts/views.py:454
+msgid "Ko'rish"
 msgstr ""
 
 #: view/my_context_proccessor.py:94
