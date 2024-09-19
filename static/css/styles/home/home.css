@@ -1,8 +1,12 @@
 .header {
   margin-bottom: 110px;
 }
+.header #headerIMG{
+  width: 68%;
+  margin: 0 auto;
+}
 .header #headerIMG .item {
-  height: 78vh !important;
+  height: 62vh !important;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -12,24 +16,24 @@
 }
 .header #statistika .card {
   margin: 0 10px;
-  padding: 50px 0;
+  padding: 20px 0;
   text-align: center;
 }
 .header #statistika .card .card-body .card_icon a {
   color: #26597E;
 }
 .header #statistika .card .card-body .card_icon a i {
-  font-size: 50px;
+  font-size: 35px;
 }
 .header #statistika .card .card-body p a {
-  font-size: 18px;
+  font-size: 16px;
   color: #111;
   font-weight: 700;
   font-family: monospace;
 }
 .header #statistika .card .card-body h3 a {
   color: #111;
-  font-size: 25px;
+  font-size: 18px !important;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
 }
 
@@ -454,7 +458,7 @@
   display: none;
   background: #fff;
   position: absolute;
-  transition: all 0.3s ease-in;
+  transition: all 0.8s ease-in;
 }
 .col-12 .card .event_modal .modal_window .row .col-7 {
   padding: 15px 0px 10px 20px;

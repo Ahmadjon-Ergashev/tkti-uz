@@ -64,10 +64,28 @@
             right: 20%;
             position: absolute;
         }
-        #close_widow_phone{
+
+        #close_widow_phone {
             top: 8%;
             right: 10%;
         }
+
+        #id_link {
+            color: #123456;
+            border: 1px solid #123456;
+        }
+
+        #id_link:hover {
+            color: white;
+            background: #123456;
+            transition: 0.4s ease-in;
+        }
+
+        .tab_btn:hover {
+            color: white !important;
+            background-color: #26597E !important;
+        }
+
     </style>
 
     {% if upcoming_event_first %}
@@ -130,6 +148,7 @@
     <!-- upcoming event modal -->
 
     <!-- headers img -->
+    <br><br>
     <div class="header">
         <div id="headerIMG">
             {% for img in header_img %}
@@ -199,7 +218,7 @@
                         </div>
                     </div>
                     <div class="col-12 col-lg-2">
-                        <a href="" class="d-block text-center w-100 search_btn p-3" id="id_link">
+                        <a href="" class="d-block text-center w-100 p-3" id="id_link">
                             {{ search }}
                         </a>
                     </div>

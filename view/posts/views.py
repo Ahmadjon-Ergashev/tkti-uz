@@ -7,7 +7,6 @@ from django.views.generic import ListView, DetailView
 from django.utils.translation import gettext_lazy as _
 from django.shortcuts import render, get_object_or_404
 
-
 # local models
 from main.models import (
     posts, news, widgets
@@ -22,7 +21,6 @@ class Home(View):
         object_list_cache = cache.get('object_list_cache')
         if not object_list_cache:
             objects_list = {
-                "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
                 "statistika": widgets.Statistika.objects.order_by("order_num").only(
                     "name", "icon", "url", "quantity"
                 ),
@@ -34,6 +32,7 @@ class Home(View):
             if object_list_cache is None:
                 object_list_cache = {}
         usefully_test = {
+            "header_img": widgets.HeaderIMG.objects.order_by("order_num").only("image"),
             "usefully_links": widgets.UsefullLinks.objects.order_by("-add_time").only(
                 "name", "logo", "link"
             )
@@ -117,7 +116,8 @@ class PostsListView(ListView):
         context["lessons_schedule"] = _("Dars jadvali")
         context["students_hotel"] = _("Talabalar turar joyiga onlayn ariza berish")
         context["added_study"] = _("Toshkent kimyo-texnologiya instituti qo'shma talim dasturi")
-        context["added_study_branch"] = _("Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer filiali)")
+        context["added_study_branch"] = _(
+            "Toshkent kimyo-texnologiya instituti qo'shma talim dasturi (Yangiyer filiali)")
 
         return context
 
@@ -202,8 +202,8 @@ class DepartmentsDetailView(DetailView):
         try:
             context["conn_departments"] = news.News.objects.filter(
                 departments=obj.id, status="pub").order_by("-added_at")[:12].only(
-                        "title", "slug", "added_at", "post_viewed_count").prefetch_related(
-                            "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+                "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
         except Exception as e:
             print(e, 141)
         context["depended_news"] = _("Mavzuga aloqador yangiliklar")
@@ -229,8 +229,8 @@ class SectionsDetailView(DetailView):
         try:
             data["conn_section_and_centers"] = news.News.objects.filter(
                 section_and_centers=obj.id, status="pub").order_by("-added_at")[:12].only(
-                    "title", "slug", "added_at", "post_viewed_count").prefetch_related(
-                        "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+                "title", "slug", "added_at", "post_viewed_count").prefetch_related(
+                "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
         except Exception as e:
             print(e, 141)
         navbar = posts.Navbar.objects.get(slug=obj.navbar.slug)
@@ -265,7 +265,7 @@ class LearningWayDetailView(DetailView):
         obj = data["object"]
         education_areas = posts.EducationalAreas.objects.filter(
             study_way=obj.id).select_related(
-                "study_way"
+            "study_way"
         )
         if len(education_areas) == 1:
             education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
@@ -364,7 +364,7 @@ class EducationalAreaView(ListView):
 
         education_areas = posts.EducationalAreas.objects.filter(
             study_way=obj.id).select_related(
-                "study_way"
+            "study_way"
         )
         if len(self.get_queryset()) == 1:
             education_areas.update(post_viewed_count=F("post_viewed_count") + 1)
@@ -375,19 +375,19 @@ class EducationalAreaView(ListView):
         # if cached_data is not None:
         #     data["modules_by_semester"] = cached_data
         # else:
-            # grouped_data = {}
-            # for edu_area in education_areas:
-            #     for module in edu_area.moduleofstudyprograme_set.select_related(
-            #             "semester", "educational_area"
-            #     ):
-            #         if module.semester in grouped_data:
-            #             grouped_data[module.semester].append(module)
-            #         else:
-            #             grouped_data[module.semester] = [module]
+        # grouped_data = {}
+        # for edu_area in education_areas:
+        #     for module in edu_area.moduleofstudyprograme_set.select_related(
+        #             "semester", "educational_area"
+        #     ):
+        #         if module.semester in grouped_data:
+        #             grouped_data[module.semester].append(module)
+        #         else:
+        #             grouped_data[module.semester] = [module]
 
-            # cache.set(cache_key, grouped_data, 60 * 30)
+        # cache.set(cache_key, grouped_data, 60 * 30)
 
-            # data["modules_by_semester"] = grouped_data
+        # data["modules_by_semester"] = grouped_data
 
         grouped_data = {}
         for edu_area in education_areas:
