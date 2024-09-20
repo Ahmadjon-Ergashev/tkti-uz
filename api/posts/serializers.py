@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
 
-
 from main.models import posts
 
 
@@ -21,13 +20,13 @@ class FacultySerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.Posts
         fields = ["id", "title", "slug"]
-        
+
 
 class DepartmentsSerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.Departments
         fields = "__all__"
-    
+
     def to_representation(self, instance):
         data = super().to_representation(instance)
         data["faculty"] = FacultySerializers(instance=instance.faculty).data
@@ -48,15 +47,22 @@ class NetworksBossSerializers(serializers.ModelSerializer):
         fields = ("social_networks", "url")
 
 
+class AdministrationImagesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = posts.UniversityAdministrationsImages
+        fields = ("image",)
+
+
 class AdministrationSerializer(serializers.ModelSerializer):
     boss = NetworksBossSerializers(many=True, source="boss_network")
+    images = AdministrationImagesSerializer(many=True, source="administration_images")
 
     class Meta:
         model = posts.UniversityAdmistrations
         fields = [
-            "id", "image", "f_name", "position", "email", "phone",
+            "id", "f_name", "position", "email", "phone", "images",
             "admission_days", "short_info", "scientific_direction",
-            "main_tasks_in_position", "scientific_activity", "facebook", "instagram", "linkedin", "boss"
+            "main_tasks_in_position", "scientific_activity", "boss"
         ]
 
     def to_representation(self, instance):
@@ -70,8 +76,9 @@ class AdministrationSerializer(serializers.ModelSerializer):
         data["scientific_direction_title"] = _("Ilmiy yo'nalishlari")
         data["main_tasks_in_position_title"] = _("Lavozimidagi asosiy vazifalar")
         data["scientific_activity_title"] = _("Ilmiy va pedagogik mehnat faoliyati")
+        data["address"] = _("Navoiy ko’chasi, 32-uy, Toshkent, O'zbekiston, 100011")
         return data
-    
+
 
 class TalentedStudentsSerializers(serializers.ModelSerializer):
     class Meta:
@@ -97,7 +104,3 @@ class LearningWaySerializers(serializers.ModelSerializer):
     class Meta:
         model = posts.LearningWay
         fields = ["id", "name"]
-
-
-
-

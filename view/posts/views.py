@@ -461,3 +461,15 @@ class EducationalAreaDetailView(DetailView):
         data["modul_title"] = _("Semestrlar bo'yicha o'quv dasturi moduli")
         data["phd_subject_program"] = _("'Ixtisoslik' fanlari bo'yicha imtihon dasturlari")
         return data
+
+
+class AdministrationsView(ListView):
+    model = models.UniversityAdmistrations
+    template_name = "pages/posts/administration_detail.html"
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["object_list_last"] = [data["object_list"][0]]
+        data["position_title"] = _("Lavozimlar")
+
+        return data

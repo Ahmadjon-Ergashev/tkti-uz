@@ -414,53 +414,57 @@ class NetworksBossAdmin(admin.TabularInline):
     extra = 1
 
 
+class UniversityAdministrationImagesAdmin(admin.TabularInline):
+    model = posts.UniversityAdministrationsImages
+    extra = 1
+
+
 @admin.register(posts.UniversityAdmistrations)
 class UniversityAdminsAdmin(admin.ModelAdmin):
     actions = [duplicate]
     list_per_page = 10
-    inlines = [NetworksBossAdmin]
+    inlines = [NetworksBossAdmin, UniversityAdministrationImagesAdmin]
     list_editable = ("order_num",)
-    readonly_fields = ("get_image", "added_at")
+    readonly_fields = ("added_at",)
     prepopulated_fields = ({"slug": ("f_name_uz",)})
-    list_display_links = ("id", "get_image", "f_name_uz")
-    list_display = ("id", "get_image", "f_name_uz", "position", "order_num", "added_at")
+    list_display_links = ("id", "f_name_uz")
+    list_display = ("id", "f_name_uz", "position", "order_num", "added_at")
 
     fieldsets = (
         ("Umumiy qiymatlar", {
             'fields': (
-                "navbar", ("image", "get_image"), "facebook",
+                "navbar", "facebook",
                 "instagram", "linkedin", "order_num", "email", "phone"
             ),
         }),
         ("O'zbek tilida", {
+            'classes': ('collapse',),
             'fields': (
                 "f_name_uz", "admission_days_uz", "position_uz", "short_info_uz",
                 "scientific_activity_uz", "scientific_direction_uz", "main_tasks_in_position_uz",
             ),
         }),
         ("Rus tilida", {
+            'classes': ('collapse',),
             'fields': (
                 "f_name_ru", "admission_days_ru", "position_ru", "short_info_ru",
                 "scientific_activity_ru", "scientific_direction_ru", "main_tasks_in_position_ru",
             ),
         }),
         ("Ingiliz tilida", {
+            'classes': ('collapse',),
             'fields': (
                 "f_name_en", "admission_days_en", "position_en", "short_info_en",
                 "scientific_activity_en", "scientific_direction_en", "main_tasks_in_position_en",
             ),
         }),
         (_("Automatik to'ldiriladigan fieldlar"), {
+            'classes': ('collapse',),
             'fields': (
                 "slug", "added_at"
             ),
         }),
     )
-
-    def get_image(self, obj):
-        return mark_safe(f"<img src='{obj.image.url}' width='250' />")
-
-    get_image.short_description = _("Tanlangan rasm")
 
 
 @admin.register(posts.TalentedStudents)
@@ -513,7 +517,7 @@ class TalentedStudentsAdmin(admin.ModelAdmin):
 class BossSection(admin.ModelAdmin):
     actions = [clone]
     list_per_page = 10
-    list_editable = ("order_num", )
+    list_editable = ("order_num",)
     readonly_fields = ("get_image",)
     list_display_links = ("id", "f_name")
     list_display = ("id", "f_name", "post", "order_num")

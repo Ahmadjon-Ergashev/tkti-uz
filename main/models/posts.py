@@ -270,8 +270,6 @@ class SocialNetworksBoss(models.Model):
 class UniversityAdmistrations(models.Model):
     """ university admistrations model """
     navbar = TreeForeignKey(to=Navbar, on_delete=models.SET_NULL, null=True, verbose_name=_("Bo'lim nomi"))
-    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/adminstrations/%Y-%m-%d/",
-                              default="default/adminstrations.png")
     f_name = models.CharField(_("To'liq ismi"), max_length=150, null=True)
     position = models.CharField(_("Lavozimi"), max_length=255, null=True)
     email = models.EmailField(verbose_name=_("E-Pochta"), max_length=255, null=True, help_text="example@domain.com")
@@ -297,6 +295,18 @@ class UniversityAdmistrations(models.Model):
         ordering = ["order_num"]
         verbose_name = _("Insitut raxbariyati")
         verbose_name_plural = _("Insitut raxbariyati")
+
+
+class UniversityAdministrationsImages(models.Model):
+    administration = models.ForeignKey(to=UniversityAdmistrations, on_delete=models.SET_NULL, null=True,
+                                       related_name="administration_images")
+    image = models.ImageField(verbose_name=_("Rasmi"), upload_to="image/administrations/%Y-%m-%d/")
+
+    class Meta:
+        db_table = "administration_images"
+        ordering = ["administration"]
+        verbose_name = _("Insitut raxbariyati rasmlari")
+        verbose_name_plural = _("Insitut raxbariyati rasmlari")
 
     def save(self, *args, **kwargs):
         if self._state.adding:
@@ -359,7 +369,7 @@ class SectionsBoss(models.Model):
 
     class Meta:
         db_table = 'sections_bosses'
-        ordering = ("order_num", )
+        ordering = ("order_num",)
         verbose_name = _("Bo'lim raxbarlari")
         verbose_name_plural = _("Bo'lim raxbarlari")
 

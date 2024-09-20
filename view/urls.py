@@ -6,16 +6,17 @@ from view.posts import views as posts
 from view.widgets import views as widgets
 import view
 
-
 posts = [
     path("", posts.Home.as_view(), name="home"),
     path("posts/navbar/<slug:navbar_slug>/", posts.PostsListView.as_view(), name="posts_nav"),
     path("posts/sections/<slug:post_slug>/", posts.SectionsDetailView.as_view(), name="sect_nav"),
     path("posts/navbar/post/<slug:post_slug>/", posts.PostDetailView.as_view(), name="post_detail"),
+    path("posts/administrations/", posts.AdministrationsView.as_view(), name="posts_administrations"),
     path("posts/departments/<slug:dept_slug>/", posts.DepartmentsDetailView.as_view(), name="dept_detail"),
     path("posts/learing_way/detail/<int:id>/", posts.LearningWayDetailView.as_view(), name="learning_way_detail"),
     path("posts/eduacational_area/<int:study_way>/", posts.EducationalAreaView.as_view(), name="educational_area_list"),
-    path("posts/eduacational_area/detail/<int:id>/", posts.EducationalAreaDetailView.as_view(), name="educational_area_detail"),
+    path("posts/eduacational_area/detail/<int:id>/", posts.EducationalAreaDetailView.as_view(),
+         name="educational_area_detail"),
 ]
 news = [
     path("upload/images/", news.Upload_Images),
@@ -49,8 +50,7 @@ shop = [
 ]
 
 urlpatterns = [
-    path("partners/", include("view.partners.urls")),
-    path("searching/", include("view.searching.urls")),
-    path("certificates/", include("view.certificates.urls")),
-] + posts + news + widgets + shop
-
+                  path("partners/", include("view.partners.urls")),
+                  path("searching/", include("view.searching.urls")),
+                  path("certificates/", include("view.certificates.urls")),
+              ] + posts + news + widgets + shop

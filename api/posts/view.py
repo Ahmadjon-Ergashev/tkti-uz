@@ -1,3 +1,4 @@
+from django.db.models.functions import Lower
 from rest_framework import viewsets, mixins
 from drf_yasg.utils import swagger_auto_schema
 
@@ -13,7 +14,7 @@ class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
     def get_queryset(self):
         queryset = super().get_queryset().filter(status=widgets.Status.published, faculty=True)
         return queryset
-    
+
 
 class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.Departments.objects.all()
@@ -27,15 +28,24 @@ class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
         else:
             queryset = queryset.none()
         return queryset
-    
+
     @swagger_auto_schema(manual_parameters=query_params.department_query())
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-    
 
-class AdmistrationsView(mixins.ListModelMixin, viewsets.GenericViewSet):
+
+class AdministrationsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.UniversityAdmistrations.objects.all().order_by("order_num")
     serializer_class = serializers.AdministrationSerializer
+
+    def get_queryset(self):
+        qs = self.queryset.all().annotate(position_lower=Lower("position"))
+        position = self.request.query_params.get("position")
+        if position:
+            qs = qs.filter(position_lower=position.lower())
+        else:
+            qs = qs.none()
+        return qs
 
 
 class TalentedStudentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -51,7 +61,7 @@ class StudyDegreeView(mixins.ListModelMixin, mixins.RetrieveModelMixin, viewsets
 class LearningWayView(mixins.ListModelMixin, viewsets.GenericViewSet):
     queryset = posts.LearningWay.objects.all().order_by("name")
     serializer_class = serializers.LearningWaySerializers
-    
+
     def get_queryset(self):
         queryset = super().get_queryset()
         study_degree = self.request.query_params.get("study_degree")
@@ -61,10 +71,7 @@ class LearningWayView(mixins.ListModelMixin, viewsets.GenericViewSet):
         else:
             queryset = queryset.none()
         return queryset
-    
+
     @swagger_auto_schema(manual_parameters=query_params.learning_way_query())
     def list(self, request, *args, **kwargs):
         return super().list(request, *args, **kwargs)
-
-    
-    

@@ -1,110 +1,152 @@
-$(document).ready(function(){
+$(document).ready(function () {
     let $base_url = window.location.origin
-    $.ajax({
-        type:"GET",
-        url: `${$base_url}/api/posts/adminstrations/`,
-        data: {},
-        success: function (data) {
-            data.map((item) => {
-                let card_item = `
-                    <div class="col-12 col-md-4 col-lg-4">
-                        <div class="card" style="height: 600px">
-                            <img src="${item.image}" class="card-img-top" alt="${item.f_name} | tkti.uz">
-                            <div class="card-header">
-                                <span class="font-weight-bold">${item.position}</span>
+    administrations_detail("rektor");
+
+    function administrations_detail(position) {
+        $.ajax({
+            type: "GET",
+            url: `${$base_url}/api/posts/administrations/`,
+            data: {position: position},
+            success: function (data) {
+                $("#administrations_list").empty(); // Clear the existing list
+
+                data.map((object) => {
+                    // Create the main card structure
+                    let card_item = `
+                <div class="row">
+                    <div class="col-12 col-md-8 border-end p-3">
+                        <div class="row" id="administration_images_${object.id}"></div> <!-- Images will be appended here -->
+                    </div>
+                    <div class="col-12 col-md-4 p-1">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                <span class="fs-6"><b>${object.f_name}</b></span>
+                                <br>
+                                <small class="text-secondary">${object.position}</small>
+                                <br>
+                                <hr class="hr">
+                                <small class="text-secondary">
+                                    <i class="fas fa-envelope me-1"></i> ${object.email}
+                                </small>
+                                <br>
+                                <small class="text-secondary">
+                                    <i class="fas fa-phone me-1"></i> ${object.phone}
+                                </small>
+                                <br>
+                                <small class="text-secondary">
+                                    <i class="fas fa-calendar-alt me-1"></i> ${object.admission_days}
+                                </small>
+                                <br>
+                                <small class="text-secondary">
+                                    <i class="fas fa-map-marker-alt me-1"></i> ${object.address}
+                                </small>
+                                <br>
+                                <hr>
+                                <div class="social-networks" id="social_networks_${object.id}"></div> <!-- Social networks will be appended here -->
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-12 px-0 border-top py-3">
+                        <div class="accordion accordion-flush w-100" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne${object.id}"
+                                            aria-expanded="true"
+                                            aria-controls="collapseOne">
+                                        <b>${object.short_info_title}</b>
+                                    </button>
+                                </h2>
+                                <div id="collapseOne${object.id}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body text-start">
+                                        ${object.short_info}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-body p-0">
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item"><span>${item.f_name}</span></li>
-                                    <li class="list-group-item"><i class="fas fa-envelope me-1"></i> ${item.email}</li>
-                                    <li class="list-group-item"><i class="fas fa-phone me-1"></i> ${item.phone}</li>
-                                    <li class="list-group-item"><i class="fas fa-calendar me-1"></i> ${item.admission_days}</li>
-                                    <li class="list-group-item social-networks">
-                                        <div class=""></div>
-                                    </li>
-                                </ul>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo${object.id}"
+                                            aria-expanded="true"
+                                            aria-controls="collapseTwo">
+                                        <b>${object.scientific_direction_title}</b>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo${object.id}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body text-start">
+                                        ${object.scientific_direction}
+                                    </div>
+                                </div>
                             </div>
-                            <div class="card-footer text-center">
-                                <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop${item.id}">${item.read_more}</a>
-                                
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop${item.id}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-xl">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel"><b>${item.f_name}</b></h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <div class="accordion accordion-flush" id="accordionExample">
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                                <b>${ item.short_info_title }</b>
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body text-start">
-                                                                ${ item.short_info }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                                                                <b>${ item.scientific_direction_title }</b>
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body text-start">
-                                                                ${ item.scientific_direction }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                                                <b>${ item.main_tasks_in_position_title }</b>
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body text-start">
-                                                                ${ item.main_tasks_in_position }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="accordion-item">
-                                                        <h2 class="accordion-header">
-                                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
-                                                                <b>${ item.scientific_activity_title }</b>
-                                                            </button>
-                                                        </h2>
-                                                        <div id="collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                                                            <div class="accordion-body text-start">
-                                                                ${ item.scientific_activity }
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThree${object.id}"
+                                            aria-expanded="true"
+                                            aria-controls="collapseThree">
+                                        <b>${object.main_tasks_in_position_title}</b>
+                                    </button>
+                                </h2>
+                                <div id="collapseThree${object.id}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body text-start">
+                                        ${object.main_tasks_in_position}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button" type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseFour${object.id}"
+                                            aria-expanded="true"
+                                            aria-controls="collapseFour">
+                                        <b>${object.scientific_activity_title}</b>
+                                    </button>
+                                </h2>
+                                <div id="collapseFour${object.id}" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body text-start">
+                                        ${object.scientific_activity}
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                `
-                $("#adminstations").append(card_item)
+                </div>`;
 
-                if (item.boss) {
-                    item.boss.forEach((instance) => {
-                        let network = `
-                            <a href="${instance.url}" target="_blank" style="color: ${instance.social_networks.color};"><i class="${instance.social_networks.icon} me-1 fs-3"></i></a>
-                        `;
-                        $(".social-networks").last().append(network);
+                    // Append the card to the list
+                    $("#administrations_list").append(card_item);
+
+                    // Dynamically append the images
+                    object.images.forEach((image) => {
+                        let image_item = `
+                        <div class="col-12 col-md-4 p-1">
+                            <div class="administration_image"
+                                 style="background-image: url('${image.image}');"></div>
+                        </div>`;
+                        $(`#administration_images_${object.id}`).append(image_item);
                     });
-                }
-            })
-        }
-    })
+
+                    // Dynamically append the social networks
+                    object.boss.forEach((network) => {
+                        let network_item = `
+                        <a title="${network.social_networks.name}" href="${network.url}" target="_blank" style="color: ${network.social_networks.color};">
+                            <i class="${network.social_networks.icon} me-1 fs-4"></i>
+                        </a>`;
+                        $(`#social_networks_${object.id}`).append(network_item);
+                    });
+                });
+            }
+        });
+    }
+
+
+    // Use event delegation by attaching the event to the parent
+    $(".administration_positions").on("click", function () {
+        var position = $(this).data("position");
+        administrations_detail(position);
+    });
+
 })
