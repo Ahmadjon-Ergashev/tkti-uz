@@ -12,21 +12,21 @@
   background-repeat: no-repeat;
 }
 .header #statistika {
-  margin-top: -12%;
+  margin-top: -10%;
 }
 .header #statistika .card {
   margin: 0 10px;
-  padding: 20px 0;
+  padding: 10px 0;
   text-align: center;
 }
 .header #statistika .card .card-body .card_icon a {
   color: #26597E;
 }
 .header #statistika .card .card-body .card_icon a i {
-  font-size: 35px;
+  font-size: 25px;
 }
 .header #statistika .card .card-body p a {
-  font-size: 16px;
+  font-size: 13px;
   color: #111;
   font-weight: 700;
   font-family: monospace;
