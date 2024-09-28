@@ -106,6 +106,9 @@ def global_variables(request):
         "activity_docs": _("Faoliyat hujjatlari"),
         "about_section": _("Bo'lim haqida"),
         "about_department": _("Kafedra haqida"),
+        "extra_info": _("Qo'shimcha ma'lumotlar"),
+        "document_charter": _("Kafedra nizomi"),
+        "document_plan": _("Kafedra rejasi")
     }
 
     context = {

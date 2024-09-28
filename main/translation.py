@@ -21,12 +21,12 @@ class FacultyAdministrationTranslation(TranslationOptions):
     fields = ("f_name", "job_name", "admission_day")
 
 
-@register(posts.Departments)
+@register(models.Departments)
 class DepartmentsTranslation(TranslationOptions):
     fields = ("name", "about", "target", "activity",)
 
 
-@register(posts.DepartmentsAdmistrations)
+@register(models.DepartmentsAdmistrations)
 class DepartmentsAdmistrationsTranslation(TranslationOptions):
     fields = ("f_name", "job_name", "admission_day")
 

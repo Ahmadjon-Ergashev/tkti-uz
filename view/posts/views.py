@@ -187,13 +187,13 @@ class PostDetailView(DetailView):
 
 class DepartmentsDetailView(DetailView):
     """ departments detail view """
-    model = posts.Departments
+    model = models.Departments
     template_name = "pages/posts/departments_detail.html"
 
     def get_object(self, queryset=None):
         dept_slug = self.kwargs['dept_slug']
-        posts.Departments.objects.filter(slug=dept_slug).update(post_viewed_count=F("post_viewed_count") + 1)
-        obj = get_object_or_404(posts.Departments, slug=dept_slug)
+        models.Departments.objects.filter(slug=dept_slug).update(post_viewed_count=F("post_viewed_count") + 1)
+        obj = get_object_or_404(models.Departments, slug=dept_slug)
         return obj
 
     def get_context_data(self, **kwargs):
@@ -207,7 +207,7 @@ class DepartmentsDetailView(DetailView):
         except Exception as e:
             print(e, 141)
         context["depended_news"] = _("Mavzuga aloqador yangiliklar")
-        context["departments_list"] = posts.Departments.objects.all().order_by("name")
+        context["departments_list"] = models.Departments.objects.all().order_by("name")
         context["title"] = obj.name
         context["title_bar"] = _("Kafedralar")
         return context

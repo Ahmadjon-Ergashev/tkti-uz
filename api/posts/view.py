@@ -2,6 +2,7 @@ from django.db.models.functions import Lower
 from rest_framework import viewsets, mixins
 from drf_yasg.utils import swagger_auto_schema
 
+import main.models as models
 from main.models import posts, widgets
 from api.posts import query_params, serializers
 
@@ -17,7 +18,7 @@ class FacultyView(mixins.ListModelMixin, viewsets.GenericViewSet):
 
 
 class DepartmentsView(mixins.ListModelMixin, viewsets.GenericViewSet):
-    queryset = posts.Departments.objects.all()
+    queryset = models.Departments.objects.all()
     serializer_class = serializers.DepartmentsSerializers
 
     def get_queryset(self):

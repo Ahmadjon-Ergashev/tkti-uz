@@ -2,6 +2,7 @@ from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
 
 from main.models import posts
+import main.models as models
 
 
 class PostsSerializers(serializers.ModelSerializer):
@@ -24,7 +25,7 @@ class FacultySerializers(serializers.ModelSerializer):
 
 class DepartmentsSerializers(serializers.ModelSerializer):
     class Meta:
-        model = posts.Departments
+        model = models.Departments
         fields = "__all__"
 
     def to_representation(self, instance):

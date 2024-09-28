@@ -168,40 +168,22 @@
                             <div id="flush-collapseFour" class="accordion-collapse collapse" {# collapse #}
                                  data-bs-parent="#accordionFlushExample">
                                 <div class="accordion-body">
-                                    {#                                    <div class="row">#}
-                                    {#                                        {% for worker in object.departmentsadmistrations_set.all %}#}
-                                    {#                                            <div class="col-12 col-md-12 mb-2 p-1">#}
-                                    {#                                                <div class="card mb-3">#}
-                                    {#                                                    <div class="row g-0">#}
-                                    {#                                                        <div class="col-md-3">#}
-                                    {#                                                            {% if worker.image %}#}
-                                    {#                                                                <img src="{{ worker.image.url }}"#}
-                                    {#                                                                     class="img-fluid rounded-start" alt="tkti.uz">#}
-                                    {#                                                            {% endif %}#}
-                                    {#                                                        </div>#}
-                                    {#                                                        <div class="col-md-9">#}
-                                    {#                                                            <h5 class="card-header fw-bold">{{ worker.f_name }}</h5>#}
-                                    {#                                                            <ul class="list-group list-group-flush">#}
-                                    {#                                                                <li class="list-group-item"><i#}
-                                    {#                                                                        class="fas fa-user-tie me-2"></i> {{ worker.job_name }}#}
-                                    {#                                                                </li>#}
-                                    {#                                                                <li class="list-group-item"><i#}
-                                    {#                                                                        class="fas fa-phone-alt me-2"></i> {{ worker.phone_number }}#}
-                                    {#                                                                </li>#}
-                                    {#                                                                <li class="list-group-item"><i#}
-                                    {#                                                                        class="fas fa-envelope me-2"></i> {{ worker.email }}#}
-                                    {#                                                                </li>#}
-                                    {#                                                                <li class="list-group-item"><i#}
-                                    {#                                                                        class="fas fa-calendar-day me-2"></i> {{ worker.admission_day }}#}
-                                    {#                                                                </li>#}
-                                    {#                                                            </ul>#}
-                                    {#                                                        </div>#}
-                                    {#                                                    </div>#}
-                                    {#                                                </div>#}
-                                    {#                                            </div>#}
-                                    {#                                        {% endfor %}#}
-                                    {#                                    </div>#}
                                     {% include "pages/posts/department_administrations.html" %}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseFive" aria-expanded="false"
+                                        aria-controls="flush-collapseFive">
+                                    <span class=" fw-bold">{{ extra_info }}</span>
+                                </button>
+                            </h2>
+                            <div id="flush-collapseFive" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {% include "pages/posts/posts_sections/extra_documents_department.html" %}
                                 </div>
                             </div>
                         </div>

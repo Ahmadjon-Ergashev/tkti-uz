@@ -37,7 +37,7 @@ class News(widgets.AbstractTemplate):
     faculty_dact = models.ManyToManyField(posts.Posts,
                                           verbose_name=_("Yangilikka aloqador postlarlar"),
                                           related_name="connected_faculty_dact", blank=True)
-    departments = models.ManyToManyField(posts.Departments,
+    departments = models.ManyToManyField("Departments",
                                          verbose_name=_("Yangilikka aloqadorlar kafedralar"),
                                          related_name="connected_departments", blank=True)
     section_and_centers = models.ManyToManyField(sections_and_centers.SectionsAndCenters,
