@@ -50,6 +50,18 @@
             border-radius: 0;
             background: #cbd6e2;
         }
+
+        .vacancy_btn {
+            padding: 10px;
+            transition: 0.5s;
+            background: #26597e;
+            color: white !important;
+            text-transform: uppercase;
+        }
+
+        .vacancy_btn:hover {
+            background: #08314f;
+        }
     </style>
 </head>
 <body>
@@ -181,6 +193,11 @@
                                 <img src="{% static 'images/study.jpg' %}" width="27" alt="tkti.uz">
                             </a>
                         </li>
+                        <li class="ms-2">
+                            <a href="{{ base_variables.vacancy_url }}" target="_blank" class="vacancy_btn">
+                                {{ base_variables.vacancy }}
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Button trigger modal -->
@@ -304,7 +321,7 @@
                                     </li>
                                     </li>
                                 {% endfor %}
-                            </ul>
+                        </ul>
                         </li>
                     {% endfor %}
                 </ul>

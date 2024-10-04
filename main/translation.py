@@ -206,7 +206,7 @@ class FinancialBenefitsTranslation(TranslationOptions):
 
 @register(widgets.BaseVariables)
 class BaseVariablesTranslation(TranslationOptions):
-    fields = ("name", "description", "address", "buses")
+    fields = ("name", "description", "address", "buses", "vacancy")
 
 
 @register(widgets.TopNavbar)

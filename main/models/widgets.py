@@ -44,7 +44,7 @@ class Positions(models.Model):
 
     class Meta:
         db_table = "positions"
-        ordering = ("name", )
+        ordering = ("name",)
         verbose_name = _("Lavozimlar")
         verbose_name_plural = _("Lavozimlar")
 
@@ -57,6 +57,8 @@ class BaseVariables(models.Model):
     description = models.TextField(blank=True, null=True)
     address = models.TextField(blank=True, null=True)
     buses = models.CharField(max_length=125, blank=True, null=True)
+    vacancy = models.CharField(max_length=125, blank=True, null=True)
+    vacancy_url = models.URLField(blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -77,7 +79,7 @@ class TopNavbar(models.Model):
 
     class Meta:
         db_table = "top_navbar"
-        ordering = ("order_num", )
+        ordering = ("order_num",)
         verbose_name = _("Top Navbar")
         verbose_name_plural = _("Top Navbar")
 
@@ -89,7 +91,8 @@ class AbstractTemplate(models.Model):
     subtitle = models.CharField(verbose_name=_("Qisqacha mazmun"), max_length=255, null=True)
     post = QuillField(verbose_name=_("To'liq mazmuni"), null=True, blank=True)
     status = models.CharField(verbose_name=_("status"), max_length=50, choices=Status.choices, default=Status.pendding)
-    slug = models.SlugField(max_length=50, verbose_name="slug", unique=True, help_text=_("Majburyat tug'ulmasa tegmang"))
+    slug = models.SlugField(max_length=50, verbose_name="slug", unique=True,
+                            help_text=_("Majburyat tug'ulmasa tegmang"))
     post_viewed_count = models.IntegerField(default=0, verbose_name=_("Ko'rilganlik soni"), help_text=_("Tegilmasin !"))
     author_post = models.CharField(verbose_name=_("Muallifi"), max_length=300, default=_("TKTI axborot xizmati"))
     added_at = models.DateTimeField(verbose_name=_("Vaqt & sana"))
@@ -99,7 +102,7 @@ class AbstractTemplate(models.Model):
         abstract = True
         managed = True
 
-    
+
 class Hashtag(models.Model):
     """ hashtags for news and ads """
     name = models.CharField(max_length=123, verbose_name=_("Nomi"), null=True)
@@ -122,7 +125,8 @@ class SocialNetworks(models.Model):
                             help_text=_("ishtimoiy tarmoq nomlarini kiriting, m: facebook, instagram"))
     icon = models.CharField(
         max_length=50, verbose_name=_("Icon"), null=True,
-        help_text=_("messangerning icon class nomi, class nomlarini olish uchun https://fontawesome.com/v5/search shu saytga kiring, m: fab fa-facebook"))
+        help_text=_(
+            "messangerning icon class nomi, class nomlarini olish uchun https://fontawesome.com/v5/search shu saytga kiring, m: fab fa-facebook"))
     color = ColorField(verbose_name=_("rangi"), null=True)
     url = models.URLField(verbose_name=_("url manzil"))
     order_num = models.IntegerField(default=0)
@@ -155,7 +159,7 @@ class HeaderIMG(models.Model):
 
     def __str__(self):
         return f"Image {self.pk}"
-    
+
     def save(self, *args, **kwargs):
         if self._state.adding:
             im = Image.open(self.image)
@@ -170,7 +174,7 @@ class HeaderIMG(models.Model):
             super().save(*args, **kwargs)
         else:
             super().save(*args, **kwargs)
-    
+
 
 class UsefullLinks(models.Model):
     """ foydali havolar uchun model """
@@ -185,10 +189,10 @@ class UsefullLinks(models.Model):
         managed = True
         verbose_name = "Foydali havolalar"
         verbose_name_plural = "Foydali havolalar"
-    
+
     def __str__(self):
         return str(self.name)
-    
+
 
 class QuickLinks(models.Model):
     """ tezkor havolalar """
@@ -196,7 +200,7 @@ class QuickLinks(models.Model):
     url = models.URLField(_("url manzili"), max_length=300, null=True, blank=True)
     order_num = models.IntegerField(default=0, verbose_name=_("Tartib raqami"))
     added_at = models.DateTimeField(auto_now_add=True)
-    
+
     class Meta:
         db_table = "quick_links"
         managed = True
@@ -205,7 +209,7 @@ class QuickLinks(models.Model):
 
     def __str__(self):
         return str(self.name)
-    
+
 
 class Statistika(models.Model):
     """ universitet xaqida statistik malumotlar """
@@ -214,17 +218,17 @@ class Statistika(models.Model):
     quantity = models.IntegerField(_("soni"), default=0)
     url = models.URLField(max_length=300, verbose_name="url manzil", null=True, blank=True)
     order_num = models.IntegerField(_("Tartib raqam"), default=0)
-    added_at = models.DateTimeField(auto_now_add=True)   
+    added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = "statistika"
         managed = True
         verbose_name = _("Statistika")
         verbose_name_plural = _("Statistika")
-    
+
     def __str__(self):
         return self.name
-    
+
 
 class Year(models.Model):
     """ model for years """
@@ -235,7 +239,7 @@ class Year(models.Model):
         managed = True
         verbose_name = _("Yil")
         verbose_name_plural = _("Yillar")
-    
+
     def __str__(self):
         return self.year
 
@@ -248,7 +252,7 @@ class Flag(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         db_table = 'flag'
         managed = True
@@ -264,7 +268,7 @@ class CoatofArms(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         db_table = 'coat_of_arms'
         managed = True
@@ -280,7 +284,7 @@ class Anthem(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     class Meta:
         db_table = 'anthem'
         managed = True
@@ -300,10 +304,10 @@ class EventTypes(models.Model):
     """ event types model """
     name = models.CharField(_("Nomi"), max_length=255, null=True)
     added_at = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.name
-    
+
     class Meta:
         db_table = 'event_type'
         managed = True
@@ -318,11 +322,11 @@ class Semesters(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     class Meta:
         db_table = 'semesters'
         managed = True
-        ordering = ("name", )
+        ordering = ("name",)
         verbose_name = _("Semesterlar")
         verbose_name_plural = _("Semesterlar")
 
@@ -406,7 +410,8 @@ class FinancialBenefit(models.Model):
     name = models.CharField(max_length=255, verbose_name=_("Nomi"), null=True, blank=True)
     icon = models.CharField(max_length=100, verbose_name=_("Icon"), null=True, blank=True)
     about = QuillField(verbose_name=_("Imtiyoz haqida"), null=True, blank=True)
-    responsible_organization = models.CharField(max_length=255, verbose_name=_("Mas'ul tashkilot"), null=True, blank=True)
+    responsible_organization = models.CharField(max_length=255, verbose_name=_("Mas'ul tashkilot"), null=True,
+                                                blank=True)
     for_who = QuillField(verbose_name=_("Kimlar uchun"), null=True, blank=True)
     deadline = QuillField(verbose_name=_("Imtiyozni taqdim etish tartibi va muddatlari"),
                           null=True, blank=True)
