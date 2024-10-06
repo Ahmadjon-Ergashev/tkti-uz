@@ -193,11 +193,13 @@
                                 <img src="{% static 'images/study.jpg' %}" width="27" alt="tkti.uz">
                             </a>
                         </li>
-                        <li class="ms-2">
-                            <a href="{{ base_variables.vacancy_url }}" target="_blank" class="vacancy_btn">
-                                {{ base_variables.vacancy }}
-                            </a>
-                        </li>
+                        {% if base_variables.vacancy %}
+                            <li class="ms-2">
+                                <a href="{{ base_variables.vacancy_url }}" target="_blank" class="vacancy_btn">
+                                    {{ base_variables.vacancy }}
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <!-- Button trigger modal -->
