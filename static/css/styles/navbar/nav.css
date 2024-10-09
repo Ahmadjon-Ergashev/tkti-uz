@@ -42,7 +42,7 @@
 }
 
 #base_navbar #navbarNavDropdown .navbar-nav .main_nav_item:not(:last-child) {
-  margin-right: 5px;
+  margin-right: 3px;
 }
 #base_navbar #navbarNavDropdown .navbar-nav .nav-item .nav_name {
   font-size: 15px;

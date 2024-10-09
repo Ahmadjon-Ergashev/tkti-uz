@@ -39,7 +39,13 @@
         }
 
         .main_nav_item {
-            padding: 5px 8px;
+            padding: 5px;
+        }
+
+        .main_nav_item button {
+            font-size: 15px;
+            font-weight: bold;
+            font-family: "Cinzel", serif;
         }
 
         .main_nav_item button:focus {
@@ -52,7 +58,7 @@
         }
 
         .vacancy_btn {
-            padding: 10px;
+            padding: 8px;
             transition: 0.5s;
             background: #26597e;
             color: white !important;
@@ -61,6 +67,41 @@
 
         .vacancy_btn:hover {
             background: #08314f;
+        }
+
+        .top_nav ul li a {
+            font-size: 12px;
+            font-family: "Cinzel", serif;
+        }
+
+        @media only screen and (max-width: 479px) {
+            .top_nav {
+                margin-bottom: 10px;
+            }
+
+            .vacancy_btn {
+                padding: 3px;
+                font-size: 12px;
+                font-family: "Cinzel", serif;
+            }
+
+            .header #headerIMG {
+                width: 90% !important;
+                margin: 0 auto;
+            }
+
+            .header #headerIMG .item {
+                height: 50vh !important;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+        }
+
+        @media only screen and (min-width: 479px) {
+            .left_top_nav {
+                text-align: start !important;
+            }
         }
     </style>
 </head>
@@ -153,8 +194,8 @@
     <div class="superNav border-bottom py-2 bg-light text-center">
         <div class="container">
             <div class="row p-0">
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav">
-                    <ul>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav left_top_nav">
+                    <ul class="p-0">
                         <li class="me-3">
                             <a class="text-decoration-none text-dark"
                                href="/"><strong>{{ base_variables.email }}</strong></a>
@@ -166,7 +207,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-6 top_nav text-lg-center">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-7 top_nav text-lg-center">
                     <ul>
                         {% for nav in top_navbar %}
                             <li class="me-2">
@@ -230,7 +271,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-3 top_nav text-xxl-end">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-4 col-xxl-2 top_nav text-xxl-end">
                     <ul>
                         <!--                            <li class="me-2">-->
                         <!--                                <span id="specialButton" style="cursor: pointer;"><i class="fas fa-eye"></i></span>-->
