@@ -257,7 +257,7 @@ class UniversityAdministrationsImages(models.Model):
             im = im.convert('RGB')
             im = ImageOps.exif_transpose(im)
             im_io = BytesIO()
-            im.save(im_io, 'JPEG', quality=25)
+            im.save(im_io, 'JPEG', quality=50)
             filename = os.path.splitext(self.image.name)[0]
             filename = f"{filename}.jpg"
             new_image = File(im_io, name=filename)
