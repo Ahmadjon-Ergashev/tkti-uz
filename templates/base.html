@@ -44,8 +44,7 @@
 
         .main_nav_item button {
             font-size: 15px;
-            font-weight: bold;
-            font-family: "Cinzel", serif;
+            font-family: Montserrat, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         .main_nav_item button:focus {
@@ -71,7 +70,7 @@
 
         .top_nav ul li a {
             font-size: 12px;
-            font-family: "Cinzel", serif;
+            font-family: Montserrat, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
 
         @media only screen and (max-width: 479px) {
@@ -82,7 +81,7 @@
             .vacancy_btn {
                 padding: 3px;
                 font-size: 12px;
-                font-family: "Cinzel", serif;
+                font-family: Montserrat, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             }
 
             .header #headerIMG {
@@ -102,6 +101,10 @@
             .left_top_nav {
                 text-align: start !important;
             }
+        }
+
+        #name {
+            font-family: Montserrat, -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         }
     </style>
 </head>
@@ -316,17 +319,25 @@
         <div class="container">
             <a class="navbar-brand" href="/">
                 {% if base_variables.logo %}
-                    <img src="{{ base_variables.logo.url }}" width="90" alt="logo">
+                    <img src="{{ base_variables.logo.url }}" width="70" alt="logo">
                 {% else %}
-                    <img src="../static/images/brand.png" width="90" alt="logo">
+                    <img src="/static/images/brand.png" width="192" alt="logo">
                 {% endif %}
             </a>
-            <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name">
-                <!--                    {{ base_variables.name|linebreaksbr|safe }}-->
-                {% for i in web_name %}
-                    {{ i }}<br>
-                {% endfor %}
-            </a>
+            {% if LANGUAGE_CODE == "ru" or "en" %}
+                <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name"
+                   style="font-size: 11px">
+                    {% for i in web_name %}
+                        {{ i }}<br>
+                    {% endfor %}
+                </a>
+            {% else %}
+                <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name">
+                    {% for i in web_name %}
+                        {{ i }}<br>
+                    {% endfor %}
+                </a>
+            {% endif %}
             <br><br>
             <button class="navbar-toggler mx-3" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
