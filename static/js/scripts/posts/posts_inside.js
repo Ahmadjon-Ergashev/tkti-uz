@@ -125,7 +125,7 @@ $(document).ready(function () {
                             <div class="col-12 col-md-4 p-1">
                                 <div class="administration_image"
                                      style="background-image: url('${image.image}');">
-                                    <a class="download_image" href="${image.image}" download="${image.image}"><i class="fas fa-download"></i></a>
+                                    <a class="download_image" href="${image.image}" target="_blank" download="${image.image}"><i class="fas fa-download"></i></a>
                                     <a class="view_image" href="" data-bs-toggle="modal" data-bs-target="#exampleModal${image.id}" type="button"><i class="fas fa-eye"></i></a>     
                                 </div>
                             </div>
