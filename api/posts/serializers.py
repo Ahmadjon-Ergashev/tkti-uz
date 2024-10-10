@@ -51,7 +51,7 @@ class NetworksBossSerializers(serializers.ModelSerializer):
 class AdministrationImagesSerializer(serializers.ModelSerializer):
     class Meta:
         model = posts.UniversityAdministrationsImages
-        fields = ("image",)
+        fields = ("id", "image",)
 
 
 class AdministrationSerializer(serializers.ModelSerializer):

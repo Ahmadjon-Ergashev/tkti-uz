@@ -122,10 +122,23 @@ $(document).ready(function () {
                     // Dynamically append the images
                     object.images.forEach((image) => {
                         let image_item = `
-                        <div class="col-12 col-md-4 p-1">
-                            <div class="administration_image"
-                                 style="background-image: url('${image.image}');"></div>
-                        </div>`;
+                            <div class="col-12 col-md-4 p-1">
+                                <div class="administration_image"
+                                     style="background-image: url('${image.image}');">
+                                    <a class="download_image" href="${image.image}" download="${image.image}"><i class="fas fa-download"></i></a>
+                                    <a class="view_image" href="" data-bs-toggle="modal" data-bs-target="#exampleModal${image.id}" type="button"><i class="fas fa-eye"></i></a>     
+                                </div>
+                            </div>
+                            <div class="modal fade" id="exampleModal${image.id}" tabindex="-1" aria-labelledby="exampleModalLabel${image.id}" aria-hidden="true">
+                              <div class="modal-dialog modal-dialog-centered modal-xl">
+                                <div class="modal-content">
+                                  <div class="modal-body" style="padding: 0">
+                                     <img src="${image.image}" class="img-fluid w-100"  alt="">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        `;
                         $(`#administration_images_${object.id}`).append(image_item);
                     });
 
@@ -141,7 +154,6 @@ $(document).ready(function () {
             }
         });
     }
-
 
     // Use event delegation by attaching the event to the parent
     $(".administration_positions").on("click", function () {

@@ -11,6 +11,38 @@
             background-position: center;
             background-repeat: no-repeat;
         }
+
+        .administration_image:hover > .download_image {
+            display: inline;
+        }
+
+        .administration_image:hover > .view_image {
+            display: inline;
+        }
+
+        .download_image {
+            top: 0;
+            left: 85%;
+            padding: 3px;
+            z-index: 9999;
+            display: none;
+            background: white;
+            position: relative;
+        }
+
+        .view_image {
+            top: 0;
+            left: 60%;
+            z-index: 9999;
+            display: none;
+            background: white;
+            position: relative;
+        }
+
+        .download_image i, .view_image i {
+            color: #0d5aa7;
+            padding: 3px;
+        }
     </style>
     <!-- local css -->
     <link rel="stylesheet" href="{% static 'css/styles/left_category/left_sidebar.css' %}">
@@ -26,7 +58,7 @@
                             {% for obj in object_list %}
                                 <li class="list-group-item">
                                     <a class="administration_positions" style="cursor: pointer"
-                                          data-position="{{ obj.position }}">{{ obj.position }}</a>
+                                       data-position="{{ obj.position }}">{{ obj.position }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
