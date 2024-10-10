@@ -324,9 +324,9 @@
                     <img src="/static/images/brand.png" width="192" alt="logo">
                 {% endif %}
             </a>
-            {% if LANGUAGE_CODE == "ru" or "en" %}
+            {% if LANGUAGE_CODE == "ru" or LANGUAGE_CODE == "en" %}
                 <a href="/" class="text-decoration-none text-dark" data-web-name="{{ base_variables.name }}" id="name"
-                   style="font-size: 10px">
+                   style="font-size: 11px">
                     {% for i in web_name %}
                         {{ i }}<br>
                     {% endfor %}
