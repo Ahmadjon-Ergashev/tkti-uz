@@ -11,15 +11,15 @@
         </div>
         <div class="news_ads_videos">
             <div class="row card_box">
-                {% for obj in object_list %}              
+                {% for obj in object_list %}
                     <div class="col-12 col-md-4 col-lg-3">
                         <div class="card">
                             {% if obj.poster %}
                                 <img src="{{ obj.poster.url }}"
-                                     class="card-img-top" style="height: 170px" alt="{{ obj.title }} | tkti.uz">
+                                     class="card-img-top" style="height: 200px" alt="{{ obj.title }} | tkti.uz">
                             {% elif obj.image %}
                                 <img src="{{ obj.image.url }}"
-                                     class="card-img-top" style="height: 170px" alt="{{ obj.title }} | tkti.uz">
+                                     class="card-img-top" style="height: 200px" alt="{{ obj.title }} | tkti.uz">
                             {% endif %}
                             <div class="card-body">
                                 <p class="card-text">
@@ -34,11 +34,12 @@
                                         <a href="{% url 'video_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
                                     {% endif %}
                                 </div>
-<!--                                <br>-->
+                                <!--                                <br>-->
                                 {% if obj.added_at %}
                                     <div class="item_footer d-flex justify-content-between">
                                         <span><a href="" class="text-dark">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
-                                        <span  class="text-dark"><i class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                        <span class="text-dark"><i
+                                                class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
                                     </div>
                                 {% endif %}
                             </div>
@@ -47,7 +48,7 @@
                 {% endfor %}
             </div>
         </div>
-        {% include "../../widgets/pagination.html" %}
+        {% include "widgets/pagination.html" %}
     </div>
-  
+
 {% endblock content %}
