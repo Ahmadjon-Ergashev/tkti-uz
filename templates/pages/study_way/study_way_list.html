@@ -6,30 +6,38 @@
 
 {% block content %}
     <style>
+
+
         .learning_way .banner_img {
             height: 400px;
             background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
         }
-        .read{
+
+        .read {
             position: absolute;
             bottom: 10px;
         }
+
         .post_footer {
             margin-top: 40px;
         }
+
         .post_footer p {
             margin-bottom: 0;
         }
+
         .post_footer .time_and_view {
             display: flex;
             justify-content: space-between;
         }
+
         .post_footer .time_and_view span {
             font-weight: 500;
         }
-        .you_become_img{
+
+        .you_become_img {
             height: 100%;
             background-size: contain;
             background-position: center;
@@ -39,31 +47,41 @@
     <link rel="stylesheet" href="{% static 'css/modules/tabs/tabs.css' %}">
     {% if educational_areas|length != 1 %}
         <div class="container my-5">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
-                </ol>
-            </nav>
+            <div class="row">
+                <div class="col-10 m-auto m-md-0 col-lg-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
     {% else %}
         <div class="container mt-3 mb-1">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'learning_way_detail' id=object.id %}">{{ title }}</a></li>
-                    {% for object in educational_areas %}
-                        <li class="breadcrumb-item active" aria-current="page">{{ object.name }}</li>
-                    {% endfor %}
-                </ol>
-            </nav>
+            <div class="row">
+                <div class="col-10 m-auto m-md-0 col-lg-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/">{{ home }}</a></li>
+                            <li class="breadcrumb-item"><a
+                                    href="{% url 'learning_way_detail' id=object.id %}">{{ title }}</a>
+                            </li>
+                            {% for object in educational_areas %}
+                                <li class="breadcrumb-item active" aria-current="page">{{ object.name }}</li>
+                            {% endfor %}
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
     {% endif %}
     <div class="container">
         <div class="learning_way">
             {% if educational_areas|length != 1 %}
                 <div class="banner_img" style="background-image: url('{{ object.image.url }}');"></div>
-                <h2><b>{{ object.name }}</b></h2>
+                <h1><b>{{ object.name }}</b></h1>
                 <div class="object_body">
                     <p>{{ object.post.html|safe }}</p>
                 </div>
@@ -74,17 +92,18 @@
             <div class="row">
                 {% if educational_areas|length == 1 %}
                     {% for object in educational_areas %}
-                        {% include "./template_detail.html" %}
+                        {% include "pages/study_way/template_detail.html" %}
                     {% endfor %}
                 {% else %}
                     {% for edu in educational_areas %}
-                        <div class="col-12 col-md-4 col-lg-3">
+                        <div class="col-10 m-auto m-md-0 col-md-4 col-lg-3">
                             <div class="card" style="height: 120px;">
                                 <div class="card-body position-relative">
                                     <h6 class="card-subtitle mb-2 text-body-secondary">
                                         {{ edu.name | truncatechars:100 }}
-                                    </h6>  
-                                    <a href="{% url 'educational_area_detail' id=edu.id %}" class="card-link read">{{ read_more }}</a>
+                                    </h6>
+                                    <a href="{% url 'educational_area_detail' id=edu.id %}"
+                                       class="card-link read">{{ read_more }}</a>
                                 </div>
                             </div>
                         </div>

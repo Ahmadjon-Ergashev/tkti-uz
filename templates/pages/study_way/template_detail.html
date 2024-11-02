@@ -1,74 +1,86 @@
 <div class="container my-5">
-    <h3>{{ object.name }}</h3>
-    <div class="object_body">
-        <p>{{ object.desc.html|safe }}</p>
-        {% for pdf in object.educational_area.all %}
-            {% if pdf.type == "day" %}
-                <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas"
-                   data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                    {{ desc_day }}
-                </a>
-            {% elif pdf.type == "evening" %}
-                <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas"
-                   data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                    {{ desc_evening }}
-                </a>
-            {% elif pdf.type == "externally" %}
-                <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas"
-                   data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                    {{ desc }}
-                </a>
-            {% elif pdf.type == "master" %}
-                <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas"
-                   data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                    {{ desc_master }}
-                </a>
-            {% elif pdf.type == "phd" %}
-                <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas"
-                   data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                    {{ desc_phd }}
-                </a>
-            {% elif pdf.type == "dsc" %}
-                <a type="button" class="btn btn-sm btn-primary text-white" data-bs-toggle="offcanvas"
-                   data-bs-target="#main_pdf_edu_area_{{ pdf.id }}" aria-controls="about_study_program_{{ pdf.id }}">
-                    {{ desc_dsc }}
-                </a>
-            {% endif %}
+    <div class="row">
+        <div class="col-10 m-auto m-md-0 col-md-12">
+            <h1>{{ object.name }}</h1>
+            <div class="object_body">
+                <p>{{ object.desc.html|safe }}</p>
+                {% for pdf in object.educational_area.all %}
+                    {% if pdf.type == "day" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_day }}
+                        </a>
+                    {% elif pdf.type == "evening" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white  mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_evening }}
+                        </a>
+                    {% elif pdf.type == "externally" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc }}
+                        </a>
+                    {% elif pdf.type == "master" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_master }}
+                        </a>
+                    {% elif pdf.type == "phd" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_phd }}
+                        </a>
+                    {% elif pdf.type == "dsc" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_dsc }}
+                        </a>
+                    {% endif %}
 
-            <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false"
-                 tabindex="-1" id="main_pdf_edu_area_{{ pdf.id }}" aria-labelledby="offcanvasScrollingLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="about_study_program_{{ pdf.id }}">{{ object.name }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    {% if LANGUAGE_CODE == 'uz' %}
-                        {% if pdf.pdf_file %}
-                            <iframe
-                                    src="{{ pdf.pdf_file.url }}"
-                                    width="100%" height="100%">
-                            </iframe>
-                        {% endif %}
-                    {% endif %}
-                    {% if LANGUAGE_CODE == 'ru' %}
-                        {% if pdf.pdf_file_ru %}
-                            <iframe
-                                    src="{{ pdf.pdf_file_ru.url }}"
-                                    width="100%" height="100%">
-                            </iframe>
-                        {% endif %}
-                    {% endif %}
-                    {% if LANGUAGE_CODE == 'en' %}
-                        {% if pdf.pdf_file_en %}
-                            <iframe
-                                    src="{{ pdf.pdf_file_en.url }}"
-                                    width="100%" height="100%">
-                            </iframe>
-                        {% endif %}
-                    {% endif %}
-                </div>
+                    <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
+                         data-bs-backdrop="false"
+                         tabindex="-1" id="main_pdf_edu_area_{{ pdf.id }}" aria-labelledby="offcanvasScrollingLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="about_study_program_{{ pdf.id }}">{{ object.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            {% if LANGUAGE_CODE == 'uz' %}
+                                {% if pdf.pdf_file %}
+                                    <iframe
+                                            src="{{ pdf.pdf_file.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            {% endif %}
+                            {% if LANGUAGE_CODE == 'ru' %}
+                                {% if pdf.pdf_file_ru %}
+                                    <iframe
+                                            src="{{ pdf.pdf_file_ru.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            {% endif %}
+                            {% if LANGUAGE_CODE == 'en' %}
+                                {% if pdf.pdf_file_en %}
+                                    <iframe
+                                            src="{{ pdf.pdf_file_en.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+        </div>
     </div>
 </div>
 
@@ -159,89 +171,97 @@
     {% if req.type == 'day' %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ requirements_day }}</h1>
+                <h3>{{ requirements_day }}</h3>
             </div>
         </div>
     {% elif req.type == 'evening' %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ requirements_evening }}</h1>
+                <h3>{{ requirements_evening }}</h3>
             </div>
         </div>
     {% elif req.type == 'externally' %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ requirements }}</h1>
+                <h3>{{ requirements }}</h3>
             </div>
         </div>
     {% elif req.type == 'master' %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ requirements_master }}</h1>
+                <h3>{{ requirements_master }}</h3>
             </div>
         </div>
     {% elif req.type == 'phd' %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ requirements_phd }}</h1>
+                <h3>{{ requirements_phd }}</h3>
             </div>
         </div>
     {% elif req.type == 'dsc' %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ requirements_dsc }}</h1>
+                <h3>{{ requirements_dsc }}</h3>
             </div>
         </div>
     {% endif %}
 
     <div class="container my-1">
-        <div class="object_body">
-            {% if object.phd_subject_program %}
-                <a type="button" class="btn btn-sm btn-primary text-white my-3 w-25"
-                   data-bs-toggle="offcanvas" data-bs-target="#phd_subject_program" aria-controls="phd_subject_program">
-                    {{ phd_subject_program }}
-                </a>
-                <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
-                     data-bs-backdrop="false"
-                     tabindex="-1" id="phd_subject_program" aria-labelledby="offcanvasScrollingLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="phd_subject_program">{{ phd_subject_program }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        {% if object.phd_subject_program %}
-                            <iframe
-                                    src="{{ object.phd_subject_program.url }}"
-                                    width="100%" height="100%">
-                            </iframe>
-                        {% endif %}
-                    </div>
+        <div class="row">
+            <div class="col-10 m-auto m-md-0 col-md-12">
+                <div class="object_body">
+                    {% if object.phd_subject_program %}
+                        <a type="button" class="btn btn-sm btn-primary text-white my-3 w-25"
+                           data-bs-toggle="offcanvas" data-bs-target="#phd_subject_program"
+                           aria-controls="phd_subject_program">
+                            {{ phd_subject_program }}
+                        </a>
+                        <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
+                             data-bs-backdrop="false"
+                             tabindex="-1" id="phd_subject_program" aria-labelledby="offcanvasScrollingLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="phd_subject_program">{{ phd_subject_program }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                {% if object.phd_subject_program %}
+                                    <iframe
+                                            src="{{ object.phd_subject_program.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if object.phd_special_subject_program %}
+                        <a type="button" class="btn btn-sm btn-primary text-white my-3 w-50"
+                           data-bs-toggle="offcanvas" data-bs-target="#phd_special_subject_program"
+                           aria-controls="phd_special_subject_program">
+                            {{ phd_special_subject_program }}
+                        </a>
+                        <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
+                             data-bs-backdrop="false"
+                             tabindex="-1" id="phd_special_subject_program" aria-labelledby="offcanvasScrollingLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title"
+                                    id="phd_special_subject_program">{{ phd_special_subject_program }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                {% if object.phd_special_subject_program %}
+                                    <iframe
+                                            src="{{ object.phd_special_subject_program.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <p>{{ req.requirement.html|safe }}</p>
                 </div>
-            {% endif %}
-            {% if object.phd_special_subject_program %}
-                <a type="button" class="btn btn-sm btn-primary text-white my-3 w-50"
-                   data-bs-toggle="offcanvas" data-bs-target="#phd_special_subject_program"
-                   aria-controls="phd_special_subject_program">
-                    {{ phd_special_subject_program }}
-                </a>
-                <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
-                     data-bs-backdrop="false"
-                     tabindex="-1" id="phd_special_subject_program" aria-labelledby="offcanvasScrollingLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="phd_special_subject_program">{{ phd_special_subject_program }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        {% if object.phd_special_subject_program %}
-                            <iframe
-                                    src="{{ object.phd_special_subject_program.url }}"
-                                    width="100%" height="100%">
-                            </iframe>
-                        {% endif %}
-                    </div>
-                </div>
-            {% endif %}
-            <p>{{ req.requirement.html|safe }}</p>
+            </div>
         </div>
     </div>
 {% endfor %}
@@ -250,7 +270,7 @@
     <div class="object_body">
         <div class="row">
             {% if object.educational_area_requirements.all %}
-                <div class="col-12 col-lg-8">
+                <div class="col-10 m-auto col-lg-8">
                     <p>{{ object.tuition_fee.html|safe }}</p>
                     <ul class="list-group list-group-flush w-75 w-75-l">
                         {% for fee in object.educational_area_requirements.all %}
@@ -306,7 +326,7 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class="col-12 col-lg-4">
+            <div class="col-10 m-auto col-lg-4">
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item fw-bold ps-0">{{ contact_edu_area }}</li>
                     <li class="list-group-item d-flex justify-content-between w-50-l ps-0">
@@ -389,20 +409,20 @@
 {% else %}
     <div class="section_title py-2">
         <div class="container">
-            <h1>{{ you_may_become_title }}</h1>
+            <h3>{{ you_may_become_title }}</h3>
         </div>
     </div>
 
     <div class="container mb-5">
         <div class="object_body">
             <div class="row">
-                <div class="col-12 col-md-4 p-1">
+                <div class="col-10 m-auto col-md-4 p-1">
                     {% if object.you_may_become_image %}
                         <div class="you_become_img"
                              style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
                     {% endif %}
                 </div>
-                <div class="col-12 col-md-8 p-1">
+                <div class="col-10 m-auto col-md-8 p-1">
                     <p>{{ object.you_may_become.html|safe }}</p>
                 </div>
             </div>
@@ -411,17 +431,22 @@
 {% endif %}
 
 <div class="container">
-    <div class="post_footer">
-        {% if LANGUAGE_CODE == 'uz' %}
-            <p class="text-end fw-bold">TKTI Axborot xizmati</p>
-        {% elif LANGUAGE_CODE == 'ru' %}
-            <p class="text-end fw-bold">Пресс служба ТХТИ</p>
-        {% elif LANGUAGE_CODE == 'en' %}
-            <p class="text-end fw-bold">Press service of TICT</p>
-        {% endif %}
-        <div class="time_and_view">
-            <span><i class="fas fa-eye me-2"></i> {{ object.post_viewed_count }}</span>
-            <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+    <div class="row">
+        <div class="col-10 m-auto m-md-0 col-md-12">
+            <div class="post_footer">
+                {% if LANGUAGE_CODE == 'uz' %}
+                    <p class="text-end fw-bold">TKTI Axborot xizmati</p>
+                {% elif LANGUAGE_CODE == 'ru' %}
+                    <p class="text-end fw-bold">Пресс служба ТХТИ</p>
+                {% elif LANGUAGE_CODE == 'en' %}
+                    <p class="text-end fw-bold">Press service of TICT</p>
+                {% endif %}
+                <div class="time_and_view">
+                    <span><i class="fas fa-eye me-2"></i> {{ object.post_viewed_count }}</span>
+                    <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+                </div>
+            </div>
         </div>
     </div>
+
 </div>

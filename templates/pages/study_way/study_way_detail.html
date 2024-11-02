@@ -45,7 +45,7 @@
     </div>
 
     <div class="container my-5">
-        <h3>{{ object.name }}</h3>
+        <h1>{{ object.name }}</h1>
         <div class="object_body">
             <p>{{ object.desc.html|safe }}</p>
             {% for pdf in object.educational_area.all %}
@@ -109,11 +109,11 @@
             <div class="container">
 
                 {% if req.type == 'day' %}
-                    <h1>{{ requirements_day }}</h1>
+                    <h3>{{ requirements_day }}</h3>
                 {% elif req.type == 'evening' %}
-                    <h1>{{ requirements_evening }}</h1>
+                    <h3>{{ requirements_evening }}</h3>
                 {% elif req.type == 'externally' %}
-                    <h1>{{ requirements }}</h1>
+                    <h3>{{ requirements }}</h3>
                 {% endif %}
             </div>
         </div>
@@ -193,7 +193,7 @@
     {% if modules_by_semester %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ modul_title }}</h1>
+                <h3>{{ modul_title }}</h3>
             </div>
         </div>
 
@@ -247,7 +247,7 @@
     {% if you_may_become %}
         <div class="section_title py-2">
             <div class="container">
-                <h1>{{ you_may_become }}</h1>
+                <h3>{{ you_may_become }}</h3>
             </div>
         </div>
 

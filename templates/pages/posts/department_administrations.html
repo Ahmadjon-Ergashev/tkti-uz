@@ -48,29 +48,31 @@
 <div class="department_administrations_list">
     <div class="row">
         <div class="col-12 col-sm-12 col-md-3 ps-0">
-            <ul class="">
+            <ul class="my-0">
                 {% for item in department_positions %}
-                    <li class="">
-                        <button
-                                type="button" data-position="{{ item.id }}" data-department="{{ object.id }}"
-                                class="department-admininstration">
-                            {{ item.name }}
-                        </button>
-                    </li>
+                    {% if item %}
+                        <li class="">
+                            <button
+                                    type="button" data-position="{{ item.id }}" data-department="{{ object.id }}"
+                                    class="department-admininstration">
+                                <b>{{ item.name }}</b>
+                            </button>
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ul>
         </div>
-        <div class="col-12 col-sm-12 col-md-8">
-            <div>
+        <div class="col-12 p-0 p-md-1 col-md-8">
+            <div class="table-responsive-sm">
                 <table class="table">
-{#                    {% if department_positions %}#}
-{#                        <tr>#}
-{#                            <th scope="col">{{ f_i_sh }}</th>#}
-{#                            <th scope="col">{{ profession }}</th>#}
-{#                            <th scope="col">{{ email_title }}</th>#}
-{#                            <th scope="col">CV</th>#}
-{#                        </tr>#}
-{#                    {% endif %}#}
+                    {#                    {% if department_positions %}#}
+                    {#                        <tr>#}
+                    {#                            <th scope="col">{{ f_i_sh }}</th>#}
+                    {#                            <th scope="col">{{ profession }}</th>#}
+                    {#                            <th scope="col">{{ email_title }}</th>#}
+                    {#                            <th scope="col">CV</th>#}
+                    {#                        </tr>#}
+                    {#                    {% endif %}#}
                     <tbody id="administration_item">
 
                     {#                    <tr>#}
