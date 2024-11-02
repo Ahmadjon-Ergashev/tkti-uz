@@ -40,10 +40,20 @@ class AdministrationsView(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = serializers.AdministrationSerializer
 
     def get_queryset(self):
-        qs = self.queryset.all().annotate(position_lower=Lower("position"))
+        language_code = self.request.LANGUAGE_CODE
+        qs = self.queryset.all().annotate(
+            position_lower=Lower("position"),
+            position_ru_lower=Lower("position_ru"),
+            position_en_lower=Lower("position_en"),
+        )
         position = self.request.query_params.get("position")
         if position:
-            qs = qs.filter(position_lower=position.lower())
+            if language_code == "ru":
+                qs = qs.filter(position_ru_lower=position.lower())
+            elif language_code == "en":
+                qs = qs.filter(position_en_lower=position.lower())
+            else:
+                qs = qs.filter(position_lower=position.lower())
         else:
             qs = qs.none()
         return qs
