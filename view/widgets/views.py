@@ -237,7 +237,8 @@ class BRMItemsDetailView(DetailView):
         context["title"] = object.name
         context["connected_news_title"] = _("Mavzuga aloqador yangiliklar.")
         context["connected_news"] = news.News.objects.filter(
-            status=widgets.Status.published, brm=object.id).order_by("-added_at")
+            status=widgets.Status.published, brm=object.id).order_by("-added_at").only(
+            "id", "brm", "title", "slug", "added_at", "post_viewed_count").prefetch_related("brm")
         context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
             brm_item=object
         ).order_by("-added_at")

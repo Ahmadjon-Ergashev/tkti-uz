@@ -55,10 +55,10 @@
         <div class="row" id="brm_connected_news">
             {% for i in connected_news %}
                 <div class="col-12 col-sm-6 col-md-4">
-                    <div class="card" style="height: 270px;">
+                    <div class="card" style="height: 285px;">
                         <h5 class="card-header">
                             {% for b in i.brm.all %}
-                                <a href="/brm_detail/{{ b.id }}"><button class="brm_color mb-1" data-brm-color="{{ b.color }}">{{ b.number }}</button></a>
+                                <a href="/brm_detail/{{ b.id }}"><button class="brm_color mb-1 text-white" data-brm-color="{{ b.color }}">{{ b.number }}</button></a>
                             {% endfor %}
                         </h5>
                         <div class="card-body">
