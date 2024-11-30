@@ -22,6 +22,7 @@ news = [
     path("upload/images/", news.Upload_Images),
     path("ads/", news.AdsView.as_view(), name="ads"),
     path("news/", news.NewsView.as_view(), name="news"),
+    path("news/brm/<int:brm_id>", news.BrmNewsView.as_view(), name="brm_news"),
     path("videos/", news.VideoView.as_view(), name="videos"),
     path("events/", news.EventsView.as_view(), name="events"),
     path("photo/gallary/", news.PhotoGallaryView.as_view(), name="photo_gallary"),

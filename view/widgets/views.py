@@ -17,7 +17,8 @@ class SiteMapView(ListView):
     ordering = "name"
 
     def get_queryset(self):
-        data = super().get_queryset().filter(status="base", visible=True).order_by("order_num")
+        data = super().get_queryset().filter(
+            status="base", visible=True).order_by("order_num")
         return data
 
     def get_context_data(self, **kwargs):
@@ -92,16 +93,24 @@ class SearchAroundProgram(View):
         if not search_query:
             return render(request, self.template_name, titles | {"total": 0})
 
-        query_conditions = Q(title__icontains=search_query) | Q(subtitle__icontains=search_query)
+        query_conditions = Q(
+            title__icontains=search_query) | Q(
+            subtitle__icontains=search_query)
 
-        news_objects = news.News.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
-        events_objects = models.Events.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
-        posts_objects = posts.Posts.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
-        ads_objects = news.Ads.objects.filter(Q(status="pub") & query_conditions).only("title", "image", "slug")
-        shop_objects = models.Shop.objects.select_related("category").filter(name__icontains=search_query)
+        news_objects = news.News.objects.filter(
+            Q(status="pub") & query_conditions).only("title", "image", "slug")
+        events_objects = models.Events.objects.filter(
+            Q(status="pub") & query_conditions).only("title", "image", "slug")
+        posts_objects = posts.Posts.objects.filter(
+            Q(status="pub") & query_conditions).only("title", "image", "slug")
+        ads_objects = news.Ads.objects.filter(
+            Q(status="pub") & query_conditions).only("title", "image", "slug")
+        shop_objects = models.Shop.objects.select_related(
+            "category").filter(name__icontains=search_query)
         sections_objects = models.SectionsAndCenters.objects.filter(
             title__icontains=search_query).only("title", "image", "slug")
-        departments_objects = models.Departments.objects.filter(name__icontains=search_query).only("name", "slug")
+        departments_objects = models.Departments.objects.filter(
+            name__icontains=search_query).only("name", "slug")
 
         results = {
             "news": list(news_objects),
@@ -136,11 +145,14 @@ class SearchDetail(DetailView):
 
     def get_object(self, queryset=None):
         post_slug = self.kwargs["post_slug"]
-        posts.Posts.objects.filter(slug=post_slug).update(post_viewed_count=F("post_viewed_count") + 1)
+        posts.Posts.objects.filter(slug=post_slug).update(
+            post_viewed_count=F("post_viewed_count") + 1)
         obj = get_object_or_404(
-            posts.Posts.objects.select_related("author", "update_user", "navbar"),
-            slug=post_slug
-        )
+            posts.Posts.objects.select_related(
+                "author",
+                "update_user",
+                "navbar"),
+            slug=post_slug)
         return obj
 
     def get_context_data(self, **kwargs):
@@ -171,8 +183,10 @@ class SearchDetail(DetailView):
         context["master_departments_way"] = posts.LearningWay.objects.filter(
             faculty=post, study_degree=2
         )
-        context["bachelor_departments_way_title"] = _("FAKULTETNING BAKALAVRIATURA YO‘NALISHLARI")
-        context["master_departments_way_title"] = _("FAKULTETNING MAGISTRATURA YO‘NALISHLARI")
+        context["bachelor_departments_way_title"] = _(
+            "FAKULTETNING BAKALAVRIATURA YO‘NALISHLARI")
+        context["master_departments_way_title"] = _(
+            "FAKULTETNING MAGISTRATURA YO‘NALISHLARI")
         context["faculty_title"] = _("Fakultet ma'muryati")
         context["departments_title"] = _("Fakultet kafedralari")
         try:
@@ -182,7 +196,8 @@ class SearchDetail(DetailView):
             print(e)
         try:
             if post.navbar:
-                context["category_list"] = posts.Navbar.objects.filter(parent_id=navbar.parent.id)
+                context["category_list"] = posts.Navbar.objects.filter(
+                    parent_id=navbar.parent.id)
             context["pdf_file"] = post.pdf_file.url
         except AttributeError:
             if post.navbar:
@@ -199,7 +214,8 @@ class OpportunitiesView(TemplateView):
         data = super().get_context_data(**kwargs)
         data["title"] = _("Moliyaviy imtiyozlar")
         data["education_credit"] = _("Ta'lim kriditi")
-        data["education_credit_opportunity"] = _("Talabalar uchun soliq imtiyozlari")
+        data["education_credit_opportunity"] = _(
+            "Talabalar uchun soliq imtiyozlari")
         return data
 
 
@@ -236,9 +252,17 @@ class BRMItemsDetailView(DetailView):
         object = context["object"]
         context["title"] = object.name
         context["connected_news_title"] = _("Mavzuga aloqador yangiliklar.")
+        context["view_all_news"] = _("Barcha yangiliklarni ko'rish")
         context["connected_news"] = news.News.objects.filter(
-            status=widgets.Status.published, brm=object.id).order_by("-added_at").only(
-            "id", "brm", "title", "slug", "added_at", "post_viewed_count").prefetch_related("brm")
+            status=widgets.Status.published,
+            brm=object.id).order_by("-added_at").only(
+            "id",
+            "brm",
+            "title",
+            "slug",
+            "added_at",
+            "post_viewed_count").prefetch_related("brm")[
+            :21]
         context["extra_pdf_list"] = widgets.ExtraFile.objects.filter(
             brm_item=object
         ).order_by("-added_at")
@@ -266,8 +290,7 @@ class FinancialBenefitDetailView(View):
             "who_for": _("Kimlar uchun"),
             "order_and_time": _("Imtiyozni taqdim etish tartibi va muddatlari"),
             "lower_base": _("Huquqiy asos"),
-            "contact": _("Aloqa ma’lumotlari")
-        }
+            "contact": _("Aloqa ma’lumotlari")}
         pk = self.kwargs.get("pk")
         if pk:
             obj = widgets.FinancialBenefit.objects.filter(pk=pk).first()

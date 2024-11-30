@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{% static 'css/styles/news/news.css' %}">
     <div class="container mt-4" style="background: #F8F9FA; padding: 20px;">
         <div class="row" id="brm_header">
-            <div class="col-12 col-md-5">
+            <div class="col-11 m-auto m-sm-0 col-md-5">
                 <div class="brm_card" data-brm-color="{{object.color}}">
                     <div class="top">
                         <div class="brm_number">
@@ -32,7 +32,7 @@
                     </div>
                 </div>                
             </div>
-            <div class="col-12 col-md-7">
+            <div class="col-11 m-auto m-sm-0 col-md-7">
                 <div class="post">
                 {% if object.video_file %}
                     <div class="post_video">
@@ -54,7 +54,7 @@
         <h2 class="fw-bolder mb-4">{{ connected_news_title }}</h2>
         <div class="row" id="brm_connected_news">
             {% for i in connected_news %}
-                <div class="col-12 col-sm-6 col-md-4">
+                <div class="col-11 m-auto m-sm-0 col-sm-6 col-md-4">
                     <div class="card" style="height: 285px;">
                         <h5 class="card-header">
                             {% for b in i.brm.all %}
@@ -72,6 +72,9 @@
                     </div>
                 </div>
             {% endfor %}
+            <div class="col-12 text-center mt-3">
+            	<a href="/news/brm/{{ object.id }}" class="btn btn-outline-primary rounded-0">{{ view_all_news }}</a>
+            </div>
         </div>
     </div>
 

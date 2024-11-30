@@ -16,10 +16,35 @@ class NewsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(status="pub").order_by("-added_at").select_related(
-            "author", "update_user"
-                ).prefetch_related(
-                    "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+        queryset = super().get_queryset().filter(
+            status="pub").order_by("-added_at").select_related(
+            "author", "update_user").prefetch_related(
+            "faculty_dact", "departments", "section_and_centers", "hashtag", "brm")
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["title"] = _("Yangiliklar")
+        context["data_number"] = 0
+        return context
+
+
+class BrmNewsView(ListView):
+    """ all brm news view with pagination """
+    model = news.News
+    template_name = "pages/news_and_ads/all_news_for_brm.html"
+    paginate_by = 20
+
+    def get_queryset(self):
+        brm_id = self.kwargs["brm_id"]
+        brm = widgets.BRMItems.objects.get(id=brm_id)
+        queryset = super().get_queryset().filter(status="pub",
+                                                 brm=brm).order_by("-added_at").select_related("author",
+                                                                                               "update_user").prefetch_related("faculty_dact",
+                                                                                                                               "departments",
+                                                                                                                               "section_and_centers",
+                                                                                                                               "hashtag",
+                                                                                                                               "brm")
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -36,16 +61,19 @@ class NewsDetailView(DetailView):
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
-        news.News.objects.filter(slug=slug).update(post_viewed_count=F("post_viewed_count") + 1)
-        object = news.News.objects.filter(slug=slug).select_related("author").first()
+        news.News.objects.filter(slug=slug).update(
+            post_viewed_count=F("post_viewed_count") + 1)
+        object = news.News.objects.filter(
+            slug=slug).select_related("author").first()
         return object
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object = context["object"]
         context["title"] = _("Yangilik")
         context["photos_list"] = _("Ko'proq rasmlarni ko'rish")
-        context["news_photos"] = news.PhotoGallary.objects.filter(news=object).order_by("-added_at")[:10].select_related("news")
+        context["news_photos"] = news.PhotoGallary.objects.filter(
+            news=object).order_by("-added_at")[:10].select_related("news")
         try:
             domain = self.request.get_host()
             context["pdf_file"] = f"http://{domain}" + object.pdf_file.url
@@ -62,9 +90,9 @@ class HashtagSearchView(ListView):
     def get_queryset(self):
         hashtag = self.kwargs["hashtag"]
         hashtag_ = widgets.Hashtag.objects.get(name=hashtag)
-        data =  super().get_queryset().filter(hashtag=hashtag_)
-        return data    
-    
+        data = super().get_queryset().filter(hashtag=hashtag_)
+        return data
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Yangiliklar")
@@ -79,7 +107,8 @@ class AdsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(status="pub").order_by("-added_at").select_related("author", "update_user").prefetch_related("hashtag")
+        queryset = super().get_queryset().filter(status="pub").order_by(
+            "-added_at").select_related("author", "update_user").prefetch_related("hashtag")
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -96,10 +125,12 @@ class AdsDetailView(DetailView):
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
-        news.Ads.objects.filter(slug=slug).update(post_viewed_count=F("post_viewed_count") + 1)
+        news.Ads.objects.filter(
+            slug=slug).update(
+            post_viewed_count=F("post_viewed_count") + 1)
         object = get_object_or_404(news.Ads, slug=slug)
         return object
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         object = context["object"]
@@ -116,7 +147,7 @@ def Upload_Images(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
             try:
-                data = request.FILES.getlist('images') 
+                data = request.FILES.getlist('images')
                 news_id = int(request.POST.get("news_list_id"))
                 img_objects = [
                     news.PhotoGallary(
@@ -127,7 +158,7 @@ def Upload_Images(request):
                 news.PhotoGallary.objects.bulk_create(img_objects)
             except Exception as e:
                 print(e)
-    return render(request, "widgets/upload_images.html") 
+    return render(request, "widgets/upload_images.html")
 
 
 class PhotoGallaryView(ListView):
@@ -153,7 +184,8 @@ class PhotoGallaryFilterView(ListView):
 
     def get_queryset(self):
         news_id = self.kwargs["news_id"]
-        data = super().get_queryset().filter(news=news_id).order_by("-added_at").select_related("news")
+        data = super().get_queryset().filter(
+            news=news_id).order_by("-added_at").select_related("news")
         return data
 
     def get_context_data(self, **kwargs):
@@ -169,7 +201,8 @@ class VideoView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(status="pub").order_by("-added_at").select_related("author")
+        queryset = super().get_queryset().filter(
+            status="pub").order_by("-added_at").select_related("author")
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -186,15 +219,16 @@ class VideosDetailView(DetailView):
 
     def get_object(self, queryset=None):
         slug = self.kwargs["obj_slug"]
-        news.VideoGallery.objects.filter(slug=slug).update(post_viewed_count=F("post_viewed_count") + 1)
+        news.VideoGallery.objects.filter(slug=slug).update(
+            post_viewed_count=F("post_viewed_count") + 1)
         object = get_object_or_404(news.VideoGallery, slug=slug)
         return object
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["title"] = _("Video lavhalar")
         return context
-    
+
 
 class EventsView(ListView):
     model = news.Events
@@ -202,7 +236,9 @@ class EventsView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
-        queryset = super().get_queryset().filter(status="pub").order_by("added_at").select_related("author", "update_user", "event_type")
+        queryset = super().get_queryset().filter(
+            status="pub").order_by("added_at").select_related(
+            "author", "update_user", "event_type")
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -210,7 +246,7 @@ class EventsView(ListView):
         context["title"] = _("Voqealar")
         context["read_more"] = _("Batafsil")
         return context
-    
+
 
 class EventsDetailView(DetailView):
     model = news.Events
@@ -218,12 +254,12 @@ class EventsDetailView(DetailView):
 
     def get_object(self, queryset=None):
         slug = self.kwargs["slug"]
-        news.Events.objects.filter(slug=slug).update(post_viewed_count=F("post_viewed_count") + 1)
+        news.Events.objects.filter(slug=slug).update(
+            post_viewed_count=F("post_viewed_count") + 1)
         object = get_object_or_404(news.Events, slug=slug)
         return object
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["all_events"] = _("Barcha voqealar")
         return context
-    
