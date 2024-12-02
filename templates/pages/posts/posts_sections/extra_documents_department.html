@@ -1,0 +1,26 @@
+<table class="table">
+    {% for obj in object.department_charter_files.all %}
+        <tr>
+            <td>{{ document_charter }}</td>
+            {% if LANGUAGE_CODE == 'en' %}
+                <td><a href="{{ obj.department_charter_en.url }}" target="_blank">{{ download }}</a></td>
+            {% elif LANGUAGE_CODE == 'ru' %}
+                <td><a href="{{ obj.department_charter_ru.url }}" target="_blank">{{ download }}</a></td>
+            {% else %}
+                <td><a href="{{ obj.department_charter.url }}" target="_blank">{{ download }}</a></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    {% for obj in object.department_plan_files.all %}
+        <tr>
+            <td>{{ document_plan }}</td>
+            {% if LANGUAGE_CODE == 'en' %}
+                <td><a href="{{ obj.department_plan_en.url }}" target="_blank">{{ download }}</a></td>
+            {% elif LANGUAGE_CODE == 'ru' %}
+                <td><a href="{{ obj.department_plan_ru.url }}" target="_blank">{{ download }}</a></td>
+            {% else %}
+                <td><a href="{{ obj.department_plan.url }}" target="_blank">{{ download }}</a></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+</table>

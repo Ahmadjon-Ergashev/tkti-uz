@@ -1,0 +1,161 @@
+.quick_links .title h4 {
+  margin: 0;
+  padding: 10px;
+  color: #ffffff;
+  background: #26597E;
+}
+.quick_links .body ul li {
+  border: none;
+}
+.quick_links .body ul li a {
+  color: #111;
+}
+.quick_links .body ul li::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #26597E;
+  transition: width 0.5s ease-in-out;
+}
+.quick_links .body ul li:hover::after {
+  width: 100%;
+}
+
+.socials_networks .title h4 {
+  margin: 0;
+  padding: 10px;
+  color: #ffffff;
+  background: #26597E;
+}
+.socials_networks .body ul {
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+}
+.socials_networks .body ul li {
+  list-style-type: none;
+}
+.socials_networks .body ul li a {
+  font-size: 35px;
+}
+
+.pc-tab > input,
+.pc-tab section > div {
+  display: none;
+}
+
+#tab1:checked ~ section .tab1,
+#tab2:checked ~ section .tab2 {
+  display: block;
+}
+
+#tab1:checked ~ nav .tab1,
+#tab2:checked ~ nav .tab2 {
+  color: red;
+}
+
+/* Visual Styles */
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.pc-tab {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+.pc-tab ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.pc-tab ul li label {
+  width: 50%;
+  text-align: center;
+  font-family: "Cinzel", serif;
+  float: left;
+  font-weight: 900;
+  padding: 15px 25px;
+  border-bottom: 0;
+  border: 1px solid #ddd;
+  background: #eeeeee;
+  color: #444;
+}
+.pc-tab ul li label:hover {
+  background: #dddddd;
+}
+.pc-tab ul li label:active {
+  background: #ffffff;
+}
+.pc-tab ul li:not(:last-child) label {
+  border-right-width: 0;
+}
+.pc-tab section {
+  clear: both;
+  font-family: "Roboto Mono", monospace;
+}
+.pc-tab section div {
+  width: 100%;
+  padding: 20px;
+  background: #fff;
+  line-height: 1.5em;
+  letter-spacing: 0.3px;
+  border: 1px solid #ddd;
+  color: #444;
+}
+.pc-tab section div ul li {
+  padding: 8px 0;
+}
+.pc-tab section div ul li a {
+  color: #111;
+  font-size: 13px;
+  font-family: "Noto Serif", serif;
+}
+.pc-tab section div ul li a:hover {
+  color: #111;
+}
+.pc-tab section div ul li::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: #26597E;
+  transition: width 0.5s ease-in-out;
+}
+.pc-tab section div ul li:hover::after {
+  width: 100%;
+}
+.pc-tab section div ul li .header_tabs_section {
+  border: none;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+.pc-tab section div ul li .header_tabs_section span {
+  color: #111;
+}
+.pc-tab section div ul li .body_tabs_section {
+  padding: 0;
+  border: none;
+}
+
+#tab1:checked ~ nav .tab1 label,
+#tab2:checked ~ nav .tab2 label {
+  color: #111;
+  background: white;
+  position: relative;
+}
+#tab1:checked ~ nav .tab1 label:after,
+#tab2:checked ~ nav .tab2 label:after {
+  content: "";
+  display: block;
+  position: absolute;
+  height: 2px;
+  width: 100%;
+  background: #ffffff;
+  left: 0;
+  bottom: -1px;
+}/*# sourceMappingURL=left_sidebar.css.map */

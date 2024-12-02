@@ -1,0 +1,162 @@
+@import "../variables/colors";
+
+
+.lang{
+    .language_code{
+        border: none;
+        font-size: 14px;
+    }
+}
+
+.top_nav{
+    ul{
+        padding: 0;
+        margin: 0;
+        li{
+            display: inline-block;
+            list-style-type: none;
+            a{
+                color: $dark;
+                font-size: 13px;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+            .again{
+                font-weight: 700;
+                &:hover{
+                    text-decoration: none;
+                }
+            }
+            .again_dr{
+                z-index: 9998;
+                li{
+                    width: 100%;
+                    padding: 5px 10px;
+                    a{
+                        &:hover{
+                            text-decoration: none;
+                        }
+                    }
+                    &:hover{
+                        background: $color1;
+                        a{
+                            color: $text_white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+#base_navbar{
+    #navbarNavDropdown{
+        .navbar-nav{
+            .main_nav_item{
+                &:not(:last-child){
+                    margin-right: 5px;
+                }
+            }
+            .nav-item{
+                .nav_name{
+                    font-size: 15px;
+                    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+                }
+                .dropdown-menu{
+                    z-index: 9999;
+                    li{
+                        transition: 0.5s all;
+                        &:hover{
+                            background-color: $color1;
+                            a:hover{
+                                color: $text_white;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.socials{
+    top: 30%;
+    right: 0%;
+    z-index: 9999;
+    position: fixed;
+    ul {
+        padding: 0;
+        li{
+            list-style-type: none;
+            background-color: $text_white;
+            a{
+                padding: 5px;
+                display: flex;
+                font-size: 18px;
+                justify-content: space-between;
+                i{
+                    font-size: 35px;
+                }
+            }
+        }
+        .link{
+            color: $color1;
+            i{
+                font-size: 30px;
+            }
+        }
+    }
+}
+
+// to top button css
+
+.bottom_right_btns{
+    top: 85%;
+    right: 1%;
+    z-index: 9999;
+    position: fixed; 
+    ul{
+        li{
+            margin-bottom: 10px;
+            list-style-type: none;
+            button{
+                border: none;
+                outline: none;
+                background: none;
+            }
+            i{
+                color: $color1;
+                font-size: 35px;
+            }
+        }
+    }
+}
+
+// seach box 
+.has-search{
+    .form-control {
+        padding-left: 2.375rem;
+    }
+    .form-control-feedback {
+        position: absolute;
+        z-index: 2;
+        color: $dark;
+        display: block;
+        width: 2.375rem;
+        height: 2.375rem;
+        text-align: center;
+        pointer-events: none;
+        line-height: 2.375rem;
+    }
+
+}
+
+.search_btn{
+    border: none;
+    outline: none;
+    background: none;
+    color: $text_white;
+    padding: 8px 20px;
+    background-color: $color1;
+}

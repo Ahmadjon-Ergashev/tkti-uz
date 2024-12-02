@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+
+{% block content %}
+    <style>
+        article {
+            --img-scale: 1.001;
+            --title-color: black;
+            --link-icon-translate: -20px;
+            --link-icon-opacity: 0;
+            position: relative;
+            border-radius: 16px;
+            box-shadow: none;
+            background: #fff;
+            transform-origin: center;
+            transition: all 0.4s ease-in-out;
+            overflow: hidden;
+        }
+
+        article a::after {
+            position: absolute;
+            inset-block: 0;
+            inset-inline: 0;
+            cursor: pointer;
+            content: "";
+        }
+
+        article h5 {
+            font-weight: unset;
+            margin: 0 0 18px 0;
+            letter-spacing: 0.06em;
+            color: var(--title-color);
+            transition: color 0.3s ease-out;
+        }
+
+        figure {
+            margin: 0;
+            padding: 0;
+            aspect-ratio: 16 / 9;
+            overflow: hidden;
+        }
+
+        article img {
+            max-width: 100%;
+            transform-origin: center;
+            transform: scale(var(--img-scale));
+            transition: transform 0.4s ease-in-out;
+        }
+
+        .article-body {
+            padding: 24px;
+        }
+
+        article a {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #28666e;
+        }
+
+        article a:focus {
+            outline: 1px dotted #28666e;
+        }
+
+        article a .icon {
+            min-width: 24px;
+            width: 24px;
+            height: 24px;
+            margin-left: 5px;
+            transform: translateX(var(--link-icon-translate));
+            opacity: var(--link-icon-opacity);
+            transition: all 0.3s;
+        }
+
+        article:has(:hover, :focus) {
+            --img-scale: 1.1;
+            --title-color: #28666e;
+            --link-icon-translate: 0;
+            --link-icon-opacity: 1;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        .articles {
+            display: grid;
+            max-width: 1200px;
+            margin-inline: auto;
+            padding-inline: 24px;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        @media screen and (max-width: 960px) {
+            article {
+                container: card/inline-size;
+            }
+
+            .article-body p {
+                display: none;
+            }
+        }
+
+        @container card (min-width: 380px) {
+            .article-wrapper {
+                display: grid;
+                grid-template-columns: 100px 1fr;
+                gap: 16px;
+            }
+
+            .article-body {
+                padding-left: 0;
+            }
+
+            figure {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            figure img {
+                height: 100%;
+                aspect-ratio: 1;
+                object-fit: cover;
+            }
+        }
+
+        .sr-only:not(:focus):not(:active) {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            height: 1px;
+            overflow: hidden;
+            position: absolute;
+            white-space: nowrap;
+            width: 1px;
+        }
+    </style>
+    <!-- local css -->
+    <link rel="stylesheet" href="{% static 'css/styles/left_category/left_sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles/posts/posts_list.css' %}">
+    <div class="container mt-4">
+        {% if title_slug == 'fakultet' %}
+            {% include "./posts_sections/faculty.html" %}
+        {% elif title_slug == 'brm' %}
+            {% include "./posts_sections/brm.html" %}
+        {% elif title_slug == 'raqamlashtirish' %}
+            {% include "./posts_sections/digitization.html" %}
+        {% else %}
+            <div class="row">
+            <div class="col-11 col-sm-12 m-auto m-md-0 col-md-4 col-lg-4 col-xl-4 col-xxl-3">
+                {% include "widgets/left_sidebar.html" %}
+            </div>
+            {#                <br><br><br><br>#}
+            <div class="col-11 mx-auto col-sm-12 col-md-4 col-lg-8 col-xl-8 col-xxl-9 posts">
+                {% if object_list|length == 1 %}
+                    {% for object in object_list %}
+                        <div class="post_detail">
+                            {% if object.image %}
+                                <div class="post_img_bg" id="object_base_img"
+                                     style="background-image: url('{{ object.image.url }}');"></div>
+                            {% endif %}
+                            <h3>{{ object.title }}</h3>
+                            {% if object.video_file %}
+                                <div class="post_video">
+                                    <video width="100%" controls>
+                                        <source src="{{ object.video_file.url }}" type="video/mp4">
+                                    </video>
+                                </div>
+                            {% endif %}
+                            {% include "widgets/pdf_file.html" %}
+                            {% if object.post %}
+                                <div class="post_text mt-3" id="object_post">
+                                    {{ object.post.html | safe }}
+                                </div>
+                            {% endif %}
+                            {% if extra_pdf_list %}
+                                {% include 'pages/posts/posts_sections/extra_pdf.html' %}
+                            {% endif %}
+                            {% if object.zip_file %}
+                                <p class="py-3 px-2">
+                                    <a href="{{ object.zip_file.url }}" download="{{ object.zip_file.url }}">
+                                        {{ zip_file_title }}
+                                    </a>
+                                </p>
+                            {% endif %}
+                            <br><br>
+                            <div class="row">
+                                {% include "pages/posts/posts_sections/section_boss.html" %}
+                            </div>
+                            {% if connected_faculty_dact %}
+                                <div class="accordion accordion-flush" id="accordionFlushExample">
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed px-0" type="button"
+                                                    data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                    aria-expanded="false" aria-controls="flush-collapseOne">
+                                                <h5 class="fw-bold p-0 m-0">{{ depended_news }}</h5>
+                                            </button>
+                                        </h2>
+                                        <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                             data-bs-parent="#accordionFlushExample">
+                                            <div class="accordion-body px-0 py-2">
+                                                <div class="row">
+                                                    {% for obj in connected_faculty_dact %}
+                                                        <div class="col-12 col-md-4">
+                                                            <div class="card" style="height: 110px; ">
+                                                                <div class="card-body">
+                                                                    <p class="">
+                                                                        <a target="_blank" class="text-dark"
+                                                                           href="{% url 'news_detail' obj_slug=obj.slug %}">
+                                                                            {{ obj.title|truncatechars:80 }}</a>
+                                                                    </p>
+                                                                    <div class="d-flex justify-content-between">
+                                                                        <span><i class="fas fa-calendar-alt me-2"></i>
+                                                                            {{ obj.added_at|date:'d-M-Y' }}</span>
+                                                                        <span><i
+                                                                                class="fas fa-eye me-2"></i> {{ obj.post_viewed_count }}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            <div class="post_footer">
+                                {% if LANGUAGE_CODE == 'uz' %}
+                                    <p class="text-end fw-bold">TKTI Axborot xizmati</p>
+                                {% elif LANGUAGE_CODE == 'ru' %}
+                                    <p class="text-end fw-bold">Пресс служба ТХТИ</p>
+                                {% elif LANGUAGE_CODE == 'en' %}
+                                    <p class="text-end fw-bold">Press service of TICT</p>
+                                {% endif %}
+                                <div class="time_and_view">
+                                    <span><i class="fas fa-eye me-2"></i>{{ object.post_viewed_count }}</span>
+                                    <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% if title_slug == 'boglanish' %}
+                        {% include "pages/posts/posts_sections/contact.html" %}
+                    {% elif title_slug == 'bolim-va-markazlar' %}
+                        {% include "pages/posts/posts_sections/sections_and_centers.html" %}
+                        {% include "widgets/pagination.html" %}
+                    {% elif title_slug == 'institut-rahbariyati' %}
+                        {% include "pages/posts/posts_sections/admistrations.html" %}
+                    {% elif title_slug == 'iqtidorli-talabalar' %}
+                        {% include "pages/posts/posts_sections/talented_students.html" %}
+                    {% else %}
+                        <!-- Start Blog Layout -->
+                        <section class="articles">
+                            {% for obj in object_list %}
+                                <article>
+                                    <div class="article-wrapper">
+                                        <figure>
+                                            {% if obj.image %}
+                                                <img src="{{ obj.image.url }}" alt=""/>
+                                            {% else %}
+                                                <img src="/static/images/default.png" alt=""/>
+                                            {% endif %}
+                                        </figure>
+                                        <div class="article-body">
+                                            <h5>{{ obj.title|truncatechars:100 }}</h5>
+                                            {% if obj.subtitle %}
+                                                <p>
+                                                    {{ obj.subtitle }}
+                                                </p>
+                                            {% endif %}
+                                            <a href="/posts/navbar/post/{{ obj.slug }}"
+                                               class="read-more">{{ read_more }}<span class="sr-only"></span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 20 20"
+                                                     fill="currentColor">
+                                                    <path fill-rule="evenodd"
+                                                          d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"
+                                                          clip-rule="evenodd"></path>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                                {% empty %}
+                                <p class="text-center">
+                                    {{ empty }}
+                                </p>
+                            {% endfor %}
+                        </section>
+                        {% include "widgets/pagination.html" %}
+                    {% endif %}
+                {% endif %}
+                {% if connected_faqs %}
+                    {% include "pages/posts/posts_sections/faqs.html" %}
+                {% endif %}
+            </div>
+        {% endif %}
+        </div>
+    </div>
+    <script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/scripts/posts/posts_inside.js' %}"></script>
+    <script src="{% static 'js/scripts/posts/talented_students.js' %}"></script>
+{% endblock content %}
+    

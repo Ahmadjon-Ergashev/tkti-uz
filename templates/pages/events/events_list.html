@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles/news/news.css' %}">
+    <div class="container">
+        <div class="title my-5">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="all_events">
+            <div class="row card_box">
+                {% for obj in object_list %}              
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card">
+                            <!-- <img src="{{ obj.image.url }}" class="card-img-top" alt="{{ obj.title }} | tkti.uz"> -->
+                            <div class="card-body">
+                                <p class="card-text">
+                                    {{ obj.title | truncatechars:80 }}
+                                </p>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item ps-0"><span class="font-monospace">{{ obj.event_type.name }}</span></li>
+                                    <li class="list-group-item ps-0"><i class="fas fa-calendar-alt pe-2"></i><span>{{ obj.added_at}}</span></li>
+                                    <li class="list-group-item ps-0"><i class="fas fa-map-marker-alt pe-2"></i></i><span>{{ obj.location }}</span></li>
+                                </ul>
+                                <div class="read_more">
+                                    <a href="{% url 'events_detail' slug=obj.slug %}">{{ read_more }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "../../widgets/pagination.html" %}
+    </div>
+  
+{% endblock content %}

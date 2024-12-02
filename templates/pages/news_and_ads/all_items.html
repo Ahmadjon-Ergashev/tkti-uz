@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/styles/news/news.css' %}">
+    <div class="container">
+        <div class="title my-5">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="news_ads_videos">
+            <div class="row card_box">
+                {% for obj in object_list %}
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="card">
+                            {% if obj.poster %}
+                                <img src="{{ obj.poster.url }}"
+                                     class="card-img-top" style="height: 200px" alt="{{ obj.title }} | tkti.uz">
+                            {% elif obj.image %}
+                                <img src="{{ obj.image.url }}"
+                                     class="card-img-top" style="height: 200px" alt="{{ obj.title }} | tkti.uz">
+                            {% endif %}
+                            <div class="card-body">
+                                <p class="card-text">
+                                    {{ obj.title | truncatechars:80 }}
+                                </p>
+                                <div class="read_more">
+                                    {% if data_number == 0 %}
+                                        <a href="{% url 'news_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
+                                    {% elif data_number == 1 %}
+                                        <a href="{% url 'ads_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
+                                    {% elif data_number == 2 %}
+                                        <a href="{% url 'video_detail' obj_slug=obj.slug %}">{{ read_more }}</a>
+                                    {% endif %}
+                                </div>
+                                <!--                                <br>-->
+                                {% if obj.added_at %}
+                                    <div class="item_footer d-flex justify-content-between">
+                                        <span><a href="" class="text-dark">{{ obj.added_at|date:"D, d-M Y" }}</a></span>
+                                        <span class="text-dark"><i
+                                                class="far fa-eye me-1"></i>{{ obj.post_viewed_count }}</span>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% include "widgets/pagination.html" %}
+    </div>
+
+{% endblock content %}

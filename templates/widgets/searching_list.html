@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <style>
+        .card_bg {
+            height: 200px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+    <div class="container mt-4">
+        <div class="main_title my-5 text-center"></div>
+        <div class="row" id="search_result_list">
+            <div class="search_title py-3">
+                <div class="d-flex justify-content-between">
+                    <span class="fs-2 d-block">{{ title }}</span>
+                </div>
+                <hr class="my-1">
+            </div>
+            {% for object in object_list %}
+                <div class="col-12 col-md-4 col-lg-3 p-2">
+                    <div class="card" style="height: 320px">
+                        {% if object.image %}
+                            <div class="card_bg" style="background-image: url('{{ object.image.url }}')"></div>
+                        {% else %}
+                            <div class="card_bg"
+                                 style="background-image: url('{% static 'images/default.png' %}')"></div>
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text text-lowercase">
+                                {{ object.title|truncatechars:100 }}
+                                <br><br>
+                                <a class="text-capitalize" href="{{ url }}/{{ object.slug }}">
+                                    {{ read_more }} <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {% if object_list.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">Birinchi sahifa</a></li>
+                    <li class="page-item"><a class="page-link"
+                                             href="?page={{ object_list.previous_page_number }}">Ortga</a></li>
+                {% endif %}
+
+                {% for i in object_list.paginator.page_range %}
+                    <li class="page-item{% if object_list.number == i %} active{% endif %}">
+                        <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+                    </li>
+                {% endfor %}
+
+                {% if object_list.has_next %}
+                    <li class="page-item"><a class="page-link"
+                                             href="?page={{ object_list.next_page_number }}">Keyingisi</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ object_list.paginator.num_pages }}">Oxirgisi</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endblock content %}
+    
+
+
+    

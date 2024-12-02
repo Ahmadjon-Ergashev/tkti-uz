@@ -1,0 +1,452 @@
+<div class="container my-5">
+    <div class="row">
+        <div class="col-10 m-auto m-md-0 col-md-12">
+            <h1>{{ object.name }}</h1>
+            <div class="object_body">
+                <p>{{ object.desc.html|safe }}</p>
+                {% for pdf in object.educational_area.all %}
+                    {% if pdf.type == "day" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_day }}
+                        </a>
+                    {% elif pdf.type == "evening" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white  mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_evening }}
+                        </a>
+                    {% elif pdf.type == "externally" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc }}
+                        </a>
+                    {% elif pdf.type == "master" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_master }}
+                        </a>
+                    {% elif pdf.type == "phd" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_phd }}
+                        </a>
+                    {% elif pdf.type == "dsc" %}
+                        <a type="button" class="btn btn-sm btn-primary text-white mb-2" data-bs-toggle="offcanvas"
+                           data-bs-target="#main_pdf_edu_area_{{ pdf.id }}"
+                           aria-controls="about_study_program_{{ pdf.id }}">
+                            {{ desc_dsc }}
+                        </a>
+                    {% endif %}
+
+                    <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
+                         data-bs-backdrop="false"
+                         tabindex="-1" id="main_pdf_edu_area_{{ pdf.id }}" aria-labelledby="offcanvasScrollingLabel">
+                        <div class="offcanvas-header">
+                            <h5 class="offcanvas-title" id="about_study_program_{{ pdf.id }}">{{ object.name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body">
+                            {% if LANGUAGE_CODE == 'uz' %}
+                                {% if pdf.pdf_file %}
+                                    <iframe
+                                            src="{{ pdf.pdf_file.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            {% endif %}
+                            {% if LANGUAGE_CODE == 'ru' %}
+                                {% if pdf.pdf_file_ru %}
+                                    <iframe
+                                            src="{{ pdf.pdf_file_ru.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            {% endif %}
+                            {% if LANGUAGE_CODE == 'en' %}
+                                {% if pdf.pdf_file_en %}
+                                    <iframe
+                                            src="{{ pdf.pdf_file_en.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if object.education_areas_themes.all %}
+    <table class="table">
+        <thead class="table-head-fixed">
+        <tr>
+            <th scope="col">{{ theme_name }}</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th scope="col">{{ theme_teacher }}</th>
+            <th scope="col">{{ theme_finance }}</th>
+        </tr>
+        </thead>
+        <tbody class="">
+        {% for i in object.education_areas_themes.all %}
+            <tr>
+                <td colspan="3">
+                    <div class="accordion accordion-flush w-100" id="accordionFlushExample_{{ i.id }}">
+                        <div class="accordion-item">
+                                <span class="accordion-header">
+                                    <button class="accordion-button collapsed px-0" type="button"
+                                            data-bs-toggle="collapse" data-bs-target="#flush-collapse_{{ i.id }}"
+                                            aria-expanded="false" aria-controls="flush-collapse_{{ i.id }}">
+                                        {{ i.name }}
+                                    </button>
+                                </span>
+                            <div id="flush-collapse_{{ i.id }}" class="accordion-collapse collapse w-75"
+                                 data-bs-parent="#accordionFlushExample_{{ i.id }}">
+                                <div class="accordion-body w-75">
+                                    <p class="w-75">
+                                        {{ i.desc.html|safe }}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td colspan="1">{{ i.teacher }}</td>
+                <td colspan="1">{{ i.finance }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <br>
+    <a type="button" class="btn btn-sm btn-primary text-white my-3 w-25"
+       data-bs-toggle="offcanvas" data-bs-target="#themes_list" aria-controls="themes_list">
+        {{ theme_download }}
+    </a>
+    <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l"
+         data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="themes_list"
+         aria-labelledby="offcanvasScrollingLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="">{{ theme_download }}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            {% if LANGUAGE_CODE == 'uz' %}
+                {% if object.pdf_file %}
+                    <iframe
+                            src="{{ object.pdf_file.url }}"
+                            width="100%" height="100%">
+                    </iframe>
+                {% endif %}
+            {% endif %}
+            {% if LANGUAGE_CODE == 'ru' %}
+                {% if object.pdf_file_ru %}
+                    <iframe
+                            src="{{ object.pdf_file_ru.url }}"
+                            width="100%" height="100%">
+                    </iframe>
+                {% endif %}
+            {% endif %}
+            {% if LANGUAGE_CODE == 'en' %}
+                {% if object.pdf_file_en %}
+                    <iframe
+                            src="{{ object.pdf_file_en.url }}"
+                            width="100%" height="100%">
+                    </iframe>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endif %}
+
+
+{% for req in object.educational_area_requirements.all %}
+    {% if req.type == 'day' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h3>{{ requirements_day }}</h3>
+            </div>
+        </div>
+    {% elif req.type == 'evening' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h3>{{ requirements_evening }}</h3>
+            </div>
+        </div>
+    {% elif req.type == 'externally' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h3>{{ requirements }}</h3>
+            </div>
+        </div>
+    {% elif req.type == 'master' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h3>{{ requirements_master }}</h3>
+            </div>
+        </div>
+    {% elif req.type == 'phd' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h3>{{ requirements_phd }}</h3>
+            </div>
+        </div>
+    {% elif req.type == 'dsc' %}
+        <div class="section_title py-2">
+            <div class="container">
+                <h3>{{ requirements_dsc }}</h3>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container my-1">
+        <div class="row">
+            <div class="col-10 m-auto m-md-0 col-md-12">
+                <div class="object_body">
+                    {% if object.phd_subject_program %}
+                        <a type="button" class="btn btn-sm btn-primary text-white my-3 w-25"
+                           data-bs-toggle="offcanvas" data-bs-target="#phd_subject_program"
+                           aria-controls="phd_subject_program">
+                            {{ phd_subject_program }}
+                        </a>
+                        <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
+                             data-bs-backdrop="false"
+                             tabindex="-1" id="phd_subject_program" aria-labelledby="offcanvasScrollingLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="phd_subject_program">{{ phd_subject_program }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                {% if object.phd_subject_program %}
+                                    <iframe
+                                            src="{{ object.phd_subject_program.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% if object.phd_special_subject_program %}
+                        <a type="button" class="btn btn-sm btn-primary text-white my-3 w-50"
+                           data-bs-toggle="offcanvas" data-bs-target="#phd_special_subject_program"
+                           aria-controls="phd_special_subject_program">
+                            {{ phd_special_subject_program }}
+                        </a>
+                        <div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true"
+                             data-bs-backdrop="false"
+                             tabindex="-1" id="phd_special_subject_program" aria-labelledby="offcanvasScrollingLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title"
+                                    id="phd_special_subject_program">{{ phd_special_subject_program }}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                        aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                {% if object.phd_special_subject_program %}
+                                    <iframe
+                                            src="{{ object.phd_special_subject_program.url }}"
+                                            width="100%" height="100%">
+                                    </iframe>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    <p>{{ req.requirement.html|safe }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+<div class="container my-2">
+    <div class="object_body">
+        <div class="row">
+            {% if object.educational_area_requirements.all %}
+                <div class="col-10 m-auto col-lg-8">
+                    <p>{{ object.tuition_fee.html|safe }}</p>
+                    <ul class="list-group list-group-flush w-75 w-75-l">
+                        {% for fee in object.educational_area_requirements.all %}
+                            {% if fee.full_time_fee != 0 %}
+                                {% if fee.type == "day" %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title_day }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title_day }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% elif fee.type == "evening" %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title_evening }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title_evening }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% elif fee.type == "master" %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title_master }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title_master }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% else %}
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ full_time_fee_title }}</span>
+                                        <span>{{ fee.full_time_fee }} so'm</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between px-0">
+                                        <span>{{ dept_fee_title }}</span>
+                                        <span>{{ fee.dept_fee }} so'm</span>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                            <br>
+                        {% endfor %}
+                    </ul>
+                    {% for fee in object.educational_area_requirements.all %}
+                        {% if forloop.counter == 1 %}
+                            {% if fee.full_time_fee != 0 %}
+                                <a href="/supports" class="btn btn-sm btn-primary mt-2"
+                                   target="_blank">{{ money_priz }}</a>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="col-10 m-auto col-lg-4">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item fw-bold ps-0">{{ contact_edu_area }}</li>
+                    <li class="list-group-item d-flex justify-content-between w-50-l ps-0">
+                        <span class="fw-bold">{{ phone_title }}: </span>
+                        <span>{{ object.phone }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between ps-0">
+                        <span class="fw-bold">{{ extra_phone_title }}: </span>
+                        <span>{{ object.extra_phone }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between ps-0">
+                        <span class="fw-bold">{{ email_title }}: </span>
+                        <span>{{ object.email }}</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between ps-0">
+                        <span class="fw-bold">{{ address_title }}: </span>
+                        <span>{{ object.address }}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+{% if modules_by_semester %}
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ modul_title }}</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="module_by_semesters">
+            <div class="_container">
+                <div class="tap_title">
+                    <div class="tab_box container" style="padding: 0;">
+                        <div class="tab_btns">
+                            {% for semester in modules_by_semester %}
+                                <button class="tab_btn {% if forloop.first %}active_tap{% endif %}">{{ semester }}</button>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="content_box my-5 container">
+                    {% for semester, modules in modules_by_semester.items %}
+                        <div class="content {% if forloop.first %}d-block{% endif %}">
+                            <ul class="list-group list-group-flush w-50-l w-50">
+                                {% for module in modules %}
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span>{{ module.name }}</span>
+                                        <a type="button" class="text-primary" data-bs-toggle="offcanvas"
+                                           data-bs-target="#StudyWay{{ module.id }}" aria-controls="offcanvasScrolling">
+                                            {{ view }}
+                                        </a>
+                                    </li>
+                                    <div class="offcanvas offcanvas-start w-100" data-bs-scroll="true"
+                                         data-bs-backdrop="false" tabindex="-1" id="StudyWay{{ module.id }}"
+                                         aria-labelledby="offcanvasScrollingLabel">
+                                        <div class="offcanvas-header">
+                                            <h5 class="offcanvas-title"
+                                                id="offcanvasScrollingLabel">{{ module.name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="offcanvas-body">
+                                            {% include "pages/study_way/pdfs.html" %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+{% if object.education_areas_themes.all %}
+
+{% else %}
+    <div class="section_title py-2">
+        <div class="container">
+            <h3>{{ you_may_become_title }}</h3>
+        </div>
+    </div>
+
+    <div class="container mb-5">
+        <div class="object_body">
+            <div class="row">
+                <div class="col-10 m-auto col-md-4 p-1">
+                    {% if object.you_may_become_image %}
+                        <div class="you_become_img"
+                             style="background-image: url('{{ object.you_may_become_image.url }}');"></div>
+                    {% endif %}
+                </div>
+                <div class="col-10 m-auto col-md-8 p-1">
+                    <p>{{ object.you_may_become.html|safe }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-10 m-auto m-md-0 col-md-12">
+            <div class="post_footer">
+                {% if LANGUAGE_CODE == 'uz' %}
+                    <p class="text-end fw-bold">TKTI Axborot xizmati</p>
+                {% elif LANGUAGE_CODE == 'ru' %}
+                    <p class="text-end fw-bold">Пресс служба ТХТИ</p>
+                {% elif LANGUAGE_CODE == 'en' %}
+                    <p class="text-end fw-bold">Press service of TICT</p>
+                {% endif %}
+                <div class="time_and_view">
+                    <span><i class="fas fa-eye me-2"></i> {{ object.post_viewed_count }}</span>
+                    <span><i class="fas fa-calendar-alt me-2"></i> {{ object.added_at }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

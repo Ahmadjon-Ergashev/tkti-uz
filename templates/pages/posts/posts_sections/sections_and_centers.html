@@ -1,0 +1,30 @@
+{% load static %}
+<div class="row">
+    {% for obj in object_list %}                          
+        <div class="col-12 col-md-4 col-lg-4">
+            <div class="card" style="height: 315px; max-height: 315px;">
+
+                <a href="{% url 'sect_nav' post_slug=obj.slug %}">
+                    {% if obj.image %}
+                        <img
+                             src="{{ obj.image.url }}" style="object-fit: contain" width="200" height="210"
+                             class="card-img-top" alt="{{ obj.title }} | tkti.uz"
+                        >
+                    {% else %}
+                        <img
+                            src="{% static 'images/default.png' %}"  style="object-fit: contain" width="200" height="210"
+                            class="card-img-top" alt="{{ obj.title }} | tkti.uz"
+                        >
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <p class="card-text text-center">
+                        <a href="{% url 'sect_nav' post_slug=obj.slug %}" class="text-dark">
+                            {{ obj.title }}
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

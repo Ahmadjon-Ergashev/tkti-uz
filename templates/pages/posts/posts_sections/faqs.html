@@ -1,0 +1,33 @@
+<div class="accordion accordion-flush" id="accordionFlushFAQ">
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed px-0" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFAQ" aria-expanded="false" aria-controls="flush-collapseFAQ">
+                <h5 class="fw-bold p-0 m-0">{{ depended_faq }}</h5>
+            </button>
+        </h2>
+        <div id="flush-collapseFAQ" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body px-0 py-2">
+                {% for obj in connected_faqs %}
+                    <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button
+                                        class="accordion-button collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapse{{ obj.id }}"
+                                        aria-expanded="false" aria-controls="flush-collapse{{ obj.id }}">
+                                    <span class="font-monospace">{{ obj.title }}</span>
+                                </button>
+                            </h2>
+                            <div id="flush-collapse{{ obj.id }}" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                                <div class="accordion-body">
+                                    {{ obj.answer.html|safe }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>

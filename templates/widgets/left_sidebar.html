@@ -1,0 +1,145 @@
+{% load static %}
+<!-- inside navbar -->
+{% if category_list %}
+    <div class="quick_links border mb-3">
+        <div class="title bg-light">
+            {% if parent is not None %}
+                <h4>{{ parent }}</h4>
+            {% else %}
+                <h4>{{ title }}</h4>
+            {% endif %}
+        </div>
+        <div class="body">
+            <ul class="list-group">
+                {% for cl in category_list %}
+                    {% if cl.name == title %}
+                        <li class="list-group-item">
+                            <i class="fas fa-angle-right"></i>
+                            {% if cl.url %}
+                                <a class="left_side_child"
+                                   href="{{ cl.url }}">{{ cl.name }}</a>
+                            {% else %}
+                                <a class="left_side_child"
+                                   href="/posts/navbar/{{ cl.slug }}">{{ cl.name }}</a>
+                            {% endif %}
+                        </li>
+                    {% else %}
+                        <li class="list-group-item">
+                            {% if cl.url %}
+                                <a class="left_side_child"
+                                   href="{{ cl.url }}">{{ cl.name }}</a>
+                            {% else %}
+                                <a class="left_side_child"
+                                   href="/posts/navbar/{{ cl.slug }}">{{ cl.name }}</a>
+                            {% endif %}
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}
+
+<!-- inside navbar -->
+
+<!-- quick links -->
+
+<div class="quick_links border">
+    <div class="title bg-light">
+        <h4>{{ quick_link_title }}</h4>
+    </div>
+    <div class="body">
+        <ul class="list-group">
+            {% for ql in quick_links %}
+                <li class="list-group-item">
+                    <a href="{{ ql.url }}">{{ ql.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<!-- quick links -->
+
+<!-- social networks -->
+<div class="mt-3 socials_networks border">
+    <div class="title">
+        <h4>{{ social_networks_title }}</h4>
+    </div>
+    <div class="body">
+        <ul class="">
+            {% for sn in social_networks %}
+                <li class="social_networks_links" data-social-color="{{ sn.color }}">
+                    <a href="{{ sn.url }}" target="_blank"><i class="{{ sn.icon }}"></i></a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<!-- social networks -->
+
+<!-- news tabs -->
+
+<div class="pc-tab mt-3">
+    <input checked="checked" id="tab1" type="radio" name="pct"/>
+    <input id="tab2" type="radio" name="pct"/>
+    <input id="tab3" type="radio" name="pct"/>
+    <nav>
+        <ul>
+            <li class="tab1">
+                <label for="tab1">{{ news_tab }}</label>
+            </li>
+            <li class="tab2">
+                <label for="tab2">{{ ads_tab }}</label>
+            </li>
+        </ul>
+    </nav>
+    <section>
+        <div class="tab1">
+            <ul id="most_read_news_4">
+                {% comment %}
+                    {% for news in most_read_news %}
+                        <li>
+                            <div class="header_tabs_section">
+                                <span><a
+                                        href="/news/detail/{{ news.slug }}/">{{ news.added_at|date:"D, d M, Y" }}</a></span>
+                                <span><i class="fas fa-eye"></i> {{ news.post_viewed_count }}</span>
+                            </div>
+                            <div class="body_tabs_section">
+                                <a href="/news/detail/{{ news.slug }}/">
+                                    {{ news.title | truncatechars:55 }}
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endcomment %}
+            </ul>
+        </div>
+        <div class="tab2">
+            <ul id="most_read_ads_4">
+                {% comment %}
+                    {% for ads in most_read_ads %}
+                        <li>
+                            <div class="header_tabs_section">
+                                <span><a
+                                        href="/ads/detail/{{ ads.slug }}">{{ ads.added_at|date:"D, d M, Y" }}</a></span>
+                                <span><i class="fas fa-eye"></i> {{ ads.post_viewed_count }}</span>
+                            </div>
+                            <div class="body_tabs_section">
+                                <a href="/ads/detail/{{ ads.slug }}">
+                                    {{ ads.title | truncatechars:55 }}
+                                </a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                {% endcomment %}
+            </ul>
+        </div>
+    </section>
+</div>
+
+<script src="{% static 'js/modules/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'js/scripts/posts/left_sidebar_news.js' %}"></script>
+
+
+<!-- news tabs -->

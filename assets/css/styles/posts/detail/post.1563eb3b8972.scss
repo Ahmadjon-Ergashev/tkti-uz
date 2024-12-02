@@ -1,0 +1,67 @@
+@import "../../variables/colors";
+
+.post_detail{
+    padding: 20px 0px;
+    h3{
+        padding: 10px 0;
+        font-weight: 700;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
+    .hashtags{
+        margin: 30px 0;
+        .hashtag{
+            padding: 5px 8px;
+            border-radius: 50px;
+            background-color: lightblue;
+        }
+    }
+    .post_text{
+        p{
+            img{
+                width: 100%;
+            }
+        }
+    }
+}
+.department-item{
+    a{
+        color: $dark;
+        &:hover{
+            color: $color2;
+        }
+        &::after{
+            content: "";
+            display: block;
+            width: 0;
+            height: 2px;
+            background: $color1;
+            transition: width .5s ease-in-out;
+        }
+        &:hover::after{
+            width: 90%;
+        }
+    }
+}
+
+.post_footer{
+    margin-top: 40px;
+    p{
+        margin-bottom: 0;
+    }
+    .time_and_view{
+        display: flex;
+        justify-content: space-between;
+        span{
+            font-weight: 500;
+        }
+    }
+}
+
+.post_img_bg{
+    height: 400px;
+    margin-bottom: 20px;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+

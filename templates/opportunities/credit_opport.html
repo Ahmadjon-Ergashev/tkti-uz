@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+{{ title }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Bosh sahifa</a></li>
+                <li class="breadcrumb-item"><a href="/supports">Moliyaviy imtiyozlar</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ title }}</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="section_title py-2">
+        <div class="container">
+            <h1>{{ title }}</h1>
+        </div>
+    </div>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="invisible">1111111111111111</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th colspan="2">{{ about }}</th>
+                            <td colspan="1">
+                                {{ object.about.html|safe }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">{{ responsible_org }}</th>
+                            <td>{{ object.responsible_organization }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">{{ who_for }} ?</th>
+                            <td>
+                                {{ object.for_who.html | safe }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">{{ order_and_time }}</th>
+                            <td>
+                                {{ object.deadline.html | safe }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">{{ lower_base }}</th>
+                            <td>
+                                {{ object.main_lower.html | safe }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">{{ contact }}</th>
+                            <td>
+                                {{ object.contact.html | safe }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}

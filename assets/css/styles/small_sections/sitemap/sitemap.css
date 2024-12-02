@@ -1,0 +1,14 @@
+.sitemap_title {
+  font-weight: 500;
+  padding: 10px 0;
+  border-bottom: 2px solid #26597E;
+}
+
+.sitemap_ul li a {
+  color: #15446f;
+  transition: all 0.2s ease-in;
+}
+.sitemap_ul li a:hover {
+  color: #26597E;
+  border-bottom: 1px solid #26597E;
+}/*# sourceMappingURL=sitemap.css.map */

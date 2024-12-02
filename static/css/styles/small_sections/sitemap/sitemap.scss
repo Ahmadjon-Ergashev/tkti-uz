@@ -1,0 +1,21 @@
+@import "../../variables/colors";
+
+
+.sitemap_title{
+    font-weight: 500;
+    padding: 10px 0;
+    border-bottom: 2px solid $color1;
+}
+
+.sitemap_ul{
+    li{
+        a{
+            color: $color2;
+            transition: all 0.2s ease-in;
+            &:hover{
+                color: $color1;
+                border-bottom: 1px solid $color1;
+            }
+        }
+    }
+}

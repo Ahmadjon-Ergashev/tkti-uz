@@ -1,0 +1,205 @@
+@import "../variables/colors";
+@import "../variables/fonts";
+
+
+// quick links
+.quick_links{
+    .title{
+        h4{
+            margin: 0;
+            padding: 10px;
+            color: $text_white;
+            background: $color1;
+        }   
+    }
+    .body{
+        ul{
+            li{
+                border: none;
+                a{
+                    color: $dark;
+                }
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 2px; // animation border width
+                    background: $color1; // border color
+                    transition: width 0.5s ease-in-out;
+                }
+                &:hover::after{
+                    width: 100%;
+                }
+            }
+            
+        }
+    }
+}
+
+// social networks
+.socials_networks{
+    .title{
+        h4{
+            margin: 0;
+            padding: 10px;
+            color: $text_white;
+            background: $color1;
+        }
+    }
+    .body{
+        ul{
+            padding: 0;
+            display: flex;
+            justify-content: space-around;
+            li{
+                list-style-type: none;
+                a{
+                    font-size: 35px;
+                }
+            }
+        }
+    }
+}
+
+// news and ads tab 
+
+
+.pc-tab>input,
+.pc-tab section>div {
+    display: none;
+}
+
+#tab1:checked~section .tab1,
+#tab2:checked~section .tab2 {
+    display: block;
+}
+
+#tab1:checked~nav .tab1,
+#tab2:checked~nav .tab2 {
+    color: red;
+}
+
+/* Visual Styles */
+
+$activeColor: #ffffff;
+$unactiveColor: #eeeeee;
+$unactiveHoverColor: #dddddd;
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.pc-tab {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            label {
+                width: 50%;
+                text-align: center;
+                font-family: $cinzel;
+                float: left;
+                font-weight: 900;
+                padding: 15px 25px;
+                border-bottom: 0;
+                border: 1px solid #ddd;
+                background: $unactiveColor;
+                color: #444;
+
+                &:hover {
+                    background: $unactiveHoverColor;
+                }
+
+                &:active {
+                    background: $activeColor;
+                }
+            }
+
+            &:not(:last-child) label {
+                border-right-width: 0;
+            }
+        }
+    }
+
+    section {
+        clear: both;
+        font-family: $roboto_mono;
+
+        div {
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            line-height: 1.5em;
+            letter-spacing: 0.3px;
+            border: 1px solid #ddd;
+            color: #444;
+            ul{
+                li{
+                    padding: 8px 0;
+                    a{
+                        color: $dark;
+                        font-size: 13px;
+                        font-family: $noto;
+                        &:hover{
+                            color: $dark;
+                        }
+                    }
+                    &::after{
+                        content: "";
+                        display: block;
+                        width: 0;
+                        height: 2px;
+                        background: $color1;
+                        transition: width 0.5s ease-in-out;
+                    }
+                    &:hover::after{
+                        width: 100%;
+                    }
+                    .header_tabs_section{
+                        border: none;
+                        padding: 0;
+                        display: flex;
+                        justify-content: space-between;
+                        span{
+                            color: $dark;
+                        }
+                    }
+                    .body_tabs_section{
+                        padding: 0;
+                        border: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#tab1:checked~nav .tab1,
+#tab2:checked~nav .tab2 {
+    label {
+        color: #111;
+        background: white;
+        position: relative;
+
+        &:after {
+            content: '';
+            display: block;
+            position: absolute;
+            height: 2px;
+            width: 100%;
+            background: $activeColor;
+            left: 0;
+            bottom: -1px;
+        }
+    }
+}

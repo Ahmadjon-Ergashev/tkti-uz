@@ -1,0 +1,465 @@
+.header {
+  margin-bottom: 110px;
+}
+.header #headerIMG .item {
+  height: 78vh !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.header #statistika {
+  margin-top: -12%;
+}
+.header #statistika .card {
+  margin: 0 10px;
+  padding: 50px 0;
+  text-align: center;
+}
+.header #statistika .card .card-body .card_icon a {
+  color: #26597E;
+}
+.header #statistika .card .card-body .card_icon a i {
+  font-size: 50px;
+}
+.header #statistika .card .card-body p a {
+  font-size: 18px;
+  color: #111;
+  font-weight: 700;
+  font-family: monospace;
+}
+.header #statistika .card .card-body h3 a {
+  color: #111;
+  font-size: 25px;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+}
+
+#about {
+  margin: 70px 0;
+  padding: 70px 0;
+  background: #15446f;
+}
+#about h1 {
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+#about .img {
+  overflow: hidden;
+  padding-top: 10px;
+  height: 100%;
+}
+#about .img img {
+  height: 100%;
+  transition: all 0.2s ease-out;
+}
+#about .img img:hover {
+  transform: scale(1.1);
+}
+#about p {
+  color: #ffffff;
+  text-align: justify;
+}
+#about .read_more {
+  padding: 10px 50px;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+  transition: all 0.5 ease;
+}
+#about .read_more:hover {
+  color: #26597E;
+  background-color: #ffffff;
+}
+
+#studyway .wrapper_studyway {
+  display: block;
+  font-size: 45px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+#studyway #result_data ul li {
+  width: 100%;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#faculty_and_departments {
+  margin-bottom: 50px;
+}
+#faculty_and_departments h1 {
+  font-size: 45px;
+  margin: 50px 0;
+}
+#faculty_and_departments #faculties .card_box {
+  display: flex;
+  justify-content: space-between;
+}
+#faculty_and_departments #faculties .card_box .faculty {
+  flex: 1;
+  text-align: center;
+}
+#faculty_and_departments #faculties .card_box .faculty .card_img {
+  height: 150px;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+#faculty_and_departments #faculties .card_box .faculty .card_img p {
+  bottom: 0;
+  padding: 10px 0px;
+  margin-bottom: 0;
+  background: #111;
+  color: #ffffff;
+  position: absolute;
+}
+#faculty_and_departments #faculties .card_box .faculty:not(:last-child) {
+  margin-right: 10px;
+}
+#faculty_and_departments #departments {
+  margin-top: 25px;
+  min-height: 150px;
+}
+#faculty_and_departments #departments .wrapper {
+  margin: 20px 0;
+  border-bottom: 2px solid #26597E;
+}
+#faculty_and_departments #departments .wrapper span {
+  font-size: 25px;
+}
+#faculty_and_departments #departments .row .dept-item {
+  border: 1px solid lightgrey;
+  transition: all 0.5s ease-in;
+}
+#faculty_and_departments #departments .row .dept-item p {
+  margin: 0;
+  padding: 10px;
+}
+#faculty_and_departments #departments .row .dept-item p a {
+  color: #777;
+}
+#faculty_and_departments #departments .row .dept-item:hover {
+  border: 1px solid #26597E;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+#faculty_and_departments #departments .row .dept-item:hover p a {
+  color: #26597E;
+}
+
+#news_ads_section {
+  padding: 80px 0;
+  position: relative;
+  background: #26597E;
+}
+#news_ads_section .tab-content .big_box .col-12 {
+  transition: all 0.3s ease-in;
+}
+#news_ads_section .tab-content .big_box .col-12 .item {
+  padding: 15px 0;
+  min-height: 370px;
+  position: relative;
+}
+#news_ads_section .tab-content .big_box .col-12 .item_img img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+#news_ads_section .tab-content .big_box .col-12 .item_body h4 {
+  font-size: 15px;
+  padding-top: 10px;
+  font-family: "Noto Serif", serif;
+}
+#news_ads_section .tab-content .big_box .col-12 .item_body h4 a {
+  color: #111;
+}
+#news_ads_section .tab-content .big_box .col-12 .item_footer {
+  width: 100%;
+  bottom: 5px;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+}
+#news_ads_section .tab-content .big_box .col-12 .item_footer span a {
+  color: #777;
+}
+@media (min-width: 0px) and (max-width: 1199px) {
+  #news_ads_section .tab-content .big_box .col-12:last-child {
+    display: none;
+  }
+}
+#news_ads_section .tab-content .big_box .col-12:hover {
+  color: #ffffff;
+  background: #15446f;
+}
+#news_ads_section .tab-content .big_box .col-12:hover .item_body h4 a {
+  color: #ffffff;
+}
+#news_ads_section .tab-content .big_box .col-12:hover .item_footer span a {
+  color: #ffffff;
+}
+#news_ads_section .tab-content .small_news .col-12 .news_box {
+  padding: 10px 0;
+  min-height: 110px;
+  position: relative;
+}
+#news_ads_section .tab-content .small_news .col-12 .news_box_body p a {
+  color: #111;
+  font-family: "Noto Serif", serif;
+}
+#news_ads_section .tab-content .small_news .col-12 .news_box_footer {
+  width: 100%;
+  bottom: 5px;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+}
+#news_ads_section .tab-content .small_news .col-12 .news_box_footer span a {
+  color: #111;
+  font-family: "Noto Serif", serif;
+}
+#news_ads_section .tab-content .small_news .col-12:hover {
+  color: #ffffff;
+  background: #26597E;
+}
+#news_ads_section .tab-content .small_news .col-12:hover .news_box_body p a {
+  color: #ffffff;
+}
+#news_ads_section .tab-content .small_news .col-12:hover .news_box_footer span a {
+  color: #ffffff;
+}
+#news_ads_section .tab-content .videos_tab .col-12 .video {
+  position: relative;
+}
+#news_ads_section .tab-content .videos_tab .col-12 .video .play_btn, #news_ads_section .tab-content .videos_tab .col-12 .video .pause_btn {
+  top: 50%;
+  left: 50%;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 5px 10px;
+  position: absolute;
+  background-color: #333;
+  transform: translate(-50%, -50%);
+}
+#news_ads_section .tab-content .videos_tab .col-12 .video .play_btn i, #news_ads_section .tab-content .videos_tab .col-12 .video .pause_btn i {
+  color: white;
+}
+#news_ads_section .tab-content .videos_tab .col-12 p {
+  margin: 0;
+  padding: 7px 0;
+  font-weight: 700;
+  font-family: "Noto Serif", serif;
+}
+
+.big_box {
+  padding: 30px 0;
+}
+.big_box .col-12 {
+  transition: all 0.3s ease-in;
+}
+.big_box .col-12 .item {
+  padding: 0 10px;
+  min-height: 370px;
+  position: relative;
+  transition: all 0.2s ease-in;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.big_box .col-12 .item_img {
+  height: 200px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.big_box .col-12 .item_body h4 {
+  font-size: 15px;
+  padding-top: 10px;
+  font-family: "Roboto", sans-serif;
+}
+.big_box .col-12 .item_body h4 a {
+  color: #111;
+}
+.big_box .col-12 .item_footer {
+  width: 90%;
+  bottom: 5px;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+}
+.big_box .col-12 .item_footer span a {
+  color: #777;
+}
+.big_box .col-12 .item_footer span i {
+  color: #777;
+}
+@media (min-width: 0px) and (max-width: 1199px) {
+  .big_box .col-12:last-child {
+    display: none;
+  }
+}
+.big_box .col-12:hover .item {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.big_box .col-12:hover .item_body h4 a {
+  color: #111;
+}
+.big_box .col-12:hover .item_footer span a {
+  color: #111;
+}
+.big_box .col-12:hover .item_footer span i {
+  color: #111;
+}
+
+.small_news .col-12 .news_box {
+  padding: 15px;
+  min-height: 120px;
+  position: relative;
+  transition: all 0.2s ease-in;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+}
+.small_news .col-12 .news_box_body p a {
+  color: #111;
+  font-family: "Roboto", sans-serif;
+}
+.small_news .col-12 .news_box_footer {
+  width: 90%;
+  bottom: 5px;
+  display: flex;
+  position: absolute;
+  justify-content: space-between;
+}
+.small_news .col-12 .news_box_footer span a {
+  color: #777;
+  font-family: "Noto Serif", serif;
+}
+.small_news .col-12 .news_box_footer span i {
+  color: #777;
+}
+.small_news .col-12:hover .news_box {
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
+.small_news .col-12:hover .news_box_body p a {
+  color: #111;
+}
+.small_news .col-12:hover .news_box_footer span a, .small_news .col-12:hover .news_box_footer span i {
+  color: #111;
+}
+
+.videos_tab .col-12 .video {
+  position: relative;
+}
+.videos_tab .col-12 .video .play_btn, .videos_tab .col-12 .video .pause_btn, #news_ads_section .tab-content .videos_tab .col-12 .video .pause_btn {
+  top: 50%;
+  left: 50%;
+  border: none;
+  outline: none;
+  background: none;
+  padding: 5px 10px;
+  position: absolute;
+  background-color: #333;
+  transform: translate(-50%, -50%);
+}
+.videos_tab .col-12 .video .play_btn i, .videos_tab .col-12 .video .pause_btn i, #news_ads_section .tab-content .videos_tab .col-12 .video .pause_btn i {
+  color: white;
+}
+.videos_tab .col-12 p {
+  margin: 0;
+  padding: 7px 0;
+  font-weight: 700;
+  font-family: "Noto Serif", serif;
+}
+
+.talented_students #students_list {
+  padding: 40px 0;
+}
+.talented_students #students_list .card {
+  width: 350px;
+  margin: 0px 10px;
+}
+
+#photo_carusel {
+  margin: 50px 0;
+  background-color: #26597E;
+  padding: 50px 0;
+}
+#photo_carusel .image {
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#usefull_links {
+  margin: 30px 0;
+}
+#usefull_links .item {
+  padding: 10px;
+  margin: 0px 10px;
+  min-height: 200px;
+  text-align: center;
+  position: relative;
+  background-color: whitesmoke;
+}
+#usefull_links .item .brand img {
+  width: 100px;
+  display: inline;
+}
+#usefull_links .item .body {
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  vertical-align: bottom;
+}
+#usefull_links .item .body p {
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+}
+#usefull_links .item .body p a {
+  color: #111;
+}
+
+.section_title .photo button {
+  border: none;
+  background: none;
+  transition: all 0.3s ease;
+}
+.section_title .photo button a {
+  color: #777;
+}
+.section_title .photo button:hover {
+  background: #111;
+}
+.section_title .photo button:hover a {
+  color: white;
+}
+
+.search_btn {
+  color: white;
+  font-weight: 600;
+  background: #26597E;
+}
+
+.col-12 {
+  position: relative;
+}
+.col-12 .card .event_modal {
+  top: 0;
+  left: -5%;
+  width: 480px;
+  z-index: 7777;
+  display: none;
+  background: #fff;
+  position: absolute;
+  transition: all 0.3s ease-in;
+}
+.col-12 .card .event_modal .modal_window .row .col-7 {
+  padding: 15px 0px 10px 20px;
+}
+.col-12 .card:hover .event_modal {
+  display: block;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}/*# sourceMappingURL=home.css.map */

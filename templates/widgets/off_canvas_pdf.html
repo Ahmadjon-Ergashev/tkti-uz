@@ -1,0 +1,35 @@
+
+
+<div class="offcanvas offcanvas-start w-100 w-75-m w-75-l" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1"
+     id="main_pdf_edu_area_{{ object.id }}" aria-labelledby="offcanvasScrollingLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="about_study_program_{{ object.id }}">document</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        {% if LANGUAGE_CODE == 'uz' %}
+            {% if object.pdf_file %}
+                <iframe
+                        src="{{ object.pdf_file.url }}"
+                        width="100%" height="100%">
+                </iframe>
+            {% endif %}
+        {% endif %}
+        {% if LANGUAGE_CODE == 'ru' %}
+            {% if object.pdf_file_ru %}
+                <iframe
+                        src="{{ object.pdf_file_ru.url }}"
+                        width="100%" height="100%">
+                </iframe>
+            {% endif %}
+        {% endif %}
+        {% if LANGUAGE_CODE == 'en' %}
+            {% if object.pdf_file_en %}
+                <iframe
+                        src="{{ object.pdf_file_en.url }}"
+                        width="100%" height="100%">
+                </iframe>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
