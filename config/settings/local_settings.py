@@ -21,8 +21,8 @@ DATABASES = {
         'PORT': env("POSTGRES_PORT"),
     }
 }
-MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = "https://tkti.uz/var/www/tkti_uz/media/"
+# MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # redis
 

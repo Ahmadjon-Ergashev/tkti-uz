@@ -1176,7 +1176,7 @@ msgstr "Сегодня"
 
 #: view/my_context_proccessor.py:46
 msgid "kun qoldi"
-msgstr "день остался"
+msgstr "день"
 
 #: view/my_context_proccessor.py:55
 msgid "Arxiv"
